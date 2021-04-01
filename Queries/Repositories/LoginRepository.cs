@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Npgsql;
 using System.Data.Common;
-using System.Collections;
+using System.Data.SqlClient;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
@@ -29,10 +23,10 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"Login\".\"LoginTable\" WHERE login = @Login AND password = @Password", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"Login\".\"LoginTable\" WHERE login = @Login AND password = @Password");
                 queryCommand.Parameters.AddWithValue("@Login", login.GetLogin());
                 queryCommand.Parameters.AddWithValue("@Password", login.GetPassword());
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -42,7 +36,7 @@ namespace Queries.Repositories
                 }
 
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -57,14 +51,14 @@ namespace Queries.Repositories
             {
                 dbc.OpenConnection();            
                 
-                NpgsqlCommand queryCommand = new NpgsqlCommand("INSERT INTO \"Login\".\"LoginTable\"(Login, Password, Role)" +
-                    "VALUES(@Login, @Pass, @Role)", dbc.GetConnection());
+                var queryCommand = new SqlCommand("INSERT INTO \"Login\".\"LoginTable\"(Login, Password, Role)" +
+                    "VALUES(@Login, @Pass, @Role)");
                 queryCommand.Parameters.AddWithValue("@Login", dbUser.GetDBUserLogin());
                 queryCommand.Parameters.AddWithValue("@Pass", SecurityCrypt.MD5((dbUser.GetDBUserPass())));
                 queryCommand.Parameters.AddWithValue("@Role", dbUser.GetDBUserRole());
                 queryCommand.ExecuteNonQuery();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -78,16 +72,16 @@ namespace Queries.Repositories
             {
                 dbc.OpenConnection();
 
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"Login\".\"LoginTable\" WHERE login = @Login", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"Login\".\"LoginTable\" WHERE login = @Login");
                 queryCommand.Parameters.AddWithValue("@Login", login);
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     checkFlag = true;
                 }
                 else checkFlag = false;
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -102,10 +96,10 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT Password FROM \"Login\".\"RoleTable\" WHERE Role = @Role", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT Password FROM \"Login\".\"RoleTable\" WHERE Role = @Role");
                 queryCommand.Parameters.AddWithValue("@Role", role);
 
-                NpgsqlDataReader passWordSearch = queryCommand.ExecuteReader();
+                var passWordSearch = queryCommand.ExecuteReader();
                 if (passWordSearch.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in passWordSearch)
@@ -115,7 +109,7 @@ namespace Queries.Repositories
                     passWordSearch.Close();
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;          
             }
@@ -130,12 +124,12 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("DELETE FROM \"Login\".\"LoginTable\"  WHERE login = @Login", dbc.GetConnection());
+                var queryCommand = new SqlCommand("DELETE FROM \"Login\".\"LoginTable\"  WHERE login = @Login");
                 queryCommand.Parameters.AddWithValue("@Login", id);
                 queryCommand.ExecuteNonQuery();
 
             }
-            catch (PostgresException)
+            catch (SqlException)
             { }
             finally { dbc.CloseConnection(); }
 

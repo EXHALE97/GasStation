@@ -12,7 +12,7 @@ namespace Queries.Connection
             _connection = new SqlConnection(connectionString);
         }
 
-        public static void OpenConnection()
+        public void OpenConnection()
         {
             try
             {
@@ -21,7 +21,7 @@ namespace Queries.Connection
             catch (Exception) {  }
         }
 
-        public static void CloseConnection()
+        public void CloseConnection()
         {
             try
             {

@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Npgsql;
 using System.Data.Common;
-using System.Collections;
+using System.Data.SqlClient;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
@@ -34,8 +29,8 @@ namespace Queries.Repositories
             {
 
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"GasStation\"", dbc.GetConnection());
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\"");
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -46,9 +41,9 @@ namespace Queries.Repositories
                         stationList.Add(st);
                     }
                 }
-                 AZSTableReader.Close();
+                AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -62,12 +57,12 @@ namespace Queries.Repositories
             dbc.OpenConnection();
             try
             {
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country LIKE" +
-                " @fCountry AND city LIKE @fCity ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country LIKE" +
+                " @fCountry AND city LIKE @fCity ");
                 queryCommand.Parameters.AddWithValue("@fCountry", "%" + fCountry + "%");
                 queryCommand.Parameters.AddWithValue("@fCity", "%" + fCity + "%");
 
-                NpgsqlDataReader AZSTableSearcher = queryCommand.ExecuteReader();
+                var AZSTableSearcher = queryCommand.ExecuteReader();
                 if (AZSTableSearcher.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableSearcher)
@@ -84,7 +79,7 @@ namespace Queries.Repositories
                     AZSTableSearcher.Close();
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -109,13 +104,13 @@ namespace Queries.Repositories
                     splittedLocation[2] = CheckRigthStreet(splittedLocation[2]);
                 }
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country =" +
-                  "'" + splittedLocation[0] + "' AND city =" + "'" + splittedLocation[1] + "'" + "AND street =" + "'" + splittedLocation[2] + "'" + "", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country =" +
+                  "'" + splittedLocation[0] + "' AND city =" + "'" + splittedLocation[1] + "'" + "AND street =" + "'" + splittedLocation[2] + "'" + "");
 
                 //NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country LIKE" +
                 //  "'%" + splittedLocation[0] + "%' AND city LIKE" + "'%" + splittedLocation[1] + "%'" + "AND street LIKE" + "'%" + splittedLocation[2] + "%'" + "", dbc.getConnection());
 
-                NpgsqlDataReader Station_ID_TableSearcher = queryCommand.ExecuteReader();
+                var Station_ID_TableSearcher = queryCommand.ExecuteReader();
                 if (Station_ID_TableSearcher.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in Station_ID_TableSearcher)
@@ -125,7 +120,7 @@ namespace Queries.Repositories
                 }
                 Station_ID_TableSearcher.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -139,9 +134,9 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT country, city, street FROM \"AZS\".\"GasStation\" WHERE orgname LIKE @Orgname ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT country, city, street FROM \"AZS\".\"GasStation\" WHERE orgname LIKE @Orgname ");
                 queryCommand.Parameters.AddWithValue("@Orgname", "%" + Orgname + "%");
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -152,7 +147,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -168,9 +163,9 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT country, city, street FROM \"AZS\".\"GasStation\" WHERE station_id = @Station_id ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT country, city, street FROM \"AZS\".\"GasStation\" WHERE station_id = @Station_id ");
                 queryCommand.Parameters.AddWithValue("@Station_id", station_id);
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -181,7 +176,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -197,8 +192,8 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT DISTINCT orgname FROM \"AZS\".\"GasStation\"", dbc.GetConnection());
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var queryCommand = new SqlCommand("SELECT DISTINCT orgname FROM \"AZS\".\"GasStation\"");
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -208,7 +203,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -223,8 +218,8 @@ namespace Queries.Repositories
             {
                 dbc.OpenConnection();
 
-                NpgsqlCommand queryCommand = new NpgsqlCommand("INSERT INTO \"AZS\".\"GasStation\"(OrgName, Country, City, Street, StorageCap)" +
-                        "VALUES(@OrgName, @Country, @City, @Street, @StorageCap)", dbc.GetConnection());
+                var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"GasStation\"(OrgName, Country, City, Street, StorageCap)" +
+                        "VALUES(@OrgName, @Country, @City, @Street, @StorageCap)");
                     queryCommand.Parameters.AddWithValue("@OrgName", st.GetOrgName());
                     queryCommand.Parameters.AddWithValue("@Country", st.GetCountry());
                     queryCommand.Parameters.AddWithValue("@City", st.GetCity());
@@ -232,7 +227,7 @@ namespace Queries.Repositories
                     queryCommand.Parameters.AddWithValue("@StorageCap", st.GetStorageCap());
                     queryCommand.ExecuteNonQuery();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }

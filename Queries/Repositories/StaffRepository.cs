@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Npgsql;
 using System.Data.Common;
-using System.Collections;
+using System.Data.SqlClient;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
@@ -33,11 +28,11 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"Staff\"" + " EXCEPT " + 
-                    "SELECT * FROM \"AZS\".\"Staff\" WHERE function = " + "@DismissedFunction" + " OR salary = @DismissedSalary", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Staff\"" + " EXCEPT " + 
+                    "SELECT * FROM \"AZS\".\"Staff\" WHERE function = " + "@DismissedFunction" + " OR salary = @DismissedSalary");
                 queryCommand.Parameters.AddWithValue("@DismissedFunction", "Уволен!");
                 queryCommand.Parameters.AddWithValue("@DismissedSalary", 0);
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -53,7 +48,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -68,8 +63,8 @@ namespace Queries.Repositories
             {
                 dbc.OpenConnection();
 
-                    NpgsqlCommand queryCommand = new NpgsqlCommand("INSERT INTO \"AZS\".\"Staff\"(Station_id, Surname, Name, Gender, Birthdate, Function, Salary)" +
-                        "VALUES(@Station_id, @Surname, @Name, @Gender, @Birthdate, @Function, @Salary)", dbc.GetConnection());
+                    var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"Staff\"(Station_id, Surname, Name, Gender, Birthdate, Function, Salary)" +
+                        "VALUES(@Station_id, @Surname, @Name, @Gender, @Birthdate, @Function, @Salary)");
                     queryCommand.Parameters.AddWithValue("@Station_id", wk.GetStationID());
                     queryCommand.Parameters.AddWithValue("@Surname", wk.GetSurname());
                     queryCommand.Parameters.AddWithValue("@Name", wk.GetName());
@@ -79,7 +74,7 @@ namespace Queries.Repositories
                     queryCommand.Parameters.AddWithValue("@Salary", wk.GetSalary());
                     queryCommand.ExecuteNonQuery();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }       
@@ -92,8 +87,8 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("UPDATE \"AZS\".\"Staff\" SET surname = @Surname, name = @Name, function = @Function, " +
-                "salary = @Salary WHERE staff_id = @Staff_id ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("UPDATE \"AZS\".\"Staff\" SET surname = @Surname, name = @Name, function = @Function, " +
+                "salary = @Salary WHERE staff_id = @Staff_id ");
 
                 queryCommand.Parameters.AddWithValue("@Surname", wk.GetSurname());
                 queryCommand.Parameters.AddWithValue("@Name", wk.GetName());
@@ -103,7 +98,7 @@ namespace Queries.Repositories
 
                 queryCommand.ExecuteNonQuery();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -116,14 +111,14 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("UPDATE \"AZS\".\"Staff\" SET  function = @DismissedFunction, salary = @DismissedSalary WHERE staff_id = @Staff_id ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("UPDATE \"AZS\".\"Staff\" SET  function = @DismissedFunction, salary = @DismissedSalary WHERE staff_id = @Staff_id ");
                 queryCommand.Parameters.AddWithValue("@Staff_id", id);
                 queryCommand.Parameters.AddWithValue("@DismissedFunction", "Уволен!");
                 queryCommand.Parameters.AddWithValue("@DismissedSalary", 0);
                 queryCommand.ExecuteNonQuery();
 
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -136,9 +131,9 @@ namespace Queries.Repositories
             string SName = String.Empty, name, surname;
             try
             {
-                NpgsqlDataReader AZSTableReader = null;
+                SqlDataReader AZSTableReader = null;
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT surname, name FROM \"AZS\".\"Staff\" WHERE staff_id = @Staff_id ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT surname, name FROM \"AZS\".\"Staff\" WHERE staff_id = @Staff_id ");
                 queryCommand.Parameters.AddWithValue("@Staff_id", staff_id);
                 AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
@@ -152,7 +147,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -166,9 +161,9 @@ namespace Queries.Repositories
             int station_id = 0;
             try
             {
-                NpgsqlDataReader AZSTableReader = null;
+                SqlDataReader AZSTableReader = null;
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT station_id FROM \"AZS\".\"Staff\" WHERE staff_id = @Staff_id ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT station_id FROM \"AZS\".\"Staff\" WHERE staff_id = @Staff_id ");
                 queryCommand.Parameters.AddWithValue("@Staff_id", staff_id);
                 AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
@@ -180,7 +175,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -194,9 +189,9 @@ namespace Queries.Repositories
             List<int> staff_id = new List<int>();
             try
             {             
-                NpgsqlDataReader AZSTableReader = null;
+                SqlDataReader AZSTableReader = null;
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT staff_id FROM \"AZS\".\"Staff\" WHERE station_id = @Station_id ", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT staff_id FROM \"AZS\".\"Staff\" WHERE station_id = @Station_id ");
                 queryCommand.Parameters.AddWithValue("@Station_id", station_id);
                 AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
@@ -208,7 +203,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }

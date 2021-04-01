@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.Collections;
-using Npgsql;
 using Queries.Entities;
-using Queries.Repositories;
 using Queries.Interfaces;
 using Queries.Validators;
 
-namespace Queries.dgvControllers
+namespace Queries.Controllers
 {
     public class DealController
     {
@@ -47,9 +42,9 @@ namespace Queries.dgvControllers
                 else MessageBox.Show("Сделок с данным пользователем не найдено!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Неизвестная ошибка!!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
             return dealList.Count;
@@ -70,9 +65,9 @@ namespace Queries.dgvControllers
                         deal.GetDealPrice(), cardnum, deal.GetDealDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -88,9 +83,9 @@ namespace Queries.dgvControllers
                     dgv.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -106,9 +101,9 @@ namespace Queries.dgvControllers
                     dgv.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), deal.GetDealDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -135,9 +130,9 @@ namespace Queries.dgvControllers
                     }
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -162,10 +157,10 @@ namespace Queries.dgvControllers
                     MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
                 checkFlag = false;
-                MessageBox.Show(pe.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
@@ -195,10 +190,10 @@ namespace Queries.dgvControllers
                     MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
                 checkFlag = false;
-                MessageBox.Show(pe.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {

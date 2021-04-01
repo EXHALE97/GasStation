@@ -1,23 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using Npgsql;
-using System.Data.Common;
-using System.Collections;
-using Queries;
 using Queries.Entities;
-using Queries.dgvControllers;
-using Queries.comboBoxFillers;
-using Queries.Repositories;
 using Queries.Interfaces;
 
-namespace Queries.dgvControllers
+namespace Queries.Controllers
 {
     public class AccountController
     {
@@ -44,9 +32,9 @@ namespace Queries.dgvControllers
                         account.GetFuelAccountAmount(), account.GetAccountDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
@@ -66,9 +54,9 @@ namespace Queries.dgvControllers
                         account.GetFuelAccountAmount(), account.GetAccountDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {

@@ -44,14 +44,14 @@
             this.btnSupplyUpdate = new System.Windows.Forms.Button();
             this.btnAddSupply = new System.Windows.Forms.Button();
             this.dgvViewSupply = new System.Windows.Forms.DataGridView();
-            this.msWorker = new System.Windows.Forms.MenuStrip();
-            this.smUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbSessionName = new System.Windows.Forms.Label();
             this.supplystaff = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelsupplytype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelsupplyamount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelsupplydate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.msWorker = new System.Windows.Forms.MenuStrip();
+            this.smUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSessionName = new System.Windows.Forms.Label();
             this.tabAdmin.SuspendLayout();
             this.tabDealTable.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -103,6 +103,7 @@
             this.btnTableView.TabIndex = 1;
             this.btnTableView.Text = "Обновить таблицу сделок";
             this.btnTableView.UseVisualStyleBackColor = true;
+            this.btnTableView.Click += new System.EventHandler(this.btnTableView_Click);
             // 
             // btnAddDeal
             // 
@@ -215,6 +216,28 @@
             this.dgvViewSupply.Size = new System.Drawing.Size(483, 366);
             this.dgvViewSupply.TabIndex = 0;
             // 
+            // supplystaff
+            // 
+            this.supplystaff.HeaderText = "Сотрудник-оператор";
+            this.supplystaff.Name = "supplystaff";
+            this.supplystaff.Width = 120;
+            // 
+            // fuelsupplytype
+            // 
+            this.fuelsupplytype.HeaderText = "Тип топлива";
+            this.fuelsupplytype.Name = "fuelsupplytype";
+            // 
+            // fuelsupplyamount
+            // 
+            this.fuelsupplyamount.HeaderText = "Количество топлива";
+            this.fuelsupplyamount.Name = "fuelsupplyamount";
+            // 
+            // fuelsupplydate
+            // 
+            this.fuelsupplydate.HeaderText = "Дата подвоза";
+            this.fuelsupplydate.Name = "fuelsupplydate";
+            this.fuelsupplydate.Width = 120;
+            // 
             // msWorker
             // 
             this.msWorker.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -248,28 +271,6 @@
             this.lbSessionName.Size = new System.Drawing.Size(16, 13);
             this.lbSessionName.TabIndex = 5;
             this.lbSessionName.Text = "---";
-            // 
-            // supplystaff
-            // 
-            this.supplystaff.HeaderText = "Сотрудник-оператор";
-            this.supplystaff.Name = "supplystaff";
-            this.supplystaff.Width = 120;
-            // 
-            // fuelsupplytype
-            // 
-            this.fuelsupplytype.HeaderText = "Тип топлива";
-            this.fuelsupplytype.Name = "fuelsupplytype";
-            // 
-            // fuelsupplyamount
-            // 
-            this.fuelsupplyamount.HeaderText = "Количество топлива";
-            this.fuelsupplyamount.Name = "fuelsupplyamount";
-            // 
-            // fuelsupplydate
-            // 
-            this.fuelsupplydate.HeaderText = "Дата подвоза";
-            this.fuelsupplydate.Name = "fuelsupplydate";
-            this.fuelsupplydate.Width = 120;
             // 
             // WorkerForm
             // 

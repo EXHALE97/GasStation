@@ -1,24 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using Npgsql;
-using System.Data.Common;
-using System.Collections;
-using Queries;
 using Queries.Entities;
-using Queries.dgvControllers;
-using Queries.comboBoxFillers;
-using Queries.Repositories;
 using Queries.Interfaces;
 using Queries.Validators;
 
-namespace Queries.dgvControllers
+namespace Queries.Controllers
 {
     public class SupplyController
     {
@@ -50,9 +38,9 @@ namespace Queries.dgvControllers
                         supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Ошибка базы данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -70,9 +58,9 @@ namespace Queries.dgvControllers
                     dgv.Rows.Add(factory.GetStaffRepository().FindStaffByID(supply.GetStaffID()), supply.GetFuelSupplyType(), supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception) { MessageBox.Show("Ошибка базы данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -97,10 +85,10 @@ namespace Queries.dgvControllers
                     MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
                 checkFlag = false;
-                MessageBox.Show(pe.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
@@ -122,9 +110,9 @@ namespace Queries.dgvControllers
                         supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {

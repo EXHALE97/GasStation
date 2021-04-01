@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Npgsql;
 using System.Data.Common;
-using System.Collections;
+using System.Data.SqlClient;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
@@ -33,8 +28,8 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"Supply\"", dbc.GetConnection());
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Supply\"");
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -49,7 +44,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -60,12 +55,11 @@ namespace Queries.Repositories
 
         public void AddToSupplyTable(Supply sup)
         {
-            NpgsqlCommand queryCommand;
             try
             {
                 dbc.OpenConnection();
-                    queryCommand = new NpgsqlCommand("INSERT INTO \"AZS\".\"Supply\"(Station_ID, Staff_ID, FuelSupplyType, FuelSupplyAmount, SupplyDate)" +
-                        "VALUES(@Station_id, @Staff_id, @FuelSupplyType, @FuelSupplyAmount, @SupplyDate)", dbc.GetConnection());
+                    var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"Supply\"(Station_ID, Staff_ID, FuelSupplyType, FuelSupplyAmount, SupplyDate)" +
+                                                      "VALUES(@Station_id, @Staff_id, @FuelSupplyType, @FuelSupplyAmount, @SupplyDate)");
                     queryCommand.Parameters.AddWithValue("@Station_id", sup.GetStationID());
                     queryCommand.Parameters.AddWithValue("@Staff_id", sup.GetStaffID());
                     queryCommand.Parameters.AddWithValue("@FuelSupplyType", sup.GetFuelSupplyType());
@@ -75,7 +69,7 @@ namespace Queries.Repositories
                 queryCommand.ExecuteNonQuery();
                 dbc.CloseConnection(); 
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -89,9 +83,9 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"Supply\" WHERE station_id = @Station_id", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Supply\" WHERE station_id = @Station_id");
                 queryCommand.Parameters.AddWithValue("@Station_id", ID);
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -106,7 +100,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }
@@ -121,9 +115,9 @@ namespace Queries.Repositories
             try
             {
                 dbc.OpenConnection();
-                NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"Supply\" WHERE station_id = @Station_id ORDER BY supplydate", dbc.GetConnection());
+                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Supply\" WHERE station_id = @Station_id ORDER BY supplydate");
                 queryCommand.Parameters.AddWithValue("@Station_id", id);
-                NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
+                var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
@@ -138,7 +132,7 @@ namespace Queries.Repositories
                 }
                 AZSTableReader.Close();
             }
-            catch (PostgresException pe)
+            catch (SqlException pe)
             {
                 throw pe;
             }

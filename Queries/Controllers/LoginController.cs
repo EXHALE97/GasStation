@@ -1,47 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using Npgsql;
-using System.Data.Common;
-using System.Collections;
-using Queries;
 using Queries.Entities;
-using Queries.dgvControllers;
-using Queries.comboBoxFillers;
-using Queries.Repositories;
 using Queries.Interfaces;
+using Queries.Validators;
 
-namespace Queries.Validators
+namespace Queries.Controllers
 {
     public class LoginController
     {
-        private Login login;
-        private IRepositoryFactory factory;
-        private DBUserValidator dbUserValidator;
+        private readonly Login login;
+        private readonly IRepositoryFactory factory;
+        private readonly DataBaseUserValidator dataBaseUserValidator;
         private List<string> errorList;
         private string error;
 
         public LoginController(Login login, IRepositoryFactory factory)
         {
-            if (login == null)
-            {
-                throw new ArgumentNullException();
-            }
-            this.login = login;
+            this.login = login ?? throw new ArgumentNullException();
             this.factory = factory;
-            dbUserValidator = new DBUserValidator();
+            dataBaseUserValidator = new DataBaseUserValidator();
         }
 
         public LoginController(IRepositoryFactory factory)
         {
             this.factory = factory;
-            dbUserValidator = new DBUserValidator();
+            dataBaseUserValidator = new DataBaseUserValidator();
         }
 
         public string TryLogin()
@@ -56,9 +41,9 @@ namespace Queries.Validators
             {
                 passWord = factory.GetLoginRepository().GetRolePass(role);
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
@@ -73,7 +58,7 @@ namespace Queries.Validators
             bool checkFlag = false;
             try
             {
-                if (checkFlag = dbUserValidator.CheckAddition(dbUser, out errorList))
+                if (checkFlag = dataBaseUserValidator.CheckAddition(dbUser, out errorList))
                 {
                     factory.GetLoginRepository().AddNewDBUser(dbUser);
                 }
@@ -88,10 +73,10 @@ namespace Queries.Validators
                     MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (PostgresException pe)
+            catch (SqlException e)
             {
                 checkFlag = false;
-                MessageBox.Show("Код ошибки: " + pe.SqlState, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
