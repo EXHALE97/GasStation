@@ -99,17 +99,18 @@
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.btnTableSupplyView = new System.Windows.Forms.Button();
             this.dgvViewSupply = new System.Windows.Forms.DataGridView();
-            this.msAdmin = new System.Windows.Forms.MenuStrip();
-            this.допФункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AddNewAdmin = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbSessionName = new System.Windows.Forms.Label();
             this.stationSupplyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stationSupply = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.staffSupply = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelSupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelSupplyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.msAdmin = new System.Windows.Forms.MenuStrip();
+            this.допФункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddNewAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSessionName = new System.Windows.Forms.Label();
+            this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -777,48 +778,6 @@
             this.dgvViewSupply.Size = new System.Drawing.Size(625, 456);
             this.dgvViewSupply.TabIndex = 0;
             // 
-            // msAdmin
-            // 
-            this.msAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.допФункцииToolStripMenuItem});
-            this.msAdmin.Location = new System.Drawing.Point(0, 0);
-            this.msAdmin.Name = "msAdmin";
-            this.msAdmin.Size = new System.Drawing.Size(851, 24);
-            this.msAdmin.TabIndex = 1;
-            this.msAdmin.Text = "Доп. функции";
-            // 
-            // допФункцииToolStripMenuItem
-            // 
-            this.допФункцииToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddNewAdmin,
-            this.RefreshTables});
-            this.допФункцииToolStripMenuItem.Name = "допФункцииToolStripMenuItem";
-            this.допФункцииToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.допФункцииToolStripMenuItem.Text = "Доп. функции";
-            // 
-            // AddNewAdmin
-            // 
-            this.AddNewAdmin.Name = "AddNewAdmin";
-            this.AddNewAdmin.Size = new System.Drawing.Size(220, 22);
-            this.AddNewAdmin.Text = "Добавить администратора";
-            this.AddNewAdmin.Click += new System.EventHandler(this.AddNewAdmin_Click);
-            // 
-            // RefreshTables
-            // 
-            this.RefreshTables.Name = "RefreshTables";
-            this.RefreshTables.Size = new System.Drawing.Size(220, 22);
-            this.RefreshTables.Text = "Обновить таблицы";
-            this.RefreshTables.Click += new System.EventHandler(this.RefreshTables_Click);
-            // 
-            // lbSessionName
-            // 
-            this.lbSessionName.AutoSize = true;
-            this.lbSessionName.Location = new System.Drawing.Point(748, 11);
-            this.lbSessionName.Name = "lbSessionName";
-            this.lbSessionName.Size = new System.Drawing.Size(78, 13);
-            this.lbSessionName.TabIndex = 3;
-            this.lbSessionName.Text = "Сессия: admin";
-            // 
             // stationSupplyID
             // 
             this.stationSupplyID.HeaderText = "ID станции";
@@ -853,6 +812,55 @@
             this.SupplyDate.HeaderText = "Дата поставки";
             this.SupplyDate.Name = "SupplyDate";
             this.SupplyDate.Width = 150;
+            // 
+            // msAdmin
+            // 
+            this.msAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.допФункцииToolStripMenuItem});
+            this.msAdmin.Location = new System.Drawing.Point(0, 0);
+            this.msAdmin.Name = "msAdmin";
+            this.msAdmin.Size = new System.Drawing.Size(851, 24);
+            this.msAdmin.TabIndex = 1;
+            this.msAdmin.Text = "Доп. функции";
+            // 
+            // допФункцииToolStripMenuItem
+            // 
+            this.допФункцииToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddNewAdmin,
+            this.RefreshTables,
+            this.dbQueryManager});
+            this.допФункцииToolStripMenuItem.Name = "допФункцииToolStripMenuItem";
+            this.допФункцииToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.допФункцииToolStripMenuItem.Text = "Доп. функции";
+            // 
+            // AddNewAdmin
+            // 
+            this.AddNewAdmin.Name = "AddNewAdmin";
+            this.AddNewAdmin.Size = new System.Drawing.Size(220, 22);
+            this.AddNewAdmin.Text = "Добавить администратора";
+            this.AddNewAdmin.Click += new System.EventHandler(this.AddNewAdmin_Click);
+            // 
+            // RefreshTables
+            // 
+            this.RefreshTables.Name = "RefreshTables";
+            this.RefreshTables.Size = new System.Drawing.Size(220, 22);
+            this.RefreshTables.Text = "Обновить таблицы";
+            this.RefreshTables.Click += new System.EventHandler(this.RefreshTables_Click);
+            // 
+            // lbSessionName
+            // 
+            this.lbSessionName.AutoSize = true;
+            this.lbSessionName.Location = new System.Drawing.Point(748, 11);
+            this.lbSessionName.Name = "lbSessionName";
+            this.lbSessionName.Size = new System.Drawing.Size(78, 13);
+            this.lbSessionName.TabIndex = 3;
+            this.lbSessionName.Text = "Сессия: admin";
+            // 
+            // dbQueryManager
+            // 
+            this.dbQueryManager.Name = "dbQueryManager";
+            this.dbQueryManager.Size = new System.Drawing.Size(220, 22);
+            this.dbQueryManager.Text = "Запрос к базе данных";
             // 
             // AdminForm
             // 
@@ -981,6 +989,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn staffSupply;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationSupply;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationSupplyID;
+        private System.Windows.Forms.ToolStripMenuItem dbQueryManager;
     }
 }
 

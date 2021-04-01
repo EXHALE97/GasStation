@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Configuration;
-using System.Data.SqlClient;
 using Queries;
 using Queries.Interfaces;
-using Queries.Validators;
 using Queries.Entities;
 using Queries.Security;
 using User;
@@ -35,22 +33,23 @@ namespace Enter
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string login = tbLogin.Text, password = tbPassword.Text, role = string.Empty, rolePass = string.Empty;
-            var loginEntity = new Login();
+            var logUser = new Login();
             try
             {
-                loginEntity.setLogin(login.Trim().Replace(" ", string.Empty), SecurityCrypt.MD5(password).Trim().Replace(" ", string.Empty));
+                logUser.SetLogin(login.Trim().Replace(" ", string.Empty), SecurityCrypt.MD5(password).Trim().Replace(" ", string.Empty));
             }
             catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 
             try
             {
-                var repLoginFactory = new RepositoryFactory(new DataBaseConnection(ConfigurationManager.ConnectionStrings["GasStation"].ToString()));
-                var loginController = new LoginController(loginEntity, repLoginFactory);
+                var loginController = new LoginController(logUser,
+                    new RepositoryFactory(
+                        new DataBaseConnection(ConfigurationManager.ConnectionStrings["LoginCheck"].ToString())));
                 role = loginController.TryLogin();
-                if (role == String.Empty)
+                if (role == string.Empty)
                     MessageBox.Show("Пользователь не найден!");
                 role = role.Trim().Replace(" ", string.Empty);
-                rolePass = SecurityCrypt.DESDecrypt(loginController.GetDBPassWordByRole(role), SecurityConst.cryptKey);
+                rolePass = SecurityCrypt.DESDecrypt(loginController.GetDbPasswordByRole(role), SecurityConst.cryptKey);
                 EnterRole(role, login, rolePass);
             }
             catch (Exception) { MessageBox.Show("Ошибка входа!"); }

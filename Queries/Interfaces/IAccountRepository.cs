@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Queries.Entities;
 
 namespace Queries.Interfaces
 {
-    public interface IAccountRepository : IDisposable
+    public interface IAccountRepository
     {
         List<Account> GetAccounting();
 

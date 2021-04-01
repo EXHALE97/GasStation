@@ -47,5 +47,10 @@ namespace User
         {
             fillDealTable.ShowUserTable(cardnum);
         }
+
+        private void lbSessionName1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

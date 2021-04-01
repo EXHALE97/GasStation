@@ -95,6 +95,7 @@
             this.lbSessionName1.Size = new System.Drawing.Size(16, 13);
             this.lbSessionName1.TabIndex = 9;
             this.lbSessionName1.Text = "---";
+            this.lbSessionName1.Click += new System.EventHandler(this.lbSessionName1_Click);
             // 
             // groupBox2
             // 

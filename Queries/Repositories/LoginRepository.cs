@@ -1,119 +1,56 @@
-﻿using System;
-using System.Data.Common;
-using System.Data.SqlClient;
+﻿using System.Data.Common;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
-using Queries.Security;
 
 namespace Queries.Repositories
 {
-    public class LoginRepository : ILoginRepository
+    public class LoginRepository : BaseRepository, ILoginRepository
     {
-        private DataBaseConnection dbc;
-
         public LoginRepository(DataBaseConnection dbc)
         {
-            this.dbc = dbc;
+            DataBaseConnection = dbc;
         }
 
         public string LoginToTable(Login login)
         {
-            string role = String.Empty;
-            try
-            {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT * FROM \"Login\".\"LoginTable\" WHERE login = @Login AND password = @Password");
-                queryCommand.Parameters.AddWithValue("@Login", login.GetLogin());
-                queryCommand.Parameters.AddWithValue("@Password", login.GetPassword());
-                var AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                    {
-                        role = dbDataRecord["role"].ToString();
-                    }
-                }
+            var role = string.Empty;
+            var queryResult =
+                ExecuteSqlCommand(
+                    $"SELECT * FROM \"Login\".\"LoginTable\" WHERE login = {login.GetLogin()} AND password = {login.GetPassword()}");
 
-            }
-            catch (SqlException pe)
+            if (!queryResult.HasRows) return role;
+            foreach (DbDataRecord dbDataRecord in queryResult)
             {
-                throw pe;
+                role = dbDataRecord["role"].ToString();
             }
-            finally { dbc.CloseConnection(); }
 
             return role;
         }
 
-        public void AddNewDBUser(DBUser dbUser)
-        {            
-            try
-            {
-                dbc.OpenConnection();            
-                
-                var queryCommand = new SqlCommand("INSERT INTO \"Login\".\"LoginTable\"(Login, Password, Role)" +
-                    "VALUES(@Login, @Pass, @Role)");
-                queryCommand.Parameters.AddWithValue("@Login", dbUser.GetDBUserLogin());
-                queryCommand.Parameters.AddWithValue("@Pass", SecurityCrypt.MD5((dbUser.GetDBUserPass())));
-                queryCommand.Parameters.AddWithValue("@Role", dbUser.GetDBUserRole());
-                queryCommand.ExecuteNonQuery();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
+        public void AddNewDbUser(DBUser dbUser)
+        {
+            ExecuteSqlNonQueryCommand("INSERT INTO \"Login\".\"LoginTable\"(Login, Password, Role)" +
+                                      $"VALUES({dbUser.GetDBUserLogin()}, {dbUser.GetDBUserPass()}, {dbUser.GetDBUserRole()})");
         }
 
         public bool CheckLoginExistence(string login)
         {
-            bool checkFlag = false;
-            try
-            {
-                dbc.OpenConnection();
-
-                var queryCommand = new SqlCommand("SELECT * FROM \"Login\".\"LoginTable\" WHERE login = @Login");
-                queryCommand.Parameters.AddWithValue("@Login", login);
-                var AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
-                {
-                    checkFlag = true;
-                }
-                else checkFlag = false;
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
-
-            return checkFlag;
+            return ExecuteSqlCommand($"SELECT * FROM \"Login\".\"LoginTable\" WHERE login = {login}").HasRows;
         }      
 
         public string GetRolePass(string role)
         {
-            string passWord = String.Empty;
-            try
-            {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT Password FROM \"Login\".\"RoleTable\" WHERE Role = @Role");
-                queryCommand.Parameters.AddWithValue("@Role", role);
+            var passWord = string.Empty;
+            var queryResult =
+                ExecuteSqlCommand($"SELECT Password FROM \"Login\".\"RoleTable\" WHERE Role = {role}");
 
-                var passWordSearch = queryCommand.ExecuteReader();
-                if (passWordSearch.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in passWordSearch)
-                    {
-                        passWord = dbDataRecord["Password"].ToString();
-                    }
-                    passWordSearch.Close();
-                }
-            }
-            catch (SqlException pe)
+            if (!queryResult.HasRows) return passWord;
+            foreach (DbDataRecord dbDataRecord in queryResult)
             {
-                throw pe;          
+                passWord = dbDataRecord["Password"].ToString();
             }
-            finally { dbc.CloseConnection(); }
+            queryResult.Close();
 
             return passWord;
 
@@ -121,18 +58,7 @@ namespace Queries.Repositories
 
         public void DeleteStaffFromLoginTable(string id)
         {
-            try
-            {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("DELETE FROM \"Login\".\"LoginTable\"  WHERE login = @Login");
-                queryCommand.Parameters.AddWithValue("@Login", id);
-                queryCommand.ExecuteNonQuery();
-
-            }
-            catch (SqlException)
-            { }
-            finally { dbc.CloseConnection(); }
-
+            ExecuteSqlNonQueryCommand($"DELETE FROM \"Login\".\"LoginTable\"  WHERE login = {id}");
         }
     }
 }

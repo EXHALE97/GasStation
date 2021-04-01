@@ -6,13 +6,12 @@ namespace Queries.Interfaces
     {
         string LoginToTable(Login login);
 
-        void AddNewDBUser(DBUser dbUser);
+        void AddNewDbUser(DBUser dbUser);
 
         string GetRolePass(string role);
 
-        bool CheckLoginExistence(string cardnum);
+        bool CheckLoginExistence(string login);
 
         void DeleteStaffFromLoginTable(string id);
-
     }
 }

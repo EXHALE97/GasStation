@@ -34,12 +34,12 @@ namespace Queries.Controllers
             return factory.GetLoginRepository().LoginToTable(login);
         }
 
-        public string GetDBPassWordByRole(string role)
+        public string GetDbPasswordByRole(string role)
         {
-            string passWord = String.Empty;
+            var password = string.Empty;
             try
             {
-                passWord = factory.GetLoginRepository().GetRolePass(role);
+                password = factory.GetLoginRepository().GetRolePass(role);
             }
             catch (SqlException e)
             {
@@ -50,7 +50,7 @@ namespace Queries.Controllers
                 MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            return passWord;
+            return password;
         }
 
         public bool AddToLoginTable(DBUser dbUser)
@@ -60,7 +60,7 @@ namespace Queries.Controllers
             {
                 if (checkFlag = dataBaseUserValidator.CheckAddition(dbUser, out errorList))
                 {
-                    factory.GetLoginRepository().AddNewDBUser(dbUser);
+                    factory.GetLoginRepository().AddNewDbUser(dbUser);
                 }
                 else
                 {

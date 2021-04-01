@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Queries.Entities;
-using Queries.dgvControllers;
 using Queries.comboBoxFillers;
 using Queries.Controllers;
 using Queries.Interfaces;
@@ -134,6 +133,21 @@ namespace Worker
         {
             if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
+        }
+
+        private void dealDatePick_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbDealPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void updateDealTableForm_Load(object sender, EventArgs e)

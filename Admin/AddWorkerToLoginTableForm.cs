@@ -43,7 +43,7 @@ namespace Admin
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            string passWord = String.Empty;
+            var passWord = string.Empty;
             try
             {
                 passWord = tbPass.Text.ToString();
@@ -61,11 +61,7 @@ namespace Admin
 
         private void checkPass_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkPass.Checked)
-            {
-                tbPass.UseSystemPasswordChar = false;
-            }
-            else tbPass.UseSystemPasswordChar = true;
+            tbPass.UseSystemPasswordChar = !checkPass.Checked;
         }
     }
 }

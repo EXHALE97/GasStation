@@ -2,25 +2,25 @@
 {
     public class Login
     {
-        public string l_Login { private set; get; }
-        public string l_Password { private set; get; }
-        public string l_Role { private set; get; }
+        private readonly string userId;
+        private readonly string password;
+        private readonly string role;
 
-        public void setLogin(string Login, string Password, string Role)
+        public Login(string userId, string password, string role)
         {
-            l_Login = Login;
-            l_Password = Password;
-            l_Role = Role;
+            this.userId = userId;
+            this.password = password;
+            this.role = role;
         }
 
-        public void setLogin(string Login, string Password)
+        public Login(string userId, string password)
         {
-            l_Login = Login;
-            l_Password = Password;
+            this.userId = userId;
+            this.password = password;
         }
 
-        public string GetLogin() => l_Login;
-        public string GetPassword() => l_Password;
-        public string GetRole() => l_Role;
+        public string GetLogin() => userId;
+        public string GetPassword() => password;
+        public string GetRole() => role;
     }
 }

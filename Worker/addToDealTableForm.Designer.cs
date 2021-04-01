@@ -60,9 +60,12 @@
             // 
             this.dealDatePick.Enabled = false;
             this.dealDatePick.Location = new System.Drawing.Point(150, 118);
+            this.dealDatePick.MaxDate = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
             this.dealDatePick.Name = "dealDatePick";
             this.dealDatePick.Size = new System.Drawing.Size(123, 20);
             this.dealDatePick.TabIndex = 44;
+            this.dealDatePick.Value = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
+            this.dealDatePick.ValueChanged += new System.EventHandler(this.dealDatePick_ValueChanged);
             // 
             // btnCancel
             // 
@@ -107,18 +110,19 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(18, 72);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(75, 13);
+            this.label4.Size = new System.Drawing.Size(104, 13);
             this.label4.TabIndex = 32;
-            this.label4.Text = "Цена сделки:";
+            this.label4.Text = "Цена сделки (руб.):";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(18, 46);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(113, 13);
+            this.label3.Size = new System.Drawing.Size(128, 13);
             this.label3.TabIndex = 31;
-            this.label3.Text = "Количество топлива:";
+            this.label3.Text = "Количество топлива (л):";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // tbDealPrice
             // 
@@ -126,6 +130,7 @@
             this.tbDealPrice.Name = "tbDealPrice";
             this.tbDealPrice.Size = new System.Drawing.Size(123, 20);
             this.tbDealPrice.TabIndex = 27;
+            this.tbDealPrice.TextChanged += new System.EventHandler(this.tbDealPrice_TextChanged);
             this.tbDealPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDealPrice_KeyPress);
             // 
             // tbFuelamount

@@ -1,33 +1,29 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 
 namespace Queries.Connection
 {
     public class DataBaseConnection 
     {
-        private static SqlConnection _connection;
+        private readonly SqlConnection connection;
 
         public DataBaseConnection(string connectionString)
         {
-            _connection = new SqlConnection(connectionString);
+            connection = new SqlConnection(connectionString);
         }
 
         public void OpenConnection()
         {
-            try
-            {
-                _connection.Open();
-            }
-            catch (Exception) {  }
+            connection.Open();
         }
 
         public void CloseConnection()
         {
-            try
-            {
-                _connection.Close();
-            }
-            catch (Exception) { }
+            connection.Close();
+        }
+
+        public SqlConnection GetConnection()
+        {
+            return connection;
         }
     }
 }

@@ -51,6 +51,7 @@
     <Compile Include="ComboBoxFillers\ComboBoxAccountingFiller.cs" />
     <Compile Include="ComboBoxFillers\ComboBoxSupplyFiller.cs" />
     <Compile Include="Connection\DataBaseConnection.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Validators\CarValidator.cs" />
     <Compile Include="Validators\DataBaseUserValidator.cs" />
     <Compile Include="Validators\DealValidator.cs" />

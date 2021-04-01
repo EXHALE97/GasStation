@@ -16,6 +16,5 @@
         ISupplyRepository GetSupplyRepository();
 
         ILoginRepository GetLoginRepository();
-   
     }
 }

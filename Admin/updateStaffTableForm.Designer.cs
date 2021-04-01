@@ -96,7 +96,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(68, 13);
             this.label7.TabIndex = 15;
-            this.label7.Text = "Профессия:";
+            this.label7.Text = "Должность:";
             // 
             // label9
             // 
