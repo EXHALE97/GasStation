@@ -30,13 +30,13 @@ namespace Queries.comboBoxFillers
         {
             foreach (var station in factory.GetStationRepository().GetStations())
             {
-                cb.Items.Add(factory.GetStationRepository().GetStationAdresByID(station.GetStation_id()));
+                cb.Items.Add(factory.GetStationRepository().GetStationAddressById(station.GetStation_id()));
             }
         }
 
         public void СbOrgFill()
         {
-            comboBoxElements = factory.GetStationRepository().GetOrganisations();
+            comboBoxElements = factory.GetStationRepository().GetOrganizations();
             foreach (var st in comboBoxElements)
             {
                 cb.Items.Add(st);
@@ -45,7 +45,7 @@ namespace Queries.comboBoxFillers
 
         public void СbStationFill(string Orgname)
         {
-            comboBoxElements = factory.GetStationRepository().GetStationsAdres(Orgname);
+            comboBoxElements = factory.GetStationRepository().GetStationsAddress(Orgname);
             foreach (string st in comboBoxElements)
             {
                 cb.Items.Add(st.Trim().Replace(" ", string.Empty));

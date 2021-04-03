@@ -1,80 +1,67 @@
 ﻿using System;
 using System.Windows.Forms;
+using Queries.Controllers;
 using Queries.Entities;
-using Queries.dgvControllers;
 using Queries.Interfaces;
 
 namespace Admin
 {
     public partial class AddToStationTableForm : Form
     {
-        private IRepositoryFactory factory;
-        private DataGridView dgv;
-        private string orgname, country, city, street;
+        private readonly IRepositoryFactory factory;
+        private readonly DataGridView stationsTable;
+        private readonly Lazy<StationController> stationController;
 
+        public AddToStationTableForm(IRepositoryFactory factory, DataGridView stationsTable)
+        {
+            InitializeComponent();
+            this.factory = factory;
+            this.stationsTable = stationsTable;
+            stationController = new Lazy<StationController>(() => new StationController(stationsTable, factory));
+        }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                orgname = tbOrgName.Text.ToString();
-                country = tbCountry.Text.ToString();
-                city = tbCity.Text.ToString();
-                street = tbStreet.Text.ToString();
-                    street = CheckRigthStreet(street);
-                    int storagecap;
-                    bool checkStorageCap = Int32.TryParse(tbStorageCap.Text, out storagecap);
-                    if (!checkStorageCap)
-                    {
-                        storagecap = -1;
-                    }
-                    Station st = new Station();
-                    st.stationSet(orgname, country, city, street, storagecap);
-                    StationController stationController = new StationController(dgv, factory);
-                    if (stationController.AddToTable(st))
-                    {
-                        MessageBox.Show("Операция выполнена успешно!");
-                        Close();
-                    }
+                var st = new Station(tbOrgName.Text, tbCountry.Text, tbCity.Text, CheckRightStreet(tbStreet.Text));
+                if (stationController.Value.AddToTable(st))
+                {
+                    MessageBox.Show("Операция выполнена успешно!");
+                    Close();
+                }
             }
             catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void tbOrgName_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
         }
 
         private void tbCountry_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
         }
 
         private void tbCity_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsLetter(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
         }
 
         private void tbStreet_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsLetter(e.KeyChar) && !Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 32 )
+            if (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 32 )
                 e.Handled = true;
         }
 
         private void tbStorageCap_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
-        }
-
-        public AddToStationTableForm(IRepositoryFactory factory, DataGridView dgv)
-        {
-            InitializeComponent();
-            this.factory = factory;
-            this.dgv = dgv;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -82,9 +69,9 @@ namespace Admin
             Close();
         }
 
-        private string CheckRigthStreet(string street)
+        private string CheckRightStreet(string street)
         {
-            for (int i = 1; i < street.Length; i++)
+            for (var i = 1; i < street.Length; i++)
             {
                 if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
                 {

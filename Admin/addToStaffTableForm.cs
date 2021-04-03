@@ -71,7 +71,7 @@ namespace Admin
             {
                 try
                 {
-                    station_id = factory.GetStationRepository().FindStationIDByLocation(cbStationList.Text);
+                    station_id = factory.GetStationRepository().FindStationIdByLocation(cbStationList.Text);
                 } catch(Exception) { station_id = -1; }
                 if (station_id == 0)
                 {

@@ -7,19 +7,18 @@ namespace Queries.Interfaces
 {
     public interface IStationRepository : IDisposable
     {
-        int FindStationIDByLocation(string location);
+        int FindStationIdByLocation(string location);
 
         List<Station> FindStations(string fCountry, string fCity);
 
-        List<string> GetOrganisations();
+        List<string> GetOrganizations();
 
         List<Station> GetStations();
 
-        List<string> GetStationsAdres(string Orgname);
+        List<string> GetStationsAddress(string name);
 
-        string GetStationAdresByID(int station_id);
+        string GetStationAddressById(int stationId);
 
         void AddToStationTable(Station st);
-
     }
 }

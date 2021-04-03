@@ -19,7 +19,7 @@ namespace Queries.comboBoxFillers
             var comboBoxStationElements = factory.GetStationRepository().GetStations();
             foreach (var station in comboBoxStationElements)
             {
-                comboBox.Items.Add(factory.GetStationRepository().GetStationAdresByID(station.GetStation_id()));
+                comboBox.Items.Add(factory.GetStationRepository().GetStationAddressById(station.GetStation_id()));
             }
         }
     }

@@ -2,37 +2,27 @@
 {
     public class Station
     {
-        public int s_station_id { private set; get; }
-        public string s_orgname { private set; get; }
-        public string s_country { private set; get; }
-        public string s_city { private set; get; }
-        public string s_street { private set; get; }
-        public int s_storagecap { private set; get; }
+        public int Id { get; }
+        public string Name { get; }
+        public string Country { get; }
+        public string City { get; }
+        public string Address { get; }
 
-        public void stationSet(int station_id, string orgname, string country, string city, string street, int storagecap)
+        public Station(int id, string name, string country, string city, string street)
         {
-            s_station_id = station_id;
-            s_orgname = orgname;
-            s_country = country;
-            s_city = city;
-            s_street = street;
-            s_storagecap = storagecap;
+            Id = id;
+            Name = name;
+            Country = country;
+            City = city;
+            Address = street;
         }
 
-        public void stationSet(string orgname, string country, string city, string street, int storagecap)
+        public Station(string name, string country, string city, string street)
         {
-            s_orgname = orgname;
-            s_country = country;
-            s_city = city;
-            s_street = street;
-            s_storagecap = storagecap;
+            Name = name;
+            Country = country;
+            City = city;
+            Address = street;
         }
-
-        public int GetStation_id() => s_station_id;
-        public string GetOrgName() => s_orgname;
-        public string GetCountry() => s_country;
-        public string GetCity() => s_city;
-        public string GetStreet() => s_street;
-        public int GetStorageCap() => s_storagecap;
     }
 }

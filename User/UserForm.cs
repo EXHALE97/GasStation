@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Queries.Controllers;
-using Queries.dgvControllers;
 using Queries.Interfaces;
 
 namespace User

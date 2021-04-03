@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
 
 namespace Queries.Repositories
 {
-    public class StationRepository : IStationRepository
+    public class StationRepository : BaseRepository, IStationRepository
     {
-        private DataBaseConnection dbc;
-
         public StationRepository(DataBaseConnection dbc)
         {
-            this.dbc = dbc;
+            DataBaseConnection = dbc;
         }
 
         public void Dispose()
@@ -24,37 +23,29 @@ namespace Queries.Repositories
 
         public List<Station> GetStations()
         {
-            List<Station> stationList = new List<Station>();
+            var stationList = new List<Station>();
             try
             {
 
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\"");
-                var AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
+                DataBaseConnection.OpenConnection();
+                var queryResult = new SqlCommand("EXEC StationsSummary").ExecuteReader();
+                if (queryResult.HasRows)
                 {
-                    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                    {
-                        Station st = new Station();
-                        st.stationSet(Convert.ToInt32(dbDataRecord["station_id"]), dbDataRecord["orgname"].ToString(), dbDataRecord["country"].ToString(),
-                            dbDataRecord["city"].ToString(), dbDataRecord["street"].ToString(), Convert.ToInt32(dbDataRecord["storagecap"]));
-                        stationList.Add(st);
-                    }
+                    stationList.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select new Station(int.Parse(dbDataRecord["id"].ToString()), dbDataRecord["name"].ToString(),
+                            dbDataRecord["country"].ToString(), dbDataRecord["city"].ToString(),
+                            dbDataRecord["address"].ToString()));
                 }
-                AZSTableReader.Close();
+                queryResult.Close();
             }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
             return stationList;
         }
 
         public List<Station> FindStations(string fCountry, string fCity)
         {
             List<Station> stationList = new List<Station>();
-            dbc.OpenConnection();
+            DataBaseConnection.OpenConnection();
             try
             {
                 var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country LIKE" +
@@ -65,17 +56,10 @@ namespace Queries.Repositories
                 var AZSTableSearcher = queryCommand.ExecuteReader();
                 if (AZSTableSearcher.HasRows)
                 {
-                    foreach (DbDataRecord dbDataRecord in AZSTableSearcher)
-                    {
-                        Station st = new Station();
-                        st.stationSet(Convert.ToInt32(dbDataRecord["station_id"]),
-                            dbDataRecord["orgname"].ToString(),
-                            dbDataRecord["country"].ToString(),
-                            dbDataRecord["city"].ToString(),
-                            dbDataRecord["street"].ToString(),
-                            Convert.ToInt32(dbDataRecord["storagecap"]));
-                        stationList.Add(st);
-                    }
+                    stationList.AddRange(from DbDataRecord dbDataRecord in AZSTableSearcher
+                        select new Station(Convert.ToInt32(dbDataRecord["station_id"]),
+                            dbDataRecord["orgname"].ToString(), dbDataRecord["country"].ToString(),
+                            dbDataRecord["city"].ToString(), dbDataRecord["street"].ToString()));
                     AZSTableSearcher.Close();
                 }
             }
@@ -83,11 +67,11 @@ namespace Queries.Repositories
             {
                 throw pe;
             }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
             return stationList;
         }
 
-        public int FindStationIDByLocation(string location)
+        public int FindStationIdByLocation(string location)
         {
             int station_id = 0;
             try
@@ -101,9 +85,9 @@ namespace Queries.Repositories
                     {
                         splittedLocation.Add(s);
                     }
-                    splittedLocation[2] = CheckRigthStreet(splittedLocation[2]);
+                    splittedLocation[2] = CheckRightStreet(splittedLocation[2]);
                 }
-                dbc.OpenConnection();
+                DataBaseConnection.OpenConnection();
                 var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country =" +
                   "'" + splittedLocation[0] + "' AND city =" + "'" + splittedLocation[1] + "'" + "AND street =" + "'" + splittedLocation[2] + "'" + "");
 
@@ -124,16 +108,16 @@ namespace Queries.Repositories
             {
                 throw pe;
             }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
             return station_id;
         }
 
-        public List<string> GetStationsAdres(string Orgname)
+        public List<string> GetStationsAddress(string Orgname)
         {
             List<string> comboBoxElements = new List<string>();
             try
             {
-                dbc.OpenConnection();
+                DataBaseConnection.OpenConnection();
                 var queryCommand = new SqlCommand("SELECT country, city, street FROM \"AZS\".\"GasStation\" WHERE orgname LIKE @Orgname ");
                 queryCommand.Parameters.AddWithValue("@Orgname", "%" + Orgname + "%");
                 var AZSTableReader = queryCommand.ExecuteReader();
@@ -151,20 +135,20 @@ namespace Queries.Repositories
             {
                 throw pe;
             }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
 
             return comboBoxElements;
         }
 
-        public string GetStationAdresByID(int station_id)
+        public string GetStationAddressById(int stationId)
         {
             string location = String.Empty;
             var comboBoxElements = new List<string>();
             try
             {
-                dbc.OpenConnection();
+                DataBaseConnection.OpenConnection();
                 var queryCommand = new SqlCommand("SELECT country, city, street FROM \"AZS\".\"GasStation\" WHERE station_id = @Station_id ");
-                queryCommand.Parameters.AddWithValue("@Station_id", station_id);
+                queryCommand.Parameters.AddWithValue("@Station_id", stationId);
                 var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
                 {
@@ -180,18 +164,18 @@ namespace Queries.Repositories
             {
                 throw pe;
             }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
 
             return location.Trim().Replace(" ", string.Empty);
         }
 
-        public List<string> GetOrganisations()
+        public List<string> GetOrganizations()
         {
             List<string> comboBoxElements = new List<string>();
 
             try
             {
-                dbc.OpenConnection();
+                DataBaseConnection.OpenConnection();
                 var queryCommand = new SqlCommand("SELECT DISTINCT orgname FROM \"AZS\".\"GasStation\"");
                 var AZSTableReader = queryCommand.ExecuteReader();
                 if (AZSTableReader.HasRows)
@@ -207,7 +191,7 @@ namespace Queries.Repositories
             {
                 throw pe;
             }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
 
             return comboBoxElements;
         }
@@ -216,50 +200,41 @@ namespace Queries.Repositories
         {
             try
             {
-                dbc.OpenConnection();
+                DataBaseConnection.OpenConnection();
 
                 var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"GasStation\"(OrgName, Country, City, Street, StorageCap)" +
                         "VALUES(@OrgName, @Country, @City, @Street, @StorageCap)");
-                    queryCommand.Parameters.AddWithValue("@OrgName", st.GetOrgName());
-                    queryCommand.Parameters.AddWithValue("@Country", st.GetCountry());
-                    queryCommand.Parameters.AddWithValue("@City", st.GetCity());
-                    queryCommand.Parameters.AddWithValue("@Street", st.GetStreet());
-                    queryCommand.Parameters.AddWithValue("@StorageCap", st.GetStorageCap());
                     queryCommand.ExecuteNonQuery();
             }
             catch (SqlException pe)
             {
                 throw pe;
             }
-            finally { dbc.CloseConnection(); }
+            finally { DataBaseConnection.CloseConnection(); }
 
         }
 
-        private string CheckRigthStreet(string street)
+        private string CheckRightStreet(string street)
         {
-            try
+            for (var i = 1; i < street.Length; i++)
             {
-                for (int i = 1; i < street.Length; i++)
+                if ((street[i] >= 'А' && street[i] <= 'Я') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
                 {
-                    if ((street[i] >= 'А' && street[i] <= 'Я') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
-                    {
-                        street = street.Insert(i, " ");
-                    }
-                    if ((street[i] >= 'A' && street[i] <= 'Z') && (street[i - 1] >= 'a' && street[i - 1] <= 'z'))
-                    {
-                        street = street.Insert(i, " ");
-                    }
-                    if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
-                    {
-                        street = street.Insert(i, " ");
-                    }
-                    if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'a' && street[i - 1] <= 'z'))
-                    {
-                        street = street.Insert(i, " ");
-                    }
+                    street = street.Insert(i, " ");
+                }
+                if ((street[i] >= 'A' && street[i] <= 'Z') && (street[i - 1] >= 'a' && street[i - 1] <= 'z'))
+                {
+                    street = street.Insert(i, " ");
+                }
+                if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
+                {
+                    street = street.Insert(i, " ");
+                }
+                if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'a' && street[i - 1] <= 'z'))
+                {
+                    street = street.Insert(i, " ");
                 }
             }
-            catch (Exception) { };
             return street;
         }
     }

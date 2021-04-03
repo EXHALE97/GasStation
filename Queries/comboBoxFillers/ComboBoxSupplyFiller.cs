@@ -21,7 +21,7 @@ namespace Queries.comboBoxFillers
             List<Station> comboBoxStationElements = factory.GetStationRepository().GetStations();
             foreach (Station station in comboBoxStationElements)
             {
-                cb.Items.Add(factory.GetStationRepository().GetStationAdresByID(station.GetStation_id()));
+                cb.Items.Add(factory.GetStationRepository().GetStationAddressById(station.GetStation_id()));
             }
         }
     }

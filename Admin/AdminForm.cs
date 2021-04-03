@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Queries.dgvControllers;
 using Queries.Interfaces;
 using Queries.comboBoxFillers;
 using Queries.Controllers;
@@ -24,7 +23,7 @@ namespace Admin
         {
             InitializeComponent();
             this.factory = factory;
-            stationController = new StationController(dgvVievAZS, factory);
+            stationController = new StationController(dgvVievStations, factory);
             employeeController = new EmployeeController(dgvViewStaff, factory);
             clientController = new CarController(dgvViewCars, factory);
             accountingController = new AccountController(dgvViewAccounting, factory);
@@ -39,7 +38,7 @@ namespace Admin
         {
             MessageBox.Show("Добро пожаловать, администратор!");
             
-            stationController.ShowAdminTable();
+            stationController.ShowTable();
             employeeController.ShowTable();
             clientController.ShowTable();
             accountingController.ShowTable();
@@ -102,12 +101,12 @@ namespace Admin
         private void btnStationAdd_Click(object sender, EventArgs e)
         {
             new AddToStationTableForm(factory, dgvViewCars).ShowDialog();
-            stationController.ShowAdminTable();
+            stationController.ShowTable();
         }
 
         private void RefreshTables_Click(object sender, EventArgs e)
         {
-            stationController.ShowAdminTable();
+            stationController.ShowTable();
             employeeController.ShowTable();
             clientController.ShowTable();
             accountingController.ShowTable();
@@ -137,7 +136,7 @@ namespace Admin
 
         private void btnTableStationView_Click(object sender, EventArgs e)
         {
-            stationController.ShowAdminTable();
+            stationController.ShowTable();
         }
 
         private void btnTableCarView_Click(object sender, EventArgs e)
@@ -154,7 +153,7 @@ namespace Admin
         {
             if (cbDealFilterByStation.SelectedIndex != -1)
             {
-                dealController.FindDealsByStationID(factory.GetStationRepository().FindStationIDByLocation(cbDealFilterByStation.Text));
+                dealController.FindDealsByStationID(factory.GetStationRepository().FindStationIdByLocation(cbDealFilterByStation.Text));
                 cbDealFilterByStation.Items.Clear();
                 dealComboBox.СbStationListFill();
             }
@@ -164,7 +163,7 @@ namespace Admin
         {
             if (cbAccountingFilterByStation.SelectedIndex != -1)
             {
-                accountingController.FilterBYStationID(factory.GetStationRepository().FindStationIDByLocation(cbAccountingFilterByStation.Text));
+                accountingController.FilterBYStationID(factory.GetStationRepository().FindStationIdByLocation(cbAccountingFilterByStation.Text));
                 cbAccountingFilterByStation.Items.Clear();
                 accountingComboBox.СbStationListFill();
             }
@@ -174,7 +173,7 @@ namespace Admin
         {
             if (cbSupplyFilterByStation.SelectedIndex != -1)
             {
-                supplyController.FilterBYStationID(factory.GetStationRepository().FindStationIDByLocation(cbSupplyFilterByStation.Text));
+                supplyController.FilterBYStationID(factory.GetStationRepository().FindStationIdByLocation(cbSupplyFilterByStation.Text));
                 cbSupplyFilterByStation.Items.Clear();
                 supplyComboBox.СbStationListFill();
             }

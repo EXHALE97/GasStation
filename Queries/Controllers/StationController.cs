@@ -6,21 +6,20 @@ using Queries.Entities;
 using Queries.Interfaces;
 using Queries.Validators;
 
-namespace Queries.dgvControllers
+namespace Queries.Controllers
 {
     public class StationController
     {
-        private DataGridView dgv;
-        private StationValidator stationValidator;
-        private List<Station> dgvElements;
-        private IRepositoryFactory factory;
+        private readonly DataGridView stationsTable;
+        private readonly StationValidator stationValidator;
+        private readonly IRepositoryFactory factory;
         private List<string> errorList;
         private string error;
 
-        public StationController(DataGridView dgv, IRepositoryFactory factory)
+        public StationController(DataGridView stationsTable, IRepositoryFactory factory)
         {
             this.factory = factory;
-            this.dgv = dgv;
+            this.stationsTable = stationsTable;
             stationValidator = new StationValidator();
         }
 
@@ -28,34 +27,21 @@ namespace Queries.dgvControllers
         {
             try
             {
-                dgvElements = new List<Station>();
-                dgvElements = factory.GetStationRepository().GetStations();
-                dgv.Rows.Clear();
-                foreach (Station ps in dgvElements)
-                {
-                    dgv.Rows.Add(ps.GetOrgName(), ps.GetCountry(), ps.GetCity(), ps.GetStreet());
-                }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+                var rowsCount = stationsTable.Rows.Count;
+                var stations = factory.GetStationRepository().GetStations();
 
-        public void ShowAdminTable()
-        {
-            try
-            {
-                dgvElements = new List<Station>();
-                dgvElements = factory.GetStationRepository().GetStations();
-                dgv.Rows.Clear();
-                foreach (Station ps in dgvElements)
+                stationsTable.Rows.Clear();
+                
+                foreach (var ps in stations)
                 {
-                    dgv.Rows.Add(ps.GetStation_id(), ps.GetOrgName(), ps.GetCountry(), ps.GetCity(), ps.GetStreet(), ps.GetStorageCap());
+                    if (rowsCount == 4)
+                    {
+                        stationsTable.Rows.Add(ps.Name, ps.Country, ps.City, ps.Address);
+                    }
+                    else
+                    {
+                        stationsTable.Rows.Add(ps.Id, ps.Name, ps.Country, ps.City, ps.Address);
+                    }
                 }
             }
             catch (SqlException e)
@@ -72,12 +58,11 @@ namespace Queries.dgvControllers
         {
             try
             {
-                dgvElements = new List<Station>();
-                dgvElements = factory.GetStationRepository().FindStations(country, city);
-                dgv.Rows.Clear();
-                foreach (Station ps in dgvElements)
+                var stations = factory.GetStationRepository().FindStations(country, city);
+                stationsTable.Rows.Clear();
+                foreach (var ps in stations)
                 {
-                    dgv.Rows.Add(ps.GetOrgName(), ps.GetCountry(), ps.GetCity(), ps.GetStreet());
+                    stationsTable.Rows.Add(ps.Name, ps.Country, ps.City, ps.Address);
                 }
             }
             catch (SqlException e)

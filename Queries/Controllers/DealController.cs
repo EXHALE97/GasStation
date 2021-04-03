@@ -60,7 +60,7 @@ namespace Queries.Controllers
                 foreach (Deal deal in dgvElements)
                 {
                     string cardnum = factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()); 
-                    dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAdresByID(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                    dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
                         factory.GetStaffRepository().FindStaffByID(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
                         deal.GetDealPrice(), cardnum, deal.GetDealDate());
                 }
@@ -123,7 +123,7 @@ namespace Queries.Controllers
                         stationDealList = factory.GetDealRepository().ShowWorkerDealTable(id);
                         foreach (Deal deal in stationDealList)
                         {
-                            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAdresByID(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
                                 factory.GetStaffRepository().FindStaffByID(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
                                 deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
                         }

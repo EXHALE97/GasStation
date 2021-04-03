@@ -18,7 +18,7 @@ namespace Queries.comboBoxFillers
 
         public void СbOrgFill()
         {
-            comboBoxElements = factory.GetStationRepository().GetOrganisations();
+            comboBoxElements = factory.GetStationRepository().GetOrganizations();
             foreach (string st in comboBoxElements)
             {
                 cb.Items.Add(st);
@@ -27,7 +27,7 @@ namespace Queries.comboBoxFillers
 
         public void СbStationFill(string Orgname)
         {
-            comboBoxElements = factory.GetStationRepository().GetStationsAdres(Orgname);
+            comboBoxElements = factory.GetStationRepository().GetStationsAddress(Orgname);
             foreach (string st in comboBoxElements)
             {
                 string cbString = RemoveSpaces(st);

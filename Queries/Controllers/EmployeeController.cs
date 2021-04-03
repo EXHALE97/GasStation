@@ -36,7 +36,7 @@ namespace Queries.Controllers
                     foreach (Employee wk in dgvElements)
                     {
                         dataGridView.Rows.Add(wk.GetStaffID(), wk.GetSurname(), wk.GetName(),
-                            factory.GetStationRepository().GetStationAdresByID(factory.GetStaffRepository().FindStationIDByStaffID(wk.GetStaffID())).Trim().Replace(" ", string.Empty),
+                            factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(wk.GetStaffID())).Trim().Replace(" ", string.Empty),
                             wk.GetGender(), wk.GetBirthdate(), wk.GetFunction(), wk.GetSalary());
                     }
                 }

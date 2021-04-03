@@ -71,13 +71,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnTableStationView = new System.Windows.Forms.Button();
             this.btnStationAdd = new System.Windows.Forms.Button();
-            this.dgvVievAZS = new System.Windows.Forms.DataGridView();
-            this.station_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orgname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.country = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.street = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.storagecap = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvVievStations = new System.Windows.Forms.DataGridView();
             this.tabDealTable = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cbDealFilterByStation = new System.Windows.Forms.ComboBox();
@@ -111,6 +105,11 @@
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
+            this.station_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.orgname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -124,7 +123,7 @@
             this.tabAdmin.SuspendLayout();
             this.tabStationTable.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVievAZS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVievStations)).BeginInit();
             this.tabDealTable.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -491,7 +490,7 @@
             // tabStationTable
             // 
             this.tabStationTable.Controls.Add(this.groupBox1);
-            this.tabStationTable.Controls.Add(this.dgvVievAZS);
+            this.tabStationTable.Controls.Add(this.dgvVievStations);
             this.tabStationTable.Location = new System.Drawing.Point(4, 22);
             this.tabStationTable.Name = "tabStationTable";
             this.tabStationTable.Padding = new System.Windows.Forms.Padding(3);
@@ -531,52 +530,21 @@
             this.btnStationAdd.UseVisualStyleBackColor = true;
             this.btnStationAdd.Click += new System.EventHandler(this.btnStationAdd_Click);
             // 
-            // dgvVievAZS
+            // dgvVievStations
             // 
-            this.dgvVievAZS.AllowUserToAddRows = false;
-            this.dgvVievAZS.AllowUserToDeleteRows = false;
-            this.dgvVievAZS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVievAZS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvVievStations.AllowUserToAddRows = false;
+            this.dgvVievStations.AllowUserToDeleteRows = false;
+            this.dgvVievStations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvVievStations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.station_id,
             this.orgname,
             this.country,
             this.city,
-            this.street,
-            this.storagecap});
-            this.dgvVievAZS.Location = new System.Drawing.Point(3, 3);
-            this.dgvVievAZS.Name = "dgvVievAZS";
-            this.dgvVievAZS.Size = new System.Drawing.Size(545, 456);
-            this.dgvVievAZS.TabIndex = 1;
-            // 
-            // station_id
-            // 
-            this.station_id.HeaderText = "ID";
-            this.station_id.Name = "station_id";
-            // 
-            // orgname
-            // 
-            this.orgname.HeaderText = "Организация";
-            this.orgname.Name = "orgname";
-            // 
-            // country
-            // 
-            this.country.HeaderText = "Страна";
-            this.country.Name = "country";
-            // 
-            // city
-            // 
-            this.city.HeaderText = "Город";
-            this.city.Name = "city";
-            // 
-            // street
-            // 
-            this.street.HeaderText = "Улица";
-            this.street.Name = "street";
-            // 
-            // storagecap
-            // 
-            this.storagecap.HeaderText = "Объем цистерн";
-            this.storagecap.Name = "storagecap";
+            this.address});
+            this.dgvVievStations.Location = new System.Drawing.Point(3, 3);
+            this.dgvVievStations.Name = "dgvVievStations";
+            this.dgvVievStations.Size = new System.Drawing.Size(545, 456);
+            this.dgvVievStations.TabIndex = 1;
             // 
             // tabDealTable
             // 
@@ -862,6 +830,31 @@
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
             // 
+            // station_id
+            // 
+            this.station_id.HeaderText = "ID";
+            this.station_id.Name = "station_id";
+            // 
+            // orgname
+            // 
+            this.orgname.HeaderText = "Название";
+            this.orgname.Name = "orgname";
+            // 
+            // country
+            // 
+            this.country.HeaderText = "Страна";
+            this.country.Name = "country";
+            // 
+            // city
+            // 
+            this.city.HeaderText = "Город";
+            this.city.Name = "city";
+            // 
+            // address
+            // 
+            this.address.HeaderText = "Адрес";
+            this.address.Name = "address";
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -889,7 +882,7 @@
             this.tabAdmin.ResumeLayout(false);
             this.tabStationTable.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVievAZS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvVievStations)).EndInit();
             this.tabDealTable.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -924,7 +917,7 @@
         private System.Windows.Forms.DataGridView dgvViewDeal;
         private System.Windows.Forms.Button btnDealUpdate;
         private System.Windows.Forms.TabPage tabStationTable;
-        private System.Windows.Forms.DataGridView dgvVievAZS;
+        private System.Windows.Forms.DataGridView dgvVievStations;
         private System.Windows.Forms.Button btnStationAdd;
         private System.Windows.Forms.DataGridViewTextBoxColumn car_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cardnum;
@@ -957,12 +950,6 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnTableAccountingView;
         private System.Windows.Forms.ComboBox cbAccountingFilterByStation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn station_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn storagecap;
-        private System.Windows.Forms.DataGridViewTextBoxColumn street;
-        private System.Windows.Forms.DataGridViewTextBoxColumn city;
-        private System.Windows.Forms.DataGridViewTextBoxColumn country;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orgname;
         private System.Windows.Forms.TabPage tabSupplyTable;
         private System.Windows.Forms.DataGridView dgvViewSupply;
         private System.Windows.Forms.GroupBox groupBox8;
@@ -990,6 +977,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn stationSupply;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationSupplyID;
         private System.Windows.Forms.ToolStripMenuItem dbQueryManager;
+        private System.Windows.Forms.DataGridViewTextBoxColumn station_id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn orgname;
+        private System.Windows.Forms.DataGridViewTextBoxColumn country;
+        private System.Windows.Forms.DataGridViewTextBoxColumn city;
+        private System.Windows.Forms.DataGridViewTextBoxColumn address;
     }
 }
 
