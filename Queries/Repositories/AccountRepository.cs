@@ -15,9 +15,9 @@ namespace Queries.Repositories
             DataBaseConnection = dbc;
         }
 
-        public List<Account> GetAccounting()
+        public List<Accounting> GetAccounting()
         {
-            var dgvElements = new List<Account>();
+            var dgvElements = new List<Accounting>();
             try
             {
                 DataBaseConnection.OpenConnection();
@@ -28,7 +28,7 @@ namespace Queries.Repositories
                 {
                     foreach (DbDataRecord dbDataRecord in queryResult)
                     {
-                        var account = new Account();
+                        var account = new Accounting();
                         account.accountSet(Convert.ToInt32(dbDataRecord["station_id"]), dbDataRecord["accountrole"].ToString(),
                             dbDataRecord["fuelaccounttype"].ToString(), Convert.ToInt32(dbDataRecord["fuelaccountamount"]),
                             Convert.ToDateTime(dbDataRecord["accountdate"].ToString()));
@@ -44,9 +44,9 @@ namespace Queries.Repositories
             return dgvElements;
         }
 
-        public List<Account> GetAccountingBYStationID(int id)
+        public List<Accounting> GetAccountingBYStationID(int id)
         {
-            var dgvElements = new List<Account>();
+            var dgvElements = new List<Accounting>();
             var queryResult =
                 new SqlCommand($"SELECT * FROM \"AZS\".\"Accounting\" WHERE station_id = {id} ORDER BY accountdate")
                     .ExecuteReader();
@@ -54,7 +54,7 @@ namespace Queries.Repositories
             {
                 foreach (DbDataRecord dbDataRecord in queryResult)
                 {
-                    var account = new Account();
+                    var account = new Accounting();
                     account.accountSet(Convert.ToInt32(dbDataRecord["station_id"]), dbDataRecord["accountrole"].ToString(),
                         dbDataRecord["fuelaccounttype"].ToString(), Convert.ToInt32(dbDataRecord["fuelaccountamount"]),
                         Convert.ToDateTime(dbDataRecord["accountdate"].ToString()));

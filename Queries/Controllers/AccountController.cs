@@ -10,12 +10,12 @@ namespace Queries.Controllers
     public class AccountController
     {
         private DataGridView dgv;
-        private List<Account> dgvElements;
+        private List<Accounting> dgvElements;
         private IRepositoryFactory factory;
 
         public AccountController(DataGridView dgv, IRepositoryFactory factory)
         {
-            dgvElements = new List<Account>();
+            dgvElements = new List<Accounting>();
             this.dgv = dgv;
             this.factory = factory;
         }
@@ -26,7 +26,7 @@ namespace Queries.Controllers
             {
                 dgvElements = factory.GetAccountRepository().GetAccounting();
                 dgv.Rows.Clear();
-                foreach (Account account in dgvElements)
+                foreach (Accounting account in dgvElements)
                 {
                     dgv.Rows.Add(account.GetStationID(), factory.GetStationRepository().GetStationAdresByID(account.GetStationID()), account.GetAccountRole(), account.GetFuelAccountType(), 
                         account.GetFuelAccountAmount(), account.GetAccountDate());
@@ -48,7 +48,7 @@ namespace Queries.Controllers
             {
                 dgvElements = factory.GetAccountRepository().GetAccountingBYStationID(id);
                 dgv.Rows.Clear();
-                foreach (Account account in dgvElements)
+                foreach (Accounting account in dgvElements)
                 {
                     dgv.Rows.Add(account.GetStationID(), factory.GetStationRepository().GetStationAdresByID(account.GetStationID()), account.GetAccountRole(), account.GetFuelAccountType(),
                         account.GetFuelAccountAmount(), account.GetAccountDate());

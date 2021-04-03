@@ -6,13 +6,13 @@ namespace Queries.Interfaces
 {
     public interface IStaffRepository : IDisposable
     {
-        List<Worker> GetStaff();
+        List<Employee> GetStaff();
 
-        void UpdateStaffTable(int id, Worker wk);
+        void UpdateStaffTable(int id, Employee wk);
 
         void DeleteFromStaffTable(int id);
 
-        void AddToStaffTable(Worker wk);
+        void AddToStaffTable(Employee wk);
 
         string FindStaffByID(int staff_id);
 

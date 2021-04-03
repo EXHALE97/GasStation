@@ -22,9 +22,9 @@ namespace Queries.Repositories
 
         }
 
-        public List<Worker> GetStaff()
+        public List<Employee> GetStaff()
         {
-            List<Worker> dgvElements = new List<Worker>();
+            List<Employee> dgvElements = new List<Employee>();
             try
             {
                 dbc.OpenConnection();
@@ -37,7 +37,7 @@ namespace Queries.Repositories
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
                     {
-                        Worker wk = new Worker();
+                        Employee wk = new Employee();
 
                             wk.workerSet(Convert.ToInt32(dbDataRecord["staff_id"]), Convert.ToInt32(dbDataRecord["station_id"]), dbDataRecord["surname"].ToString(),
                                 dbDataRecord["name"].ToString(), dbDataRecord["gender"].ToString(), Convert.ToDateTime(dbDataRecord["birthdate"]),
@@ -57,7 +57,7 @@ namespace Queries.Repositories
             return dgvElements;
         }
 
-        public void AddToStaffTable(Worker wk)
+        public void AddToStaffTable(Employee wk)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace Queries.Repositories
 
         }
 
-        public void UpdateStaffTable(int id, Worker wk)
+        public void UpdateStaffTable(int id, Employee wk)
         {
             try
             {

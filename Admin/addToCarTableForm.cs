@@ -25,7 +25,7 @@ namespace Admin
                 string carMark, cardNum;
                 carMark = tbCarMark.Text.ToString();
                 cardNum = tbCardNum.Text.ToString();
-                Car car = new Car();
+                Client car = new Client();
                 car.buyerSet(carMark, cardNum);
                 CarController carController = new CarController(dgv, factory);
                 if (carController.AddToTable(car))

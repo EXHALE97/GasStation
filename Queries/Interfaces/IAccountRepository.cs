@@ -5,9 +5,9 @@ namespace Queries.Interfaces
 {
     public interface IAccountRepository
     {
-        List<Account> GetAccounting();
+        List<Accounting> GetAccounting();
 
-        List<Account> GetAccountingBYStationID(int id);
+        List<Accounting> GetAccountingBYStationID(int id);
 
     }
 }

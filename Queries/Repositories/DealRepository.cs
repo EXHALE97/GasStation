@@ -148,7 +148,7 @@ namespace Queries.Repositories
             return dealList;
         }
 
-        public List<Deal> GetDeals(Car car)
+        public List<Deal> GetDeals(Client car)
         {
             List<Deal> dgvElements = new List<Deal>();
 

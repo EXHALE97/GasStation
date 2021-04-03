@@ -2,7 +2,7 @@
 
 namespace Queries.Entities
 {
-    public class Worker
+    public class Employee
     {
         public int w_staff_id { private set; get; }
         public int w_station_id { private set; get; }

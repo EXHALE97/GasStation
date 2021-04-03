@@ -61,12 +61,12 @@ namespace Admin
                 {
                     salary = -1;
                 }
-                Worker wk = new Worker();
+                Employee wk = new Employee();
                 wk.workerSet(surname, name, function, salary);
                 var cell = dgv[0, dgv.CurrentRow.Index];
                 int id = Convert.ToInt32(cell.Value);
-                StaffController staffController = new StaffController(dgv, factory);
-                if (staffController.UpdateTable(id, wk))
+                EmployeeController employeeController = new EmployeeController(dgv, factory);
+                if (employeeController.UpdateTable(id, wk))
                 {
                     MessageBox.Show("Операция выполнена успешно!");
                     Close();

@@ -2,7 +2,6 @@
 {
     public interface IRepositoryFactory 
     {
-
         IStationRepository GetStationRepository();
 
         IStaffRepository GetStaffRepository();

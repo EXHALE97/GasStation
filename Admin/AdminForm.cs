@@ -9,64 +9,62 @@ namespace Admin
 {
     public partial class AdminForm : Form
     {
-        private IRepositoryFactory factory;
-        private StaffController fillStaffTable;
-        private CarController fillCarTable;
-        private AccountController fillAccountingTable;
-        private DealController fillDealTable;
-        private StationController fillStationTable;
-        private SupplyController fillSupplyTable;
-        private ComboBoxDealFiller fillComboBoxDeal;
-        private ComboBoxAccountingFiller fillComboBoxAccounting;
-        private ComboBoxSupplyFiller fillComboBoxSupply;
+        private readonly IRepositoryFactory factory;
+        private readonly EmployeeController employeeController;
+        private readonly CarController clientController;
+        private readonly AccountController accountingController;
+        private readonly DealController dealController;
+        private readonly StationController stationController;
+        private readonly SupplyController supplyController;
+        private readonly ComboBoxDealFiller dealComboBox;
+        private readonly ComboBoxAccountingFiller accountingComboBox;
+        private readonly ComboBoxSupplyFiller supplyComboBox;
 
         public AdminForm(IRepositoryFactory factory)
         {
             InitializeComponent();
-            this.factory = factory;                       
+            this.factory = factory;
+            stationController = new StationController(dgvVievAZS, factory);
+            employeeController = new EmployeeController(dgvViewStaff, factory);
+            clientController = new CarController(dgvViewCars, factory);
+            accountingController = new AccountController(dgvViewAccounting, factory);
+            dealController = new DealController(dgvViewDeal, factory);
+            supplyController = new SupplyController(dgvViewSupply, factory);
+            dealComboBox = new ComboBoxDealFiller(cbDealFilterByStation, factory);
+            accountingComboBox = new ComboBoxAccountingFiller(cbAccountingFilterByStation, factory);
+            supplyComboBox = new ComboBoxSupplyFiller(cbSupplyFilterByStation, factory);
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
         {
             MessageBox.Show("Добро пожаловать, администратор!");
-            fillStationTable = new StationController(dgvVievAZS, factory);
-            fillStationTable.ShowAdminTable();           
-            fillStaffTable = new StaffController(dgvViewStaff, factory);
-            fillStaffTable.ShowTable();
-            fillCarTable = new CarController(dgvViewCars, factory);
-            fillCarTable.ShowTable();
-            fillAccountingTable = new AccountController(dgvViewAccounting, factory);
-            fillAccountingTable.ShowTable();
-            fillDealTable = new DealController(dgvViewDeal, factory);
-            fillDealTable.ShowTable();
-            fillSupplyTable = new SupplyController(dgvViewSupply, factory);
-            fillSupplyTable.ShowTable();
-            fillComboBoxDeal = new ComboBoxDealFiller(cbDealFilterByStation, factory);
-            fillComboBoxDeal.СbStationListFill();
-            fillComboBoxAccounting = new ComboBoxAccountingFiller(cbAccountingFilterByStation, factory);
-            fillComboBoxAccounting.СbStationListFill();
-            fillComboBoxSupply = new ComboBoxSupplyFiller(cbSupplyFilterByStation, factory);
-            fillComboBoxSupply.СbStationListFill();
+            
+            stationController.ShowAdminTable();
+            employeeController.ShowTable();
+            clientController.ShowTable();
+            accountingController.ShowTable();
+            dealController.ShowTable();
+            supplyController.ShowTable();
+            dealComboBox.СbStationListFill();
+            accountingComboBox.СbStationListFill();
+            supplyComboBox.СbStationListFill();
         }
 
         private void btnTableView_Click(object sender, EventArgs e)
         {
-            fillStaffTable = new StaffController(dgvViewStaff, factory);
-            fillStaffTable.ShowTable();
+            employeeController.ShowTable();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            UpdateStaffTableForm updateForm = new UpdateStaffTableForm(dgvViewStaff.CurrentRow, factory, dgvViewStaff);
-            updateForm.ShowDialog();
-            fillStaffTable.ShowTable();
+            new UpdateStaffTableForm(dgvViewStaff.CurrentRow, factory, dgvViewStaff).ShowDialog();
+            employeeController.ShowTable();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            AddToStaffTableForm addForm = new AddToStaffTableForm(factory, dgvViewStaff);
-            addForm.ShowDialog();
-            fillStaffTable.ShowTable();
+            new AddToStaffTableForm(factory, dgvViewStaff).ShowDialog();
+            employeeController.ShowTable();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -75,100 +73,90 @@ namespace Admin
             {
                 var cell = dgvViewStaff[0, dgvViewStaff.CurrentRow.Index];
                 int id = Convert.ToInt32(cell.Value);
-                StaffController staffController = new StaffController(dgvViewStaff, factory);
-                if (staffController.DeleteFromTable(id))
+                if (employeeController.DeleteFromTable(id))
                 {
                     factory.GetLoginRepository().DeleteStaffFromLoginTable(id.ToString());
                     MessageBox.Show("Операция выполнена успешно!");
                 }
-                fillStaffTable.ShowTable();
+                employeeController.ShowTable();
             }
             catch (Exception) { MessageBox.Show("Операция не может быть выполнена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnFindDeals_Click(object sender, EventArgs e)
         {
-            var cell = dgvViewCars[0, dgvViewCars.CurrentRow.Index];
-            int id = Convert.ToInt32(cell.Value);
-            DealList dealList = new DealList(id, factory);
-            dealList.ShowDialog();
+            new DealList(Convert.ToInt32(dgvViewCars[0, dgvViewCars.CurrentRow.Index].Value), factory).ShowDialog();
         }
 
         private void btnCarAdd_Click(object sender, EventArgs e)
         {
-            AddToCarTableForm addForm = new AddToCarTableForm(factory, dgvViewCars);
-            addForm.ShowDialog();
-            fillCarTable.ShowTable();
+            new AddToCarTableForm(factory, dgvViewCars).ShowDialog();
+            clientController.ShowTable();
         }
 
         private void btnDealUpdate_Click(object sender, EventArgs e)
         {
-            UpdateDealTableForm updateDealForm = new UpdateDealTableForm(dgvViewDeal.CurrentRow, factory, dgvViewDeal);
-            updateDealForm.ShowDialog();
+            new UpdateDealTableForm(dgvViewDeal.CurrentRow, factory, dgvViewDeal).ShowDialog();
         }
 
         private void btnStationAdd_Click(object sender, EventArgs e)
         {
-            AddToStationTableForm addForm = new AddToStationTableForm(factory, dgvViewCars);
-            addForm.ShowDialog();
-            fillStationTable.ShowAdminTable();
+            new AddToStationTableForm(factory, dgvViewCars).ShowDialog();
+            stationController.ShowAdminTable();
         }
 
         private void RefreshTables_Click(object sender, EventArgs e)
         {
-            fillStationTable.ShowAdminTable();
-            fillStaffTable.ShowTable();
-            fillCarTable.ShowTable();
-            fillAccountingTable.ShowTable();
-            fillDealTable.ShowTable();
+            stationController.ShowAdminTable();
+            employeeController.ShowTable();
+            clientController.ShowTable();
+            accountingController.ShowTable();
+            dealController.ShowTable();
             cbDealFilterByStation.Items.Clear();
-            fillComboBoxDeal.СbStationListFill();
+            dealComboBox.СbStationListFill();
             cbAccountingFilterByStation.Items.Clear();
-            fillComboBoxAccounting.СbStationListFill();
+            accountingComboBox.СbStationListFill();
             cbSupplyFilterByStation.Items.Clear();
-            fillComboBoxSupply.СbStationListFill();
+            supplyComboBox.СbStationListFill();
         }
 
         private void AddNewAdmin_Click(object sender, EventArgs e)
         {
-            AddNewAdminForm addAdminForm = new AddNewAdminForm(factory);
-            addAdminForm.ShowDialog();
+            new AddNewAdminForm(factory).ShowDialog();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            AddWorkerToLoginTableForm addLoginForm = new AddWorkerToLoginTableForm(dgvViewStaff.CurrentRow, factory);
-            addLoginForm.ShowDialog();
+            new AddWorkerToLoginTableForm(dgvViewStaff.CurrentRow, factory).ShowDialog();
         }
 
         private void btnActivateCarCard_Click(object sender, EventArgs e)
         {
-            AddUserToLoginTableForm addLoginForm = new AddUserToLoginTableForm(dgvViewCars.CurrentRow, factory);
-            addLoginForm.ShowDialog();
+            new AddUserToLoginTableForm(dgvViewCars.CurrentRow, factory).ShowDialog();
         }
 
         private void btnTableStationView_Click(object sender, EventArgs e)
         {
-            fillStationTable.ShowAdminTable();
+            stationController.ShowAdminTable();
         }
 
         private void btnTableCarView_Click(object sender, EventArgs e)
         {
-            fillCarTable.ShowTable();
+            clientController.ShowTable();
         }
 
         private void btnTableDealView_Click(object sender, EventArgs e)
         {
-            fillDealTable.ShowTable();
+            dealController.ShowTable();
         }
 
         private void cbFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbDealFilterByStation.SelectedIndex != -1)
             {
-                fillDealTable.FindDealsByStationID(factory.GetStationRepository().FindStationIDByLocation(cbDealFilterByStation.Text));
+                dealController.FindDealsByStationID(factory.GetStationRepository().FindStationIDByLocation(cbDealFilterByStation.Text));
                 cbDealFilterByStation.Items.Clear();
-                fillComboBoxDeal.СbStationListFill();
+                dealComboBox.СbStationListFill();
             }
         }
 
@@ -176,9 +164,9 @@ namespace Admin
         {
             if (cbAccountingFilterByStation.SelectedIndex != -1)
             {
-                fillAccountingTable.FilterBYStationID(factory.GetStationRepository().FindStationIDByLocation(cbAccountingFilterByStation.Text));
+                accountingController.FilterBYStationID(factory.GetStationRepository().FindStationIDByLocation(cbAccountingFilterByStation.Text));
                 cbAccountingFilterByStation.Items.Clear();
-                fillComboBoxAccounting.СbStationListFill();
+                accountingComboBox.СbStationListFill();
             }
         }
 
@@ -186,22 +174,20 @@ namespace Admin
         {
             if (cbSupplyFilterByStation.SelectedIndex != -1)
             {
-                fillSupplyTable.FilterBYStationID(factory.GetStationRepository().FindStationIDByLocation(cbSupplyFilterByStation.Text));
+                supplyController.FilterBYStationID(factory.GetStationRepository().FindStationIDByLocation(cbSupplyFilterByStation.Text));
                 cbSupplyFilterByStation.Items.Clear();
-                fillComboBoxSupply.СbStationListFill();
+                supplyComboBox.СbStationListFill();
             }
         }
 
         private void btnTableAccountingView_Click(object sender, EventArgs e)
         {
-            fillAccountingTable.ShowTable();
+            accountingController.ShowTable();
         }
 
         private void btnTableSupplyView_Click(object sender, EventArgs e)
         {
-            fillSupplyTable.ShowTable();
+            supplyController.ShowTable();
         }
-
-
     }
 }

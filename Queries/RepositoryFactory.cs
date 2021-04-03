@@ -6,7 +6,7 @@ namespace Queries
 {  
     public class RepositoryFactory : IRepositoryFactory
     {
-        private DataBaseConnection dbc;
+        private readonly DataBaseConnection dbc;
 
         public RepositoryFactory(DataBaseConnection dbc)
         {

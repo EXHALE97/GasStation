@@ -8,21 +8,21 @@ using Queries.Validators;
 
 namespace Queries.Controllers
 {
-    public class StaffController
+    public class EmployeeController
     {
-        private DataGridView dgv;
-        private List<Worker> dgvElements;
-        private IRepositoryFactory factory;
-        private StaffValidator staffValidator;
+        private readonly IRepositoryFactory factory;
+        private readonly DataGridView dataGridView;
+        private readonly StaffValidator staffValidator;
+        private List<Employee> dgvElements;
         private List<string> errorList;
         private string error;
 
-        public StaffController(DataGridView dgv, IRepositoryFactory factory)
+        public EmployeeController(DataGridView dataGridView, IRepositoryFactory factory)
         {
-            dgvElements = new List<Worker>();
-            this.dgv = dgv;
+            this.dataGridView = dataGridView;
             this.factory = factory;
             staffValidator = new StaffValidator();
+            dgvElements = new List<Employee>();
         }
 
         public void ShowTable()
@@ -30,12 +30,12 @@ namespace Queries.Controllers
             try
             {
                 dgvElements = factory.GetStaffRepository().GetStaff();
-                dgv.Rows.Clear();
+                dataGridView.Rows.Clear();
                 if (dgvElements.Count != 0)
                 {
-                    foreach (Worker wk in dgvElements)
+                    foreach (Employee wk in dgvElements)
                     {
-                        dgv.Rows.Add(wk.GetStaffID(), wk.GetSurname(), wk.GetName(),
+                        dataGridView.Rows.Add(wk.GetStaffID(), wk.GetSurname(), wk.GetName(),
                             factory.GetStationRepository().GetStationAdresByID(factory.GetStaffRepository().FindStationIDByStaffID(wk.GetStaffID())).Trim().Replace(" ", string.Empty),
                             wk.GetGender(), wk.GetBirthdate(), wk.GetFunction(), wk.GetSalary());
                     }
@@ -51,7 +51,7 @@ namespace Queries.Controllers
             }
         }
 
-        public bool AddToTable(Worker wk)
+        public bool AddToTable(Employee wk)
         {
             bool checkFlag = false;
             try
@@ -84,7 +84,7 @@ namespace Queries.Controllers
             return checkFlag;
         }
 
-        public bool UpdateTable(int id, Worker wk)
+        public bool UpdateTable(int id, Employee wk)
         {
             bool checkFlag = false;
             try

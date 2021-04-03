@@ -6,11 +6,11 @@ namespace Queries.Interfaces
 {
     public interface ICarRepository : IDisposable
     {
-        List<Car> GetCars();
+        List<Client> GetCars();
 
         List<string> GetCardNumList();
 
-        void AddToCarTable(Car car);
+        void AddToCarTable(Client car);
 
         int FindCarIDByCardnum(string cardnum);
 

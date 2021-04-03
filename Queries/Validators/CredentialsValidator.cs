@@ -9,7 +9,7 @@ namespace Queries.Validators
         {
             errorList = new List<string>();
             var checkFlag = true;
-            string login = user.GetLogin(), password = user.GetPassword(), role = user.GetRole();
+            string login = user.login, password = user.password, role = user.role;
             if (login == string.Empty || login.Length < 4 && !role.Equals("worker"))
             {
                 checkFlag = false;

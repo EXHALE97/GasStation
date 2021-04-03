@@ -21,7 +21,7 @@ namespace Queries.Repositories
                 DataBaseConnection.OpenConnection();
                 var queryResult =
                     new SqlCommand(
-                        $"SELECT * FROM Credentials WHERE login = '{login.GetLogin()}' AND password = '{login.GetPassword()}'",
+                        $"SELECT * FROM Credentials WHERE login = '{login.login}' AND password = '{login.password}'",
                         DataBaseConnection.GetConnection()).ExecuteReader();
                 if (!queryResult.HasRows) return role;
                 foreach (DbDataRecord dbDataRecord in queryResult)
@@ -39,7 +39,7 @@ namespace Queries.Repositories
 
         public void AddNewDbUser(Credentials dbUser)
         {
-            ExecuteSqlNonQueryCommand($"INSERT INTO Credentials VALUES('{dbUser.GetLogin()}', '{dbUser.GetPassword()}', '{dbUser.GetRole()}')");
+            ExecuteSqlNonQueryCommand($"INSERT INTO Credentials VALUES('{dbUser.login}', '{dbUser.password}', '{dbUser.role}')");
         }
 
         public bool IsThereCurrentCredentialsInTable(string login)

@@ -2,7 +2,7 @@
 
 namespace Queries.Entities
 {
-    public class Account
+    public class Accounting
     {
         public int a_station_id { private set; get; }
         public string a_accountrole { private set; get; }

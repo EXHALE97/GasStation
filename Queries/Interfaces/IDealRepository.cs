@@ -12,7 +12,7 @@ namespace Queries.Interfaces
 
         List<Deal> ShowWorkerDealTable(int id);
 
-        List<Deal> GetDeals(Car car);
+        List<Deal> GetDeals(Client car);
 
         void UpdateDealTable(int id, Deal deal);
 

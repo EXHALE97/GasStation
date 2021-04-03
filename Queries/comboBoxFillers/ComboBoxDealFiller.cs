@@ -19,7 +19,7 @@ namespace Queries.comboBoxFillers
 
         //public void СbStationListFill()
         //{
-        //    List<Station> comboBoxStationElements = factory.GetStationRepository().GetStations();
+        //    List<Station> comboBoxStationElements = factory.GetRepository().GetStations();
         //    foreach (Station station in comboBoxStationElements)
         //    {
         //        cb.Items.Add(station.GetStation_id().ToString().Trim().Replace(" ", string.Empty));
@@ -54,8 +54,8 @@ namespace Queries.comboBoxFillers
 
         public void СbCardnumFill()
         {
-            List<Car> comboBoxCarElements = factory.GetCarRepository().GetCars();
-            foreach (Car car in comboBoxCarElements)
+            List<Client> comboBoxCarElements = factory.GetCarRepository().GetCars();
+            foreach (Client car in comboBoxCarElements)
             {               
                 cb.Items.Add(car.GetCardNum().Trim().Replace(" ", string.Empty));
             }

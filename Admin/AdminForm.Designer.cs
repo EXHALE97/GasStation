@@ -109,8 +109,8 @@
             this.допФункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddNewAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbSessionName = new System.Windows.Forms.Label();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSessionName = new System.Windows.Forms.Label();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -847,6 +847,12 @@
             this.RefreshTables.Text = "Обновить таблицы";
             this.RefreshTables.Click += new System.EventHandler(this.RefreshTables_Click);
             // 
+            // dbQueryManager
+            // 
+            this.dbQueryManager.Name = "dbQueryManager";
+            this.dbQueryManager.Size = new System.Drawing.Size(220, 22);
+            this.dbQueryManager.Text = "Запрос к базе данных";
+            // 
             // lbSessionName
             // 
             this.lbSessionName.AutoSize = true;
@@ -855,12 +861,6 @@
             this.lbSessionName.Size = new System.Drawing.Size(78, 13);
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
-            // 
-            // dbQueryManager
-            // 
-            this.dbQueryManager.Name = "dbQueryManager";
-            this.dbQueryManager.Size = new System.Drawing.Size(220, 22);
-            this.dbQueryManager.Text = "Запрос к базе данных";
             // 
             // AdminForm
             // 

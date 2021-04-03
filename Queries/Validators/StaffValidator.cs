@@ -12,7 +12,7 @@ namespace Queries.Validators
 
         }
 
-        public bool CheckAddition(Worker wk, out List<string> errorList)
+        public bool CheckAddition(Employee wk, out List<string> errorList)
         {
             errorList = new List<string>();
             bool checkFlag = true;
@@ -55,7 +55,7 @@ namespace Queries.Validators
             return checkFlag;
         }
 
-        public bool CheckUpdate(int id, Worker wk, out List<string> errorList)
+        public bool CheckUpdate(int id, Employee wk, out List<string> errorList)
         {
             errorList = new List<string>();
             bool checkFlag = true;

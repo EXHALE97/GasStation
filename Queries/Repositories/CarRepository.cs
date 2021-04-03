@@ -22,9 +22,9 @@ namespace Queries.Repositories
 
         }
 
-        public List<Car> GetCars()
+        public List<Client> GetCars()
         {
-            List<Car> dgvElements = new List<Car>();
+            List<Client> dgvElements = new List<Client>();
             try
             {
                 dbc.OpenConnection();
@@ -34,7 +34,7 @@ namespace Queries.Repositories
                 {
                     foreach (DbDataRecord dbDataRecord in AZSTableReader)
                     {
-                        Car buyerCar = new Car();
+                        Client buyerCar = new Client();
                         buyerCar.buyerSet(Convert.ToInt32(dbDataRecord["car_id"]), dbDataRecord["carmark"].ToString(), dbDataRecord["cardnum"].ToString());
                         dgvElements.Add(buyerCar);
                     }
@@ -132,7 +132,7 @@ namespace Queries.Repositories
             return comboBoxElements;
         }
 
-        public void AddToCarTable(Car car)
+        public void AddToCarTable(Client car)
         {
             try
             {

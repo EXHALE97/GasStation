@@ -92,10 +92,10 @@ namespace Admin
                 {
                     salary = -1;
                 }
-                Worker wk = new Worker();
+                Employee wk = new Employee();
                 wk.workerSet(station_id, surname, name, gender, birthdate, function, salary);
-                StaffController staffController = new StaffController(dgv, factory);
-                if (staffController.AddToTable(wk))
+                EmployeeController employeeController = new EmployeeController(dgv, factory);
+                if (employeeController.AddToTable(wk))
                 {
                     MessageBox.Show("Операция выполнена успешно!");
                     Close();

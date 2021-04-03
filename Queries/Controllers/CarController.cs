@@ -11,7 +11,7 @@ namespace Queries.Controllers
     public class CarController
     {
         private DataGridView dgv;
-        private List<Car> dgvElements;
+        private List<Client> dgvElements;
         private IRepositoryFactory factory;
         private CarValidator carValidator;
         private List<string> errorList;
@@ -30,7 +30,7 @@ namespace Queries.Controllers
             {
                 dgvElements = factory.GetCarRepository().GetCars();
                 dgv.Rows.Clear();
-                foreach (Car car in dgvElements)
+                foreach (Client car in dgvElements)
                 {
                     dgv.Rows.Add(car.GetCarID(), car.GetCarMark(), car.GetCardNum());
                 }
@@ -45,7 +45,7 @@ namespace Queries.Controllers
             }
         }
 
-        public bool AddToTable(Car car)
+        public bool AddToTable(Client car)
         {
             bool checkFlag = false;
             try

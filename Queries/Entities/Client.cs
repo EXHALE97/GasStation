@@ -1,6 +1,6 @@
 ﻿namespace Queries.Entities
 {
-    public class Car
+    public class Client
     {
         protected int b_car_id { private set; get; }
         protected string b_carmark { private set; get; }
