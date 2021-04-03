@@ -7,19 +7,6 @@ namespace Queries.Repositories
     {
         protected DataBaseConnection DataBaseConnection;
 
-        protected SqlDataReader ExecuteSqlCommand(string command)
-        {
-            try
-            {
-                DataBaseConnection.OpenConnection();
-                return new SqlCommand(command, DataBaseConnection.GetConnection()).ExecuteReader();
-            }
-            finally
-            {
-                DataBaseConnection.CloseConnection();
-            }
-        }
-
         protected int ExecuteSqlNonQueryCommand(string command)
         {
             try

@@ -10,23 +10,20 @@ namespace Queries.Controllers
 {
     public class LoginController
     {
-        private readonly Login login;
+        private readonly Credentials login;
         private readonly IRepositoryFactory factory;
-        private readonly DataBaseUserValidator dataBaseUserValidator;
         private List<string> errorList;
         private string error;
 
-        public LoginController(Login login, IRepositoryFactory factory)
+        public LoginController(Credentials login, IRepositoryFactory factory)
         {
             this.login = login ?? throw new ArgumentNullException();
             this.factory = factory;
-            dataBaseUserValidator = new DataBaseUserValidator();
         }
 
         public LoginController(IRepositoryFactory factory)
         {
             this.factory = factory;
-            dataBaseUserValidator = new DataBaseUserValidator();
         }
 
         public string TryLogin()
@@ -53,12 +50,12 @@ namespace Queries.Controllers
             return password;
         }
 
-        public bool AddToLoginTable(DBUser dbUser)
+        public bool AddToLoginTable(Credentials dbUser)
         {
             bool checkFlag = false;
             try
             {
-                if (checkFlag = dataBaseUserValidator.CheckAddition(dbUser, out errorList))
+                if (checkFlag == CredentialsValidator.CheckAddition(dbUser, out errorList))
                 {
                     factory.GetLoginRepository().AddNewDbUser(dbUser);
                 }

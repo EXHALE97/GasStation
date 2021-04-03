@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.SqlClient;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
@@ -17,19 +18,28 @@ namespace Queries.Repositories
         public List<Account> GetAccounting()
         {
             var dgvElements = new List<Account>();
-            var queryResult = ExecuteSqlCommand("SELECT  * FROM \"AZS\".\"Accounting\" ORDER BY accountdate");
-            if (queryResult.HasRows)
+            try
             {
-                foreach (DbDataRecord dbDataRecord in queryResult)
+                DataBaseConnection.OpenConnection();
+                var queryResult =
+                    new SqlCommand($"SELECT * FROM \"AZS\".\"Accounting\" ORDER BY accountdate",
+                        DataBaseConnection.GetConnection()).ExecuteReader();
+                if (queryResult.HasRows)
                 {
-                    var account = new Account();
-                    account.accountSet(Convert.ToInt32(dbDataRecord["station_id"]), dbDataRecord["accountrole"].ToString(),
-                        dbDataRecord["fuelaccounttype"].ToString(), Convert.ToInt32(dbDataRecord["fuelaccountamount"]),
-                        Convert.ToDateTime(dbDataRecord["accountdate"].ToString()));
-                    dgvElements.Add(account);
+                    foreach (DbDataRecord dbDataRecord in queryResult)
+                    {
+                        var account = new Account();
+                        account.accountSet(Convert.ToInt32(dbDataRecord["station_id"]), dbDataRecord["accountrole"].ToString(),
+                            dbDataRecord["fuelaccounttype"].ToString(), Convert.ToInt32(dbDataRecord["fuelaccountamount"]),
+                            Convert.ToDateTime(dbDataRecord["accountdate"].ToString()));
+                        dgvElements.Add(account);
+                    }
                 }
             }
-            queryResult.Close();
+            finally
+            {
+                DataBaseConnection.CloseConnection();
+            }
 
             return dgvElements;
         }
@@ -38,8 +48,8 @@ namespace Queries.Repositories
         {
             var dgvElements = new List<Account>();
             var queryResult =
-                ExecuteSqlCommand(
-                    $"SELECT * FROM \"AZS\".\"Accounting\" WHERE station_id = {id} ORDER BY accountdate");
+                new SqlCommand($"SELECT * FROM \"AZS\".\"Accounting\" WHERE station_id = {id} ORDER BY accountdate")
+                    .ExecuteReader();
             if (queryResult.HasRows)
             {
                 foreach (DbDataRecord dbDataRecord in queryResult)

@@ -200,7 +200,7 @@
             this.fuelaccounttype,
             this.fuelaccountamount,
             this.accountdate});
-            this.dgvViewAccounting.Location = new System.Drawing.Point(3, 3);
+            this.dgvViewAccounting.Location = new System.Drawing.Point(9, 3);
             this.dgvViewAccounting.Name = "dgvViewAccounting";
             this.dgvViewAccounting.Size = new System.Drawing.Size(595, 459);
             this.dgvViewAccounting.TabIndex = 2;
@@ -850,7 +850,7 @@
             // lbSessionName
             // 
             this.lbSessionName.AutoSize = true;
-            this.lbSessionName.Location = new System.Drawing.Point(748, 11);
+            this.lbSessionName.Location = new System.Drawing.Point(748, 9);
             this.lbSessionName.Name = "lbSessionName";
             this.lbSessionName.Size = new System.Drawing.Size(78, 13);
             this.lbSessionName.TabIndex = 3;

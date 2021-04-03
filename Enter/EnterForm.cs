@@ -22,29 +22,28 @@ namespace Enter
             tbPassword.UseSystemPasswordChar = true;
         }
 
-        private void btnAdminLog_Click(object sender, EventArgs e)
-        {
-            Hide();
-            new AdminForm(new RepositoryFactory(
-                new DataBaseConnection(ConfigurationManager.ConnectionStrings["GasStation"].ToString()))).ShowDialog();
-            Show();
-        }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string login = tbLogin.Text, password = tbPassword.Text, role = string.Empty, rolePass = string.Empty;
-            var logUser = new Login();
+            Credentials logUser;
             try
             {
-                logUser.SetLogin(login.Trim().Replace(" ", string.Empty), SecurityCrypt.MD5(password).Trim().Replace(" ", string.Empty));
+                //logUser = new Login(login.Trim().Replace(" ", string.Empty),
+                //    SecurityCrypt.MD5(password).Trim().Replace(" ", string.Empty));
+                logUser = new Credentials(login.Trim().Replace(" ", string.Empty),
+                    password.Trim().Replace(" ", string.Empty));
             }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception)
+            {
+                MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             try
             {
                 var loginController = new LoginController(logUser,
                     new RepositoryFactory(
-                        new DataBaseConnection(ConfigurationManager.ConnectionStrings["LoginCheck"].ToString())));
+                        new DataBaseConnection(ConfigurationManager.ConnectionStrings["Admin"].ToString())));
                 role = loginController.TryLogin();
                 if (role == string.Empty)
                     MessageBox.Show("Пользователь не найден!");
@@ -52,7 +51,10 @@ namespace Enter
                 rolePass = SecurityCrypt.DESDecrypt(loginController.GetDbPasswordByRole(role), SecurityConst.cryptKey);
                 EnterRole(role, login, rolePass);
             }
-            catch (Exception) { MessageBox.Show("Ошибка входа!"); }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка входа!");
+            }
         }
 
         private void EnterRole(string role, string Login, string rolePass)

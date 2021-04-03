@@ -48,9 +48,9 @@ namespace Queries
             return new SupplyRepository(dbc);
         }
 
-        public ILoginRepository GetLoginRepository()
+        public ICredentialsRepository GetLoginRepository()
         {
-            return new LoginRepository(dbc);
+            return new CredentialsRepository(dbc);
         }
     }
 }

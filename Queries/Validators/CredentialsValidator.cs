@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Queries.Entities;
 
 namespace Queries.Validators
 {
-    public class DataBaseUserValidator
+    public static class CredentialsValidator
     {
-        public DataBaseUserValidator()
-        {
-
-        }
-
-        public bool CheckAddition(DBUser user, out List<string> errorList)
+        public static bool CheckAddition(Credentials user, out List<string> errorList)
         {
             errorList = new List<string>();
-            bool checkFlag = true;
-            if (user.GetDBUserLogin() == String.Empty || user.GetDBUserLogin().Length < 4 && !user.GetDBUserRole().Equals("worker"))
+            var checkFlag = true;
+            string login = user.GetLogin(), password = user.GetPassword(), role = user.GetRole();
+            if (login == string.Empty || login.Length < 4 && !role.Equals("worker"))
             {
                 checkFlag = false;
                 errorList.Add("Логин должн быть не меньше 4 символов!");
             }
-            if (user.GetDBUserPass() == String.Empty || user.GetDBUserPass().Length < 6)
+            if (password == string.Empty || password.Length < 6)
             {
                 checkFlag = false;
                 errorList.Add("Пароль должн быть не меньше 6 символов!");
             }
-            if (user.GetDBUserRole() == String.Empty)
+            if (role == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Роль указана неверно!");

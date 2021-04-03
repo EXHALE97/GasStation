@@ -24,10 +24,9 @@ namespace Admin
             {
                 login = tbLogin.Text.ToString();
                 pass = tbPass.Text.ToString();
-                DBUser nAdmin = new DBUser();
-                nAdmin.setNewUser(login, pass, "admin");
+                Credentials nAdmin = new Credentials(login, pass, "admin");
                 LoginController lc = new LoginController(factory);
-                if (!factory.GetLoginRepository().CheckLoginExistence(login.ToString().Trim().Replace(" ", string.Empty)))
+                if (!factory.GetLoginRepository().IsThereCurrentCredentialsInTable(login.ToString().Trim().Replace(" ", string.Empty)))
                 {
                     if (lc.AddToLoginTable(nAdmin))
                     {

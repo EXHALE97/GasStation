@@ -20,7 +20,7 @@ namespace Admin
 
         private void AddToLoginTableForm_Load(object sender, EventArgs e)
         {
-            if (!factory.GetLoginRepository().CheckLoginExistence(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty)))
+            if (!factory.GetLoginRepository().IsThereCurrentCredentialsInTable(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty)))
             {
                 try
                 {
@@ -42,9 +42,10 @@ namespace Admin
             try
             {
                 passWord = tbPass.Text.ToString();
-                DBUser nUser = new DBUser();
-                nUser.setNewUser(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty), passWord.Trim().Replace(" ", string.Empty), "user");
-                LoginController lc = new LoginController(factory);
+                var nUser =
+                    new Credentials(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty),
+                        passWord.Trim().Replace(" ", string.Empty), "user");
+                var lc = new LoginController(factory);
                 if (lc.AddToLoginTable(nUser))
                 {
                     MessageBox.Show("Операция выполнена успешно!");
