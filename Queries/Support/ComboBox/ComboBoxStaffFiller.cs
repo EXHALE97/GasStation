@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
-using Queries.Interfaces;
+using Queries.Factory;
 
-namespace Queries.comboBoxFillers
+namespace Queries.Support.ComboBox
 {
     public class ComboBoxStaffFiller
     {
-        private ComboBox cb;
+        private System.Windows.Forms.ComboBox cb;
         private List<string> comboBoxElements;
         private IRepositoryFactory factory;
 
-        public ComboBoxStaffFiller(ComboBox cb, IRepositoryFactory factory)
+        public ComboBoxStaffFiller(System.Windows.Forms.ComboBox cb, IRepositoryFactory factory)
         {
             this.cb = cb;
             this.factory = factory;

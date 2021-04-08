@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Controllers;
+using Queries.Factory;
 using Queries.Interfaces;
 
 namespace Admin

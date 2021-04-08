@@ -1,8 +1,8 @@
 ﻿using Queries.Connection;
-using Queries.Repositories;
 using Queries.Interfaces;
+using Queries.Repositories;
 
-namespace Queries
+namespace Queries.Factory
 {  
     public class RepositoryFactory : IRepositoryFactory
     {

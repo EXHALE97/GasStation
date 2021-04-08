@@ -1,4 +1,4 @@
-﻿namespace Queries.Security
+﻿namespace Queries.Support.Security
 {
     public static class SecurityConst
     {

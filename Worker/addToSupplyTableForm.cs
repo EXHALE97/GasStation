@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Interfaces;
 using Queries.Entities;
+using Queries.Factory;
 
 namespace Worker
 {

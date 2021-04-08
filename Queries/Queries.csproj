@@ -46,33 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ComboBoxFillers\ComboBoxCardNumFiller.cs" />
-    <Compile Include="ComboBoxFillers\ComboBoxDealFiller.cs" />
-    <Compile Include="ComboBoxFillers\ComboBoxStaffFiller.cs" />
-    <Compile Include="ComboBoxFillers\ComboBoxAccountingFiller.cs" />
-    <Compile Include="ComboBoxFillers\ComboBoxSupplyFiller.cs" />
+    <Compile Include="Support\ComboBox\ComboBoxCardNumFiller.cs" />
+    <Compile Include="Support\ComboBox\ComboBoxDealFiller.cs" />
+    <Compile Include="Support\ComboBox\ComboBoxStaffFiller.cs" />
+    <Compile Include="Support\ComboBox\ComboBoxAccountingFiller.cs" />
+    <Compile Include="Support\ComboBox\ComboBoxSupplyFiller.cs" />
     <Compile Include="Connection\DataBaseConnection.cs" />
     <Compile Include="Entities\SupplyType.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="Validators\CarValidator.cs" />
-    <Compile Include="Validators\CredentialsValidator.cs" />
-    <Compile Include="Validators\DealValidator.cs" />
+    <Compile Include="Support\MessageBox\ErrorMessageBox.cs" />
+    <Compile Include="Support\Validators\CarValidator.cs" />
+    <Compile Include="Support\Validators\CredentialsValidator.cs" />
+    <Compile Include="Support\Validators\DealValidator.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Validators\StaffValidator.cs" />
-    <Compile Include="Validators\StationValidator.cs" />
-    <Compile Include="Validators\SupplyValidator.cs" />
+    <Compile Include="Support\Validators\StaffValidator.cs" />
+    <Compile Include="Support\Validators\StationValidator.cs" />
+    <Compile Include="Support\Validators\SupplyValidator.cs" />
     <Compile Include="Entities\Credentials.cs" />
     <Compile Include="Interfaces\IAccountRepository.cs" />
     <Compile Include="Interfaces\ICarRepository.cs" />
     <Compile Include="Interfaces\IDealRepository.cs" />
     <Compile Include="Interfaces\ICredentialsRepository.cs" />
-    <Compile Include="Interfaces\IRepositoryFactory.cs" />
+    <Compile Include="Factory\IRepositoryFactory.cs" />
     <Compile Include="Interfaces\IStaffRepository.cs" />
     <Compile Include="Interfaces\IStationRepository.cs" />
     <Compile Include="Interfaces\ISupplyRepository.cs" />
-    <Compile Include="RepositoryFactory.cs" />
-    <Compile Include="Security\SecurityConst.cs" />
-    <Compile Include="Security\SecurityCrypt.cs" />
+    <Compile Include="Factory\RepositoryFactory.cs" />
+    <Compile Include="Support\Security\SecurityConst.cs" />
+    <Compile Include="Support\Security\SecurityCrypt.cs" />
     <Compile Include="Repositories\CredentialsRepository.cs" />
     <Compile Include="Repositories\SupplyRepository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -100,6 +101,7 @@
   <ItemGroup>
     <Content Include="Triggers.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

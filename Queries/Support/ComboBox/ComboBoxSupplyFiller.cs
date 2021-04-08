@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
 using Queries.Entities;
-using Queries.Interfaces;
+using Queries.Factory;
 
-namespace Queries.comboBoxFillers
+namespace Queries.Support.ComboBox
 {
     public class ComboBoxSupplyFiller
     {
-        private ComboBox cb;
+        private System.Windows.Forms.ComboBox cb;
         private IRepositoryFactory factory;
 
-        public ComboBoxSupplyFiller(ComboBox cb, IRepositoryFactory factory)
+        public ComboBoxSupplyFiller(System.Windows.Forms.ComboBox cb, IRepositoryFactory factory)
         {
             this.cb = cb;
             this.factory = factory;
@@ -21,7 +20,7 @@ namespace Queries.comboBoxFillers
             List<Station> comboBoxStationElements = factory.GetStationRepository().GetStations();
             foreach (Station station in comboBoxStationElements)
             {
-                cb.Items.Add(factory.GetStationRepository().GetStationAddressById(station.GetStation_id()));
+                cb.Items.Add(factory.GetStationRepository().GetStationAddressById(station.Id));
             }
         }
     }

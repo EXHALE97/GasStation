@@ -1,16 +1,15 @@
 ﻿using System.Collections.Generic;
-using System.Windows.Forms;
-using Queries.Interfaces;
+using Queries.Factory;
 
-namespace Queries.comboBoxFillers
+namespace Queries.Support.ComboBox
 {
     public class ComboBoxCardNumFiller
     {
-        private readonly ComboBox comboBox;
+        private readonly System.Windows.Forms.ComboBox comboBox;
         private List<string> comboBoxElements;
         private readonly IRepositoryFactory factory;
 
-        public ComboBoxCardNumFiller(ComboBox comboBox, IRepositoryFactory factory)
+        public ComboBoxCardNumFiller(System.Windows.Forms.ComboBox comboBox, IRepositoryFactory factory)
         {
             this.comboBox = comboBox;
             this.factory = factory;

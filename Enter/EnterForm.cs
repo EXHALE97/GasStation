@@ -7,6 +7,7 @@ using User;
 using Admin;
 using Queries.Connection;
 using Queries.Controllers;
+using Queries.Factory;
 using Worker;
 
 

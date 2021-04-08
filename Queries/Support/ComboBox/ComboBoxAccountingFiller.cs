@@ -1,14 +1,13 @@
-﻿using System.Windows.Forms;
-using Queries.Interfaces;
+﻿using Queries.Factory;
 
-namespace Queries.comboBoxFillers
+namespace Queries.Support.ComboBox
 {
     public class ComboBoxAccountingFiller
     {
-        private readonly ComboBox comboBox;
+        private readonly System.Windows.Forms.ComboBox comboBox;
         private readonly IRepositoryFactory factory;
 
-        public ComboBoxAccountingFiller(ComboBox comboBox, IRepositoryFactory factory)
+        public ComboBoxAccountingFiller(System.Windows.Forms.ComboBox comboBox, IRepositoryFactory factory)
         {
             this.comboBox = comboBox;
             this.factory = factory;
@@ -19,7 +18,7 @@ namespace Queries.comboBoxFillers
             var comboBoxStationElements = factory.GetStationRepository().GetStations();
             foreach (var station in comboBoxStationElements)
             {
-                comboBox.Items.Add(factory.GetStationRepository().GetStationAddressById(station.GetStation_id()));
+                comboBox.Items.Add(factory.GetStationRepository().GetStationAddressById(station.Id));
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿namespace Queries.Interfaces
+﻿using Queries.Interfaces;
+
+namespace Queries.Factory
 {
     public interface IRepositoryFactory 
     {

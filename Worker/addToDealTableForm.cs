@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
 using Queries.Entities;
-using Queries.comboBoxFillers;
 using Queries.Controllers;
+using Queries.Factory;
 using Queries.Interfaces;
+using Queries.Support.ComboBox;
 
 namespace Worker
 {

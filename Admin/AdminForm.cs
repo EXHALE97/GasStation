@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 using Queries.Interfaces;
-using Queries.comboBoxFillers;
 using Queries.Controllers;
+using Queries.Factory;
+using Queries.Support.ComboBox;
 
 namespace Admin
 {
@@ -39,14 +40,14 @@ namespace Admin
             MessageBox.Show("Добро пожаловать, администратор!");
             
             stationController.ShowTable();
-            employeeController.ShowTable();
-            clientController.ShowTable();
-            accountingController.ShowTable();
-            dealController.ShowTable();
-            supplyController.ShowTable();
-            dealComboBox.СbStationListFill();
-            accountingComboBox.СbStationListFill();
-            supplyComboBox.СbStationListFill();
+            //employeeController.ShowTable();
+            //clientController.ShowTable();
+            //accountingController.ShowTable();
+            //dealController.ShowTable();
+            //supplyController.ShowTable();
+            //dealComboBox.СbStationListFill();
+            //accountingComboBox.СbStationListFill();
+            //supplyComboBox.СbStationListFill();
         }
 
         private void btnTableView_Click(object sender, EventArgs e)
@@ -100,7 +101,7 @@ namespace Admin
 
         private void btnStationAdd_Click(object sender, EventArgs e)
         {
-            new AddToStationTableForm(factory, dgvViewCars).ShowDialog();
+            new AddNewStationForm(factory, dgvViewCars).ShowDialog();
             stationController.ShowTable();
         }
 

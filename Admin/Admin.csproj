@@ -81,11 +81,11 @@
     <Compile Include="AddToStaffTableForm.Designer.cs">
       <DependentUpon>AddToStaffTableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddToStationTableForm.cs">
+    <Compile Include="AddNewStationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddToStationTableForm.Designer.cs">
-      <DependentUpon>AddToStationTableForm.cs</DependentUpon>
+    <Compile Include="AddNewStationForm.Designer.cs">
+      <DependentUpon>AddNewStationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminForm.cs">
       <SubType>Form</SubType>
@@ -128,8 +128,8 @@
     <EmbeddedResource Include="AddToStaffTableForm.resx">
       <DependentUpon>AddToStaffTableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddToStationTableForm.resx">
-      <DependentUpon>AddToStationTableForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddNewStationForm.resx">
+      <DependentUpon>AddNewStationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>

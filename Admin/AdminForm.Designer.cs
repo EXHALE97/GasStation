@@ -107,9 +107,9 @@
             this.lbSessionName = new System.Windows.Forms.Label();
             this.station_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.orgname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.country = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsWorkingColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -538,9 +538,9 @@
             this.dgvVievStations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.station_id,
             this.orgname,
-            this.country,
             this.city,
-            this.address});
+            this.address,
+            this.IsWorkingColumn});
             this.dgvVievStations.Location = new System.Drawing.Point(3, 3);
             this.dgvVievStations.Name = "dgvVievStations";
             this.dgvVievStations.Size = new System.Drawing.Size(545, 456);
@@ -840,11 +840,6 @@
             this.orgname.HeaderText = "Название";
             this.orgname.Name = "orgname";
             // 
-            // country
-            // 
-            this.country.HeaderText = "Страна";
-            this.country.Name = "country";
-            // 
             // city
             // 
             this.city.HeaderText = "Город";
@@ -854,6 +849,11 @@
             // 
             this.address.HeaderText = "Адрес";
             this.address.Name = "address";
+            // 
+            // IsWorkingColumn
+            // 
+            this.IsWorkingColumn.HeaderText = "Работает";
+            this.IsWorkingColumn.Name = "IsWorkingColumn";
             // 
             // AdminForm
             // 
@@ -979,9 +979,9 @@
         private System.Windows.Forms.ToolStripMenuItem dbQueryManager;
         private System.Windows.Forms.DataGridViewTextBoxColumn station_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn orgname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn country;
         private System.Windows.Forms.DataGridViewTextBoxColumn city;
         private System.Windows.Forms.DataGridViewTextBoxColumn address;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsWorkingColumn;
     }
 }
 

@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Linq;
-using System.Text;
-using System.Security.Cryptography;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
-namespace Queries.Security
+namespace Queries.Support.Security
 {
     public static class SecurityCrypt
     {

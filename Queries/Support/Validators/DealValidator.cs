@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Queries.Entities;
 
-namespace Queries.Validators
+namespace Queries.Support.Validators
 {
     public class DealValidator
     {

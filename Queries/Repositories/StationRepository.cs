@@ -28,13 +28,13 @@ namespace Queries.Repositories
             {
 
                 DataBaseConnection.OpenConnection();
-                var queryResult = new SqlCommand("EXEC StationsSummary").ExecuteReader();
+                var queryResult = new SqlCommand("EXEC StationsSummary", DataBaseConnection.GetConnection()).ExecuteReader();
                 if (queryResult.HasRows)
                 {
                     stationList.AddRange(from DbDataRecord dbDataRecord in queryResult
                         select new Station(int.Parse(dbDataRecord["id"].ToString()), dbDataRecord["name"].ToString(),
-                            dbDataRecord["country"].ToString(), dbDataRecord["city"].ToString(),
-                            dbDataRecord["address"].ToString()));
+                            dbDataRecord["city"].ToString(), dbDataRecord["address"].ToString(),
+                            bool.Parse(dbDataRecord["is_working"].ToString())));
                 }
                 queryResult.Close();
             }
@@ -59,7 +59,7 @@ namespace Queries.Repositories
                     stationList.AddRange(from DbDataRecord dbDataRecord in AZSTableSearcher
                         select new Station(Convert.ToInt32(dbDataRecord["station_id"]),
                             dbDataRecord["orgname"].ToString(), dbDataRecord["country"].ToString(),
-                            dbDataRecord["city"].ToString(), dbDataRecord["street"].ToString()));
+                            dbDataRecord["city"].ToString(), bool.Parse(dbDataRecord["street"].ToString())));
                     AZSTableSearcher.Close();
                 }
             }

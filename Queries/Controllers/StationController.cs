@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using Queries.Entities;
+using Queries.Factory;
 using Queries.Interfaces;
-using Queries.Validators;
+using Queries.Support.Validators;
 
 namespace Queries.Controllers
 {
@@ -27,20 +28,20 @@ namespace Queries.Controllers
         {
             try
             {
-                var rowsCount = stationsTable.Rows.Count;
+                var columnsCount = stationsTable.Columns.Count;
                 var stations = factory.GetStationRepository().GetStations();
 
                 stationsTable.Rows.Clear();
                 
                 foreach (var ps in stations)
                 {
-                    if (rowsCount == 4)
+                    if (columnsCount == 4)
                     {
-                        stationsTable.Rows.Add(ps.Name, ps.Country, ps.City, ps.Address);
+                        stationsTable.Rows.Add(ps.Name, ps.City, ps.Address, ps.IsWorking.ToString());
                     }
                     else
                     {
-                        stationsTable.Rows.Add(ps.Id, ps.Name, ps.Country, ps.City, ps.Address);
+                        stationsTable.Rows.Add(ps.Id, ps.Name, ps.City, ps.Address, ps.IsWorking.ToString());
                     }
                 }
             }
@@ -62,7 +63,7 @@ namespace Queries.Controllers
                 stationsTable.Rows.Clear();
                 foreach (var ps in stations)
                 {
-                    stationsTable.Rows.Add(ps.Name, ps.Country, ps.City, ps.Address);
+                    stationsTable.Rows.Add(ps.Name, ps.City, ps.Address);
                 }
             }
             catch (SqlException e)
@@ -75,15 +76,16 @@ namespace Queries.Controllers
             }
         }
 
-        public bool AddToTable(Station st)
+        public bool AddToTable(Station station)
         {
             errorList = new List<string>();
-            bool checkFlag = false;
+            var checkFlag = false;
             try
             {
-                if (checkFlag = stationValidator.CheckAddition(st, out errorList))
+                if (checkFlag == stationValidator.CheckAddition(station, out errorList))
                 {
-                    factory.GetStationRepository().AddToStationTable(st);
+                    factory.GetStationRepository().AddToStationTable(station);
+                    checkFlag = true;
                 }
                 else
                 {
