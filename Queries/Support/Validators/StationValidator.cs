@@ -6,35 +6,30 @@ namespace Queries.Support.Validators
 {
     public static class StationValidator
     {
-        public static bool CheckAddition(Station st, out List<string> errorList)
+        public static bool CheckAddition(Station station, out List<string> errorList)
         {
-            var rgx = new Regex("^[А-ЯA-Z]{1}[а-яa-z]+ ?([А-ЯA-Z]{1}[а-яa-z]+ )?[0-9]+$");
             var checkFlag = true;
             errorList = new List<string>();
 
-            if (st.Name == string.Empty)
+            if (station.Name == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Название организации не задано!");
             }
-            if (st.City == string.Empty)
+            if (station.City == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Город не задан!");
             }
-            if (st.Address == string.Empty)
+            if (station.Address == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Адрес не задан!");
             }
-            if (st.Address != string.Empty)
+            else if (!new Regex("^[А-ЯA-Z]{1}[а-яa-z]+ ?([А-ЯA-Z]{1}[а-яa-z]+ )?[0-9]+$").Match(station.Address).Success)
             {
-                var matches = rgx.Match(st.Address);
-                if (!matches.Success)
-                {
-                    checkFlag = false;
-                    errorList.Add("Улица задана неверно!");
-                }
+                checkFlag = false;
+                errorList.Add("Улица задана неверно!");
             }
 
             return checkFlag;

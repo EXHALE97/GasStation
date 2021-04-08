@@ -1,114 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Linq;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
-using Queries.Interfaces;
+using Queries.Support.MessageBox;
 using Queries.Support.Validators;
 
 namespace Queries.Controllers
 {
-    public class StationController
+    public class StationController : BaseController
     {
         private readonly DataGridView stationsTable;
-        private readonly StationValidator stationValidator;
-        private readonly IRepositoryFactory factory;
-        private List<string> errorList;
-        private string error;
 
         public StationController(DataGridView stationsTable, IRepositoryFactory factory)
         {
-            this.factory = factory;
+            Factory = factory;
             this.stationsTable = stationsTable;
-            stationValidator = new StationValidator();
         }
 
         public void ShowTable()
         {
-            try
+            DoFormAction(() =>
             {
-                var columnsCount = stationsTable.Columns.Count;
-                var stations = factory.GetStationRepository().GetStations();
-
                 stationsTable.Rows.Clear();
-                
-                foreach (var ps in stations)
+
+                foreach (var station in Factory.GetStationRepository().GetStations())
                 {
-                    if (columnsCount == 4)
+                    if (stationsTable.Columns.Count == 4)
                     {
-                        stationsTable.Rows.Add(ps.Name, ps.City, ps.Address, ps.IsWorking.ToString());
+                        stationsTable.Rows.Add(station.Name, station.City, station.Address, station.IsWorking.ToString());
                     }
                     else
                     {
-                        stationsTable.Rows.Add(ps.Id, ps.Name, ps.City, ps.Address, ps.IsWorking.ToString());
+                        stationsTable.Rows.Add(station.Id, station.Name, station.City, station.Address, station.IsWorking.ToString());
                     }
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            });
         }
 
         public void FindInTable(string country, string city)
         {
-            try
+            DoFormAction(() =>
             {
-                var stations = factory.GetStationRepository().FindStations(country, city);
+                var stations = Factory.GetStationRepository().FindStations(country, city);
                 stationsTable.Rows.Clear();
-                foreach (var ps in stations)
+                foreach (var station in stations)
                 {
-                    stationsTable.Rows.Add(ps.Name, ps.City, ps.Address);
+                    stationsTable.Rows.Add(station.Name, station.City, station.Address);
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            });
         }
 
         public bool AddToTable(Station station)
         {
-            errorList = new List<string>();
-            var checkFlag = false;
-            try
+            return DoFormAction(() =>
             {
-                if (checkFlag == stationValidator.CheckAddition(station, out errorList))
+                if (StationValidator.CheckAddition(station, out var errorList))
                 {
-                    factory.GetStationRepository().AddToStationTable(station);
-                    checkFlag = true;
+                    Factory.GetStationRepository().AddToStationTable(station);
+                    return true;
                 }
-                else
-                {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
     }
 }

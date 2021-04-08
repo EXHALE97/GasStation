@@ -6,6 +6,7 @@ using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
+using Queries.Support.Validators;
 
 namespace Queries.Repositories
 {
@@ -23,26 +24,24 @@ namespace Queries.Repositories
 
         public List<Station> GetStations()
         {
-            var stationList = new List<Station>();
-            try
+            return ExecuteSqlCommand("EXEC StationsSummary", queryResult =>
             {
-
-                DataBaseConnection.OpenConnection();
-                var queryResult = new SqlCommand("EXEC StationsSummary", DataBaseConnection.GetConnection()).ExecuteReader();
+                var stationList = new List<Station>();
                 if (queryResult.HasRows)
                 {
                     stationList.AddRange(from DbDataRecord dbDataRecord in queryResult
-                        select new Station(int.Parse(dbDataRecord["id"].ToString()), dbDataRecord["name"].ToString(),
+                        select new Station(int.Parse(dbDataRecord["id"].ToString()),
+                            dbDataRecord["name"].ToString(),
                             dbDataRecord["city"].ToString(), dbDataRecord["address"].ToString(),
                             bool.Parse(dbDataRecord["is_working"].ToString())));
                 }
+
                 queryResult.Close();
-            }
-            finally { DataBaseConnection.CloseConnection(); }
-            return stationList;
+                return stationList;
+            });
         }
 
-        public List<Station> FindStations(string fCountry, string fCity)
+        public List<Station> FindStations(string country, string city)
         {
             List<Station> stationList = new List<Station>();
             DataBaseConnection.OpenConnection();
@@ -50,8 +49,8 @@ namespace Queries.Repositories
             {
                 var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country LIKE" +
                 " @fCountry AND city LIKE @fCity ");
-                queryCommand.Parameters.AddWithValue("@fCountry", "%" + fCountry + "%");
-                queryCommand.Parameters.AddWithValue("@fCity", "%" + fCity + "%");
+                queryCommand.Parameters.AddWithValue("@fCountry", "%" + country + "%");
+                queryCommand.Parameters.AddWithValue("@fCity", "%" + city + "%");
 
                 var AZSTableSearcher = queryCommand.ExecuteReader();
                 if (AZSTableSearcher.HasRows)
@@ -85,7 +84,7 @@ namespace Queries.Repositories
                     {
                         splittedLocation.Add(s);
                     }
-                    splittedLocation[2] = CheckRightStreet(splittedLocation[2]);
+                    splittedLocation[2] = StationValidator.CheckRightStreet(splittedLocation[2]);
                 }
                 DataBaseConnection.OpenConnection();
                 var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country =" +
@@ -196,46 +195,9 @@ namespace Queries.Repositories
             return comboBoxElements;
         }
 
-        public void AddToStationTable(Station st)
+        public void AddToStationTable(Station station)
         {
-            try
-            {
-                DataBaseConnection.OpenConnection();
-
-                var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"GasStation\"(OrgName, Country, City, Street, StorageCap)" +
-                        "VALUES(@OrgName, @Country, @City, @Street, @StorageCap)");
-                    queryCommand.ExecuteNonQuery();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { DataBaseConnection.CloseConnection(); }
-
-        }
-
-        private string CheckRightStreet(string street)
-        {
-            for (var i = 1; i < street.Length; i++)
-            {
-                if ((street[i] >= 'А' && street[i] <= 'Я') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
-                {
-                    street = street.Insert(i, " ");
-                }
-                if ((street[i] >= 'A' && street[i] <= 'Z') && (street[i - 1] >= 'a' && street[i - 1] <= 'z'))
-                {
-                    street = street.Insert(i, " ");
-                }
-                if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'а' && street[i - 1] <= 'я'))
-                {
-                    street = street.Insert(i, " ");
-                }
-                if ((street[i] >= '0' && street[i] <= '9') && (street[i - 1] >= 'a' && street[i - 1] <= 'z'))
-                {
-                    street = street.Insert(i, " ");
-                }
-            }
-            return street;
+            ExecuteSqlNonQueryCommand($"EXEC InsertStation N'{station.Name}', N'{station.City}', N'{station.Address}', {station.IsWorking.ToString()}");
         }
     }
 }

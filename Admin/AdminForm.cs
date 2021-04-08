@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Queries.Interfaces;
 using Queries.Controllers;
 using Queries.Factory;
 using Queries.Support.ComboBox;

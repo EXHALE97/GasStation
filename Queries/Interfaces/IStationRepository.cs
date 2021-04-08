@@ -9,7 +9,7 @@ namespace Queries.Interfaces
     {
         int FindStationIdByLocation(string location);
 
-        List<Station> FindStations(string fCountry, string fCity);
+        List<Station> FindStations(string country, string city);
 
         List<string> GetOrganizations();
 
@@ -19,6 +19,6 @@ namespace Queries.Interfaces
 
         string GetStationAddressById(int stationId);
 
-        void AddToStationTable(Station st);
+        void AddToStationTable(Station station);
     }
 }
