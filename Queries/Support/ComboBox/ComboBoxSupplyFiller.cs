@@ -17,7 +17,7 @@ namespace Queries.Support.ComboBox
 
         public void СbStationListFill()
         {
-            List<Station> comboBoxStationElements = factory.GetStationRepository().GetStations();
+            List<Station> comboBoxStationElements = factory.GetStationRepository().GetStations(false);
             foreach (Station station in comboBoxStationElements)
             {
                 cb.Items.Add(factory.GetStationRepository().GetStationAddressById(station.Id));

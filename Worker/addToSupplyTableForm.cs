@@ -75,39 +75,39 @@ namespace Worker
         {
             try
             {
-                if (cbFuelType.SelectedIndex != -1)
-                {
-                    fueltype = Convert.ToString(cbFuelType.Text);
-                }
-                fuelamount = Convert.ToInt32(tbFuelAmount.Text);
-                if (checkNow.Checked)
-                {
-                    supplydate = DateTime.Now;
-                }
-                if (!checkNow.Checked)
-                {
-                        hours = Convert.ToInt32(tbHours.Text);
-                        minutes = Convert.ToInt32(tbMinutes.Text);
-                }
+                //if (cbFuelType.SelectedIndex != -1)
+                //{
+                //    fueltype = Convert.ToString(cbFuelType.Text);
+                //}
+                //fuelamount = Convert.ToInt32(tbFuelAmount.Text);
+                //if (checkNow.Checked)
+                //{
+                //    supplydate = DateTime.Now;
+                //}
+                //if (!checkNow.Checked)
+                //{
+                //        hours = Convert.ToInt32(tbHours.Text);
+                //        minutes = Convert.ToInt32(tbMinutes.Text);
+                //}
                 
-                supplydate = Convert.ToDateTime(supplyDateTimePick.Text);
-                if (checkNow.Checked)
-                {
-                    supplydate = DateTime.Now;
-                }
-                else
-                {
-                    supplydate = supplydate.AddHours(hours);
-                    supplydate = supplydate.AddMinutes(minutes);
-                }
-                Supply sup = new Supply();
-                sup.supplySet(factory.GetStaffRepository().FindStationIDByStaffID(id), id, fueltype, fuelamount, supplydate);
-                SupplyController supplyController = new SupplyController(dgv, factory);
-                if (supplyController.AddToSupplyTable(sup))
-                {
-                    MessageBox.Show("Операция выполнена успешно!");
-                    Close();
-                }
+                //supplydate = Convert.ToDateTime(supplyDateTimePick.Text);
+                //if (checkNow.Checked)
+                //{
+                //    supplydate = DateTime.Now;
+                //}
+                //else
+                //{
+                //    supplydate = supplydate.AddHours(hours);
+                //    supplydate = supplydate.AddMinutes(minutes);
+                //}
+                //Supply sup = new Supply();
+                //sup.supplySet(factory.GetStaffRepository().FindStationIDByStaffID(id), id, fueltype, fuelamount, supplydate);
+                //SupplyController supplyController = new SupplyController(dgv, factory);
+                //if (supplyController.AddToSupplyTable(sup))
+                //{
+                //    MessageBox.Show("Операция выполнена успешно!");
+                //    Close();
+                //}
             }
             catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

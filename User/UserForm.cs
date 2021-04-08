@@ -2,7 +2,6 @@
 using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Factory;
-using Queries.Interfaces;
 
 namespace User
 {
@@ -26,14 +25,14 @@ namespace User
             lbSessionName1.Text = "Вы зашли как:" + cardnum;
             lbSessionName2.Text = "Вы зашли как:" + cardnum;
             fillStationTable = new StationController(dgvVievAZS, factory);
-            fillStationTable.ShowTable();
+            fillStationTable.ShowTable(false);
             fillDealTable = new DealController(dgvUserDeals, factory);
             fillDealTable.ShowUserTable(cardnum);
         }
 
         private void dataView1_Click(object sender, EventArgs e)
         {
-            fillStationTable.ShowTable();
+            fillStationTable.ShowTable(false);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

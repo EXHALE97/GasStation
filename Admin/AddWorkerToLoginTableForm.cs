@@ -26,7 +26,7 @@ namespace Admin
                 try
                 {
                     tbPass.UseSystemPasswordChar = true;
-                    lbName.Text = factory.GetStaffRepository().FindStaffByID(Convert.ToInt32(row.Cells["staff_id"].Value));
+                    lbName.Text = factory.GetStaffRepository().FindEmployeeById(Convert.ToInt32(row.Cells["staff_id"].Value));
                 }
                 catch (Exception) { }
             }

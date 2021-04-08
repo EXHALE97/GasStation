@@ -23,8 +23,8 @@ namespace Admin
         {
             InitializeComponent();
             this.factory = factory;
-            stationController = new StationController(dgvVievStations, factory);
-            employeeController = new EmployeeController(dgvViewStaff, factory);
+            stationController = new StationController(StationsTable, factory);
+            employeeController = new EmployeeController(EmployeeTable, factory);
             clientController = new CarController(dgvViewCars, factory);
             accountingController = new AccountController(dgvViewAccounting, factory);
             dealController = new DealController(dgvViewDeal, factory);
@@ -38,8 +38,8 @@ namespace Admin
         {
             MessageBox.Show("Добро пожаловать, администратор!");
             
-            stationController.ShowTable();
-            //employeeController.ShowTable();
+            stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
+            employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             //clientController.ShowTable();
             //accountingController.ShowTable();
             //dealController.ShowTable();
@@ -51,33 +51,33 @@ namespace Admin
 
         private void btnTableView_Click(object sender, EventArgs e)
         {
-            employeeController.ShowTable();
+            employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            new UpdateStaffTableForm(dgvViewStaff.CurrentRow, factory, dgvViewStaff).ShowDialog();
-            employeeController.ShowTable();
+            new UpdateStaffTableForm(EmployeeTable.CurrentRow, factory, EmployeeTable).ShowDialog();
+            employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            new AddToStaffTableForm(factory, dgvViewStaff).ShowDialog();
-            employeeController.ShowTable();
+            new AddToStaffTableForm(factory, EmployeeTable).ShowDialog();
+            employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             try
             {
-                var cell = dgvViewStaff[0, dgvViewStaff.CurrentRow.Index];
+                var cell = EmployeeTable[0, EmployeeTable.CurrentRow.Index];
                 int id = Convert.ToInt32(cell.Value);
                 if (employeeController.DeleteFromTable(id))
                 {
                     factory.GetLoginRepository().DeleteStaffFromLoginTable(id.ToString());
                     MessageBox.Show("Операция выполнена успешно!");
                 }
-                employeeController.ShowTable();
+                employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             }
             catch (Exception) { MessageBox.Show("Операция не может быть выполнена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -98,16 +98,16 @@ namespace Admin
             new UpdateDealTableForm(dgvViewDeal.CurrentRow, factory, dgvViewDeal).ShowDialog();
         }
 
-        private void btnStationAdd_Click(object sender, EventArgs e)
+        private void AddNewStationButton_Click(object sender, EventArgs e)
         {
             new AddNewStationForm(factory, dgvViewCars).ShowDialog();
-            stationController.ShowTable();
+            stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
         }
 
         private void RefreshTables_Click(object sender, EventArgs e)
         {
-            stationController.ShowTable();
-            employeeController.ShowTable();
+            stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
+            employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             clientController.ShowTable();
             accountingController.ShowTable();
             dealController.ShowTable();
@@ -126,7 +126,7 @@ namespace Admin
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            new AddWorkerToLoginTableForm(dgvViewStaff.CurrentRow, factory).ShowDialog();
+            new AddWorkerToLoginTableForm(EmployeeTable.CurrentRow, factory).ShowDialog();
         }
 
         private void btnActivateCarCard_Click(object sender, EventArgs e)
@@ -134,17 +134,17 @@ namespace Admin
             new AddUserToLoginTableForm(dgvViewCars.CurrentRow, factory).ShowDialog();
         }
 
-        private void btnTableStationView_Click(object sender, EventArgs e)
+        private void RefreshStationTableButton_Click(object sender, EventArgs e)
         {
-            stationController.ShowTable();
+            stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
         }
 
-        private void btnTableCarView_Click(object sender, EventArgs e)
+        private void ViewClientTable(object sender, EventArgs e)
         {
             clientController.ShowTable();
         }
 
-        private void btnTableDealView_Click(object sender, EventArgs e)
+        private void ViewDealTable(object sender, EventArgs e)
         {
             dealController.ShowTable();
         }
@@ -179,14 +179,24 @@ namespace Admin
             }
         }
 
-        private void btnTableAccountingView_Click(object sender, EventArgs e)
+        private void ViewAccountingTable(object sender, EventArgs e)
         {
             accountingController.ShowTable();
         }
 
-        private void btnTableSupplyView_Click(object sender, EventArgs e)
+        private void ViewSuppliesTable(object sender, EventArgs e)
         {
             supplyController.ShowTable();
+        }
+
+        private void UpdateStationInfoButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnlyWorkingStationsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            stationController.ShowTable(((CheckBox)sender).Checked);
         }
     }
 }

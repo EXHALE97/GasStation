@@ -13,7 +13,7 @@ namespace Queries.Interfaces
 
         List<string> GetOrganizations();
 
-        List<Station> GetStations();
+        List<Station> GetStations(bool workingStationsOnly);
 
         List<string> GetStationsAddress(string name);
 

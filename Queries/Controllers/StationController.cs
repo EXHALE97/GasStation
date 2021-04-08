@@ -17,13 +17,13 @@ namespace Queries.Controllers
             this.stationsTable = stationsTable;
         }
 
-        public void ShowTable()
+        public void ShowTable(bool workingOnly)
         {
             DoFormAction(() =>
             {
                 stationsTable.Rows.Clear();
 
-                foreach (var station in Factory.GetStationRepository().GetStations())
+                foreach (var station in Factory.GetStationRepository().GetStations(workingOnly))
                 {
                     if (stationsTable.Columns.Count == 4)
                     {

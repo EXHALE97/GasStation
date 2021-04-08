@@ -22,9 +22,9 @@ namespace Queries.Repositories
 
         }
 
-        public List<Station> GetStations()
+        public List<Station> GetStations(bool workingStationsOnly)
         {
-            return ExecuteSqlCommand("EXEC StationsSummary", queryResult =>
+            return ExecuteSqlCommand(workingStationsOnly ? "EXEC WorkingStationsSummary":"EXEC StationsSummary", queryResult =>
             {
                 var stationList = new List<Station>();
                 if (queryResult.HasRows)

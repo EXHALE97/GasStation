@@ -4,52 +4,34 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
-using Queries.Interfaces;
 using Queries.Support.Validators;
 
 namespace Queries.Controllers
 {
-    public class EmployeeController
+    public class EmployeeController : BaseController
     {
-        private readonly IRepositoryFactory factory;
         private readonly DataGridView dataGridView;
-        private readonly StaffValidator staffValidator;
-        private List<Employee> dgvElements;
         private List<string> errorList;
         private string error;
 
         public EmployeeController(DataGridView dataGridView, IRepositoryFactory factory)
         {
+            Factory = factory;
             this.dataGridView = dataGridView;
-            this.factory = factory;
-            staffValidator = new StaffValidator();
-            dgvElements = new List<Employee>();
         }
 
-        public void ShowTable()
+        public void ShowTable(bool workingOnly)
         {
-            try
+            DoFormAction(() =>
             {
-                dgvElements = factory.GetStaffRepository().GetStaff();
                 dataGridView.Rows.Clear();
-                if (dgvElements.Count != 0)
+                foreach(var employee in Factory.GetStaffRepository().GetEmployees(workingOnly))
                 {
-                    foreach (Employee wk in dgvElements)
-                    {
-                        dataGridView.Rows.Add(wk.GetStaffID(), wk.GetSurname(), wk.GetName(),
-                            factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(wk.GetStaffID())).Trim().Replace(" ", string.Empty),
-                            wk.GetGender(), wk.GetBirthdate(), wk.GetFunction(), wk.GetSalary());
-                    }
+                    dataGridView.Rows.Add(employee.Id, employee.CredId, employee.SurName, employee.Name,
+                        employee.MiddleName, employee.Birthday, employee.EmploymentDate, employee.ContractEndDate,
+                        employee.Position, employee.Salary, employee.Address, employee.Phone, employee.IsWorking);
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            });
         }
 
         public bool AddToTable(Employee wk)
@@ -57,9 +39,9 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = staffValidator.CheckAddition(wk, out errorList))
+                if (EmployeeValidator.CheckAddition(wk, out errorList))
                 {
-                    factory.GetStaffRepository().AddToStaffTable(wk);
+                    Factory.GetStaffRepository().AddToEmployeeTable(wk);
                 }
                 else
                 {
@@ -90,9 +72,9 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = staffValidator.CheckUpdate(id, wk, out errorList))
+                if (EmployeeValidator.CheckUpdate(id, wk, out errorList))
                 {
-                    factory.GetStaffRepository().UpdateStaffTable(id, wk);
+                    Factory.GetStaffRepository().UpdateEmployeeTable(id, wk);
                 }
                 else
                 {
@@ -123,9 +105,9 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = staffValidator.CheckDelete(id, out errorList))
+                if (!EmployeeValidator.CheckDelete(id, out errorList))
                 {
-                    factory.GetStaffRepository().DeleteFromStaffTable(id);
+                    Factory.GetStaffRepository().DeleteFromEmployeeTable(id);
                 }
                 else
                 {

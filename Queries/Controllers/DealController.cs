@@ -60,10 +60,10 @@ namespace Queries.Controllers
                 dgv.Rows.Clear();
                 foreach (Deal deal in dgvElements)
                 {
-                    string cardnum = factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()); 
-                    dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
-                        factory.GetStaffRepository().FindStaffByID(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
-                        deal.GetDealPrice(), cardnum, deal.GetDealDate());
+                    //string cardnum = factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()); 
+                    //dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                    //    factory.GetStaffRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
+                    //    deal.GetDealPrice(), cardnum, deal.GetDealDate());
                 }
             }
             catch (SqlException e)
@@ -113,23 +113,23 @@ namespace Queries.Controllers
         {
             try
             {
-                List<int> IDs = new List<int>();
-                IDs = factory.GetStaffRepository().FindStaffIDByStationID(station_id);
-                dgv.Rows.Clear();
-                if (IDs.Count != 0)
-                {
-                    List<Deal> stationDealList = new List<Deal>(); 
-                    foreach (int id in IDs)
-                    {
-                        stationDealList = factory.GetDealRepository().ShowWorkerDealTable(id);
-                        foreach (Deal deal in stationDealList)
-                        {
-                            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
-                                factory.GetStaffRepository().FindStaffByID(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
-                                deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
-                        }
-                    }
-                }
+                //List<int> IDs = new List<int>();
+                //IDs = factory.GetStaffRepository().FindStaffIDByStationID(station_id);
+                //dgv.Rows.Clear();
+                //if (IDs.Count != 0)
+                //{
+                //    List<Deal> stationDealList = new List<Deal>(); 
+                //    foreach (int id in IDs)
+                //    {
+                //        stationDealList = factory.GetDealRepository().ShowWorkerDealTable(id);
+                //        foreach (Deal deal in stationDealList)
+                //        {
+                //            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                //                factory.GetStaffRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
+                //                deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
+                //        }
+                //    }
+                //}
             }
             catch (SqlException e)
             {

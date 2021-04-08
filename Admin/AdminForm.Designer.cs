@@ -1,4 +1,6 @@
-﻿namespace Admin
+﻿using System.Windows.Forms;
+
+namespace Admin
 {
     partial class AdminForm
     {
@@ -52,26 +54,21 @@
             this.cardnum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabStaffTable = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnStaffAdd = new System.Windows.Forms.Button();
-            this.btnTableStaffView = new System.Windows.Forms.Button();
-            this.btnRegister = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.dgvViewStaff = new System.Windows.Forms.DataGridView();
-            this.staff_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.staffStationID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gender = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.birthdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.function = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.salary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddNewEmployee = new System.Windows.Forms.Button();
+            this.RefreshEmployeeTable = new System.Windows.Forms.Button();
+            this.GiveAdminAccessButton = new System.Windows.Forms.Button();
+            this.UpdateEmployeeButton = new System.Windows.Forms.Button();
+            this.DeleteEmployeeButton = new System.Windows.Forms.Button();
+            this.EmployeeTable = new System.Windows.Forms.DataGridView();
             this.tabAdmin = new System.Windows.Forms.TabControl();
             this.tabStationTable = new System.Windows.Forms.TabPage();
+            this.OnlyWorkingStationsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnTableStationView = new System.Windows.Forms.Button();
-            this.btnStationAdd = new System.Windows.Forms.Button();
-            this.dgvVievStations = new System.Windows.Forms.DataGridView();
+            this.CloseStationButton = new System.Windows.Forms.Button();
+            this.UpdateStationInfoButton = new System.Windows.Forms.Button();
+            this.RefreshStationTableButton = new System.Windows.Forms.Button();
+            this.AddNewStationButton = new System.Windows.Forms.Button();
+            this.StationsTable = new System.Windows.Forms.DataGridView();
             this.tabDealTable = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cbDealFilterByStation = new System.Windows.Forms.ComboBox();
@@ -105,11 +102,25 @@
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
-            this.station_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.orgname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.address = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsWorkingColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OnlyWorkingEmployeeCheckBox = new System.Windows.Forms.CheckBox();
+            this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeConnectedCreds = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeContractEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeePhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeIsWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsStationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -119,11 +130,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewCars)).BeginInit();
             this.tabStaffTable.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvViewStaff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EmployeeTable)).BeginInit();
             this.tabAdmin.SuspendLayout();
             this.tabStationTable.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVievStations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StationsTable)).BeginInit();
             this.tabDealTable.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -185,7 +196,7 @@
             this.btnTableAccountingView.TabIndex = 4;
             this.btnTableAccountingView.Text = "Обновить таблицу учёта";
             this.btnTableAccountingView.UseVisualStyleBackColor = true;
-            this.btnTableAccountingView.Click += new System.EventHandler(this.btnTableAccountingView_Click);
+            this.btnTableAccountingView.Click += new System.EventHandler(this.ViewAccountingTable);
             // 
             // dgvViewAccounting
             // 
@@ -271,7 +282,7 @@
             this.btnTableCarView.TabIndex = 5;
             this.btnTableCarView.Text = "Обновить список покупателей";
             this.btnTableCarView.UseVisualStyleBackColor = true;
-            this.btnTableCarView.Click += new System.EventHandler(this.btnTableCarView_Click);
+            this.btnTableCarView.Click += new System.EventHandler(this.ViewClientTable);
             // 
             // btnActivateCarCard
             // 
@@ -337,8 +348,9 @@
             // 
             // tabStaffTable
             // 
+            this.tabStaffTable.Controls.Add(this.OnlyWorkingEmployeeCheckBox);
             this.tabStaffTable.Controls.Add(this.groupBox2);
-            this.tabStaffTable.Controls.Add(this.dgvViewStaff);
+            this.tabStaffTable.Controls.Add(this.EmployeeTable);
             this.tabStaffTable.Location = new System.Drawing.Point(4, 22);
             this.tabStaffTable.Name = "tabStaffTable";
             this.tabStaffTable.Padding = new System.Windows.Forms.Padding(3);
@@ -349,11 +361,11 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnStaffAdd);
-            this.groupBox2.Controls.Add(this.btnTableStaffView);
-            this.groupBox2.Controls.Add(this.btnRegister);
-            this.groupBox2.Controls.Add(this.btnUpdate);
-            this.groupBox2.Controls.Add(this.btnDelete);
+            this.groupBox2.Controls.Add(this.AddNewEmployee);
+            this.groupBox2.Controls.Add(this.RefreshEmployeeTable);
+            this.groupBox2.Controls.Add(this.GiveAdminAccessButton);
+            this.groupBox2.Controls.Add(this.UpdateEmployeeButton);
+            this.groupBox2.Controls.Add(this.DeleteEmployeeButton);
             this.groupBox2.Location = new System.Drawing.Point(536, 6);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(278, 358);
@@ -361,117 +373,79 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Функционал";
             // 
-            // btnStaffAdd
+            // AddNewEmployee
             // 
-            this.btnStaffAdd.Location = new System.Drawing.Point(48, 88);
-            this.btnStaffAdd.Name = "btnStaffAdd";
-            this.btnStaffAdd.Size = new System.Drawing.Size(190, 60);
-            this.btnStaffAdd.TabIndex = 3;
-            this.btnStaffAdd.Text = "Добавить нового сотрудника";
-            this.btnStaffAdd.UseVisualStyleBackColor = true;
-            this.btnStaffAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.AddNewEmployee.Location = new System.Drawing.Point(48, 88);
+            this.AddNewEmployee.Name = "AddNewEmployee";
+            this.AddNewEmployee.Size = new System.Drawing.Size(190, 60);
+            this.AddNewEmployee.TabIndex = 3;
+            this.AddNewEmployee.Text = "Добавить нового сотрудника";
+            this.AddNewEmployee.UseVisualStyleBackColor = true;
+            this.AddNewEmployee.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnTableStaffView
+            // RefreshEmployeeTable
             // 
-            this.btnTableStaffView.Location = new System.Drawing.Point(48, 19);
-            this.btnTableStaffView.Name = "btnTableStaffView";
-            this.btnTableStaffView.Size = new System.Drawing.Size(190, 60);
-            this.btnTableStaffView.TabIndex = 1;
-            this.btnTableStaffView.Text = "Обновить список персонала";
-            this.btnTableStaffView.UseVisualStyleBackColor = true;
-            this.btnTableStaffView.Click += new System.EventHandler(this.btnTableView_Click);
+            this.RefreshEmployeeTable.Location = new System.Drawing.Point(48, 19);
+            this.RefreshEmployeeTable.Name = "RefreshEmployeeTable";
+            this.RefreshEmployeeTable.Size = new System.Drawing.Size(190, 60);
+            this.RefreshEmployeeTable.TabIndex = 1;
+            this.RefreshEmployeeTable.Text = "Обновить список персонала";
+            this.RefreshEmployeeTable.UseVisualStyleBackColor = true;
+            this.RefreshEmployeeTable.Click += new System.EventHandler(this.btnTableView_Click);
             // 
-            // btnRegister
+            // GiveAdminAccessButton
             // 
-            this.btnRegister.Location = new System.Drawing.Point(48, 286);
-            this.btnRegister.Name = "btnRegister";
-            this.btnRegister.Size = new System.Drawing.Size(190, 60);
-            this.btnRegister.TabIndex = 4;
-            this.btnRegister.Text = "Дать выбранному сотруднику права доступа к системе учета";
-            this.btnRegister.UseVisualStyleBackColor = true;
-            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
+            this.GiveAdminAccessButton.Location = new System.Drawing.Point(48, 286);
+            this.GiveAdminAccessButton.Name = "GiveAdminAccessButton";
+            this.GiveAdminAccessButton.Size = new System.Drawing.Size(190, 60);
+            this.GiveAdminAccessButton.TabIndex = 4;
+            this.GiveAdminAccessButton.Text = "Дать выбранному сотруднику права доступа к системе учета";
+            this.GiveAdminAccessButton.UseVisualStyleBackColor = true;
+            this.GiveAdminAccessButton.Click += new System.EventHandler(this.btnRegister_Click);
             // 
-            // btnUpdate
+            // UpdateEmployeeButton
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(48, 154);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(190, 60);
-            this.btnUpdate.TabIndex = 2;
-            this.btnUpdate.Text = "Править личные данные сотрудника";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.UpdateEmployeeButton.Location = new System.Drawing.Point(48, 154);
+            this.UpdateEmployeeButton.Name = "UpdateEmployeeButton";
+            this.UpdateEmployeeButton.Size = new System.Drawing.Size(190, 60);
+            this.UpdateEmployeeButton.TabIndex = 2;
+            this.UpdateEmployeeButton.Text = "Править личные данные сотрудника";
+            this.UpdateEmployeeButton.UseVisualStyleBackColor = true;
+            this.UpdateEmployeeButton.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
-            // btnDelete
+            // DeleteEmployeeButton
             // 
-            this.btnDelete.Location = new System.Drawing.Point(48, 220);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(190, 60);
-            this.btnDelete.TabIndex = 3;
-            this.btnDelete.Text = " Уволить выбранного сотрудника";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.DeleteEmployeeButton.Location = new System.Drawing.Point(48, 220);
+            this.DeleteEmployeeButton.Name = "DeleteEmployeeButton";
+            this.DeleteEmployeeButton.Size = new System.Drawing.Size(190, 60);
+            this.DeleteEmployeeButton.TabIndex = 3;
+            this.DeleteEmployeeButton.Text = " Уволить выбранного сотрудника";
+            this.DeleteEmployeeButton.UseVisualStyleBackColor = true;
+            this.DeleteEmployeeButton.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // dgvViewStaff
+            // EmployeeTable
             // 
-            this.dgvViewStaff.AllowUserToAddRows = false;
-            this.dgvViewStaff.AllowUserToDeleteRows = false;
-            this.dgvViewStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewStaff.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.staff_id,
-            this.surname,
-            this.name,
-            this.staffStationID,
-            this.gender,
-            this.birthdate,
-            this.function,
-            this.salary});
-            this.dgvViewStaff.Location = new System.Drawing.Point(0, 3);
-            this.dgvViewStaff.Name = "dgvViewStaff";
-            this.dgvViewStaff.Size = new System.Drawing.Size(530, 459);
-            this.dgvViewStaff.TabIndex = 0;
-            // 
-            // staff_id
-            // 
-            this.staff_id.HeaderText = "ID";
-            this.staff_id.Name = "staff_id";
-            this.staff_id.Width = 40;
-            // 
-            // surname
-            // 
-            this.surname.HeaderText = "Фамилия";
-            this.surname.Name = "surname";
-            // 
-            // name
-            // 
-            this.name.HeaderText = "Имя";
-            this.name.Name = "name";
-            // 
-            // staffStationID
-            // 
-            this.staffStationID.HeaderText = "Место работы";
-            this.staffStationID.Name = "staffStationID";
-            // 
-            // gender
-            // 
-            this.gender.HeaderText = "Пол";
-            this.gender.Name = "gender";
-            this.gender.Width = 60;
-            // 
-            // birthdate
-            // 
-            this.birthdate.HeaderText = "Дата рождения";
-            this.birthdate.Name = "birthdate";
-            // 
-            // function
-            // 
-            this.function.HeaderText = "Назначение";
-            this.function.Name = "function";
-            // 
-            // salary
-            // 
-            this.salary.HeaderText = "Зарплата";
-            this.salary.Name = "salary";
-            this.salary.Width = 80;
+            this.EmployeeTable.AllowUserToAddRows = false;
+            this.EmployeeTable.AllowUserToDeleteRows = false;
+            this.EmployeeTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.EmployeeTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.EmployeeId,
+            this.EmployeeConnectedCreds,
+            this.EmployeeSurname,
+            this.EmployeeName,
+            this.EmployeeLastName,
+            this.EmployeeBirthday,
+            this.EmploymentDate,
+            this.EmployeeContractEnd,
+            this.EmployeePosition,
+            this.EmployeeSalary,
+            this.EmployeeAddress,
+            this.EmployeePhone,
+            this.EmployeeIsWorking});
+            this.EmployeeTable.Location = new System.Drawing.Point(0, 3);
+            this.EmployeeTable.Name = "EmployeeTable";
+            this.EmployeeTable.Size = new System.Drawing.Size(530, 459);
+            this.EmployeeTable.TabIndex = 0;
             // 
             // tabAdmin
             // 
@@ -489,8 +463,9 @@
             // 
             // tabStationTable
             // 
+            this.tabStationTable.Controls.Add(this.OnlyWorkingStationsCheckBox);
             this.tabStationTable.Controls.Add(this.groupBox1);
-            this.tabStationTable.Controls.Add(this.dgvVievStations);
+            this.tabStationTable.Controls.Add(this.StationsTable);
             this.tabStationTable.Location = new System.Drawing.Point(4, 22);
             this.tabStationTable.Name = "tabStationTable";
             this.tabStationTable.Padding = new System.Windows.Forms.Padding(3);
@@ -499,52 +474,84 @@
             this.tabStationTable.Text = "Список станций";
             this.tabStationTable.UseVisualStyleBackColor = true;
             // 
+            // OnlyWorkingStationsCheckBox
+            // 
+            this.OnlyWorkingStationsCheckBox.AutoSize = true;
+            this.OnlyWorkingStationsCheckBox.Location = new System.Drawing.Point(592, 430);
+            this.OnlyWorkingStationsCheckBox.Name = "OnlyWorkingStationsCheckBox";
+            this.OnlyWorkingStationsCheckBox.Size = new System.Drawing.Size(174, 17);
+            this.OnlyWorkingStationsCheckBox.TabIndex = 3;
+            this.OnlyWorkingStationsCheckBox.Text = "Только работающие станции";
+            this.OnlyWorkingStationsCheckBox.UseVisualStyleBackColor = true;
+            this.OnlyWorkingStationsCheckBox.CheckedChanged += new System.EventHandler(this.OnlyWorkingStationsCheckBox_CheckedChanged);
+            // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnTableStationView);
-            this.groupBox1.Controls.Add(this.btnStationAdd);
+            this.groupBox1.Controls.Add(this.CloseStationButton);
+            this.groupBox1.Controls.Add(this.UpdateStationInfoButton);
+            this.groupBox1.Controls.Add(this.RefreshStationTableButton);
+            this.groupBox1.Controls.Add(this.AddNewStationButton);
             this.groupBox1.Location = new System.Drawing.Point(554, 6);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(260, 159);
+            this.groupBox1.Size = new System.Drawing.Size(263, 295);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функционал";
             // 
-            // btnTableStationView
+            // CloseStationButton
             // 
-            this.btnTableStationView.Location = new System.Drawing.Point(38, 19);
-            this.btnTableStationView.Name = "btnTableStationView";
-            this.btnTableStationView.Size = new System.Drawing.Size(190, 60);
-            this.btnTableStationView.TabIndex = 3;
-            this.btnTableStationView.Text = "Обновить список станций";
-            this.btnTableStationView.UseVisualStyleBackColor = true;
-            this.btnTableStationView.Click += new System.EventHandler(this.btnTableStationView_Click);
+            this.CloseStationButton.Location = new System.Drawing.Point(38, 217);
+            this.CloseStationButton.Name = "CloseStationButton";
+            this.CloseStationButton.Size = new System.Drawing.Size(190, 60);
+            this.CloseStationButton.TabIndex = 5;
+            this.CloseStationButton.Text = "Закрыть станцию";
+            this.CloseStationButton.UseVisualStyleBackColor = true;
             // 
-            // btnStationAdd
+            // UpdateStationInfoButton
             // 
-            this.btnStationAdd.Location = new System.Drawing.Point(38, 85);
-            this.btnStationAdd.Name = "btnStationAdd";
-            this.btnStationAdd.Size = new System.Drawing.Size(190, 60);
-            this.btnStationAdd.TabIndex = 2;
-            this.btnStationAdd.Text = "Добавить новую станцию";
-            this.btnStationAdd.UseVisualStyleBackColor = true;
-            this.btnStationAdd.Click += new System.EventHandler(this.btnStationAdd_Click);
+            this.UpdateStationInfoButton.Location = new System.Drawing.Point(38, 151);
+            this.UpdateStationInfoButton.Name = "UpdateStationInfoButton";
+            this.UpdateStationInfoButton.Size = new System.Drawing.Size(190, 60);
+            this.UpdateStationInfoButton.TabIndex = 4;
+            this.UpdateStationInfoButton.Text = "Править информацию о станции";
+            this.UpdateStationInfoButton.UseVisualStyleBackColor = true;
+            this.UpdateStationInfoButton.Click += new System.EventHandler(this.UpdateStationInfoButton_Click);
             // 
-            // dgvVievStations
+            // RefreshStationTableButton
             // 
-            this.dgvVievStations.AllowUserToAddRows = false;
-            this.dgvVievStations.AllowUserToDeleteRows = false;
-            this.dgvVievStations.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVievStations.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.station_id,
-            this.orgname,
-            this.city,
-            this.address,
-            this.IsWorkingColumn});
-            this.dgvVievStations.Location = new System.Drawing.Point(3, 3);
-            this.dgvVievStations.Name = "dgvVievStations";
-            this.dgvVievStations.Size = new System.Drawing.Size(545, 456);
-            this.dgvVievStations.TabIndex = 1;
+            this.RefreshStationTableButton.Location = new System.Drawing.Point(38, 19);
+            this.RefreshStationTableButton.Name = "RefreshStationTableButton";
+            this.RefreshStationTableButton.Size = new System.Drawing.Size(190, 60);
+            this.RefreshStationTableButton.TabIndex = 3;
+            this.RefreshStationTableButton.Text = "Обновить список станций";
+            this.RefreshStationTableButton.UseVisualStyleBackColor = true;
+            this.RefreshStationTableButton.Click += new System.EventHandler(this.RefreshStationTableButton_Click);
+            // 
+            // AddNewStationButton
+            // 
+            this.AddNewStationButton.Location = new System.Drawing.Point(38, 85);
+            this.AddNewStationButton.Name = "AddNewStationButton";
+            this.AddNewStationButton.Size = new System.Drawing.Size(190, 60);
+            this.AddNewStationButton.TabIndex = 2;
+            this.AddNewStationButton.Text = "Добавить новую станцию";
+            this.AddNewStationButton.UseVisualStyleBackColor = true;
+            this.AddNewStationButton.Click += new System.EventHandler(this.AddNewStationButton_Click);
+            // 
+            // StationsTable
+            // 
+            this.StationsTable.AllowUserToAddRows = false;
+            this.StationsTable.AllowUserToDeleteRows = false;
+            this.StationsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.StationsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.StationId,
+            this.StationName,
+            this.StationCity,
+            this.StationAddress,
+            this.IsStationWorking});
+            this.StationsTable.Location = new System.Drawing.Point(3, 3);
+            this.StationsTable.Name = "StationsTable";
+            this.StationsTable.Size = new System.Drawing.Size(545, 456);
+            this.StationsTable.TabIndex = 1;
             // 
             // tabDealTable
             // 
@@ -598,7 +605,7 @@
             this.btnTableDealView.TabIndex = 3;
             this.btnTableDealView.Text = "Обновить список сделок";
             this.btnTableDealView.UseVisualStyleBackColor = true;
-            this.btnTableDealView.Click += new System.EventHandler(this.btnTableDealView_Click);
+            this.btnTableDealView.Click += new System.EventHandler(this.ViewDealTable);
             // 
             // btnDealUpdate
             // 
@@ -727,7 +734,7 @@
             this.btnTableSupplyView.TabIndex = 0;
             this.btnTableSupplyView.Text = "Обновить список поставок";
             this.btnTableSupplyView.UseVisualStyleBackColor = true;
-            this.btnTableSupplyView.Click += new System.EventHandler(this.btnTableSupplyView_Click);
+            this.btnTableSupplyView.Click += new System.EventHandler(this.ViewSuppliesTable);
             // 
             // dgvViewSupply
             // 
@@ -830,30 +837,125 @@
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
             // 
-            // station_id
+            // OnlyWorkingEmployeeCheckBox
             // 
-            this.station_id.HeaderText = "ID";
-            this.station_id.Name = "station_id";
+            this.OnlyWorkingEmployeeCheckBox.AutoSize = true;
+            this.OnlyWorkingEmployeeCheckBox.Location = new System.Drawing.Point(584, 423);
+            this.OnlyWorkingEmployeeCheckBox.Name = "OnlyWorkingEmployeeCheckBox";
+            this.OnlyWorkingEmployeeCheckBox.Size = new System.Drawing.Size(191, 17);
+            this.OnlyWorkingEmployeeCheckBox.TabIndex = 6;
+            this.OnlyWorkingEmployeeCheckBox.Text = "Только работающие сотрудники";
+            this.OnlyWorkingEmployeeCheckBox.UseVisualStyleBackColor = true;
             // 
-            // orgname
+            // EmployeeId
             // 
-            this.orgname.HeaderText = "Название";
-            this.orgname.Name = "orgname";
+            this.EmployeeId.HeaderText = "ID";
+            this.EmployeeId.Name = "EmployeeId";
+            this.EmployeeId.ReadOnly = true;
+            this.EmployeeId.Width = 40;
             // 
-            // city
+            // EmployeeConnectedCreds
             // 
-            this.city.HeaderText = "Город";
-            this.city.Name = "city";
+            this.EmployeeConnectedCreds.HeaderText = "Креды";
+            this.EmployeeConnectedCreds.Name = "EmployeeConnectedCreds";
+            this.EmployeeConnectedCreds.ReadOnly = true;
             // 
-            // address
+            // EmployeeSurname
             // 
-            this.address.HeaderText = "Адрес";
-            this.address.Name = "address";
+            this.EmployeeSurname.HeaderText = "Фамилия";
+            this.EmployeeSurname.Name = "EmployeeSurname";
+            this.EmployeeSurname.ReadOnly = true;
             // 
-            // IsWorkingColumn
+            // EmployeeName
             // 
-            this.IsWorkingColumn.HeaderText = "Работает";
-            this.IsWorkingColumn.Name = "IsWorkingColumn";
+            this.EmployeeName.HeaderText = "Имя";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            // 
+            // EmployeeLastName
+            // 
+            this.EmployeeLastName.HeaderText = "Отчество";
+            this.EmployeeLastName.Name = "EmployeeLastName";
+            this.EmployeeLastName.ReadOnly = true;
+            // 
+            // EmployeeBirthday
+            // 
+            this.EmployeeBirthday.HeaderText = "Дата рождения";
+            this.EmployeeBirthday.Name = "EmployeeBirthday";
+            this.EmployeeBirthday.ReadOnly = true;
+            // 
+            // EmploymentDate
+            // 
+            this.EmploymentDate.HeaderText = "Дата найма";
+            this.EmploymentDate.Name = "EmploymentDate";
+            this.EmploymentDate.ReadOnly = true;
+            // 
+            // EmployeeContractEnd
+            // 
+            this.EmployeeContractEnd.HeaderText = "Дата окончания контакта";
+            this.EmployeeContractEnd.Name = "EmployeeContractEnd";
+            this.EmployeeContractEnd.ReadOnly = true;
+            // 
+            // EmployeePosition
+            // 
+            this.EmployeePosition.HeaderText = "Должность";
+            this.EmployeePosition.Name = "EmployeePosition";
+            this.EmployeePosition.ReadOnly = true;
+            // 
+            // EmployeeSalary
+            // 
+            this.EmployeeSalary.HeaderText = "Зарплата";
+            this.EmployeeSalary.Name = "EmployeeSalary";
+            this.EmployeeSalary.ReadOnly = true;
+            this.EmployeeSalary.Width = 80;
+            // 
+            // EmployeeAddress
+            // 
+            this.EmployeeAddress.HeaderText = "Адрес";
+            this.EmployeeAddress.Name = "EmployeeAddress";
+            this.EmployeeAddress.ReadOnly = true;
+            // 
+            // EmployeePhone
+            // 
+            this.EmployeePhone.HeaderText = "Телефон";
+            this.EmployeePhone.Name = "EmployeePhone";
+            this.EmployeePhone.ReadOnly = true;
+            // 
+            // EmployeeIsWorking
+            // 
+            this.EmployeeIsWorking.HeaderText = "Работает";
+            this.EmployeeIsWorking.Name = "EmployeeIsWorking";
+            this.EmployeeIsWorking.ReadOnly = true;
+            // 
+            // StationId
+            // 
+            this.StationId.HeaderText = "ID";
+            this.StationId.Name = "StationId";
+            this.StationId.ReadOnly = true;
+            // 
+            // StationName
+            // 
+            this.StationName.HeaderText = "Название";
+            this.StationName.Name = "StationName";
+            this.StationName.ReadOnly = true;
+            // 
+            // StationCity
+            // 
+            this.StationCity.HeaderText = "Город";
+            this.StationCity.Name = "StationCity";
+            this.StationCity.ReadOnly = true;
+            // 
+            // StationAddress
+            // 
+            this.StationAddress.HeaderText = "Адрес";
+            this.StationAddress.Name = "StationAddress";
+            this.StationAddress.ReadOnly = true;
+            // 
+            // IsStationWorking
+            // 
+            this.IsStationWorking.HeaderText = "Работает";
+            this.IsStationWorking.Name = "IsStationWorking";
+            this.IsStationWorking.ReadOnly = true;
             // 
             // AdminForm
             // 
@@ -877,12 +979,14 @@
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewCars)).EndInit();
             this.tabStaffTable.ResumeLayout(false);
+            this.tabStaffTable.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvViewStaff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EmployeeTable)).EndInit();
             this.tabAdmin.ResumeLayout(false);
             this.tabStationTable.ResumeLayout(false);
+            this.tabStationTable.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVievStations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StationsTable)).EndInit();
             this.tabDealTable.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -901,11 +1005,11 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabAdmin;
-        private System.Windows.Forms.DataGridView dgvViewStaff;
-        private System.Windows.Forms.Button btnTableStaffView;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnStaffAdd;
-        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.DataGridView EmployeeTable;
+        private System.Windows.Forms.Button RefreshEmployeeTable;
+        private System.Windows.Forms.Button UpdateEmployeeButton;
+        private System.Windows.Forms.Button AddNewEmployee;
+        private System.Windows.Forms.Button DeleteEmployeeButton;
         private System.Windows.Forms.TabPage tabStaffTable;
         private System.Windows.Forms.DataGridView dgvViewCars;
         private System.Windows.Forms.Button btnFindDealsByCar_id;
@@ -917,8 +1021,8 @@
         private System.Windows.Forms.DataGridView dgvViewDeal;
         private System.Windows.Forms.Button btnDealUpdate;
         private System.Windows.Forms.TabPage tabStationTable;
-        private System.Windows.Forms.DataGridView dgvVievStations;
-        private System.Windows.Forms.Button btnStationAdd;
+        private System.Windows.Forms.DataGridView StationsTable;
+        private System.Windows.Forms.Button AddNewStationButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn car_id;
         private System.Windows.Forms.DataGridViewTextBoxColumn cardnum;
         private System.Windows.Forms.DataGridViewTextBoxColumn carmark;
@@ -926,9 +1030,9 @@
         private System.Windows.Forms.ToolStripMenuItem допФункцииToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddNewAdmin;
         private System.Windows.Forms.ToolStripMenuItem RefreshTables;
-        private System.Windows.Forms.Button btnRegister;
+        private System.Windows.Forms.Button GiveAdminAccessButton;
         private System.Windows.Forms.Button btnActivateCarCard;
-        private System.Windows.Forms.Button btnTableStationView;
+        private System.Windows.Forms.Button RefreshStationTableButton;
         private System.Windows.Forms.Button btnTableCarView;
         private System.Windows.Forms.Button btnTableDealView;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -960,14 +1064,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fuelaccounttype;
         private System.Windows.Forms.DataGridViewTextBoxColumn accountrole;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationaccountID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn birthdate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn salary;
-        private System.Windows.Forms.DataGridViewTextBoxColumn function;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gender;
-        private System.Windows.Forms.DataGridViewTextBoxColumn staffStationID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn surname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn staff_id;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.ComboBox cbSupplyFilterByStation;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupplyDate;
@@ -977,11 +1073,28 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn stationSupply;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationSupplyID;
         private System.Windows.Forms.ToolStripMenuItem dbQueryManager;
-        private System.Windows.Forms.DataGridViewTextBoxColumn station_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orgname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn city;
-        private System.Windows.Forms.DataGridViewTextBoxColumn address;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IsWorkingColumn;
+        private Button CloseStationButton;
+        private Button UpdateStationInfoButton;
+        private CheckBox OnlyWorkingStationsCheckBox;
+        private CheckBox OnlyWorkingEmployeeCheckBox;
+        private DataGridViewTextBoxColumn EmployeeId;
+        private DataGridViewTextBoxColumn EmployeeConnectedCreds;
+        private DataGridViewTextBoxColumn EmployeeSurname;
+        private DataGridViewTextBoxColumn EmployeeName;
+        private DataGridViewTextBoxColumn EmployeeLastName;
+        private DataGridViewTextBoxColumn EmployeeBirthday;
+        private DataGridViewTextBoxColumn EmploymentDate;
+        private DataGridViewTextBoxColumn EmployeeContractEnd;
+        private DataGridViewTextBoxColumn EmployeePosition;
+        private DataGridViewTextBoxColumn EmployeeSalary;
+        private DataGridViewTextBoxColumn EmployeeAddress;
+        private DataGridViewTextBoxColumn EmployeePhone;
+        private DataGridViewTextBoxColumn EmployeeIsWorking;
+        private DataGridViewTextBoxColumn StationId;
+        private DataGridViewTextBoxColumn StationName;
+        private DataGridViewTextBoxColumn StationCity;
+        private DataGridViewTextBoxColumn StationAddress;
+        private DataGridViewTextBoxColumn IsStationWorking;
     }
 }
 

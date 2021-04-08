@@ -4,49 +4,38 @@ using Queries.Entities;
 
 namespace Queries.Support.Validators
 {
-    public class StaffValidator
+    public static class EmployeeValidator
     {
-
-        public StaffValidator()
-        {
-
-        }
-
-        public bool CheckAddition(Employee wk, out List<string> errorList)
+        public static bool CheckAddition(Employee wk, out List<string> errorList)
         {
             errorList = new List<string>();
             bool checkFlag = true;
-            if (wk.GetStationID() <= 0)
+            if (wk.Id <= 0)
             {
                 checkFlag = false;
                 errorList.Add("Станция не выбрана!");
             }
-            if (wk.GetSurname() == String.Empty)
+            if (wk.SurName == String.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Фамилия не задана!");
             }
-            if (wk.GetName() == String.Empty)
+            if (wk.Name == String.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Имя не задано!");
             }
-            if (wk.GetGender() == String.Empty)
-            {
-                checkFlag = false;
-                errorList.Add("Пол не выбран!");
-            }
-            if (wk.GetBirthdate().Year > 2000 || wk.GetBirthdate().Year < 1955)
+            if (wk.Birthday.Year > 2000 || wk.Birthday.Year < 1955)
             {
                 checkFlag = false;
                 errorList.Add("Возраст указан неверно!");
             }
-            if (wk.GetFunction() == String.Empty)
+            if (wk.Position == String.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Должность не задана!");
             }
-            if (wk.GetSalary() < 500)
+            if (wk.Salary < 500)
             {
                 checkFlag = false;
                 errorList.Add("Зарплата не может быть дробным числом или быть меньше 500 у.е!");
@@ -55,26 +44,26 @@ namespace Queries.Support.Validators
             return checkFlag;
         }
 
-        public bool CheckUpdate(int id, Employee wk, out List<string> errorList)
+        public static bool CheckUpdate(int id, Employee wk, out List<string> errorList)
         {
             errorList = new List<string>();
             bool checkFlag = true;
-            if (wk.GetSurname() == String.Empty)
+            if (wk.SurName == String.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Фамилия не задана!");
             }
-            if (wk.GetName() == String.Empty)
+            if (wk.Name == String.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Имя не задано!");
             }
-            if (wk.GetFunction() == String.Empty)
+            if (wk.Position == String.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Должность не задана!");
             }
-            if (wk.GetSalary() < 500)
+            if (wk.Salary < 500)
             {
                 checkFlag = false;
                 errorList.Add("Зарплата не может быть меньше 500 у.е!");
@@ -85,7 +74,7 @@ namespace Queries.Support.Validators
             return checkFlag;
         }
 
-        public bool CheckDelete(int id, out List<string> errorList)
+        public static bool CheckDelete(int id, out List<string> errorList)
         {
             errorList = new List<string>();
             bool checkFlag = true;

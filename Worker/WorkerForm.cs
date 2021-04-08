@@ -22,8 +22,8 @@ namespace Worker
 
         private void WorkerForm_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Добро пожаловать, " + factory.GetStaffRepository().FindStaffByID(ID) + "!" + "\n" + "Желаем вам приятного рабочего дня!" + "\n");
-            lbSessionName.Text = "Сессия: " + factory.GetStaffRepository().FindStaffByID(ID) + "[" + ID + "]";
+            MessageBox.Show("Добро пожаловать, " + factory.GetStaffRepository().FindEmployeeById(ID) + "!" + "\n" + "Желаем вам приятного рабочего дня!" + "\n");
+            lbSessionName.Text = "Сессия: " + factory.GetStaffRepository().FindEmployeeById(ID) + "[" + ID + "]";
             fillDealTable = new DealController(dgvVievDeal, factory);
             fillDealTable.ShowWorkerTable(ID);
             fillSupplyTable = new SupplyController(dgvViewSupply, factory);

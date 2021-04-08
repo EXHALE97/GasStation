@@ -6,7 +6,7 @@ namespace Queries.Factory
     {
         IStationRepository GetStationRepository();
 
-        IStaffRepository GetStaffRepository();
+        IEmployeeRepository GetStaffRepository();
 
         ICarRepository GetCarRepository();
 

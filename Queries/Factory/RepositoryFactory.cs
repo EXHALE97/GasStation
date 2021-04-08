@@ -23,9 +23,9 @@ namespace Queries.Factory
             return new StationRepository(dbc);
         }
 
-        public IStaffRepository GetStaffRepository()
+        public IEmployeeRepository GetStaffRepository()
         {
-            return new StaffRepository(dbc);
+            return new EmployeeRepository(dbc);
         }
 
         public ICarRepository GetCarRepository()

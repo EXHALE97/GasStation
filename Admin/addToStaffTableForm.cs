@@ -70,37 +70,37 @@ namespace Admin
         {
             try
             {
-                try
-                {
-                    station_id = factory.GetStationRepository().FindStationIdByLocation(cbStationList.Text);
-                } catch(Exception) { station_id = -1; }
-                if (station_id == 0)
-                {
-                    station_id = -1;
-                }
-                surname = tbSurname.Text;
-                name = tbName.Text;
-                if (cbGender.SelectedIndex != -1)
-                {
-                    gender = Convert.ToString(cbGender.Text);
-                }
-                else gender = String.Empty;
-                birthdate = Convert.ToDateTime(birthDatePick.Text);
-                function = tbFunction.Text;
-                int salary;
-                bool checkStorageCap = Int32.TryParse(tbSalary.Text, out salary);
-                if (!checkStorageCap)
-                {
-                    salary = -1;
-                }
-                Employee wk = new Employee();
-                wk.workerSet(station_id, surname, name, gender, birthdate, function, salary);
-                EmployeeController employeeController = new EmployeeController(dgv, factory);
-                if (employeeController.AddToTable(wk))
-                {
-                    MessageBox.Show("Операция выполнена успешно!");
-                    Close();
-                }
+                //try
+                //{
+                //    station_id = factory.GetStationRepository().FindStationIdByLocation(cbStationList.Text);
+                //} catch(Exception) { station_id = -1; }
+                //if (station_id == 0)
+                //{
+                //    station_id = -1;
+                //}
+                //surname = tbSurname.Text;
+                //name = tbName.Text;
+                //if (cbGender.SelectedIndex != -1)
+                //{
+                //    gender = Convert.ToString(cbGender.Text);
+                //}
+                //else gender = String.Empty;
+                //birthdate = Convert.ToDateTime(birthDatePick.Text);
+                //function = tbFunction.Text;
+                //int salary;
+                //bool checkStorageCap = Int32.TryParse(tbSalary.Text, out salary);
+                //if (!checkStorageCap)
+                //{
+                //    salary = -1;
+                //}
+                //Employee wk = new Employee();
+                //wk.workerSet(station_id, surname, name, gender, birthdate, function, salary);
+                //EmployeeController employeeController = new EmployeeController(dgv, factory);
+                //if (employeeController.AddToTable(wk))
+                //{
+                //    MessageBox.Show("Операция выполнена успешно!");
+                //    Close();
+                //}
             }
             catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

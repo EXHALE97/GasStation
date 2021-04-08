@@ -3,7 +3,6 @@ using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Entities;
 using Queries.Factory;
-using Queries.Interfaces;
 
 namespace Admin
 {
@@ -51,29 +50,29 @@ namespace Admin
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            try
-            {
-                surname = tbSurname.Text;
-                name = tbName.Text;
-                function = tbFunction.Text;
-                int salary;
-                bool checkSalary = Int32.TryParse(tbSalary.Text, out salary);
-                if (!checkSalary)
-                {
-                    salary = -1;
-                }
-                Employee wk = new Employee();
-                wk.workerSet(surname, name, function, salary);
-                var cell = dgv[0, dgv.CurrentRow.Index];
-                int id = Convert.ToInt32(cell.Value);
-                EmployeeController employeeController = new EmployeeController(dgv, factory);
-                if (employeeController.UpdateTable(id, wk))
-                {
-                    MessageBox.Show("Операция выполнена успешно!");
-                    Close();
-                }
-            }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            //try
+            //{
+            //    surname = tbSurname.Text;
+            //    name = tbName.Text;
+            //    function = tbFunction.Text;
+            //    int salary;
+            //    bool checkSalary = Int32.TryParse(tbSalary.Text, out salary);
+            //    if (!checkSalary)
+            //    {
+            //        salary = -1;
+            //    }
+            //    Employee wk = new Employee();
+            //    wk.workerSet(surname, name, function, salary);
+            //    var cell = dgv[0, dgv.CurrentRow.Index];
+            //    int id = Convert.ToInt32(cell.Value);
+            //    EmployeeController employeeController = new EmployeeController(dgv, factory);
+            //    if (employeeController.UpdateTable(id, wk))
+            //    {
+            //        MessageBox.Show("Операция выполнена успешно!");
+            //        Close();
+            //    }
+            //}
+            //catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
