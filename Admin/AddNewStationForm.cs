@@ -18,12 +18,12 @@ namespace Admin
             stationController = new Lazy<StationController>(() => new StationController(stationsTable, factory));
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddStationButton_Click(object sender, EventArgs e)
         {
             try
             {
-                if (stationController.Value.AddToTable(new Station(TbStationName.Text, TextBoxCity.Text,
-                    StationValidator.CheckRightStreet(TextBoxAddress.Text), WorkingRadio.Checked)))
+                if (stationController.Value.AddToTable(new Station(StationNameTextBox.Text, CityTextBox.Text,
+                    StationValidator.CheckRightStreet(AddressTextBox.Text), WorkingRadio.Checked)))
                 {
                     SuccessMessageBox.ShowSuccessBox();
                     Close();
@@ -35,25 +35,25 @@ namespace Admin
             }
         }
 
-        private void tbOrgName_KeyPress(object sender, KeyPressEventArgs e)
+        private void StationNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 32 && e.KeyChar != 35 && e.KeyChar != 185)
                 e.Handled = true;
         }
 
-        private void tbCity_KeyPress(object sender, KeyPressEventArgs e)
+        private void CityTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 32)
                 e.Handled = true;
         }
 
-        private void tbStreet_KeyPress(object sender, KeyPressEventArgs e)
+        private void AddressTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 32)
                 e.Handled = true;
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void CancelButton_Click(object sender, EventArgs e)
         {
             Close();
         }

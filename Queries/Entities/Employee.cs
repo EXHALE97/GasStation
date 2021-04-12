@@ -36,5 +36,22 @@ namespace Queries.Entities
             Phone = phone;
             IsWorking = isWorking;
         }
+
+        public Employee(string surName, string name, string middleName, string position,
+            DateTime birthday, DateTime employmentDate, DateTime contractEndDate, double salary,
+            string address, string phone, bool isWorking)
+        {
+            SurName = surName;
+            Name = name;
+            MiddleName = middleName;
+            Position = position;
+            Birthday = birthday;
+            EmploymentDate = employmentDate;
+            ContractEndDate = contractEndDate;
+            Salary = salary;
+            Address = address;
+            Phone = phone;
+            IsWorking = isWorking;
+        }
     }
 }

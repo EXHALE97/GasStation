@@ -28,43 +28,43 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.TbStationName = new System.Windows.Forms.TextBox();
-            this.TextBoxCity = new System.Windows.Forms.TextBox();
-            this.TextBoxAddress = new System.Windows.Forms.TextBox();
+            this.StationNameTextBox = new System.Windows.Forms.TextBox();
+            this.CityTextBox = new System.Windows.Forms.TextBox();
+            this.AddressTextBox = new System.Windows.Forms.TextBox();
             this.StationNameLabel = new System.Windows.Forms.Label();
             this.StationCityLabel = new System.Windows.Forms.Label();
             this.StationAddressLabel = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.AddStationButton = new System.Windows.Forms.Button();
+            this.CancelButton = new System.Windows.Forms.Button();
             this.IsWorkingGroupBox = new System.Windows.Forms.GroupBox();
             this.NotWorkingRadio = new System.Windows.Forms.RadioButton();
             this.WorkingRadio = new System.Windows.Forms.RadioButton();
             this.IsWorkingGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TbStationName
+            // StationNameTextBox
             // 
-            this.TbStationName.Location = new System.Drawing.Point(154, 12);
-            this.TbStationName.Name = "TbStationName";
-            this.TbStationName.Size = new System.Drawing.Size(138, 20);
-            this.TbStationName.TabIndex = 0;
-            this.TbStationName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbOrgName_KeyPress);
+            this.StationNameTextBox.Location = new System.Drawing.Point(154, 12);
+            this.StationNameTextBox.Name = "StationNameTextBox";
+            this.StationNameTextBox.Size = new System.Drawing.Size(138, 20);
+            this.StationNameTextBox.TabIndex = 0;
+            this.StationNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.StationNameTextBox_KeyPress);
             // 
-            // TextBoxCity
+            // CityTextBox
             // 
-            this.TextBoxCity.Location = new System.Drawing.Point(154, 39);
-            this.TextBoxCity.Name = "TextBoxCity";
-            this.TextBoxCity.Size = new System.Drawing.Size(138, 20);
-            this.TextBoxCity.TabIndex = 2;
-            this.TextBoxCity.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbCity_KeyPress);
+            this.CityTextBox.Location = new System.Drawing.Point(154, 39);
+            this.CityTextBox.Name = "CityTextBox";
+            this.CityTextBox.Size = new System.Drawing.Size(138, 20);
+            this.CityTextBox.TabIndex = 2;
+            this.CityTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CityTextBox_KeyPress);
             // 
-            // TextBoxAddress
+            // AddressTextBox
             // 
-            this.TextBoxAddress.Location = new System.Drawing.Point(154, 65);
-            this.TextBoxAddress.Name = "TextBoxAddress";
-            this.TextBoxAddress.Size = new System.Drawing.Size(138, 20);
-            this.TextBoxAddress.TabIndex = 3;
-            this.TextBoxAddress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbStreet_KeyPress);
+            this.AddressTextBox.Location = new System.Drawing.Point(154, 65);
+            this.AddressTextBox.Name = "AddressTextBox";
+            this.AddressTextBox.Size = new System.Drawing.Size(138, 20);
+            this.AddressTextBox.TabIndex = 3;
+            this.AddressTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.AddressTextBox_KeyPress);
             // 
             // StationNameLabel
             // 
@@ -93,25 +93,25 @@
             this.StationAddressLabel.TabIndex = 8;
             this.StationAddressLabel.Text = "Адрес: ";
             // 
-            // btnAdd
+            // AddStationButton
             // 
-            this.btnAdd.Location = new System.Drawing.Point(217, 154);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 10;
-            this.btnAdd.Text = "Добавить";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.AddStationButton.Location = new System.Drawing.Point(217, 154);
+            this.AddStationButton.Name = "AddStationButton";
+            this.AddStationButton.Size = new System.Drawing.Size(75, 23);
+            this.AddStationButton.TabIndex = 10;
+            this.AddStationButton.Text = "Добавить";
+            this.AddStationButton.UseVisualStyleBackColor = true;
+            this.AddStationButton.Click += new System.EventHandler(this.AddStationButton_Click);
             // 
-            // btnCancel
+            // CancelButton
             // 
-            this.btnCancel.Location = new System.Drawing.Point(136, 154);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 11;
-            this.btnCancel.Text = "Отменить";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.CancelButton.Location = new System.Drawing.Point(136, 154);
+            this.CancelButton.Name = "CancelButton";
+            this.CancelButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelButton.TabIndex = 11;
+            this.CancelButton.Text = "Отменить";
+            this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // IsWorkingGroupBox
             // 
@@ -152,14 +152,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 186);
             this.Controls.Add(this.IsWorkingGroupBox);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.AddStationButton);
             this.Controls.Add(this.StationAddressLabel);
             this.Controls.Add(this.StationCityLabel);
             this.Controls.Add(this.StationNameLabel);
-            this.Controls.Add(this.TextBoxAddress);
-            this.Controls.Add(this.TextBoxCity);
-            this.Controls.Add(this.TbStationName);
+            this.Controls.Add(this.AddressTextBox);
+            this.Controls.Add(this.CityTextBox);
+            this.Controls.Add(this.StationNameTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddNewStationForm";
@@ -173,14 +173,14 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox TbStationName;
-        private System.Windows.Forms.TextBox TextBoxCity;
-        private System.Windows.Forms.TextBox TextBoxAddress;
+        private System.Windows.Forms.TextBox StationNameTextBox;
+        private System.Windows.Forms.TextBox CityTextBox;
+        private System.Windows.Forms.TextBox AddressTextBox;
         private System.Windows.Forms.Label StationNameLabel;
         private System.Windows.Forms.Label StationCityLabel;
         private System.Windows.Forms.Label StationAddressLabel;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button AddStationButton;
+        private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.GroupBox IsWorkingGroupBox;
         private System.Windows.Forms.RadioButton NotWorkingRadio;
         private System.Windows.Forms.RadioButton WorkingRadio;

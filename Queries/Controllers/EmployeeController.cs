@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
+using Queries.Support.MessageBox;
 using Queries.Support.Validators;
 
 namespace Queries.Controllers
@@ -12,7 +12,6 @@ namespace Queries.Controllers
     {
         private readonly DataGridView dataGridView;
         private List<string> errorList;
-        private string error;
 
         public EmployeeController(DataGridView dataGridView, IRepositoryFactory factory)
         {
@@ -34,103 +33,53 @@ namespace Queries.Controllers
             });
         }
 
-        public bool AddToTable(Employee wk)
+        public bool AddToTable(Employee employee)
         {
-            bool checkFlag = false;
-            try
+            return DoFormAction(() =>
             {
-                if (EmployeeValidator.CheckAddition(wk, out errorList))
+                if (EmployeeValidator.CheckAddition(employee, out errorList))
                 {
-                    Factory.GetStaffRepository().AddToEmployeeTable(wk);
+                    Factory.GetStaffRepository().AddToEmployeeTable(employee);
+                    return true;
                 }
-                else
-                {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
 
         public bool UpdateTable(int id, Employee wk)
         {
-            bool checkFlag = false;
-            try
+            return DoFormAction(() =>
             {
                 if (EmployeeValidator.CheckUpdate(id, wk, out errorList))
                 {
                     Factory.GetStaffRepository().UpdateEmployeeTable(id, wk);
                 }
-                else
-                {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
 
         public bool DeleteFromTable(int id)
         {
-            bool checkFlag = false;
-            try
+            return DoFormAction(() =>
             {
                 if (!EmployeeValidator.CheckDelete(id, out errorList))
                 {
                     Factory.GetStaffRepository().DeleteFromEmployeeTable(id);
                 }
-                else
-                {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
     }
 }

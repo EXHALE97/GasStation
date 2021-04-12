@@ -53,6 +53,7 @@ namespace Admin
             this.carmark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cardnum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabStaffTable = new System.Windows.Forms.TabPage();
+            this.OnlyWorkingEmployeeCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.AddNewEmployee = new System.Windows.Forms.Button();
             this.RefreshEmployeeTable = new System.Windows.Forms.Button();
@@ -60,6 +61,19 @@ namespace Admin
             this.UpdateEmployeeButton = new System.Windows.Forms.Button();
             this.DeleteEmployeeButton = new System.Windows.Forms.Button();
             this.EmployeeTable = new System.Windows.Forms.DataGridView();
+            this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeConnectedCreds = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeContractEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeePhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeIsWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAdmin = new System.Windows.Forms.TabControl();
             this.tabStationTable = new System.Windows.Forms.TabPage();
             this.OnlyWorkingStationsCheckBox = new System.Windows.Forms.CheckBox();
@@ -69,6 +83,11 @@ namespace Admin
             this.RefreshStationTableButton = new System.Windows.Forms.Button();
             this.AddNewStationButton = new System.Windows.Forms.Button();
             this.StationsTable = new System.Windows.Forms.DataGridView();
+            this.StationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsStationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabDealTable = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.cbDealFilterByStation = new System.Windows.Forms.ComboBox();
@@ -102,25 +121,6 @@ namespace Admin
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
-            this.OnlyWorkingEmployeeCheckBox = new System.Windows.Forms.CheckBox();
-            this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeConnectedCreds = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeContractEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeePhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeIsWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StationAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsStationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -359,6 +359,17 @@ namespace Admin
             this.tabStaffTable.Text = "Список сотрудников";
             this.tabStaffTable.UseVisualStyleBackColor = true;
             // 
+            // OnlyWorkingEmployeeCheckBox
+            // 
+            this.OnlyWorkingEmployeeCheckBox.AutoSize = true;
+            this.OnlyWorkingEmployeeCheckBox.Location = new System.Drawing.Point(584, 423);
+            this.OnlyWorkingEmployeeCheckBox.Name = "OnlyWorkingEmployeeCheckBox";
+            this.OnlyWorkingEmployeeCheckBox.Size = new System.Drawing.Size(191, 17);
+            this.OnlyWorkingEmployeeCheckBox.TabIndex = 6;
+            this.OnlyWorkingEmployeeCheckBox.Text = "Только работающие сотрудники";
+            this.OnlyWorkingEmployeeCheckBox.UseVisualStyleBackColor = true;
+            this.OnlyWorkingEmployeeCheckBox.CheckedChanged += new System.EventHandler(this.OnlyWorkingEmployeeCheckBox_CheckedChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.AddNewEmployee);
@@ -381,7 +392,7 @@ namespace Admin
             this.AddNewEmployee.TabIndex = 3;
             this.AddNewEmployee.Text = "Добавить нового сотрудника";
             this.AddNewEmployee.UseVisualStyleBackColor = true;
-            this.AddNewEmployee.Click += new System.EventHandler(this.btnAdd_Click);
+            this.AddNewEmployee.Click += new System.EventHandler(this.AddNewEmployee_Click);
             // 
             // RefreshEmployeeTable
             // 
@@ -391,7 +402,7 @@ namespace Admin
             this.RefreshEmployeeTable.TabIndex = 1;
             this.RefreshEmployeeTable.Text = "Обновить список персонала";
             this.RefreshEmployeeTable.UseVisualStyleBackColor = true;
-            this.RefreshEmployeeTable.Click += new System.EventHandler(this.btnTableView_Click);
+            this.RefreshEmployeeTable.Click += new System.EventHandler(this.RefreshEmployeeTable_Click);
             // 
             // GiveAdminAccessButton
             // 
@@ -401,7 +412,7 @@ namespace Admin
             this.GiveAdminAccessButton.TabIndex = 4;
             this.GiveAdminAccessButton.Text = "Дать выбранному сотруднику права доступа к системе учета";
             this.GiveAdminAccessButton.UseVisualStyleBackColor = true;
-            this.GiveAdminAccessButton.Click += new System.EventHandler(this.btnRegister_Click);
+            this.GiveAdminAccessButton.Click += new System.EventHandler(this.GiveAdminAccessButton_Click);
             // 
             // UpdateEmployeeButton
             // 
@@ -411,7 +422,7 @@ namespace Admin
             this.UpdateEmployeeButton.TabIndex = 2;
             this.UpdateEmployeeButton.Text = "Править личные данные сотрудника";
             this.UpdateEmployeeButton.UseVisualStyleBackColor = true;
-            this.UpdateEmployeeButton.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.UpdateEmployeeButton.Click += new System.EventHandler(this.UpdateEmployeeButton_Click);
             // 
             // DeleteEmployeeButton
             // 
@@ -421,7 +432,7 @@ namespace Admin
             this.DeleteEmployeeButton.TabIndex = 3;
             this.DeleteEmployeeButton.Text = " Уволить выбранного сотрудника";
             this.DeleteEmployeeButton.UseVisualStyleBackColor = true;
-            this.DeleteEmployeeButton.Click += new System.EventHandler(this.btnDelete_Click);
+            this.DeleteEmployeeButton.Click += new System.EventHandler(this.DeleteEmployeeButton_Click);
             // 
             // EmployeeTable
             // 
@@ -446,6 +457,86 @@ namespace Admin
             this.EmployeeTable.Name = "EmployeeTable";
             this.EmployeeTable.Size = new System.Drawing.Size(530, 459);
             this.EmployeeTable.TabIndex = 0;
+            // 
+            // EmployeeId
+            // 
+            this.EmployeeId.HeaderText = "ID";
+            this.EmployeeId.Name = "EmployeeId";
+            this.EmployeeId.ReadOnly = true;
+            this.EmployeeId.Width = 40;
+            // 
+            // EmployeeConnectedCreds
+            // 
+            this.EmployeeConnectedCreds.HeaderText = "Креды";
+            this.EmployeeConnectedCreds.Name = "EmployeeConnectedCreds";
+            this.EmployeeConnectedCreds.ReadOnly = true;
+            // 
+            // EmployeeSurname
+            // 
+            this.EmployeeSurname.HeaderText = "Фамилия";
+            this.EmployeeSurname.Name = "EmployeeSurname";
+            this.EmployeeSurname.ReadOnly = true;
+            // 
+            // EmployeeName
+            // 
+            this.EmployeeName.HeaderText = "Имя";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            // 
+            // EmployeeLastName
+            // 
+            this.EmployeeLastName.HeaderText = "Отчество";
+            this.EmployeeLastName.Name = "EmployeeLastName";
+            this.EmployeeLastName.ReadOnly = true;
+            // 
+            // EmployeeBirthday
+            // 
+            this.EmployeeBirthday.HeaderText = "Дата рождения";
+            this.EmployeeBirthday.Name = "EmployeeBirthday";
+            this.EmployeeBirthday.ReadOnly = true;
+            // 
+            // EmploymentDate
+            // 
+            this.EmploymentDate.HeaderText = "Дата найма";
+            this.EmploymentDate.Name = "EmploymentDate";
+            this.EmploymentDate.ReadOnly = true;
+            // 
+            // EmployeeContractEnd
+            // 
+            this.EmployeeContractEnd.HeaderText = "Дата окончания контакта";
+            this.EmployeeContractEnd.Name = "EmployeeContractEnd";
+            this.EmployeeContractEnd.ReadOnly = true;
+            // 
+            // EmployeePosition
+            // 
+            this.EmployeePosition.HeaderText = "Должность";
+            this.EmployeePosition.Name = "EmployeePosition";
+            this.EmployeePosition.ReadOnly = true;
+            // 
+            // EmployeeSalary
+            // 
+            this.EmployeeSalary.HeaderText = "Зарплата";
+            this.EmployeeSalary.Name = "EmployeeSalary";
+            this.EmployeeSalary.ReadOnly = true;
+            this.EmployeeSalary.Width = 80;
+            // 
+            // EmployeeAddress
+            // 
+            this.EmployeeAddress.HeaderText = "Адрес";
+            this.EmployeeAddress.Name = "EmployeeAddress";
+            this.EmployeeAddress.ReadOnly = true;
+            // 
+            // EmployeePhone
+            // 
+            this.EmployeePhone.HeaderText = "Телефон";
+            this.EmployeePhone.Name = "EmployeePhone";
+            this.EmployeePhone.ReadOnly = true;
+            // 
+            // EmployeeIsWorking
+            // 
+            this.EmployeeIsWorking.HeaderText = "Работает";
+            this.EmployeeIsWorking.Name = "EmployeeIsWorking";
+            this.EmployeeIsWorking.ReadOnly = true;
             // 
             // tabAdmin
             // 
@@ -552,6 +643,36 @@ namespace Admin
             this.StationsTable.Name = "StationsTable";
             this.StationsTable.Size = new System.Drawing.Size(545, 456);
             this.StationsTable.TabIndex = 1;
+            // 
+            // StationId
+            // 
+            this.StationId.HeaderText = "ID";
+            this.StationId.Name = "StationId";
+            this.StationId.ReadOnly = true;
+            // 
+            // StationName
+            // 
+            this.StationName.HeaderText = "Название";
+            this.StationName.Name = "StationName";
+            this.StationName.ReadOnly = true;
+            // 
+            // StationCity
+            // 
+            this.StationCity.HeaderText = "Город";
+            this.StationCity.Name = "StationCity";
+            this.StationCity.ReadOnly = true;
+            // 
+            // StationAddress
+            // 
+            this.StationAddress.HeaderText = "Адрес";
+            this.StationAddress.Name = "StationAddress";
+            this.StationAddress.ReadOnly = true;
+            // 
+            // IsStationWorking
+            // 
+            this.IsStationWorking.HeaderText = "Работает";
+            this.IsStationWorking.Name = "IsStationWorking";
+            this.IsStationWorking.ReadOnly = true;
             // 
             // tabDealTable
             // 
@@ -836,126 +957,6 @@ namespace Admin
             this.lbSessionName.Size = new System.Drawing.Size(78, 13);
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
-            // 
-            // OnlyWorkingEmployeeCheckBox
-            // 
-            this.OnlyWorkingEmployeeCheckBox.AutoSize = true;
-            this.OnlyWorkingEmployeeCheckBox.Location = new System.Drawing.Point(584, 423);
-            this.OnlyWorkingEmployeeCheckBox.Name = "OnlyWorkingEmployeeCheckBox";
-            this.OnlyWorkingEmployeeCheckBox.Size = new System.Drawing.Size(191, 17);
-            this.OnlyWorkingEmployeeCheckBox.TabIndex = 6;
-            this.OnlyWorkingEmployeeCheckBox.Text = "Только работающие сотрудники";
-            this.OnlyWorkingEmployeeCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // EmployeeId
-            // 
-            this.EmployeeId.HeaderText = "ID";
-            this.EmployeeId.Name = "EmployeeId";
-            this.EmployeeId.ReadOnly = true;
-            this.EmployeeId.Width = 40;
-            // 
-            // EmployeeConnectedCreds
-            // 
-            this.EmployeeConnectedCreds.HeaderText = "Креды";
-            this.EmployeeConnectedCreds.Name = "EmployeeConnectedCreds";
-            this.EmployeeConnectedCreds.ReadOnly = true;
-            // 
-            // EmployeeSurname
-            // 
-            this.EmployeeSurname.HeaderText = "Фамилия";
-            this.EmployeeSurname.Name = "EmployeeSurname";
-            this.EmployeeSurname.ReadOnly = true;
-            // 
-            // EmployeeName
-            // 
-            this.EmployeeName.HeaderText = "Имя";
-            this.EmployeeName.Name = "EmployeeName";
-            this.EmployeeName.ReadOnly = true;
-            // 
-            // EmployeeLastName
-            // 
-            this.EmployeeLastName.HeaderText = "Отчество";
-            this.EmployeeLastName.Name = "EmployeeLastName";
-            this.EmployeeLastName.ReadOnly = true;
-            // 
-            // EmployeeBirthday
-            // 
-            this.EmployeeBirthday.HeaderText = "Дата рождения";
-            this.EmployeeBirthday.Name = "EmployeeBirthday";
-            this.EmployeeBirthday.ReadOnly = true;
-            // 
-            // EmploymentDate
-            // 
-            this.EmploymentDate.HeaderText = "Дата найма";
-            this.EmploymentDate.Name = "EmploymentDate";
-            this.EmploymentDate.ReadOnly = true;
-            // 
-            // EmployeeContractEnd
-            // 
-            this.EmployeeContractEnd.HeaderText = "Дата окончания контакта";
-            this.EmployeeContractEnd.Name = "EmployeeContractEnd";
-            this.EmployeeContractEnd.ReadOnly = true;
-            // 
-            // EmployeePosition
-            // 
-            this.EmployeePosition.HeaderText = "Должность";
-            this.EmployeePosition.Name = "EmployeePosition";
-            this.EmployeePosition.ReadOnly = true;
-            // 
-            // EmployeeSalary
-            // 
-            this.EmployeeSalary.HeaderText = "Зарплата";
-            this.EmployeeSalary.Name = "EmployeeSalary";
-            this.EmployeeSalary.ReadOnly = true;
-            this.EmployeeSalary.Width = 80;
-            // 
-            // EmployeeAddress
-            // 
-            this.EmployeeAddress.HeaderText = "Адрес";
-            this.EmployeeAddress.Name = "EmployeeAddress";
-            this.EmployeeAddress.ReadOnly = true;
-            // 
-            // EmployeePhone
-            // 
-            this.EmployeePhone.HeaderText = "Телефон";
-            this.EmployeePhone.Name = "EmployeePhone";
-            this.EmployeePhone.ReadOnly = true;
-            // 
-            // EmployeeIsWorking
-            // 
-            this.EmployeeIsWorking.HeaderText = "Работает";
-            this.EmployeeIsWorking.Name = "EmployeeIsWorking";
-            this.EmployeeIsWorking.ReadOnly = true;
-            // 
-            // StationId
-            // 
-            this.StationId.HeaderText = "ID";
-            this.StationId.Name = "StationId";
-            this.StationId.ReadOnly = true;
-            // 
-            // StationName
-            // 
-            this.StationName.HeaderText = "Название";
-            this.StationName.Name = "StationName";
-            this.StationName.ReadOnly = true;
-            // 
-            // StationCity
-            // 
-            this.StationCity.HeaderText = "Город";
-            this.StationCity.Name = "StationCity";
-            this.StationCity.ReadOnly = true;
-            // 
-            // StationAddress
-            // 
-            this.StationAddress.HeaderText = "Адрес";
-            this.StationAddress.Name = "StationAddress";
-            this.StationAddress.ReadOnly = true;
-            // 
-            // IsStationWorking
-            // 
-            this.IsStationWorking.HeaderText = "Работает";
-            this.IsStationWorking.Name = "IsStationWorking";
-            this.IsStationWorking.ReadOnly = true;
             // 
             // AdminForm
             // 

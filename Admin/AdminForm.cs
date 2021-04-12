@@ -49,24 +49,24 @@ namespace Admin
             //supplyComboBox.СbStationListFill();
         }
 
-        private void btnTableView_Click(object sender, EventArgs e)
+        private void RefreshEmployeeTable_Click(object sender, EventArgs e)
         {
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void UpdateEmployeeButton_Click(object sender, EventArgs e)
         {
             new UpdateStaffTableForm(EmployeeTable.CurrentRow, factory, EmployeeTable).ShowDialog();
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddNewEmployee_Click(object sender, EventArgs e)
         {
-            new AddToStaffTableForm(factory, EmployeeTable).ShowDialog();
+            new AddNewEmployeeForm(factory, EmployeeTable).ShowDialog();
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
-        private void btnDelete_Click(object sender, EventArgs e)
+        private void DeleteEmployeeButton_Click(object sender, EventArgs e)
         {
             try
             {
@@ -124,7 +124,7 @@ namespace Admin
             new AddNewAdminForm(factory).ShowDialog();
         }
 
-        private void btnRegister_Click(object sender, EventArgs e)
+        private void GiveAdminAccessButton_Click(object sender, EventArgs e)
         {
             new AddWorkerToLoginTableForm(EmployeeTable.CurrentRow, factory).ShowDialog();
         }
@@ -197,6 +197,11 @@ namespace Admin
         private void OnlyWorkingStationsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             stationController.ShowTable(((CheckBox)sender).Checked);
+        }
+
+        private void OnlyWorkingEmployeeCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            employeeController.ShowTable(((CheckBox)sender).Checked);
         }
     }
 }

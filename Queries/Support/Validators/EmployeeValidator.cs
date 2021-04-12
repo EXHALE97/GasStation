@@ -6,39 +6,62 @@ namespace Queries.Support.Validators
 {
     public static class EmployeeValidator
     {
-        public static bool CheckAddition(Employee wk, out List<string> errorList)
+        public static bool CheckAddition(Employee employee, out List<string> errorList)
         {
             errorList = new List<string>();
-            bool checkFlag = true;
-            if (wk.Id <= 0)
-            {
-                checkFlag = false;
-                errorList.Add("Станция не выбрана!");
-            }
-            if (wk.SurName == String.Empty)
+            var checkFlag = true;
+            if (employee.SurName == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Фамилия не задана!");
             }
-            if (wk.Name == String.Empty)
+            if (employee.Name == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Имя не задано!");
             }
-            if (wk.Birthday.Year > 2000 || wk.Birthday.Year < 1955)
+            if (employee.Birthday.Year > 2003 || employee.Birthday.Year < 1955)
             {
                 checkFlag = false;
                 errorList.Add("Возраст указан неверно!");
             }
-            if (wk.Position == String.Empty)
+            if (employee.EmploymentDate.Year < employee.Birthday.Year + 18)
+            {
+                checkFlag = false;
+                errorList.Add("Дата найма указана неверно!");
+            }
+            if (employee.Position == string.Empty)
             {
                 checkFlag = false;
                 errorList.Add("Должность не задана!");
             }
-            if (wk.Salary < 500)
+            if (employee.Address == string.Empty)
             {
                 checkFlag = false;
-                errorList.Add("Зарплата не может быть дробным числом или быть меньше 500 у.е!");
+                errorList.Add("Адрес не задан!");
+            }
+            if (employee.Salary < 500)
+            {
+                checkFlag = false;
+                errorList.Add("Зарплата не может быть меньше 500 рублей!");
+            }
+            if (employee.ContractEndDate.Year < employee.EmploymentDate.Year)
+            {
+                checkFlag = false;
+                errorList.Add("Дата окончания контракта указана неверно!");
+            }
+            else if (employee.ContractEndDate.Year == employee.EmploymentDate.Year && 
+                     employee.ContractEndDate.Month < employee.EmploymentDate.Month)
+            {
+                checkFlag = false;
+                errorList.Add("Дата окончания контракта указана неверно!");
+            }
+            else if (employee.ContractEndDate.Year == employee.EmploymentDate.Year && 
+                     employee.ContractEndDate.Month == employee.EmploymentDate.Month && 
+                     employee.ContractEndDate.Day <= employee.EmploymentDate.Day)
+            {
+                checkFlag = false;
+                errorList.Add("Дата окончания контракта указана неверно!");
             }
 
             return checkFlag;
