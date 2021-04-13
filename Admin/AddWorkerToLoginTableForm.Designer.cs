@@ -28,81 +28,101 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbPass = new System.Windows.Forms.TextBox();
-            this.lbName = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.checkPass = new System.Windows.Forms.CheckBox();
+            this.UserPasswordTextBox = new System.Windows.Forms.TextBox();
+            this.NameLabel = new System.Windows.Forms.Label();
+            this.UserPasswordLabel = new System.Windows.Forms.Label();
+            this.OkButton = new System.Windows.Forms.Button();
+            this.CancelActionButton = new System.Windows.Forms.Button();
+            this.ShowPasswordCheckBox = new System.Windows.Forms.CheckBox();
+            this.UserLoginTextBox = new System.Windows.Forms.TextBox();
+            this.UserLoginLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // tbPass
+            // UserPasswordTextBox
             // 
-            this.tbPass.Location = new System.Drawing.Point(135, 39);
-            this.tbPass.Name = "tbPass";
-            this.tbPass.Size = new System.Drawing.Size(117, 20);
-            this.tbPass.TabIndex = 0;
+            this.UserPasswordTextBox.Location = new System.Drawing.Point(96, 56);
+            this.UserPasswordTextBox.Name = "UserPasswordTextBox";
+            this.UserPasswordTextBox.Size = new System.Drawing.Size(156, 20);
+            this.UserPasswordTextBox.TabIndex = 0;
             // 
-            // lbName
+            // NameLabel
             // 
-            this.lbName.AutoSize = true;
-            this.lbName.Location = new System.Drawing.Point(93, 9);
-            this.lbName.Name = "lbName";
-            this.lbName.Size = new System.Drawing.Size(16, 13);
-            this.lbName.TabIndex = 1;
-            this.lbName.Text = "---";
+            this.NameLabel.AutoSize = true;
+            this.NameLabel.Location = new System.Drawing.Point(93, 9);
+            this.NameLabel.Name = "NameLabel";
+            this.NameLabel.Size = new System.Drawing.Size(16, 13);
+            this.NameLabel.TabIndex = 1;
+            this.NameLabel.Text = "---";
             // 
-            // label2
+            // UserPasswordLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Пароль:";
+            this.UserPasswordLabel.AutoSize = true;
+            this.UserPasswordLabel.Location = new System.Drawing.Point(12, 59);
+            this.UserPasswordLabel.Name = "UserPasswordLabel";
+            this.UserPasswordLabel.Size = new System.Drawing.Size(48, 13);
+            this.UserPasswordLabel.TabIndex = 2;
+            this.UserPasswordLabel.Text = "Пароль:";
             // 
-            // btnAdd
+            // OkButton
             // 
-            this.btnAdd.Location = new System.Drawing.Point(177, 88);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 3;
-            this.btnAdd.Text = "Ок";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.OkButton.Location = new System.Drawing.Point(177, 105);
+            this.OkButton.Name = "OkButton";
+            this.OkButton.Size = new System.Drawing.Size(75, 23);
+            this.OkButton.TabIndex = 3;
+            this.OkButton.Text = "ОК";
+            this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // btnCancel
+            // CancelActionButton
             // 
-            this.btnCancel.Location = new System.Drawing.Point(96, 88);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 4;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.CancelActionButton.Location = new System.Drawing.Point(96, 105);
+            this.CancelActionButton.Name = "CancelActionButton";
+            this.CancelActionButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelActionButton.TabIndex = 4;
+            this.CancelActionButton.Text = "Отмена";
+            this.CancelActionButton.UseVisualStyleBackColor = true;
+            this.CancelActionButton.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // checkPass
+            // ShowPasswordCheckBox
             // 
-            this.checkPass.AutoSize = true;
-            this.checkPass.Location = new System.Drawing.Point(135, 65);
-            this.checkPass.Name = "checkPass";
-            this.checkPass.Size = new System.Drawing.Size(114, 17);
-            this.checkPass.TabIndex = 5;
-            this.checkPass.Text = "Показать пароль";
-            this.checkPass.UseVisualStyleBackColor = true;
-            this.checkPass.CheckedChanged += new System.EventHandler(this.checkPass_CheckedChanged);
+            this.ShowPasswordCheckBox.AutoSize = true;
+            this.ShowPasswordCheckBox.Location = new System.Drawing.Point(135, 82);
+            this.ShowPasswordCheckBox.Name = "ShowPasswordCheckBox";
+            this.ShowPasswordCheckBox.Size = new System.Drawing.Size(114, 17);
+            this.ShowPasswordCheckBox.TabIndex = 5;
+            this.ShowPasswordCheckBox.Text = "Показать пароль";
+            this.ShowPasswordCheckBox.UseVisualStyleBackColor = true;
+            this.ShowPasswordCheckBox.CheckedChanged += new System.EventHandler(this.checkPass_CheckedChanged);
+            // 
+            // UserLoginTextBox
+            // 
+            this.UserLoginTextBox.Location = new System.Drawing.Point(96, 30);
+            this.UserLoginTextBox.Name = "UserLoginTextBox";
+            this.UserLoginTextBox.Size = new System.Drawing.Size(156, 20);
+            this.UserLoginTextBox.TabIndex = 6;
+            // 
+            // UserLoginLabel
+            // 
+            this.UserLoginLabel.AutoSize = true;
+            this.UserLoginLabel.Location = new System.Drawing.Point(12, 33);
+            this.UserLoginLabel.Name = "UserLoginLabel";
+            this.UserLoginLabel.Size = new System.Drawing.Size(41, 13);
+            this.UserLoginLabel.TabIndex = 7;
+            this.UserLoginLabel.Text = "Логин:";
             // 
             // AddWorkerToLoginTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(264, 126);
-            this.Controls.Add(this.checkPass);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.lbName);
-            this.Controls.Add(this.tbPass);
+            this.ClientSize = new System.Drawing.Size(264, 140);
+            this.Controls.Add(this.UserLoginLabel);
+            this.Controls.Add(this.UserLoginTextBox);
+            this.Controls.Add(this.ShowPasswordCheckBox);
+            this.Controls.Add(this.CancelActionButton);
+            this.Controls.Add(this.OkButton);
+            this.Controls.Add(this.UserPasswordLabel);
+            this.Controls.Add(this.NameLabel);
+            this.Controls.Add(this.UserPasswordTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddWorkerToLoginTableForm";
@@ -115,11 +135,13 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbPass;
-        private System.Windows.Forms.Label lbName;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.CheckBox checkPass;
+        private System.Windows.Forms.TextBox UserPasswordTextBox;
+        private System.Windows.Forms.Label NameLabel;
+        private System.Windows.Forms.Label UserPasswordLabel;
+        private System.Windows.Forms.Button OkButton;
+        private System.Windows.Forms.Button CancelActionButton;
+        private System.Windows.Forms.CheckBox ShowPasswordCheckBox;
+        private System.Windows.Forms.TextBox UserLoginTextBox;
+        private System.Windows.Forms.Label UserLoginLabel;
     }
 }

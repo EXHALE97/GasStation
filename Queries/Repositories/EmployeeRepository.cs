@@ -113,32 +113,17 @@ namespace Queries.Repositories
 
         public string FindEmployeeById(int id)
         {
-            string SName = String.Empty, name, surname;
-            try
+            return ExecuteSqlCommand($"SELECT dbo.GetEmployeeFullName({id})", queryResult =>
             {
-                SqlDataReader AZSTableReader = null;
-                DataBaseConnection.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT surname, name FROM \"AZS\".\"Staff\" WHERE staff_id = @Staff_id ");
-                queryCommand.Parameters.AddWithValue("@Staff_id", id);
-                AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
+                var fullName = string.Empty;
+                if (!queryResult.HasRows) return fullName;
+                foreach (DbDataRecord dbDataRecord in queryResult)
                 {
-                    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                    {
-                        surname = dbDataRecord["surname"].ToString().Replace(" ", string.Empty);
-                        name = dbDataRecord["name"].ToString().Replace(" ", string.Empty);
-                        SName = surname + " " + name;
-                    }               
+                    fullName = dbDataRecord[0].ToString();
                 }
-                AZSTableReader.Close();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { DataBaseConnection.CloseConnection(); }
 
-            return SName;
+                return fullName;
+            });
         }
     }
 }

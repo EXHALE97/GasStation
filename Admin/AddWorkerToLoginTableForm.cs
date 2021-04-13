@@ -4,35 +4,36 @@ using Queries.Controllers;
 using Queries.Interfaces;
 using Queries.Entities;
 using Queries.Factory;
+using Queries.Support.MessageBox;
 
 namespace Admin
 {
     public partial class AddWorkerToLoginTableForm : Form
     {
-        private DataGridViewRow row;
-        private IRepositoryFactory factory;
+        private readonly DataGridViewRow selectedRow;
+        private readonly IRepositoryFactory factory;
 
-        public AddWorkerToLoginTableForm(DataGridViewRow row, IRepositoryFactory factory)
+        public AddWorkerToLoginTableForm(DataGridViewRow selectedRow, IRepositoryFactory factory)
         {
             InitializeComponent();
-            this.row = row;
+            this.selectedRow = selectedRow;
             this.factory = factory;
         }
 
         private void AddToLoginTableForm_Load(object sender, EventArgs e)
         {
-            if (!factory.GetCredentialsRepository().IsThereCurrentCredentialsInTable(row.Cells["staff_id"].Value.ToString().Trim().Replace(" ", string.Empty)))
+            if (selectedRow.Cells["EmployeeConnectedCreds"].Value.ToString() == "-")
             {
                 try
                 {
-                    tbPass.UseSystemPasswordChar = true;
-                    lbName.Text = factory.GetEmployeeRepository().FindEmployeeById(Convert.ToInt32(row.Cells["staff_id"].Value));
+                    UserPasswordTextBox.UseSystemPasswordChar = true;
+                    NameLabel.Text = factory.GetEmployeeRepository().FindEmployeeById(Convert.ToInt32(selectedRow.Cells["EmployeeId"].Value));
                 }
-                catch (Exception) { }
+                catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
             }
             else
             {
-                MessageBox.Show("Этому работнику уже был выдан пароль!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessageBox.ShowCustomErrorMessage("Этому работнику уже был выдан пароль!");
                 Close();
             }
         }
@@ -47,8 +48,8 @@ namespace Admin
             var passWord = string.Empty;
             try
             {
-                passWord = tbPass.Text.ToString();
-                var nWorker = new Credentials(row.Cells["staff_id"].Value.ToString(), passWord.ToString(), "worker");
+                passWord = UserPasswordTextBox.Text.ToString();
+                var nWorker = new Credentials(selectedRow.Cells["staff_id"].Value.ToString(), passWord.ToString(), "worker");
                 var loginController = new LoginController(factory);
                 if (loginController.AddToLoginTable(nWorker))
                 {
@@ -61,7 +62,7 @@ namespace Admin
 
         private void checkPass_CheckedChanged(object sender, EventArgs e)
         {
-            tbPass.UseSystemPasswordChar = !checkPass.Checked;
+            UserPasswordTextBox.UseSystemPasswordChar = !ShowPasswordCheckBox.Checked;
         }
     }
 }
