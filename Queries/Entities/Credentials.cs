@@ -2,21 +2,30 @@
 {
     public class Credentials
     {
-        public string login { get; }
-        public string password { get; }
-        public string role { get; }
+        public int Id { get; }
+        public string Login { get; }
+        public string Password { get; }
+        public string Role { get; }
+
+        public Credentials(int id, string login, string password, string role)
+        {
+            Id = id;
+            Login = login;
+            Password = password;
+            Role = role;
+        }
 
         public Credentials(string login, string password, string role)
         {
-            this.login = login;
-            this.password = password;
-            this.role = role;
+            Login = login;
+            Password = password;
+            Role = role;
         }
 
         public Credentials(string login, string password)
         {
-            this.login = login;
-            this.password = password;
+            Login = login;
+            Password = password;
         }
     }
 }

@@ -21,12 +21,12 @@ namespace Admin
 
         private void AddToLoginTableForm_Load(object sender, EventArgs e)
         {
-            if (!factory.GetLoginRepository().IsThereCurrentCredentialsInTable(row.Cells["staff_id"].Value.ToString().Trim().Replace(" ", string.Empty)))
+            if (!factory.GetCredentialsRepository().IsThereCurrentCredentialsInTable(row.Cells["staff_id"].Value.ToString().Trim().Replace(" ", string.Empty)))
             {
                 try
                 {
                     tbPass.UseSystemPasswordChar = true;
-                    lbName.Text = factory.GetStaffRepository().FindEmployeeById(Convert.ToInt32(row.Cells["staff_id"].Value));
+                    lbName.Text = factory.GetEmployeeRepository().FindEmployeeById(Convert.ToInt32(row.Cells["staff_id"].Value));
                 }
                 catch (Exception) { }
             }

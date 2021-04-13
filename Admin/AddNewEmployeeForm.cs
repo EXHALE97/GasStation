@@ -22,7 +22,7 @@ namespace Admin
             {
                 if (employeeController.Value.AddToTable(new Employee(EmployeeSurnameTextBox.Text, EmployeeNameTextBox.Text, EmployeeMiddleNameTextBox.Text,
                     EmployeePositionTextBox.Text, EmployeeBirthDatePicker.Value, EmploymentDatePicker.Value, ContractEndDatePicker.Value,
-                    double.Parse(EmployeeSalaryTextBox.Text), EmployeeAddressTextBox.Text, EmployeePhoneTextBox.Text, WorkingChechBox.Checked)))
+                    double.Parse(EmployeeSalaryTextBox.Text), EmployeeAddressTextBox.Text, EmployeePhoneTextBox.Text, WorkingRadio.Checked)))
                 {
                     MessageBox.Show("Операция выполнена успешно!");
                     Close();
@@ -61,26 +61,37 @@ namespace Admin
             HandleOnlyNumbersAndPlus(e);
         }
 
-        private void CancelButton_Click(object sender, EventArgs e)
+        private void EmployeeAddressTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleLettersAndSpace(e);
+        }
+
+        private void CancelAddingButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        private void HandleLettersAndSpace(KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 32 && e.KeyChar != 8)
+                e.Handled = true;
+        }
+
         private void HandleOnlyLetters(KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
         }
 
         private void HandleOnlyNumbersAndPlus(KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 43 && e.KeyChar != 8)
                 e.Handled = true;
         }
 
         private void HandleOnlyNumbersAndDot(KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 46)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 46 && e.KeyChar != 8)
                 e.Handled = true;
         }
     }

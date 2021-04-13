@@ -107,11 +107,11 @@
     <Compile Include="UpdateDealTableForm.Designer.cs">
       <DependentUpon>UpdateDealTableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UpdateStaffTableForm.cs">
+    <Compile Include="UpdateEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UpdateStaffTableForm.Designer.cs">
-      <DependentUpon>UpdateStaffTableForm.cs</DependentUpon>
+    <Compile Include="UpdateEmployeeForm.Designer.cs">
+      <DependentUpon>UpdateEmployeeForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="AddNewAdminForm.resx">
       <DependentUpon>AddNewAdminForm.cs</DependentUpon>
@@ -150,8 +150,8 @@
     <EmbeddedResource Include="UpdateDealTableForm.resx">
       <DependentUpon>UpdateDealTableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UpdateStaffTableForm.resx">
-      <DependentUpon>UpdateStaffTableForm.cs</DependentUpon>
+    <EmbeddedResource Include="UpdateEmployeeForm.resx">
+      <DependentUpon>UpdateEmployeeForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

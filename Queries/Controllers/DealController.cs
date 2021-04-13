@@ -61,8 +61,8 @@ namespace Queries.Controllers
                 foreach (Deal deal in dgvElements)
                 {
                     //string cardnum = factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()); 
-                    //dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
-                    //    factory.GetStaffRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
+                    //dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                    //    factory.GetEmployeeRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
                     //    deal.GetDealPrice(), cardnum, deal.GetDealDate());
                 }
             }
@@ -114,7 +114,7 @@ namespace Queries.Controllers
             try
             {
                 //List<int> IDs = new List<int>();
-                //IDs = factory.GetStaffRepository().FindStaffIDByStationID(station_id);
+                //IDs = factory.GetEmployeeRepository().FindStaffIDByStationID(station_id);
                 //dgv.Rows.Clear();
                 //if (IDs.Count != 0)
                 //{
@@ -124,8 +124,8 @@ namespace Queries.Controllers
                 //        stationDealList = factory.GetDealRepository().ShowWorkerDealTable(id);
                 //        foreach (Deal deal in stationDealList)
                 //        {
-                //            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetStaffRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
-                //                factory.GetStaffRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
+                //            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                //                factory.GetEmployeeRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
                 //                deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
                 //        }
                 //    }

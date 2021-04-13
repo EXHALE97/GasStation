@@ -56,7 +56,7 @@ namespace Admin
 
         private void UpdateEmployeeButton_Click(object sender, EventArgs e)
         {
-            new UpdateStaffTableForm(EmployeeTable.CurrentRow, factory, EmployeeTable).ShowDialog();
+            new UpdateEmployeeForm(EmployeeTable.CurrentRow, factory, EmployeeTable).ShowDialog();
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
         }
 
@@ -74,7 +74,7 @@ namespace Admin
                 int id = Convert.ToInt32(cell.Value);
                 if (employeeController.DeleteFromTable(id))
                 {
-                    factory.GetLoginRepository().DeleteStaffFromLoginTable(id.ToString());
+                    factory.GetCredentialsRepository().DeleteStaffFromLoginTable(id.ToString());
                     MessageBox.Show("Операция выполнена успешно!");
                 }
                 employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);

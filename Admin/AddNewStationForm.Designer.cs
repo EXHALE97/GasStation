@@ -35,7 +35,7 @@
             this.StationCityLabel = new System.Windows.Forms.Label();
             this.StationAddressLabel = new System.Windows.Forms.Label();
             this.AddStationButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.CancelAddingButton = new System.Windows.Forms.Button();
             this.IsWorkingGroupBox = new System.Windows.Forms.GroupBox();
             this.NotWorkingRadio = new System.Windows.Forms.RadioButton();
             this.WorkingRadio = new System.Windows.Forms.RadioButton();
@@ -103,15 +103,15 @@
             this.AddStationButton.UseVisualStyleBackColor = true;
             this.AddStationButton.Click += new System.EventHandler(this.AddStationButton_Click);
             // 
-            // CancelButton
+            // CancelAddingButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(136, 154);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 11;
-            this.CancelButton.Text = "Отменить";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CancelAddingButton.Location = new System.Drawing.Point(136, 154);
+            this.CancelAddingButton.Name = "CancelAddingButton";
+            this.CancelAddingButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelAddingButton.TabIndex = 11;
+            this.CancelAddingButton.Text = "Отменить";
+            this.CancelAddingButton.UseVisualStyleBackColor = true;
+            this.CancelAddingButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // IsWorkingGroupBox
             // 
@@ -152,7 +152,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(304, 186);
             this.Controls.Add(this.IsWorkingGroupBox);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.CancelAddingButton);
             this.Controls.Add(this.AddStationButton);
             this.Controls.Add(this.StationAddressLabel);
             this.Controls.Add(this.StationCityLabel);
@@ -180,7 +180,7 @@
         private System.Windows.Forms.Label StationCityLabel;
         private System.Windows.Forms.Label StationAddressLabel;
         private System.Windows.Forms.Button AddStationButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelAddingButton;
         private System.Windows.Forms.GroupBox IsWorkingGroupBox;
         private System.Windows.Forms.RadioButton NotWorkingRadio;
         private System.Windows.Forms.RadioButton WorkingRadio;

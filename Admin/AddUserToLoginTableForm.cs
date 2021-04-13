@@ -21,7 +21,7 @@ namespace Admin
 
         private void AddToLoginTableForm_Load(object sender, EventArgs e)
         {
-            if (!factory.GetLoginRepository().IsThereCurrentCredentialsInTable(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty)))
+            if (!factory.GetCredentialsRepository().IsThereCurrentCredentialsInTable(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty)))
             {
                 try
                 {

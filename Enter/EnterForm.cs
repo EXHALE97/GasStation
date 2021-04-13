@@ -27,8 +27,8 @@ namespace Enter
             Credentials logUser;
             try
             {
-                //logUser = new Login(login.Trim().Replace(" ", string.Empty),
-                //    SecurityCrypt.MD5(password).Trim().Replace(" ", string.Empty));
+                //logUser = new Login(Login.Trim().Replace(" ", string.Empty),
+                //    SecurityCrypt.MD5(Password).Trim().Replace(" ", string.Empty));
                 logUser = new Credentials(login.Trim().Replace(" ", string.Empty),
                     password.Trim().Replace(" ", string.Empty));
             }
@@ -48,7 +48,7 @@ namespace Enter
                 if (role == string.Empty)
                     MessageBox.Show("Пользователь не найден!");
                 role = role.Trim().Replace(" ", string.Empty);
-                //rolePass = SecurityCrypt.DESDecrypt(loginController.GetDbPasswordByRole(role), SecurityConst.cryptKey);
+                //rolePass = SecurityCrypt.DESDecrypt(loginController.GetDbPasswordByRole(Role), SecurityConst.cryptKey);
                 EnterRole(role, login);
             }
             catch (Exception)

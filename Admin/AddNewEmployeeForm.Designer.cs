@@ -38,7 +38,7 @@
             this.EmployeePositionLabel = new System.Windows.Forms.Label();
             this.EmployeeSalaryLabel = new System.Windows.Forms.Label();
             this.AddEmployeeButton = new System.Windows.Forms.Button();
-            this.CancelButton = new System.Windows.Forms.Button();
+            this.CancelAddingButton = new System.Windows.Forms.Button();
             this.EmployeeAddressLabel = new System.Windows.Forms.Label();
             this.EmployeeBirthDatePicker = new System.Windows.Forms.DateTimePicker();
             this.EmployeeMiddleNameLabel = new System.Windows.Forms.Label();
@@ -49,8 +49,8 @@
             this.ContractEndDateLabel = new System.Windows.Forms.Label();
             this.EmployeePhoneLabel = new System.Windows.Forms.Label();
             this.IsWorkingGroupBox = new System.Windows.Forms.GroupBox();
-            this.NotWorkingCheckBox = new System.Windows.Forms.CheckBox();
-            this.WorkingChechBox = new System.Windows.Forms.CheckBox();
+            this.NotWorkingRadio = new System.Windows.Forms.RadioButton();
+            this.WorkingRadio = new System.Windows.Forms.RadioButton();
             this.EmployeePhoneTextBox = new System.Windows.Forms.TextBox();
             this.EmployeeAddressTextBox = new System.Windows.Forms.TextBox();
             this.IsWorkingGroupBox.SuspendLayout();
@@ -143,15 +143,15 @@
             this.AddEmployeeButton.UseVisualStyleBackColor = true;
             this.AddEmployeeButton.Click += new System.EventHandler(this.AddEmployeeButton_Click);
             // 
-            // CancelButton
+            // CancelAddingButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(154, 371);
-            this.CancelButton.Name = "CancelButton";
-            this.CancelButton.Size = new System.Drawing.Size(75, 23);
-            this.CancelButton.TabIndex = 19;
-            this.CancelButton.Text = "Отмена";
-            this.CancelButton.UseVisualStyleBackColor = true;
-            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            this.CancelAddingButton.Location = new System.Drawing.Point(154, 371);
+            this.CancelAddingButton.Name = "CancelAddingButton";
+            this.CancelAddingButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelAddingButton.TabIndex = 19;
+            this.CancelAddingButton.Text = "Отмена";
+            this.CancelAddingButton.UseVisualStyleBackColor = true;
+            this.CancelAddingButton.Click += new System.EventHandler(this.CancelAddingButton_Click);
             // 
             // EmployeeAddressLabel
             // 
@@ -232,8 +232,8 @@
             // 
             // IsWorkingGroupBox
             // 
-            this.IsWorkingGroupBox.Controls.Add(this.NotWorkingCheckBox);
-            this.IsWorkingGroupBox.Controls.Add(this.WorkingChechBox);
+            this.IsWorkingGroupBox.Controls.Add(this.NotWorkingRadio);
+            this.IsWorkingGroupBox.Controls.Add(this.WorkingRadio);
             this.IsWorkingGroupBox.Location = new System.Drawing.Point(25, 289);
             this.IsWorkingGroupBox.Name = "IsWorkingGroupBox";
             this.IsWorkingGroupBox.Size = new System.Drawing.Size(296, 64);
@@ -241,25 +241,27 @@
             this.IsWorkingGroupBox.TabStop = false;
             this.IsWorkingGroupBox.Text = "Работает:";
             // 
-            // NotWorkingCheckBox
+            // NotWorkingRadio
             // 
-            this.NotWorkingCheckBox.AutoSize = true;
-            this.NotWorkingCheckBox.Location = new System.Drawing.Point(245, 28);
-            this.NotWorkingCheckBox.Name = "NotWorkingCheckBox";
-            this.NotWorkingCheckBox.Size = new System.Drawing.Size(45, 17);
-            this.NotWorkingCheckBox.TabIndex = 1;
-            this.NotWorkingCheckBox.Text = "Нет";
-            this.NotWorkingCheckBox.UseVisualStyleBackColor = true;
+            this.NotWorkingRadio.AutoSize = true;
+            this.NotWorkingRadio.Location = new System.Drawing.Point(234, 29);
+            this.NotWorkingRadio.Name = "NotWorkingRadio";
+            this.NotWorkingRadio.Size = new System.Drawing.Size(44, 17);
+            this.NotWorkingRadio.TabIndex = 1;
+            this.NotWorkingRadio.TabStop = true;
+            this.NotWorkingRadio.Text = "Нет";
+            this.NotWorkingRadio.UseVisualStyleBackColor = true;
             // 
-            // WorkingChechBox
+            // WorkingRadio
             // 
-            this.WorkingChechBox.AutoSize = true;
-            this.WorkingChechBox.Location = new System.Drawing.Point(129, 28);
-            this.WorkingChechBox.Name = "WorkingChechBox";
-            this.WorkingChechBox.Size = new System.Drawing.Size(41, 17);
-            this.WorkingChechBox.TabIndex = 0;
-            this.WorkingChechBox.Text = "Да";
-            this.WorkingChechBox.UseVisualStyleBackColor = true;
+            this.WorkingRadio.AutoSize = true;
+            this.WorkingRadio.Location = new System.Drawing.Point(129, 29);
+            this.WorkingRadio.Name = "WorkingRadio";
+            this.WorkingRadio.Size = new System.Drawing.Size(40, 17);
+            this.WorkingRadio.TabIndex = 0;
+            this.WorkingRadio.TabStop = true;
+            this.WorkingRadio.Text = "Да";
+            this.WorkingRadio.UseVisualStyleBackColor = true;
             // 
             // EmployeePhoneTextBox
             // 
@@ -275,6 +277,7 @@
             this.EmployeeAddressTextBox.Name = "EmployeeAddressTextBox";
             this.EmployeeAddressTextBox.Size = new System.Drawing.Size(167, 20);
             this.EmployeeAddressTextBox.TabIndex = 36;
+            this.EmployeeAddressTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.EmployeeAddressTextBox_KeyPress);
             // 
             // AddNewEmployeeForm
             // 
@@ -293,7 +296,7 @@
             this.Controls.Add(this.EmployeeMiddleNameLabel);
             this.Controls.Add(this.EmployeeBirthDatePicker);
             this.Controls.Add(this.EmployeeAddressLabel);
-            this.Controls.Add(this.CancelButton);
+            this.Controls.Add(this.CancelAddingButton);
             this.Controls.Add(this.AddEmployeeButton);
             this.Controls.Add(this.EmployeeSalaryLabel);
             this.Controls.Add(this.EmployeePositionLabel);
@@ -326,7 +329,7 @@
         private System.Windows.Forms.Label EmployeePositionLabel;
         private System.Windows.Forms.Label EmployeeSalaryLabel;
         private System.Windows.Forms.Button AddEmployeeButton;
-        private System.Windows.Forms.Button CancelButton;
+        private System.Windows.Forms.Button CancelAddingButton;
         private System.Windows.Forms.Label EmployeeAddressLabel;
         private System.Windows.Forms.DateTimePicker EmployeeBirthDatePicker;
         private System.Windows.Forms.Label EmployeeMiddleNameLabel;
@@ -337,9 +340,9 @@
         private System.Windows.Forms.Label ContractEndDateLabel;
         private System.Windows.Forms.Label EmployeePhoneLabel;
         private System.Windows.Forms.GroupBox IsWorkingGroupBox;
-        private System.Windows.Forms.CheckBox NotWorkingCheckBox;
-        private System.Windows.Forms.CheckBox WorkingChechBox;
         private System.Windows.Forms.TextBox EmployeePhoneTextBox;
         private System.Windows.Forms.TextBox EmployeeAddressTextBox;
+        private System.Windows.Forms.RadioButton NotWorkingRadio;
+        private System.Windows.Forms.RadioButton WorkingRadio;
     }
 }

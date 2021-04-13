@@ -101,7 +101,7 @@ namespace Worker
                 //    supplydate = supplydate.AddMinutes(minutes);
                 //}
                 //Supply sup = new Supply();
-                //sup.supplySet(factory.GetStaffRepository().FindStationIDByStaffID(id), id, fueltype, fuelamount, supplydate);
+                //sup.supplySet(factory.GetEmployeeRepository().FindStationIDByStaffID(id), id, fueltype, fuelamount, supplydate);
                 //SupplyController supplyController = new SupplyController(dgv, factory);
                 //if (supplyController.AddToSupplyTable(sup))
                 //{

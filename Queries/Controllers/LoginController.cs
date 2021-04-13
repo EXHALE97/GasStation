@@ -28,7 +28,7 @@ namespace Queries.Controllers
 
         public string TryLogin()
         {
-            return factory.GetLoginRepository().LoginToTable(login);
+            return factory.GetCredentialsRepository().LoginToTable(login);
         }
 
         public string GetDbPasswordByRole(string role)
@@ -36,7 +36,7 @@ namespace Queries.Controllers
             var password = string.Empty;
             try
             {
-                password = factory.GetLoginRepository().GetRolePass(role);
+                password = factory.GetCredentialsRepository().GetRolePass(role);
             }
             catch (SqlException e)
             {
@@ -57,7 +57,7 @@ namespace Queries.Controllers
             {
                 if (checkFlag == CredentialsValidator.CheckAddition(dbUser, out errorList))
                 {
-                    factory.GetLoginRepository().AddNewDbUser(dbUser);
+                    factory.GetCredentialsRepository().AddNewDbUser(dbUser);
                 }
                 else
                 {

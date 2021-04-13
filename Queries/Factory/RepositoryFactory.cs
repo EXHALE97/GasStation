@@ -23,7 +23,7 @@ namespace Queries.Factory
             return new StationRepository(dbc);
         }
 
-        public IEmployeeRepository GetStaffRepository()
+        public IEmployeeRepository GetEmployeeRepository()
         {
             return new EmployeeRepository(dbc);
         }
@@ -48,7 +48,7 @@ namespace Queries.Factory
             return new SupplyRepository(dbc);
         }
 
-        public ICredentialsRepository GetLoginRepository()
+        public ICredentialsRepository GetCredentialsRepository()
         {
             return new CredentialsRepository(dbc);
         }

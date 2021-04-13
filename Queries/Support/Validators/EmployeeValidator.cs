@@ -6,7 +6,7 @@ namespace Queries.Support.Validators
 {
     public static class EmployeeValidator
     {
-        public static bool CheckAddition(Employee employee, out List<string> errorList)
+        public static bool CheckEmployee(Employee employee, out List<string> errorList)
         {
             errorList = new List<string>();
             var checkFlag = true;

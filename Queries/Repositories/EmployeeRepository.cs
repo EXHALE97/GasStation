@@ -29,7 +29,8 @@ namespace Queries.Repositories
                 if (queryResult.HasRows)
                 {
                     employeeList.AddRange(from DbDataRecord dbDataRecord in queryResult
-                        select new Employee(int.Parse(dbDataRecord["id"].ToString()), int.Parse(dbDataRecord["cred_id"].ToString()),
+                        select new Employee(int.Parse(dbDataRecord["id"].ToString()), 
+                            dbDataRecord["cred_id"].ToString() == string.Empty ? 0 : int.Parse(dbDataRecord["cred_id"].ToString()),
                             dbDataRecord["last_name"].ToString(), dbDataRecord["first_name"].ToString(), dbDataRecord["middle_name"].ToString(),
                             dbDataRecord["position"].ToString(), Convert.ToDateTime(dbDataRecord["date_of_birth"].ToString()), 
                             Convert.ToDateTime(dbDataRecord["date_of_employment"].ToString()), 
@@ -44,16 +45,65 @@ namespace Queries.Repositories
 
         public void AddToEmployeeTable(Employee employee)
         {
-            ExecuteSqlNonQueryCommand(
-                "INSERT INTO \"AZS\".\"Staff\"(Station_id, Surname, Name, Gender, Birthdate, Function, Salary)" +
-                "VALUES(@Station_id, @Surname, @Name, @Gender, @Birthdate, @Function, @Salary)");
+            if (employee.CredId == 0 && employee.MiddleName == null)
+            {
+                ExecuteSqlNonQueryCommand($"EXEC InsertEmployee N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'");
+            }
+            else if (employee.CredId != 0 && employee.MiddleName == null)
+            {
+                ExecuteSqlNonQueryCommand($"EXEC InsertEmployee N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
+                                          $"'{employee.CredId}'");
+            }
+            else if (employee.CredId == 0 && employee.MiddleName != null)
+            {
+                ExecuteSqlNonQueryCommand($"EXEC InsertEmployee N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
+                                          $"NULL, N'{employee.MiddleName}'");
+            }
+            else
+            {
+                ExecuteSqlNonQueryCommand($"EXEC InsertEmployee N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
+                                          $"'{employee.CredId}', N'{employee.MiddleName}'");
+            }
+            
         }
 
         public void UpdateEmployeeTable(int id, Employee employee)
         {
-            ExecuteSqlNonQueryCommand(
-                "INSERT INTO \"AZS\".\"Staff\"(Station_id, Surname, Name, Gender, Birthdate, Function, Salary)" +
-                "VALUES(@Station_id, @Surname, @Name, @Gender, @Birthdate, @Function, @Salary)");
+            if (employee.CredId == 0 && employee.MiddleName == null)
+            {
+                ExecuteSqlNonQueryCommand($"EXEC UpdateEmployee '{id}', N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'");
+            }
+            else if (employee.CredId != 0 && employee.MiddleName == null)
+            {
+                ExecuteSqlNonQueryCommand($"EXEC UpdateEmployee '{id}', N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
+                                          $"'{employee.CredId}'");
+            }
+            else if (employee.CredId == 0 && employee.MiddleName != null)
+            {
+                ExecuteSqlNonQueryCommand($"EXEC UpdateEmployee '{id}', N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
+                                          $"NULL, N'{employee.MiddleName}'");
+            }
+            else
+            {
+                ExecuteSqlNonQueryCommand($"EXEC UpdateEmployee '{id}', N'{employee.Name}', N'{employee.SurName}', N'{employee.Position}'," +
+                                          $"'{employee.Birthday:d}', '{employee.EmploymentDate:d}', '{employee.ContractEndDate:d}'," +
+                                          $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
+                                          $"'{employee.CredId}', N'{employee.MiddleName}'");
+            }
         }
 
         public void DeleteFromEmployeeTable(int id)

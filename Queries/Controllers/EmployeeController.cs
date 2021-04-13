@@ -24,10 +24,10 @@ namespace Queries.Controllers
             DoFormAction(() =>
             {
                 dataGridView.Rows.Clear();
-                foreach(var employee in Factory.GetStaffRepository().GetEmployees(workingOnly))
+                foreach(var employee in Factory.GetEmployeeRepository().GetEmployees(workingOnly))
                 {
-                    dataGridView.Rows.Add(employee.Id, employee.CredId, employee.SurName, employee.Name,
-                        employee.MiddleName, employee.Birthday, employee.EmploymentDate, employee.ContractEndDate,
+                    dataGridView.Rows.Add(employee.Id, employee.CredId == 0 ? "-" : employee.CredId.ToString(), employee.SurName,
+                        employee.Name, employee.MiddleName ?? "-", employee.Birthday, employee.EmploymentDate, employee.ContractEndDate,
                         employee.Position, employee.Salary, employee.Address, employee.Phone, employee.IsWorking);
                 }
             });
@@ -37,9 +37,9 @@ namespace Queries.Controllers
         {
             return DoFormAction(() =>
             {
-                if (EmployeeValidator.CheckAddition(employee, out errorList))
+                if (EmployeeValidator.CheckEmployee(employee, out errorList))
                 {
-                    Factory.GetStaffRepository().AddToEmployeeTable(employee);
+                    Factory.GetEmployeeRepository().AddToEmployeeTable(employee);
                     return true;
                 }
 
@@ -50,13 +50,14 @@ namespace Queries.Controllers
             });
         }
 
-        public bool UpdateTable(int id, Employee wk)
+        public bool UpdateTable(int id, Employee employee)
         {
             return DoFormAction(() =>
             {
-                if (EmployeeValidator.CheckUpdate(id, wk, out errorList))
+                if (EmployeeValidator.CheckEmployee(employee, out errorList))
                 {
-                    Factory.GetStaffRepository().UpdateEmployeeTable(id, wk);
+                    Factory.GetEmployeeRepository().UpdateEmployeeTable(id, employee);
+                    return true;
                 }
 
                 ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
@@ -72,7 +73,8 @@ namespace Queries.Controllers
             {
                 if (!EmployeeValidator.CheckDelete(id, out errorList))
                 {
-                    Factory.GetStaffRepository().DeleteFromEmployeeTable(id);
+                    Factory.GetEmployeeRepository().DeleteFromEmployeeTable(id);
+                    return true;
                 }
 
                 ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
@@ -80,6 +82,15 @@ namespace Queries.Controllers
 
                 return false;
             });
+        }
+
+        public void FillCredentialsLoginsComboBox(ComboBox comboBox)
+        {
+            comboBox.Items.Add("-");
+            foreach (var item in Factory.GetCredentialsRepository().GetUserLogins())
+            {
+                comboBox.Items.Add(item);
+            }
         }
     }
 }

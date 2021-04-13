@@ -34,7 +34,7 @@ namespace Queries.Controllers
                 foreach (Supply supply in dgvElements)
                 {
                     int station_id = supply.GetStationID();
-                    dgv.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(station_id)), factory.GetStaffRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
+                    dgv.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(station_id)), factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
                         supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 }
             }
@@ -49,13 +49,13 @@ namespace Queries.Controllers
         {
             try
             {
-                //int id = factory.GetStaffRepository().FindStationIDByStaffID(ID);
+                //int id = factory.GetEmployeeRepository().FindStationIDByStaffID(ID);
                 //dgvElements = factory.GetSupplyRepository().ShowSupplyTableByID(id);
                 //dgv.Rows.Clear();
                 //foreach (Supply supply in dgvElements)
                 //{
                 //    int station_id = supply.GetStationID();
-                //    dgv.Rows.Add(factory.GetStaffRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(), supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
+                //    dgv.Rows.Add(factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(), supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 //}
             }
             catch (SqlException e)
@@ -106,7 +106,7 @@ namespace Queries.Controllers
                 dgv.Rows.Clear();
                 foreach (Supply supply in dgvElements)
                 {
-                    dgv.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(supply.GetStationID())), factory.GetStaffRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
+                    dgv.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(supply.GetStationID())), factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
                         supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 }
             }
