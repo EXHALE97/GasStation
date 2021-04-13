@@ -31,25 +31,6 @@ namespace Queries.Controllers
             return factory.GetCredentialsRepository().LoginToTable(login);
         }
 
-        public string GetDbPasswordByRole(string role)
-        {
-            var password = string.Empty;
-            try
-            {
-                password = factory.GetCredentialsRepository().GetRolePass(role);
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return password;
-        }
-
         public bool AddToLoginTable(Credentials dbUser)
         {
             bool checkFlag = false;

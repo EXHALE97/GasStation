@@ -108,9 +108,7 @@ namespace Queries.Repositories
 
         public void DeleteFromEmployeeTable(int id)
         {
-            ExecuteSqlNonQueryCommand(
-                "INSERT INTO \"AZS\".\"Staff\"(Station_id, Surname, Name, Gender, Birthdate, Function, Salary)" +
-                "VALUES(@Station_id, @Surname, @Name, @Gender, @Birthdate, @Function, @Salary)");
+            ExecuteSqlNonQueryCommand($"EXEC DeleteEmployee '{id}'");
         }
 
         public string FindEmployeeById(int id)

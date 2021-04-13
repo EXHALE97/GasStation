@@ -23,7 +23,7 @@ namespace Queries.Repositories
                 if (!queryResult.HasRows) return role;
                 foreach (DbDataRecord dbDataRecord in queryResult)
                 {
-                    role = dbDataRecord["Role"].ToString();
+                    role = dbDataRecord["role"].ToString();
                 }
 
                 return role;
@@ -55,18 +55,18 @@ namespace Queries.Repositories
             });
         }
 
-        public string GetRolePass(string role)
+        public string GetCredentialsLoginById(int id)
         {
-            return ExecuteSqlCommand($"SELECT Password FROM Credentials WHERE Role = {role}", queryResult =>
+            return ExecuteSqlCommand($"EXEC GetCredentialsById '{id}'", queryResult =>
             {
-                var password = string.Empty;
-                if (!queryResult.HasRows) return password;
+                var login = string.Empty;
+                if (!queryResult.HasRows) return login;
                 foreach (DbDataRecord dbDataRecord in queryResult)
                 {
-                    password = dbDataRecord["Password"].ToString();
+                    login = dbDataRecord["login"].ToString();
                 }
 
-                return password;
+                return login;
             });
         }
 
@@ -79,11 +79,6 @@ namespace Queries.Repositories
                 logins.AddRange(from DbDataRecord dbDataRecord in queryResult select dbDataRecord[0].ToString());
                 return logins;
             });
-        }
-
-        public void DeleteStaffFromLoginTable(string id)
-        {
-            ExecuteSqlNonQueryCommand($"DELETE FROM Credentials WHERE Login = {id}");
         }
     }
 }

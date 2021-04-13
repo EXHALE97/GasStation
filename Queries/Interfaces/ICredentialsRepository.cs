@@ -9,11 +9,9 @@ namespace Queries.Interfaces
 
         void AddNewDbUser(Credentials dbUser);
 
-        string GetRolePass(string role);
+        string GetCredentialsLoginById(int id);
 
         bool IsThereCurrentCredentialsInTable(string login);
-
-        void DeleteStaffFromLoginTable(string id);
 
         int GetCredentialsIdByLogin(string login);
 

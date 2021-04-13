@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Factory;
 using Queries.Support.ComboBox;
+using Queries.Support.MessageBox;
 
 namespace Admin
 {
@@ -70,16 +71,13 @@ namespace Admin
         {
             try
             {
-                var cell = EmployeeTable[0, EmployeeTable.CurrentRow.Index];
-                int id = Convert.ToInt32(cell.Value);
-                if (employeeController.DeleteFromTable(id))
+                if (employeeController.DeleteFromTable(int.Parse(EmployeeTable.CurrentRow.Cells["EmployeeId"].Value.ToString())))
                 {
-                    factory.GetCredentialsRepository().DeleteStaffFromLoginTable(id.ToString());
-                    MessageBox.Show("Операция выполнена успешно!");
+                    SuccessMessageBox.ShowSuccessBox();
                 }
                 employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             }
-            catch (Exception) { MessageBox.Show("Операция не может быть выполнена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
         }
 
         private void btnFindDeals_Click(object sender, EventArgs e)

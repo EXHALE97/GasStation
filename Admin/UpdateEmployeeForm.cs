@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Entities;
@@ -59,6 +58,8 @@ namespace Admin
 
         private void UpdateEmployeeForm_Load(object sender, EventArgs e)
         {
+            var credId = updatingRow.Cells["EmployeeConnectedCreds"].Value.ToString();
+
             EmployeeSurNameTextBox.Text = updatingRow.Cells["EmployeeSurname"].Value.ToString();
             EmployeeNameTextBox.Text = updatingRow.Cells["EmployeeName"].Value.ToString();
             EmployeeMiddleNameTextBox.Text = updatingRow.Cells["EmployeeMiddleName"].Value.ToString();
@@ -71,7 +72,7 @@ namespace Admin
             EmployeePhoneTextBox.Text = updatingRow.Cells["EmployeePhone"].Value.ToString();
             WorkingRadio.Checked = bool.Parse(updatingRow.Cells["EmployeeIsWorking"].Value.ToString());
             NotWorkingRadio.Checked = !bool.Parse(updatingRow.Cells["EmployeeIsWorking"].Value.ToString());
-            employeeController.Value.FillCredentialsLoginsComboBox(EmployeeCredsComboBox);
+            employeeController.Value.FillCredentialsLoginsComboBox(EmployeeCredsComboBox, credId == "-" ? 0 : int.Parse(credId));
         }
 
         private void UpdateEmployeeButton_Click(object sender, EventArgs e)

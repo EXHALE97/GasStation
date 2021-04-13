@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Queries.Entities;
 
 namespace Queries.Support.Validators
@@ -67,47 +66,12 @@ namespace Queries.Support.Validators
             return checkFlag;
         }
 
-        public static bool CheckUpdate(int id, Employee wk, out List<string> errorList)
-        {
-            errorList = new List<string>();
-            bool checkFlag = true;
-            if (wk.SurName == String.Empty)
-            {
-                checkFlag = false;
-                errorList.Add("Фамилия не задана!");
-            }
-            if (wk.Name == String.Empty)
-            {
-                checkFlag = false;
-                errorList.Add("Имя не задано!");
-            }
-            if (wk.Position == String.Empty)
-            {
-                checkFlag = false;
-                errorList.Add("Должность не задана!");
-            }
-            if (wk.Salary < 500)
-            {
-                checkFlag = false;
-                errorList.Add("Зарплата не может быть меньше 500 у.е!");
-            }
-            if (id < 0)
-            { checkFlag = false; }
-
-            return checkFlag;
-        }
-
         public static bool CheckDelete(int id, out List<string> errorList)
         {
             errorList = new List<string>();
-            bool checkFlag = true;
-            if (id < 0)
-            {
-                checkFlag = false;
-                errorList.Add("Сотрудник не обнаружен!");
-            }
-
-            return checkFlag;
+            if (id >= 0) return true;
+            errorList.Add("Сотрудник не обнаружен!");
+            return false;
         }
     }
 }

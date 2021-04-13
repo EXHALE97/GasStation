@@ -71,7 +71,7 @@ namespace Queries.Controllers
         {
             return DoFormAction(() =>
             {
-                if (!EmployeeValidator.CheckDelete(id, out errorList))
+                if (EmployeeValidator.CheckDelete(id, out errorList))
                 {
                     Factory.GetEmployeeRepository().DeleteFromEmployeeTable(id);
                     return true;
@@ -84,13 +84,14 @@ namespace Queries.Controllers
             });
         }
 
-        public void FillCredentialsLoginsComboBox(ComboBox comboBox)
+        public void FillCredentialsLoginsComboBox(ComboBox comboBox, int credId = 0)
         {
             comboBox.Items.Add("-");
             foreach (var item in Factory.GetCredentialsRepository().GetUserLogins())
             {
                 comboBox.Items.Add(item);
             }
+            comboBox.SelectedItem = credId == 0 ? "-" : Factory.GetCredentialsRepository().GetCredentialsLoginById(credId);
         }
     }
 }
