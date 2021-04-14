@@ -46,7 +46,7 @@ namespace Admin
                 var nUser =
                     new Credentials(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty),
                         passWord.Trim().Replace(" ", string.Empty), "user");
-                var lc = new LoginController(factory);
+                var lc = new CredentialsController(factory);
                 if (lc.AddToLoginTable(nUser))
                 {
                     MessageBox.Show("Операция выполнена успешно!");

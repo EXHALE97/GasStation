@@ -5,7 +5,7 @@
         public int Id { get; }
         public string Login { get; }
         public string Password { get; }
-        public string Role { get; }
+        public string Role { get; set; }
 
         public Credentials(int id, string login, string password, string role)
         {

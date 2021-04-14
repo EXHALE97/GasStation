@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
@@ -104,6 +103,12 @@ namespace Queries.Repositories
                                           $"'{employee.Salary}', N'{employee.Address}', N'{employee.Phone}', '{employee.IsWorking.ToString()}'," +
                                           $"'{employee.CredId}', N'{employee.MiddleName}'");
             }
+        }
+
+        public void SetEmployeeCredentials(int employeeId, Credentials credentials)
+        {
+            ExecuteSqlNonQueryCommand(
+                $"EXEC InsertCredentialsAndConnectToEmployee '{employeeId}', '{credentials.Login}', '{credentials.Password}', '{credentials.Role}'");
         }
 
         public void DeleteFromEmployeeTable(int id)

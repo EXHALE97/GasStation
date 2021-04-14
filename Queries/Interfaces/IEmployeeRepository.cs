@@ -10,6 +10,8 @@ namespace Queries.Interfaces
 
         void UpdateEmployeeTable(int id, Employee employee);
 
+        void SetEmployeeCredentials(int employeeId, Credentials credentials);
+
         void DeleteFromEmployeeTable(int id);
 
         void AddToEmployeeTable(Employee employee);

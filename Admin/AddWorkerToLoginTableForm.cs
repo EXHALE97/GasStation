@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using Queries.Controllers;
-using Queries.Interfaces;
 using Queries.Entities;
 using Queries.Factory;
 using Queries.Support.MessageBox;
@@ -38,29 +37,32 @@ namespace Admin
             }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (new EmployeeController(factory).SetEmployeeCredentials(Convert.ToInt32(selectedRow.Cells["EmployeeId"].Value),
+                    new Credentials(UserLoginTextBox.Text, UserPasswordTextBox.Text, "worker")))
+                {
+                    SuccessMessageBox.ShowSuccessBox();
+                    Close();
+                }
+            }
+            catch (Exception) { ErrorMessageBox.ShowInvalidDataMessage(); }
+        }
+
+        private void CancelActionButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            var passWord = string.Empty;
-            try
-            {
-                passWord = UserPasswordTextBox.Text.ToString();
-                var nWorker = new Credentials(selectedRow.Cells["staff_id"].Value.ToString(), passWord.ToString(), "worker");
-                var loginController = new LoginController(factory);
-                if (loginController.AddToLoginTable(nWorker))
-                {
-                    MessageBox.Show("Операция выполнена успешно!");
-                    Close();
-                }
-            }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
+                e.Handled = true;
         }
 
-        private void checkPass_CheckedChanged(object sender, EventArgs e)
+        private void ShowPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             UserPasswordTextBox.UseSystemPasswordChar = !ShowPasswordCheckBox.Checked;
         }

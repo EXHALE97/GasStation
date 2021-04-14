@@ -71,7 +71,7 @@ namespace Admin
         {
             try
             {
-                if (employeeController.DeleteFromTable(int.Parse(EmployeeTable.CurrentRow.Cells["EmployeeId"].Value.ToString())))
+                if (employeeController.DeleteCurrentRowFromTable(int.Parse(EmployeeTable.CurrentRow.Cells["EmployeeId"].Value.ToString())))
                 {
                     SuccessMessageBox.ShowSuccessBox();
                 }

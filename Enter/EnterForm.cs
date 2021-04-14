@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Configuration;
-using Queries;
 using Queries.Entities;
 using User;
 using Admin;
 using Queries.Connection;
 using Queries.Controllers;
 using Queries.Factory;
+using Queries.Support.MessageBox;
 using Worker;
 
 
@@ -18,38 +18,34 @@ namespace Enter
         public EnterForm()
         {
             InitializeComponent();
-            tbPassword.UseSystemPasswordChar = true;
+            PasswordTextBox.UseSystemPasswordChar = true;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private void LoginButton_Click(object sender, EventArgs e)
         {
-            string login = tbLogin.Text, password = tbPassword.Text;
             Credentials logUser;
             try
             {
-                //logUser = new Login(Login.Trim().Replace(" ", string.Empty),
-                //    SecurityCrypt.MD5(Password).Trim().Replace(" ", string.Empty));
-                logUser = new Credentials(login.Trim().Replace(" ", string.Empty),
-                    password.Trim().Replace(" ", string.Empty));
+                logUser = new Credentials(LoginTextBox.Text.Trim().Replace(" ", string.Empty),
+                    PasswordTextBox.Text.Trim().Replace(" ", string.Empty));
             }
             catch (Exception)
             {
-                MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessageBox.ShowInvalidDataMessage();
                 return;
             }
 
             try
             {
-                var loginController = new LoginController(logUser,
-                    new RepositoryFactory(
-                        new DataBaseConnection(ConfigurationManager.ConnectionStrings["Admin"].ToString())));
-                var role = loginController.TryLogin();
+                logUser.Role = new CredentialsController(new RepositoryFactory(
+                    new DataBaseConnection(ConfigurationManager.ConnectionStrings["Admin"].ToString()))).TryLogin(logUser);
 
-                if (role == string.Empty)
+                if (logUser.Role == string.Empty)
                     MessageBox.Show("Пользователь не найден!");
-                role = role.Trim().Replace(" ", string.Empty);
-                //rolePass = SecurityCrypt.DESDecrypt(loginController.GetDbPasswordByRole(Role), SecurityConst.cryptKey);
-                EnterRole(role, login);
+                else
+                {
+                    EnterRole(logUser.Role, logUser.Login);
+                }
             }
             catch (Exception)
             {
@@ -67,8 +63,8 @@ namespace Enter
                             new DataBaseConnection(ConfigurationManager.ConnectionStrings["Worker"].ToString())));
                     Hide();
                     workerForm.ShowDialog();
-                    tbLogin.Clear();
-                    tbPassword.Clear();
+                    LoginTextBox.Clear();
+                    PasswordTextBox.Clear();
                     Show();
                     break;
                 case "admin":
@@ -76,8 +72,8 @@ namespace Enter
                         new DataBaseConnection(ConfigurationManager.ConnectionStrings["Admin"].ToString())));
                     Hide();
                     adminForm.ShowDialog();
-                    tbLogin.Clear();
-                    tbPassword.Clear();
+                    LoginTextBox.Clear();
+                    PasswordTextBox.Clear();
                     Show();
                     break;
                 case "user":
@@ -86,16 +82,11 @@ namespace Enter
                             new DataBaseConnection(ConfigurationManager.ConnectionStrings["User"].ToString())));
                     Hide();
                     userForm.ShowDialog();
-                    tbLogin.Clear();
-                    tbPassword.Clear();
+                    LoginTextBox.Clear();
+                    PasswordTextBox.Clear();
                     Show();
                     break;
             }
-        }
-
-        private void tbLogin_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Admin
+﻿using System.Windows.Forms;
+
+namespace Admin
 {
     partial class AddWorkerToLoginTableForm
     {
@@ -71,7 +73,7 @@
             this.OkButton.TabIndex = 3;
             this.OkButton.Text = "ОК";
             this.OkButton.UseVisualStyleBackColor = true;
-            this.OkButton.Click += new System.EventHandler(this.btnAdd_Click);
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // CancelActionButton
             // 
@@ -81,7 +83,7 @@
             this.CancelActionButton.TabIndex = 4;
             this.CancelActionButton.Text = "Отмена";
             this.CancelActionButton.UseVisualStyleBackColor = true;
-            this.CancelActionButton.Click += new System.EventHandler(this.btnCancel_Click);
+            this.CancelActionButton.Click += new System.EventHandler(this.CancelActionButton_Click);
             // 
             // ShowPasswordCheckBox
             // 
@@ -92,7 +94,7 @@
             this.ShowPasswordCheckBox.TabIndex = 5;
             this.ShowPasswordCheckBox.Text = "Показать пароль";
             this.ShowPasswordCheckBox.UseVisualStyleBackColor = true;
-            this.ShowPasswordCheckBox.CheckedChanged += new System.EventHandler(this.checkPass_CheckedChanged);
+            this.ShowPasswordCheckBox.CheckedChanged += new System.EventHandler(this.ShowPasswordCheckBox_CheckedChanged);
             // 
             // UserLoginTextBox
             // 
@@ -100,6 +102,7 @@
             this.UserLoginTextBox.Name = "UserLoginTextBox";
             this.UserLoginTextBox.Size = new System.Drawing.Size(156, 20);
             this.UserLoginTextBox.TabIndex = 6;
+            this.UserLoginTextBox.KeyPress += new KeyPressEventHandler(this.LoginTextBox_KeyPress);
             // 
             // UserLoginLabel
             // 

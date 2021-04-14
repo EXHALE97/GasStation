@@ -7,7 +7,7 @@ namespace Queries.Interfaces
     {
         string LoginToTable(Credentials login);
 
-        void AddNewDbUser(Credentials dbUser);
+        int AddNewCredentials(Credentials dbUser);
 
         string GetCredentialsLoginById(int id);
 

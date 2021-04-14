@@ -30,9 +30,19 @@ namespace Queries.Repositories
             });
         }
 
-        public void AddNewDbUser(Credentials dbUser)
+        public int AddNewCredentials(Credentials dbUser)
         {
-            ExecuteSqlNonQueryCommand($"INSERT INTO Credentials VALUES('{dbUser.Login}', '{dbUser.Password}', '{dbUser.Role}')");
+            return ExecuteSqlCommand($"EXEC InsertCredentials '{dbUser.Login}', '{dbUser.Password}', '{dbUser.Role}'", queryResult =>
+            {
+                var id = 0;
+                if (!queryResult.HasRows) return id;
+                foreach (DbDataRecord dbDataRecord in queryResult)
+                {
+                    id = int.Parse(dbDataRecord[0].ToString());
+                }
+
+                return id;
+            });
         }
 
         public bool IsThereCurrentCredentialsInTable(string login)

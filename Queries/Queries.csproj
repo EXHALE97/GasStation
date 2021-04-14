@@ -60,7 +60,7 @@
     <Compile Include="Support\Validators\CarValidator.cs" />
     <Compile Include="Support\Validators\CredentialsValidator.cs" />
     <Compile Include="Support\Validators\DealValidator.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\CredentialsController.cs" />
     <Compile Include="Support\Validators\EmployeeValidator.cs" />
     <Compile Include="Support\Validators\StationValidator.cs" />
     <Compile Include="Support\Validators\SupplyValidator.cs" />

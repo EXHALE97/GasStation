@@ -13,6 +13,11 @@ namespace Queries.Controllers
         private readonly DataGridView dataGridView;
         private List<string> errorList;
 
+        public EmployeeController(IRepositoryFactory factory)
+        {
+            Factory = factory;
+        }
+
         public EmployeeController(DataGridView dataGridView, IRepositoryFactory factory)
         {
             Factory = factory;
@@ -67,7 +72,24 @@ namespace Queries.Controllers
             });
         }
 
-        public bool DeleteFromTable(int id)
+        public bool SetEmployeeCredentials(int employeeId, Credentials credentials)
+        {
+            return DoFormAction(() =>
+            {
+                if (CredentialsValidator.CheckAddition(credentials, out errorList))
+                {
+                    Factory.GetEmployeeRepository().SetEmployeeCredentials(employeeId, credentials);
+                    return true;
+                }
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
+        }
+
+        public bool DeleteCurrentRowFromTable(int id)
         {
             return DoFormAction(() =>
             {
