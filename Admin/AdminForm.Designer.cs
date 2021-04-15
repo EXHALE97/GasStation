@@ -44,14 +44,11 @@ namespace Admin
             this.accountdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabCarTable = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnTableCarView = new System.Windows.Forms.Button();
-            this.btnActivateCarCard = new System.Windows.Forms.Button();
-            this.btnFindDealsByCar_id = new System.Windows.Forms.Button();
-            this.btnCarAdd = new System.Windows.Forms.Button();
-            this.dgvViewCars = new System.Windows.Forms.DataGridView();
-            this.car_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.carmark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cardnum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UpdateClientTableButton = new System.Windows.Forms.Button();
+            this.ActivateClientCardButton = new System.Windows.Forms.Button();
+            this.FindDealsByClientButton = new System.Windows.Forms.Button();
+            this.AddNewClientButton = new System.Windows.Forms.Button();
+            this.ClientTable = new System.Windows.Forms.DataGridView();
             this.tabStaffTable = new System.Windows.Forms.TabPage();
             this.OnlyWorkingEmployeeCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -61,6 +58,19 @@ namespace Admin
             this.UpdateEmployeeButton = new System.Windows.Forms.Button();
             this.DeleteEmployeeButton = new System.Windows.Forms.Button();
             this.EmployeeTable = new System.Windows.Forms.DataGridView();
+            this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeConnectedCreds = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeContractEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeePhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeIsWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAdmin = new System.Windows.Forms.TabControl();
             this.tabStationTable = new System.Windows.Forms.TabPage();
             this.OnlyWorkingStationsCheckBox = new System.Windows.Forms.CheckBox();
@@ -108,26 +118,21 @@ namespace Admin
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
-            this.EmployeeId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeConnectedCreds = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeSurname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeBirthday = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmploymentDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeContractEnd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeePosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeSalary = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeePhone = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeIsWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActivationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CredId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewAccounting)).BeginInit();
             this.tabCarTable.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvViewCars)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientTable)).BeginInit();
             this.tabStaffTable.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeTable)).BeginInit();
@@ -252,7 +257,7 @@ namespace Admin
             // tabCarTable
             // 
             this.tabCarTable.Controls.Add(this.groupBox3);
-            this.tabCarTable.Controls.Add(this.dgvViewCars);
+            this.tabCarTable.Controls.Add(this.ClientTable);
             this.tabCarTable.Location = new System.Drawing.Point(4, 22);
             this.tabCarTable.Name = "tabCarTable";
             this.tabCarTable.Padding = new System.Windows.Forms.Padding(3);
@@ -263,10 +268,10 @@ namespace Admin
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnTableCarView);
-            this.groupBox3.Controls.Add(this.btnActivateCarCard);
-            this.groupBox3.Controls.Add(this.btnFindDealsByCar_id);
-            this.groupBox3.Controls.Add(this.btnCarAdd);
+            this.groupBox3.Controls.Add(this.UpdateClientTableButton);
+            this.groupBox3.Controls.Add(this.ActivateClientCardButton);
+            this.groupBox3.Controls.Add(this.FindDealsByClientButton);
+            this.groupBox3.Controls.Add(this.AddNewClientButton);
             this.groupBox3.Location = new System.Drawing.Point(505, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(309, 290);
@@ -274,77 +279,64 @@ namespace Admin
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Функционал";
             // 
-            // btnTableCarView
+            // UpdateClientTableButton
             // 
-            this.btnTableCarView.Location = new System.Drawing.Point(62, 19);
-            this.btnTableCarView.Name = "btnTableCarView";
-            this.btnTableCarView.Size = new System.Drawing.Size(190, 60);
-            this.btnTableCarView.TabIndex = 5;
-            this.btnTableCarView.Text = "Обновить список покупателей";
-            this.btnTableCarView.UseVisualStyleBackColor = true;
-            this.btnTableCarView.Click += new System.EventHandler(this.ViewClientTable);
+            this.UpdateClientTableButton.Location = new System.Drawing.Point(62, 19);
+            this.UpdateClientTableButton.Name = "UpdateClientTableButton";
+            this.UpdateClientTableButton.Size = new System.Drawing.Size(190, 60);
+            this.UpdateClientTableButton.TabIndex = 5;
+            this.UpdateClientTableButton.Text = "Обновить список покупателей";
+            this.UpdateClientTableButton.UseVisualStyleBackColor = true;
+            this.UpdateClientTableButton.Click += new System.EventHandler(this.UpdateClientTableButton_Click);
             // 
-            // btnActivateCarCard
+            // ActivateClientCardButton
             // 
-            this.btnActivateCarCard.Location = new System.Drawing.Point(62, 217);
-            this.btnActivateCarCard.Name = "btnActivateCarCard";
-            this.btnActivateCarCard.Size = new System.Drawing.Size(190, 60);
-            this.btnActivateCarCard.TabIndex = 4;
-            this.btnActivateCarCard.Text = "Активировать карту покупателя";
-            this.btnActivateCarCard.UseVisualStyleBackColor = true;
-            this.btnActivateCarCard.Click += new System.EventHandler(this.btnActivateCarCard_Click);
+            this.ActivateClientCardButton.Location = new System.Drawing.Point(62, 217);
+            this.ActivateClientCardButton.Name = "ActivateClientCardButton";
+            this.ActivateClientCardButton.Size = new System.Drawing.Size(190, 60);
+            this.ActivateClientCardButton.TabIndex = 4;
+            this.ActivateClientCardButton.Text = "Активировать карту покупателя";
+            this.ActivateClientCardButton.UseVisualStyleBackColor = true;
+            this.ActivateClientCardButton.Click += new System.EventHandler(this.ActivateClientCardButton_Click);
             // 
-            // btnFindDealsByCar_id
+            // FindDealsByClientButton
             // 
-            this.btnFindDealsByCar_id.Location = new System.Drawing.Point(62, 85);
-            this.btnFindDealsByCar_id.Name = "btnFindDealsByCar_id";
-            this.btnFindDealsByCar_id.Size = new System.Drawing.Size(190, 60);
-            this.btnFindDealsByCar_id.TabIndex = 2;
-            this.btnFindDealsByCar_id.Text = "Обзор сделок с выбранным покупателем";
-            this.btnFindDealsByCar_id.UseVisualStyleBackColor = true;
-            this.btnFindDealsByCar_id.Click += new System.EventHandler(this.btnFindDeals_Click);
+            this.FindDealsByClientButton.Location = new System.Drawing.Point(62, 85);
+            this.FindDealsByClientButton.Name = "FindDealsByClientButton";
+            this.FindDealsByClientButton.Size = new System.Drawing.Size(190, 60);
+            this.FindDealsByClientButton.TabIndex = 2;
+            this.FindDealsByClientButton.Text = "Обзор сделок с выбранным покупателем";
+            this.FindDealsByClientButton.UseVisualStyleBackColor = true;
+            this.FindDealsByClientButton.Click += new System.EventHandler(this.FindDealsByClientButton_Click);
             // 
-            // btnCarAdd
+            // AddNewClientButton
             // 
-            this.btnCarAdd.Location = new System.Drawing.Point(62, 151);
-            this.btnCarAdd.Name = "btnCarAdd";
-            this.btnCarAdd.Size = new System.Drawing.Size(190, 60);
-            this.btnCarAdd.TabIndex = 3;
-            this.btnCarAdd.Text = "Добавить нового покупателя";
-            this.btnCarAdd.UseVisualStyleBackColor = true;
-            this.btnCarAdd.Click += new System.EventHandler(this.btnCarAdd_Click);
+            this.AddNewClientButton.Location = new System.Drawing.Point(62, 151);
+            this.AddNewClientButton.Name = "AddNewClientButton";
+            this.AddNewClientButton.Size = new System.Drawing.Size(190, 60);
+            this.AddNewClientButton.TabIndex = 3;
+            this.AddNewClientButton.Text = "Добавить нового покупателя";
+            this.AddNewClientButton.UseVisualStyleBackColor = true;
+            this.AddNewClientButton.Click += new System.EventHandler(this.AddNewClientButton_Click);
             // 
-            // dgvViewCars
+            // ClientTable
             // 
-            this.dgvViewCars.AllowUserToAddRows = false;
-            this.dgvViewCars.AllowUserToDeleteRows = false;
-            this.dgvViewCars.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewCars.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.car_id,
-            this.carmark,
-            this.cardnum});
-            this.dgvViewCars.Location = new System.Drawing.Point(6, 3);
-            this.dgvViewCars.Name = "dgvViewCars";
-            this.dgvViewCars.Size = new System.Drawing.Size(493, 459);
-            this.dgvViewCars.TabIndex = 1;
-            // 
-            // car_id
-            // 
-            this.car_id.HeaderText = "ID";
-            this.car_id.Name = "car_id";
-            this.car_id.Width = 50;
-            // 
-            // carmark
-            // 
-            this.carmark.HeaderText = "Марка автомобиля";
-            this.carmark.Name = "carmark";
-            this.carmark.Width = 200;
-            // 
-            // cardnum
-            // 
-            this.cardnum.HeaderText = "Номер карты";
-            this.cardnum.Name = "cardnum";
-            this.cardnum.Width = 200;
+            this.ClientTable.AllowUserToAddRows = false;
+            this.ClientTable.AllowUserToDeleteRows = false;
+            this.ClientTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.ClientTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ClientId,
+            this.ClientFirstName,
+            this.ClientLastName,
+            this.ClientMiddleName,
+            this.CardId,
+            this.DiscountPercent,
+            this.ActivationDate,
+            this.CredId});
+            this.ClientTable.Location = new System.Drawing.Point(6, 3);
+            this.ClientTable.Name = "ClientTable";
+            this.ClientTable.Size = new System.Drawing.Size(493, 459);
+            this.ClientTable.TabIndex = 1;
             // 
             // tabStaffTable
             // 
@@ -457,6 +449,86 @@ namespace Admin
             this.EmployeeTable.Name = "EmployeeTable";
             this.EmployeeTable.Size = new System.Drawing.Size(530, 459);
             this.EmployeeTable.TabIndex = 0;
+            // 
+            // EmployeeId
+            // 
+            this.EmployeeId.HeaderText = "ID";
+            this.EmployeeId.Name = "EmployeeId";
+            this.EmployeeId.ReadOnly = true;
+            this.EmployeeId.Width = 40;
+            // 
+            // EmployeeConnectedCreds
+            // 
+            this.EmployeeConnectedCreds.HeaderText = "Креды";
+            this.EmployeeConnectedCreds.Name = "EmployeeConnectedCreds";
+            this.EmployeeConnectedCreds.ReadOnly = true;
+            // 
+            // EmployeeSurname
+            // 
+            this.EmployeeSurname.HeaderText = "Фамилия";
+            this.EmployeeSurname.Name = "EmployeeSurname";
+            this.EmployeeSurname.ReadOnly = true;
+            // 
+            // EmployeeName
+            // 
+            this.EmployeeName.HeaderText = "Имя";
+            this.EmployeeName.Name = "EmployeeName";
+            this.EmployeeName.ReadOnly = true;
+            // 
+            // EmployeeMiddleName
+            // 
+            this.EmployeeMiddleName.HeaderText = "Отчество";
+            this.EmployeeMiddleName.Name = "EmployeeMiddleName";
+            this.EmployeeMiddleName.ReadOnly = true;
+            // 
+            // EmployeeBirthday
+            // 
+            this.EmployeeBirthday.HeaderText = "Дата рождения";
+            this.EmployeeBirthday.Name = "EmployeeBirthday";
+            this.EmployeeBirthday.ReadOnly = true;
+            // 
+            // EmploymentDate
+            // 
+            this.EmploymentDate.HeaderText = "Дата найма";
+            this.EmploymentDate.Name = "EmploymentDate";
+            this.EmploymentDate.ReadOnly = true;
+            // 
+            // EmployeeContractEnd
+            // 
+            this.EmployeeContractEnd.HeaderText = "Дата окончания контакта";
+            this.EmployeeContractEnd.Name = "EmployeeContractEnd";
+            this.EmployeeContractEnd.ReadOnly = true;
+            // 
+            // EmployeePosition
+            // 
+            this.EmployeePosition.HeaderText = "Должность";
+            this.EmployeePosition.Name = "EmployeePosition";
+            this.EmployeePosition.ReadOnly = true;
+            // 
+            // EmployeeSalary
+            // 
+            this.EmployeeSalary.HeaderText = "Зарплата";
+            this.EmployeeSalary.Name = "EmployeeSalary";
+            this.EmployeeSalary.ReadOnly = true;
+            this.EmployeeSalary.Width = 80;
+            // 
+            // EmployeeAddress
+            // 
+            this.EmployeeAddress.HeaderText = "Адрес";
+            this.EmployeeAddress.Name = "EmployeeAddress";
+            this.EmployeeAddress.ReadOnly = true;
+            // 
+            // EmployeePhone
+            // 
+            this.EmployeePhone.HeaderText = "Телефон";
+            this.EmployeePhone.Name = "EmployeePhone";
+            this.EmployeePhone.ReadOnly = true;
+            // 
+            // EmployeeIsWorking
+            // 
+            this.EmployeeIsWorking.HeaderText = "Работает";
+            this.EmployeeIsWorking.Name = "EmployeeIsWorking";
+            this.EmployeeIsWorking.ReadOnly = true;
             // 
             // tabAdmin
             // 
@@ -878,85 +950,54 @@ namespace Admin
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
             // 
-            // EmployeeId
+            // ClientId
             // 
-            this.EmployeeId.HeaderText = "ID";
-            this.EmployeeId.Name = "EmployeeId";
-            this.EmployeeId.ReadOnly = true;
-            this.EmployeeId.Width = 40;
+            this.ClientId.HeaderText = "ID";
+            this.ClientId.Name = "ClientId";
+            this.ClientId.ReadOnly = true;
+            this.ClientId.Width = 50;
             // 
-            // EmployeeConnectedCreds
+            // ClientFirstName
             // 
-            this.EmployeeConnectedCreds.HeaderText = "Креды";
-            this.EmployeeConnectedCreds.Name = "EmployeeConnectedCreds";
-            this.EmployeeConnectedCreds.ReadOnly = true;
+            this.ClientFirstName.HeaderText = "Имя";
+            this.ClientFirstName.Name = "ClientFirstName";
+            this.ClientFirstName.ReadOnly = true;
             // 
-            // EmployeeSurname
+            // ClientLastName
             // 
-            this.EmployeeSurname.HeaderText = "Фамилия";
-            this.EmployeeSurname.Name = "EmployeeSurname";
-            this.EmployeeSurname.ReadOnly = true;
+            this.ClientLastName.HeaderText = "Фамилия";
+            this.ClientLastName.Name = "ClientLastName";
+            this.ClientLastName.ReadOnly = true;
             // 
-            // EmployeeName
+            // ClientMiddleName
             // 
-            this.EmployeeName.HeaderText = "Имя";
-            this.EmployeeName.Name = "EmployeeName";
-            this.EmployeeName.ReadOnly = true;
+            this.ClientMiddleName.HeaderText = "Отчество";
+            this.ClientMiddleName.Name = "ClientMiddleName";
+            this.ClientMiddleName.ReadOnly = true;
             // 
-            // EmployeeMiddleName
+            // CardId
             // 
-            this.EmployeeMiddleName.HeaderText = "Отчество";
-            this.EmployeeMiddleName.Name = "EmployeeMiddleName";
-            this.EmployeeMiddleName.ReadOnly = true;
+            this.CardId.HeaderText = "Карта клиента";
+            this.CardId.Name = "CardId";
+            this.CardId.ReadOnly = true;
             // 
-            // EmployeeBirthday
+            // DiscountPercent
             // 
-            this.EmployeeBirthday.HeaderText = "Дата рождения";
-            this.EmployeeBirthday.Name = "EmployeeBirthday";
-            this.EmployeeBirthday.ReadOnly = true;
+            this.DiscountPercent.HeaderText = "Скидка";
+            this.DiscountPercent.Name = "DiscountPercent";
+            this.DiscountPercent.ReadOnly = true;
             // 
-            // EmploymentDate
+            // ActivationDate
             // 
-            this.EmploymentDate.HeaderText = "Дата найма";
-            this.EmploymentDate.Name = "EmploymentDate";
-            this.EmploymentDate.ReadOnly = true;
+            this.ActivationDate.HeaderText = "Дата активации";
+            this.ActivationDate.Name = "ActivationDate";
+            this.ActivationDate.ReadOnly = true;
             // 
-            // EmployeeContractEnd
+            // CredId
             // 
-            this.EmployeeContractEnd.HeaderText = "Дата окончания контакта";
-            this.EmployeeContractEnd.Name = "EmployeeContractEnd";
-            this.EmployeeContractEnd.ReadOnly = true;
-            // 
-            // EmployeePosition
-            // 
-            this.EmployeePosition.HeaderText = "Должность";
-            this.EmployeePosition.Name = "EmployeePosition";
-            this.EmployeePosition.ReadOnly = true;
-            // 
-            // EmployeeSalary
-            // 
-            this.EmployeeSalary.HeaderText = "Зарплата";
-            this.EmployeeSalary.Name = "EmployeeSalary";
-            this.EmployeeSalary.ReadOnly = true;
-            this.EmployeeSalary.Width = 80;
-            // 
-            // EmployeeAddress
-            // 
-            this.EmployeeAddress.HeaderText = "Адрес";
-            this.EmployeeAddress.Name = "EmployeeAddress";
-            this.EmployeeAddress.ReadOnly = true;
-            // 
-            // EmployeePhone
-            // 
-            this.EmployeePhone.HeaderText = "Телефон";
-            this.EmployeePhone.Name = "EmployeePhone";
-            this.EmployeePhone.ReadOnly = true;
-            // 
-            // EmployeeIsWorking
-            // 
-            this.EmployeeIsWorking.HeaderText = "Работает";
-            this.EmployeeIsWorking.Name = "EmployeeIsWorking";
-            this.EmployeeIsWorking.ReadOnly = true;
+            this.CredId.HeaderText = "Креды";
+            this.CredId.Name = "CredId";
+            this.CredId.ReadOnly = true;
             // 
             // AdminForm
             // 
@@ -978,7 +1019,7 @@ namespace Admin
             ((System.ComponentModel.ISupportInitialize)(this.dgvViewAccounting)).EndInit();
             this.tabCarTable.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvViewCars)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ClientTable)).EndInit();
             this.tabStaffTable.ResumeLayout(false);
             this.tabStaffTable.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -1012,9 +1053,9 @@ namespace Admin
         private System.Windows.Forms.Button AddNewEmployee;
         private System.Windows.Forms.Button DeleteEmployeeButton;
         private System.Windows.Forms.TabPage tabStaffTable;
-        private System.Windows.Forms.DataGridView dgvViewCars;
-        private System.Windows.Forms.Button btnFindDealsByCar_id;
-        private System.Windows.Forms.Button btnCarAdd;
+        private System.Windows.Forms.DataGridView ClientTable;
+        private System.Windows.Forms.Button FindDealsByClientButton;
+        private System.Windows.Forms.Button AddNewClientButton;
         private System.Windows.Forms.TabPage tabCarTable;
         private System.Windows.Forms.DataGridView dgvViewAccounting;
         private System.Windows.Forms.TabPage tabAccountingTable;
@@ -1024,17 +1065,14 @@ namespace Admin
         private System.Windows.Forms.TabPage tabStationTable;
         private System.Windows.Forms.DataGridView StationsTable;
         private System.Windows.Forms.Button AddNewStationButton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn car_id;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cardnum;
-        private System.Windows.Forms.DataGridViewTextBoxColumn carmark;
         private System.Windows.Forms.MenuStrip msAdmin;
         private System.Windows.Forms.ToolStripMenuItem допФункцииToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AddNewAdmin;
         private System.Windows.Forms.ToolStripMenuItem RefreshTables;
         private System.Windows.Forms.Button GiveAdminAccessButton;
-        private System.Windows.Forms.Button btnActivateCarCard;
+        private System.Windows.Forms.Button ActivateClientCardButton;
         private System.Windows.Forms.Button RefreshStationTableButton;
-        private System.Windows.Forms.Button btnTableCarView;
+        private System.Windows.Forms.Button UpdateClientTableButton;
         private System.Windows.Forms.Button btnTableDealView;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -1096,6 +1134,14 @@ namespace Admin
         private DataGridViewTextBoxColumn EmployeeAddress;
         private DataGridViewTextBoxColumn EmployeePhone;
         private DataGridViewTextBoxColumn EmployeeIsWorking;
+        private DataGridViewTextBoxColumn ClientId;
+        private DataGridViewTextBoxColumn ClientFirstName;
+        private DataGridViewTextBoxColumn ClientLastName;
+        private DataGridViewTextBoxColumn ClientMiddleName;
+        private DataGridViewTextBoxColumn CardId;
+        private DataGridViewTextBoxColumn DiscountPercent;
+        private DataGridViewTextBoxColumn ActivationDate;
+        private DataGridViewTextBoxColumn CredId;
     }
 }
 

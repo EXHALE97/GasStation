@@ -4,51 +4,43 @@ using System.Data.SqlClient;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
-using Queries.Interfaces;
+using Queries.Support.MessageBox;
 using Queries.Support.Validators;
 
 namespace Queries.Controllers
 {
-    public class DealController
+    public class DealController : BaseController
     {
-        private DataGridView dgv;
+        private readonly DataGridView dealsTable;
         private List<Deal> dgvElements;
-        private IRepositoryFactory factory;
-        private DealValidator dealValidator;
         private List<string> errorList;
-        private string error;
 
 
-        public DealController(DataGridView dgv, IRepositoryFactory factory)
+        public DealController(DataGridView dealsTable, IRepositoryFactory factory)
         {
             dgvElements = new List<Deal>();
-            this.factory = factory;
-            this.dgv = dgv;
-            dealValidator = new DealValidator();
+            Factory = factory;
+            this.dealsTable = dealsTable;
         }
 
-        public int ShowDeals(int id)
+        public int ShowDealsForClient(int clientId)
         {
-            var foundDealList = new List<Deal>();
-            var dealList = new List<Deal>();
-            try {
-                dealList = factory.GetDealRepository().ShowBuyerDealTable(id);
+            return DoFormAction(() =>
+            {
+                var dealList = Factory.GetDealRepository().GetDealsForClient(clientId);
+
                 if (dealList.Count != 0)
                 {
-                    foreach (Deal deal in dealList)
+                    foreach (var deal in dealList)
                     {
-                        dgv.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), deal.GetDealDate());
+                        dealsTable.Rows.Add(deal.SupplyType, deal.SupplyTypeAmount, deal.CountFullPrice(),
+                            deal.CountDiscount(), deal.Price, deal.Date);
                     }
                 }
-                else MessageBox.Show("Сделок с данным пользователем не найдено!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else ErrorMessageBox.ShowCustomErrorMessage("Сделок с данным пользователем не найдено!");
 
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception) { MessageBox.Show("Неизвестная ошибка!!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            return dealList.Count;
+                return dealList.Count;
+            });
         }
 
         public void ShowTable()
@@ -56,12 +48,12 @@ namespace Queries.Controllers
             try
             {
                 
-                dgvElements = factory.GetDealRepository().ShowDealTable();
-                dgv.Rows.Clear();
+                dgvElements = Factory.GetDealRepository().ShowDealTable();
+                dealsTable.Rows.Clear();
                 foreach (Deal deal in dgvElements)
                 {
-                    //string cardnum = factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()); 
-                    //dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                    //string cardnum = factory.GetClientRepository().FindCardNumByCarID(deal.GetCarID()); 
+                    //dealsTable.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
                     //    factory.GetEmployeeRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
                     //    deal.GetDealPrice(), cardnum, deal.GetDealDate());
                 }
@@ -77,11 +69,11 @@ namespace Queries.Controllers
         {
             try
             {
-                dgvElements = factory.GetDealRepository().ShowWorkerDealTable(ID);
-                dgv.Rows.Clear();
+                dgvElements = Factory.GetDealRepository().ShowWorkerDealTable(ID);
+                dealsTable.Rows.Clear();
                 foreach (Deal deal in dgvElements)
                 {
-                    dgv.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
+                    //dealsTable.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), factory.GetClientRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
                 }
             }
             catch (SqlException e)
@@ -95,11 +87,11 @@ namespace Queries.Controllers
         {
             try
             {
-                dgvElements = factory.GetDealRepository().ShowUserDealTable(factory.GetCarRepository().FindCarIDByCardnum(cardnum));
-                dgv.Rows.Clear();
+                dgvElements = Factory.GetDealRepository().ShowUserDealTable(Factory.GetClientRepository().FindCarIDByCardnum(cardnum));
+                dealsTable.Rows.Clear();
                 foreach (Deal deal in dgvElements)
                 {
-                    dgv.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), deal.GetDealDate());
+                    //dealsTable.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), deal.GetDealDate());
                 }
             }
             catch (SqlException e)
@@ -115,7 +107,7 @@ namespace Queries.Controllers
             {
                 //List<int> IDs = new List<int>();
                 //IDs = factory.GetEmployeeRepository().FindStaffIDByStationID(station_id);
-                //dgv.Rows.Clear();
+                //dealsTable.Rows.Clear();
                 //if (IDs.Count != 0)
                 //{
                 //    List<Deal> stationDealList = new List<Deal>(); 
@@ -124,9 +116,9 @@ namespace Queries.Controllers
                 //        stationDealList = factory.GetDealRepository().ShowWorkerDealTable(id);
                 //        foreach (Deal deal in stationDealList)
                 //        {
-                //            dgv.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
+                //            dealsTable.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
                 //                factory.GetEmployeeRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
-                //                deal.GetDealPrice(), factory.GetCarRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
+                //                deal.GetDealPrice(), factory.GetClientRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
                 //        }
                 //    }
                 //}
@@ -143,19 +135,19 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = dealValidator.CheckUpdate(id, deal, out errorList))
+                if (checkFlag = DealValidator.CheckUpdate(id, deal, out errorList))
                 {
-                    factory.GetDealRepository().UpdateDealTable(id, deal);
+                    Factory.GetDealRepository().UpdateDealTable(id, deal);
                 }
                 else
                 {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //int k = 0;
+                    //foreach (string str in errorList)
+                    //{
+                    //    k++;
+                    //    error += "Ошибка №" + k + ": " + str + " \n";
+                    //}
+                    //MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (SqlException e)
@@ -176,19 +168,19 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = dealValidator.CheckAddition(deal, out errorList))
+                if (checkFlag = DealValidator.CheckAddition(deal, out errorList))
                 {
-                    factory.GetDealRepository().AddToDealTable(deal);
+                    Factory.GetDealRepository().AddToDealTable(deal);
                 }
                 else
                 {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //int k = 0;
+                    //foreach (string str in errorList)
+                    //{
+                    //    k++;
+                    //    error += "Ошибка №" + k + ": " + str + " \n";
+                    //}
+                    //MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (SqlException e)

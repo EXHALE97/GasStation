@@ -17,7 +17,7 @@ namespace Queries.Support.ComboBox
 
         public void CbCardNumFill()
         {
-            comboBoxElements = factory.GetCarRepository().GetCardNumList();
+            comboBoxElements = factory.GetClientRepository().GetCardNumList();
             foreach (var st in comboBoxElements)
             {
                 comboBox.Items.Add(st);

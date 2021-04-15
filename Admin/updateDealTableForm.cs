@@ -69,16 +69,16 @@ namespace Admin
                     dealDate = Convert.ToDateTime(updateRow.Cells["dealdate"].Value);
                 }
 
-                Deal deal = new Deal();
-                deal.dealSet(factory.GetCarRepository().FindCarIDByCardnum(cardNum), fuelType, fuelAmount, dealPrice, dealDate);
+                //Deal deal = new Deal();
+                //deal.dealSet(factory.GetClientRepository().FindCarIDByCardnum(cardNum), fuelType, fuelAmount, dealPrice, dealDate);
                 var cell = dgv[0, dgv.CurrentRow.Index];
                 int id = Convert.ToInt32(cell.Value);
                 DealController dealController = new DealController(dgv, factory);
-                if (dealController.UpdateTable(id, deal))
-                {
-                    MessageBox.Show("Операция выполнена успешно!");
-                    Close();
-                }
+                //if (dealController.UpdateTable(id, deal))
+                //{
+                //    MessageBox.Show("Операция выполнена успешно!");
+                //    Close();
+                //}
             }
             catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

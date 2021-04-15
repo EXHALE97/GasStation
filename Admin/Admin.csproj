@@ -57,11 +57,11 @@
     <Compile Include="AddNewAdminForm.Designer.cs">
       <DependentUpon>AddNewAdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddToCarTableForm.cs">
+    <Compile Include="AddNewClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AddToCarTableForm.Designer.cs">
-      <DependentUpon>AddToCarTableForm.cs</DependentUpon>
+    <Compile Include="AddNewClientForm.Designer.cs">
+      <DependentUpon>AddNewClientForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AddUserToLoginTableForm.cs">
       <SubType>Form</SubType>
@@ -93,11 +93,11 @@
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DealList.cs">
+    <Compile Include="DealListForClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DealList.Designer.cs">
-      <DependentUpon>DealList.cs</DependentUpon>
+    <Compile Include="DealListForClientForm.Designer.cs">
+      <DependentUpon>DealListForClientForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -116,8 +116,8 @@
     <EmbeddedResource Include="AddNewAdminForm.resx">
       <DependentUpon>AddNewAdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddToCarTableForm.resx">
-      <DependentUpon>AddToCarTableForm.cs</DependentUpon>
+    <EmbeddedResource Include="AddNewClientForm.resx">
+      <DependentUpon>AddNewClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddUserToLoginTableForm.resx">
       <DependentUpon>AddUserToLoginTableForm.cs</DependentUpon>
@@ -134,8 +134,8 @@
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DealList.resx">
-      <DependentUpon>DealList.cs</DependentUpon>
+    <EmbeddedResource Include="DealListForClientForm.resx">
+      <DependentUpon>DealListForClientForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

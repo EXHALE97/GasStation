@@ -1,6 +1,6 @@
 ﻿namespace Admin
 {
-    partial class AddToCarTableForm
+    partial class AddNewClientForm
     {
         /// <summary>
         /// Required designer variable.

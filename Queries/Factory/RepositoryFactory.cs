@@ -28,9 +28,9 @@ namespace Queries.Factory
             return new EmployeeRepository(dbc);
         }
 
-        public ICarRepository GetCarRepository()
+        public IClientRepository GetClientRepository()
         {
-            return new CarRepository(dbc);
+            return new ClientRepository(dbc);
         }
 
         public IDealRepository GetDealRepository()

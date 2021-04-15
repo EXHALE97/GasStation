@@ -8,7 +8,7 @@ namespace Queries.Factory
 
         IEmployeeRepository GetEmployeeRepository();
 
-        ICarRepository GetCarRepository();
+        IClientRepository GetClientRepository();
 
         IDealRepository GetDealRepository();
 

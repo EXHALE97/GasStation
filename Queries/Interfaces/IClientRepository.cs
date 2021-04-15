@@ -4,9 +4,9 @@ using Queries.Entities;
 
 namespace Queries.Interfaces
 {
-    public interface ICarRepository : IDisposable
+    public interface IClientRepository : IDisposable
     {
-        List<Client> GetCars();
+        List<Client> GetClients();
 
         List<string> GetCardNumList();
 

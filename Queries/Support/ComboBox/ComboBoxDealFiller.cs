@@ -53,10 +53,10 @@ namespace Queries.Support.ComboBox
 
         public void СbCardnumFill()
         {
-            List<Client> comboBoxCarElements = factory.GetCarRepository().GetCars();
+            List<Client> comboBoxCarElements = factory.GetClientRepository().GetClients();
             foreach (Client car in comboBoxCarElements)
             {               
-                cb.Items.Add(car.GetCardNum().Trim().Replace(" ", string.Empty));
+                //cb.Items.Add(car.GetCardNum().Trim().Replace(" ", string.Empty));
             }
         }
 

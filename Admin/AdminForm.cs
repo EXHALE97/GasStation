@@ -11,7 +11,7 @@ namespace Admin
     {
         private readonly IRepositoryFactory factory;
         private readonly EmployeeController employeeController;
-        private readonly CarController clientController;
+        private readonly ClientController clientController;
         private readonly AccountController accountingController;
         private readonly DealController dealController;
         private readonly StationController stationController;
@@ -26,7 +26,7 @@ namespace Admin
             this.factory = factory;
             stationController = new StationController(StationsTable, factory);
             employeeController = new EmployeeController(EmployeeTable, factory);
-            clientController = new CarController(dgvViewCars, factory);
+            clientController = new ClientController(ClientTable, factory);
             accountingController = new AccountController(dgvViewAccounting, factory);
             dealController = new DealController(dgvViewDeal, factory);
             supplyController = new SupplyController(dgvViewSupply, factory);
@@ -41,7 +41,7 @@ namespace Admin
             
             stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
-            //clientController.ShowTable();
+            clientController.ShowTable();
             //accountingController.ShowTable();
             //dealController.ShowTable();
             //supplyController.ShowTable();
@@ -80,14 +80,14 @@ namespace Admin
             catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
         }
 
-        private void btnFindDeals_Click(object sender, EventArgs e)
+        private void FindDealsByClientButton_Click(object sender, EventArgs e)
         {
-            new DealList(Convert.ToInt32(dgvViewCars[0, dgvViewCars.CurrentRow.Index].Value), factory).ShowDialog();
+            new DealListForClientForm(int.Parse(ClientTable.CurrentRow.Cells["ClientId"].Value.ToString()), factory).ShowDialog();
         }
 
-        private void btnCarAdd_Click(object sender, EventArgs e)
+        private void AddNewClientButton_Click(object sender, EventArgs e)
         {
-            new AddToCarTableForm(factory, dgvViewCars).ShowDialog();
+            new AddNewClientForm(factory, ClientTable).ShowDialog();
             clientController.ShowTable();
         }
 
@@ -98,7 +98,7 @@ namespace Admin
 
         private void AddNewStationButton_Click(object sender, EventArgs e)
         {
-            new AddNewStationForm(factory, dgvViewCars).ShowDialog();
+            new AddNewStationForm(factory, ClientTable).ShowDialog();
             stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
         }
 
@@ -127,9 +127,9 @@ namespace Admin
             new AddWorkerToLoginTableForm(EmployeeTable.CurrentRow, factory).ShowDialog();
         }
 
-        private void btnActivateCarCard_Click(object sender, EventArgs e)
+        private void ActivateClientCardButton_Click(object sender, EventArgs e)
         {
-            new AddUserToLoginTableForm(dgvViewCars.CurrentRow, factory).ShowDialog();
+            new AddUserToLoginTableForm(ClientTable.CurrentRow, factory).ShowDialog();
         }
 
         private void RefreshStationTableButton_Click(object sender, EventArgs e)
@@ -137,7 +137,7 @@ namespace Admin
             stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
         }
 
-        private void ViewClientTable(object sender, EventArgs e)
+        private void UpdateClientTableButton_Click(object sender, EventArgs e)
         {
             clientController.ShowTable();
         }

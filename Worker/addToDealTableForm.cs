@@ -98,14 +98,14 @@ namespace Worker
                     }
                 }
 
-                Deal deal = new Deal();
-                deal.dealSet(0, factory.GetCarRepository().FindCarIDByCardnum(cardnum), ID, fueltype, fuelamount, dealprice, dealdate);
-                DealController dealController = new DealController(dgv, factory);
-                if (dealController.AddToTable(deal))
-                {
-                    MessageBox.Show("Операция выполнена успешно!");
-                    Close();
-                }
+                //Deal deal = new Deal();
+                //deal.dealSet(0, factory.GetClientRepository().FindCarIDByCardnum(cardnum), ID, fueltype, fuelamount, dealprice, dealdate);
+                //DealController dealController = new DealController(dgv, factory);
+                //if (dealController.AddToTable(deal))
+                //{
+                //    MessageBox.Show("Операция выполнена успешно!");
+                //    Close();
+                //}
             }
             catch (Exception pe) { MessageBox.Show(pe.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
 

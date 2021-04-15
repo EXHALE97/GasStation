@@ -1,26 +1,28 @@
-﻿namespace Queries.Entities
+﻿using System;
+
+namespace Queries.Entities
 {
     public class Client
     {
-        protected int b_car_id { private set; get; }
-        protected string b_carmark { private set; get; }
-        protected string b_cardnum { private set; get; }
+        public int Id { get; }
+        public string FirstName { get; }
+        public string LastName { get; }
+        public string MiddleName { get; }
+        public int CardId { get; }
+        public int DiscountPercent { get; }
+        public DateTime ActivationDate { get; }
+        public int CredId { get; }
 
-        public void buyerSet(int car_id, string carmark, string cardnum)
+        public Client(int id, string firstName, string lastName, string middleName, int cardId, int discountPercent, DateTime activationDate, int credId)
         {
-            b_car_id = car_id;
-            b_carmark = carmark;
-            b_cardnum = cardnum;
+            Id = id;
+            FirstName = firstName;
+            LastName = lastName;
+            MiddleName = middleName;
+            CardId = cardId;
+            DiscountPercent = discountPercent;
+            ActivationDate = activationDate;
+            CredId = credId;
         }
-
-        public void buyerSet(string carmark, string cardnum)
-        {
-            b_carmark = carmark;
-            b_cardnum = cardnum;
-        }
-
-        public int GetCarID() => b_car_id;
-        public string GetCarMark() => b_carmark;
-        public string GetCardNum() => b_cardnum;
     }
 }

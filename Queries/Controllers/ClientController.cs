@@ -8,41 +8,29 @@ using Queries.Support.Validators;
 
 namespace Queries.Controllers
 {
-    public class CarController
+    public class ClientController : BaseController
     {
-        private DataGridView dgv;
-        private List<Client> dgvElements;
-        private IRepositoryFactory factory;
-        private CarValidator carValidator;
-        private List<string> errorList;
+        private readonly DataGridView table;
         private string error;
 
-        public CarController(DataGridView dgv, IRepositoryFactory factory)
+        public ClientController(DataGridView table, IRepositoryFactory factory)
         {
-            this.factory = factory;
-            this.dgv = dgv;
-            carValidator = new CarValidator();
+            Factory = factory;
+            this.table = table;
         }
 
         public void ShowTable()
         {
-            try
+            DoFormAction(() =>
             {
-                dgvElements = factory.GetCarRepository().GetCars();
-                dgv.Rows.Clear();
-                foreach (Client car in dgvElements)
+                table.Rows.Clear();
+
+                foreach (var client in Factory.GetClientRepository().GetClients())
                 {
-                    dgv.Rows.Add(car.GetCarID(), car.GetCarMark(), car.GetCardNum());
+                    table.Rows.Add(client.Id, client.FirstName, client.LastName, client.MiddleName ?? "-",
+                        client.CardId, client.DiscountPercent, client.ActivationDate, client.CredId == 0 ? "-" : client.CredId.ToString());
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            });
         }
 
         public bool AddToTable(Client car)
@@ -50,9 +38,10 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = carValidator.CheckAddition(car, out errorList))
+                var errorList = new List<string>();
+                if (ClientValidator.CheckAddition(car, out errorList))
                 {
-                    factory.GetCarRepository().AddToCarTable(car);
+                    Factory.GetClientRepository().AddToCarTable(car);
                 }
                 else
                 {
