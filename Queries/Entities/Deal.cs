@@ -5,20 +5,31 @@ namespace Queries.Entities
     public class Deal
     {
         public int Id { get; }
+        public int ClientCardId { get; }
         public string Client { get; }
         public string Employee { get; }
         public string Station { get; }
         public string SupplyType { get; }
-        public int SupplyTypeAmount { get; }
+        public double SupplyTypeAmount { get; }
         public int DiscountPercent { get; }
-        public int Price { get; }
+        public double Price { get; }
         public DateTime Date { get; }
 
-
-        public Deal(int id, string client, string employee, string station, string supplyType, int supplyTypeAmount,
-            int discountPercent, int price, DateTime date)
+        public Deal(int id, int clientCardId, string supplyType, double supplyTypeAmount, double price, DateTime date)
         {
             Id = id;
+            ClientCardId = clientCardId;
+            SupplyType = supplyType;
+            SupplyTypeAmount = supplyTypeAmount;
+            Price = price;
+            Date = date;
+        }
+
+        public Deal(int id, int clientCardId, string client, string employee, string station, string supplyType, double supplyTypeAmount,
+            int discountPercent, double price, DateTime date)
+        {
+            Id = id;
+            ClientCardId = clientCardId;
             Client = client;
             Employee = employee;
             Station = station;
@@ -31,12 +42,12 @@ namespace Queries.Entities
 
         public double CountFullPrice()
         {
-            return Price + Price * ((double) DiscountPercent / 100);
+            return Price / ((double)(100 - DiscountPercent) / 100);
         }
 
         public double CountDiscount()
         {
-            return Price * ((double) DiscountPercent / 100);
+            return CountFullPrice() - Price;
         }
     }
 }

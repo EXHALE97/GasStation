@@ -153,11 +153,7 @@ namespace Worker
 
         private void updateDealTableForm_Load(object sender, EventArgs e)
         {
-            cbFuelType.Items.Add("A92");
-            cbFuelType.Items.Add("A95");
-            cbFuelType.Items.Add("A95+");
-            ComboBoxDealFiller comboBoxDealFiller = new ComboBoxDealFiller(factory);
-            comboBoxDealFiller.СbCardnumFill();
+            new ComboBoxDealFiller(factory).FillCardNumbers(cbCardNum);
         }
     }
 }

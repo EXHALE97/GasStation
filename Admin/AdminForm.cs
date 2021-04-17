@@ -95,7 +95,7 @@ namespace Admin
 
         private void DealUpdateButton_Click(object sender, EventArgs e)
         {
-            new UpdateDealTableForm(DealTable.CurrentRow, factory, DealTable).ShowDialog();
+            new UpdateDealTableForm(DealTable.CurrentRow, factory).ShowDialog();
             dealController.ShowTable();
         }
 

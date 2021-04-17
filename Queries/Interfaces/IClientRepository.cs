@@ -10,9 +10,13 @@ namespace Queries.Interfaces
 
         List<int> GetNonActivatedClientCards();
 
+        List<int> GetActivatedClientCards();
+
         void AddToClientTable(Client client);
 
         string FindClientById(int id);
+
+        int GetDiscountPercentForClient(int clientCardId);
 
         void SetClientCredentials(int clientId, Credentials credentials);
 

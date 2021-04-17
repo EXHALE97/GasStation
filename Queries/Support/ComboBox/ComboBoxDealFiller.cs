@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Queries.Entities;
 using Queries.Factory;
 
 namespace Queries.Support.ComboBox
@@ -31,6 +30,22 @@ namespace Queries.Support.ComboBox
             }
         }
 
+        public void FillCardNumbers(System.Windows.Forms.ComboBox comboBox)
+        {
+            foreach (var id in factory.GetClientRepository().GetActivatedClientCards())
+            {
+                comboBox.Items.Add(id);
+            }
+        }
+
+        public void FillSupplyTypes(System.Windows.Forms.ComboBox comboBox)
+        {
+            foreach (var supplyType in factory.GetSupplyRepository().GetSupplyTypes())
+            {
+                comboBox.Items.Add(supplyType.Name);
+            }
+        }
+
         public void СbOrgFill(System.Windows.Forms.ComboBox comboBox)
         {
             comboBoxElements = factory.GetStationRepository().GetOrganizations();
@@ -49,14 +64,7 @@ namespace Queries.Support.ComboBox
             }
         }
 
-        public void СbCardnumFill()
-        {
-            List<Client> comboBoxCarElements = factory.GetClientRepository().GetClients();
-            foreach (Client car in comboBoxCarElements)
-            {               
-                //comboBox.Items.Add(car.GetCardNum().Trim().Replace(" ", string.Empty));
-            }
-        }
+        
 
         private string RemoveSpaces(string inputString)
         {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
@@ -13,8 +14,12 @@ namespace Queries.Controllers
     {
         private readonly DataGridView dealsTable;
         private List<Deal> dgvElements;
-        private List<string> errorList;
 
+        public DealController(IRepositoryFactory factory)
+        {
+            dgvElements = new List<Deal>();
+            Factory = factory;
+        }
 
         public DealController(DataGridView dealsTable, IRepositoryFactory factory)
         {
@@ -50,7 +55,7 @@ namespace Queries.Controllers
                 dealsTable.Rows.Clear();
                 foreach (var deal in Factory.GetDealRepository().GetDeals())
                 {
-                    dealsTable.Rows.Add(deal.Id, deal.Client, deal.Employee, deal.Station, deal.SupplyType,
+                    dealsTable.Rows.Add(deal.Id, deal.ClientCardId, deal.Client, deal.Employee, deal.Station, deal.SupplyType,
                         deal.SupplyTypeAmount, deal.Price, deal.CountDiscount(), deal.CountFullPrice(), deal.Date);
                 }
             });
@@ -87,43 +92,27 @@ namespace Queries.Controllers
                 dealsTable.Rows.Clear();
                 foreach (var deal in Factory.GetDealRepository().GetDealsByStation(Factory.GetStationRepository().GetStationIdByName(stationName)))
                 {
-                    dealsTable.Rows.Add(deal.Id, deal.Client, deal.Employee, deal.Station, deal.SupplyType,
+                    dealsTable.Rows.Add(deal.Id, deal.ClientCardId, deal.Client, deal.Employee, deal.Station, deal.SupplyType,
                         deal.SupplyTypeAmount, deal.Price, deal.CountDiscount(), deal.CountFullPrice(), deal.Date); ;
                 }
             });
         }
 
-        public bool UpdateTable(int id, Deal deal)
+        public bool UpdateTable(Deal deal)
         {
-            bool checkFlag = false;
-            try
+            return DoFormAction(() =>
             {
-                if (checkFlag = DealValidator.CheckUpdate(id, deal, out errorList))
+                if (DealValidator.CheckUpdate(deal, out var errorList))
                 {
-                    Factory.GetDealRepository().UpdateDealTable(id, deal);
+                    Factory.GetDealRepository().UpdateDealTable(deal);
+                    return true;
                 }
-                else
-                {
-                    //int k = 0;
-                    //foreach (string str in errorList)
-                    //{
-                    //    k++;
-                    //    error += "Ошибка №" + k + ": " + str + " \n";
-                    //}
-                    //MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
 
         public bool AddToTable(Deal deal)
@@ -131,7 +120,7 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = DealValidator.CheckAddition(deal, out errorList))
+                if (DealValidator.CheckAddition(deal, out var errorList))
                 {
                     Factory.GetDealRepository().AddToDealTable(deal);
                 }

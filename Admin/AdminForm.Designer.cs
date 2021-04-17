@@ -100,16 +100,6 @@ namespace Admin
             this.DealTableRefreshButton = new System.Windows.Forms.Button();
             this.DealUpdateButton = new System.Windows.Forms.Button();
             this.DealTable = new System.Windows.Forms.DataGridView();
-            this.DealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmployeeFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StationFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupplyTypeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DealFinalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DealDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PriceWithoutDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DealDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSupplyTable = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.cbSupplyFilterByStation = new System.Windows.Forms.ComboBox();
@@ -128,6 +118,17 @@ namespace Admin
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
+            this.DealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientCardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyTypeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealFinalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceWithoutDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -788,6 +789,7 @@ namespace Admin
             this.DealTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DealTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DealId,
+            this.ClientCardId,
             this.ClientName,
             this.EmployeeFullName,
             this.StationFullName,
@@ -801,69 +803,6 @@ namespace Admin
             this.DealTable.Name = "DealTable";
             this.DealTable.Size = new System.Drawing.Size(595, 462);
             this.DealTable.TabIndex = 1;
-            // 
-            // DealId
-            // 
-            this.DealId.HeaderText = "ID";
-            this.DealId.Name = "DealId";
-            this.DealId.ReadOnly = true;
-            this.DealId.Width = 40;
-            // 
-            // ClientName
-            // 
-            this.ClientName.HeaderText = "Покупатель";
-            this.ClientName.Name = "ClientName";
-            this.ClientName.ReadOnly = true;
-            // 
-            // EmployeeFullName
-            // 
-            this.EmployeeFullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.EmployeeFullName.HeaderText = "Сотрудник";
-            this.EmployeeFullName.Name = "EmployeeFullName";
-            this.EmployeeFullName.ReadOnly = true;
-            // 
-            // StationFullName
-            // 
-            this.StationFullName.HeaderText = "Станция";
-            this.StationFullName.Name = "StationFullName";
-            // 
-            // SupplyType
-            // 
-            this.SupplyType.HeaderText = "Товар";
-            this.SupplyType.Name = "SupplyType";
-            this.SupplyType.Width = 50;
-            // 
-            // SupplyTypeAmount
-            // 
-            this.SupplyTypeAmount.HeaderText = "Количество товара";
-            this.SupplyTypeAmount.Name = "SupplyTypeAmount";
-            this.SupplyTypeAmount.Width = 50;
-            // 
-            // DealFinalPrice
-            // 
-            this.DealFinalPrice.HeaderText = "Сумма сделки";
-            this.DealFinalPrice.Name = "DealFinalPrice";
-            this.DealFinalPrice.Width = 50;
-            // 
-            // DealDiscount
-            // 
-            this.DealDiscount.HeaderText = "Скидка";
-            this.DealDiscount.Name = "DealDiscount";
-            this.DealDiscount.ReadOnly = true;
-            this.DealDiscount.Width = 50;
-            // 
-            // PriceWithoutDiscount
-            // 
-            this.PriceWithoutDiscount.HeaderText = "Цена без скидки";
-            this.PriceWithoutDiscount.Name = "PriceWithoutDiscount";
-            this.PriceWithoutDiscount.ReadOnly = true;
-            this.PriceWithoutDiscount.Width = 50;
-            // 
-            // DealDate
-            // 
-            this.DealDate.HeaderText = "Дата сделки";
-            this.DealDate.Name = "DealDate";
-            this.DealDate.Width = 150;
             // 
             // tabSupplyTable
             // 
@@ -1018,6 +957,76 @@ namespace Admin
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
             // 
+            // DealId
+            // 
+            this.DealId.HeaderText = "ID";
+            this.DealId.Name = "DealId";
+            this.DealId.ReadOnly = true;
+            this.DealId.Width = 40;
+            // 
+            // ClientCardId
+            // 
+            this.ClientCardId.HeaderText = "Карта клиента";
+            this.ClientCardId.Name = "ClientCardId";
+            this.ClientCardId.ReadOnly = true;
+            this.ClientCardId.Width = 50;
+            // 
+            // ClientName
+            // 
+            this.ClientName.HeaderText = "Покупатель";
+            this.ClientName.Name = "ClientName";
+            this.ClientName.ReadOnly = true;
+            // 
+            // EmployeeFullName
+            // 
+            this.EmployeeFullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.EmployeeFullName.HeaderText = "Сотрудник";
+            this.EmployeeFullName.Name = "EmployeeFullName";
+            this.EmployeeFullName.ReadOnly = true;
+            // 
+            // StationFullName
+            // 
+            this.StationFullName.HeaderText = "Станция";
+            this.StationFullName.Name = "StationFullName";
+            // 
+            // SupplyType
+            // 
+            this.SupplyType.HeaderText = "Товар";
+            this.SupplyType.Name = "SupplyType";
+            this.SupplyType.Width = 50;
+            // 
+            // SupplyTypeAmount
+            // 
+            this.SupplyTypeAmount.HeaderText = "Количество товара";
+            this.SupplyTypeAmount.Name = "SupplyTypeAmount";
+            this.SupplyTypeAmount.Width = 50;
+            // 
+            // DealFinalPrice
+            // 
+            this.DealFinalPrice.HeaderText = "Сумма сделки";
+            this.DealFinalPrice.Name = "DealFinalPrice";
+            this.DealFinalPrice.Width = 50;
+            // 
+            // DealDiscount
+            // 
+            this.DealDiscount.HeaderText = "Скидка";
+            this.DealDiscount.Name = "DealDiscount";
+            this.DealDiscount.ReadOnly = true;
+            this.DealDiscount.Width = 50;
+            // 
+            // PriceWithoutDiscount
+            // 
+            this.PriceWithoutDiscount.HeaderText = "Цена без скидки";
+            this.PriceWithoutDiscount.Name = "PriceWithoutDiscount";
+            this.PriceWithoutDiscount.ReadOnly = true;
+            this.PriceWithoutDiscount.Width = 50;
+            // 
+            // DealDate
+            // 
+            this.DealDate.HeaderText = "Дата сделки";
+            this.DealDate.Name = "DealDate";
+            this.DealDate.Width = 150;
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1154,6 +1163,7 @@ namespace Admin
         private DataGridViewTextBoxColumn ActivationDate;
         private DataGridViewTextBoxColumn CredId;
         private DataGridViewTextBoxColumn DealId;
+        private DataGridViewTextBoxColumn ClientCardId;
         private DataGridViewTextBoxColumn ClientName;
         private DataGridViewTextBoxColumn EmployeeFullName;
         private DataGridViewTextBoxColumn StationFullName;

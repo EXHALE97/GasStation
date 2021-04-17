@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
@@ -12,8 +11,6 @@ namespace Queries.Repositories
 {
     public class DealRepository : BaseRepository, IDealRepository
     {
-        private DataBaseConnection dbc;
-
         public DealRepository(DataBaseConnection dbc)
         {
             DataBaseConnection = dbc;
@@ -34,13 +31,14 @@ namespace Queries.Repositories
 
                     deals.AddRange(from DbDataRecord dbDataRecord in queryResult
                         select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            int.Parse(dbDataRecord["card_id"].ToString()),
                             dbDataRecord["client_data"].ToString(),
                             dbDataRecord["employee_data"].ToString(),
                             dbDataRecord["station_name"].ToString(),
                             dbDataRecord["supply_type"].ToString(),
-                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            double.Parse(dbDataRecord["supply_type_amount"].ToString()),
                             int.Parse(dbDataRecord["discount_percent"].ToString()),
-                            int.Parse(dbDataRecord["price"].ToString()),
+                            double.Parse(dbDataRecord["price"].ToString()),
                             Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
 
@@ -59,13 +57,14 @@ namespace Queries.Repositories
 
                     deals.AddRange(from DbDataRecord dbDataRecord in queryResult
                         select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            int.Parse(dbDataRecord["card_id"].ToString()),
                             dbDataRecord["client_data"].ToString(),
                             dbDataRecord["employee_data"].ToString(),
                             dbDataRecord["station_name"].ToString(),
                             dbDataRecord["supply_type"].ToString(),
-                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            double.Parse(dbDataRecord["supply_type_amount"].ToString()),
                             int.Parse(dbDataRecord["discount_percent"].ToString()),
-                            int.Parse(dbDataRecord["price"].ToString()),
+                            double.Parse(dbDataRecord["price"].ToString()),
                             Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
 
@@ -84,13 +83,14 @@ namespace Queries.Repositories
 
                     deals.AddRange(from DbDataRecord dbDataRecord in queryResult
                         select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            int.Parse(dbDataRecord["card_id"].ToString()),
                             dbDataRecord["client_data"].ToString(),
                             dbDataRecord["employee_data"].ToString(),
                             dbDataRecord["station_name"].ToString(),
                             dbDataRecord["supply_type"].ToString(),
-                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            double.Parse(dbDataRecord["supply_type_amount"].ToString()),
                             int.Parse(dbDataRecord["discount_percent"].ToString()),
-                            int.Parse(dbDataRecord["price"].ToString()),
+                            double.Parse(dbDataRecord["price"].ToString()),
                             Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
 
@@ -109,13 +109,14 @@ namespace Queries.Repositories
 
                     deals.AddRange(from DbDataRecord dbDataRecord in queryResult
                         select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            int.Parse(dbDataRecord["card_id"].ToString()),
                             dbDataRecord["client_data"].ToString(),
                             dbDataRecord["employee_data"].ToString(),
                             dbDataRecord["station_name"].ToString(),
                             dbDataRecord["supply_type"].ToString(),
-                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            double.Parse(dbDataRecord["supply_type_amount"].ToString()),
                             int.Parse(dbDataRecord["discount_percent"].ToString()),
-                            int.Parse(dbDataRecord["price"].ToString()),
+                            double.Parse(dbDataRecord["price"].ToString()),
                             Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
 
@@ -124,50 +125,34 @@ namespace Queries.Repositories
             });
         }
 
-        public void UpdateDealTable(int id, Deal deal)
+        public void UpdateDealTable(Deal deal)
         {
-            try
-            {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("UPDATE \"AZS\".\"Deal\" SET car_id = @Car_id, fueltype = @Fueltype, fuelamount = @Fuelamount, dealprice = @DealPrice," +
-                    "dealdate = @DealDate WHERE deal_id = @Deal_id ");
-                //queryCommand.Parameters.AddWithValue("@Car_id", deal.GetCarID());
-                //queryCommand.Parameters.AddWithValue("@Fueltype", deal.GetFuelType());
-                //queryCommand.Parameters.AddWithValue("@Fuelamount", deal.GetFuelAmount());
-                //queryCommand.Parameters.AddWithValue("@DealPrice", deal.GetDealPrice());
-                //queryCommand.Parameters.AddWithValue("@DealDate", deal.GetDealDate());
-                //queryCommand.Parameters.AddWithValue("@Deal_id", id);
-                //queryCommand.ExecuteNonQuery();
-
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
+            //не конвертится время (всегда 12:00 пишет)
+            ExecuteSqlNonQueryCommand(
+                $"EXEC UpdateDealShort {deal.Id}, {deal.ClientCardId}, N'{deal.SupplyType}', {deal.SupplyTypeAmount}, {deal.Price}, '{deal.Date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
         }
 
         public void AddToDealTable(Deal deal)
         {
-            try
-            {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"Deal\"(Car_ID , Staff_ID , FuelType , FuelAmount , DealPrice , DealDate)" +
-                        "VALUES(@Car_id, @Staff_id, @FuelType, @FuelAmount, @DealPrice, @DealDate)");
-                //queryCommand.Parameters.AddWithValue("@Car_id", deal.GetCarID());
-                //queryCommand.Parameters.AddWithValue("@Staff_id", deal.GetStaff_id());
-                //queryCommand.Parameters.AddWithValue("@FuelType", deal.GetFuelType());
-                //queryCommand.Parameters.AddWithValue("@FuelAmount", deal.GetFuelAmount());
-                //queryCommand.Parameters.AddWithValue("@DealPrice", deal.GetDealPrice());
-                ////queryCommand.Parameters.AddWithValue("@CardNum", deal.GetCardNum());
-                //queryCommand.Parameters.AddWithValue("@DealDate", Convert.ToDateTime(deal.GetDealDate()));
-            queryCommand.ExecuteNonQuery();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
+            //try
+            //{
+            //    dbc.OpenConnection();
+            //    var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"Deal\"(Car_ID , Staff_ID , FuelType , FuelAmount , DealPrice , DealDate)" +
+            //            "VALUES(@Car_id, @Staff_id, @FuelType, @FuelAmount, @DealPrice, @DealDate)");
+            //    //queryCommand.Parameters.AddWithValue("@Car_id", deal.GetCarID());
+            //    //queryCommand.Parameters.AddWithValue("@Staff_id", deal.GetStaff_id());
+            //    //queryCommand.Parameters.AddWithValue("@FuelType", deal.GetFuelType());
+            //    //queryCommand.Parameters.AddWithValue("@FuelAmount", deal.GetFuelAmount());
+            //    //queryCommand.Parameters.AddWithValue("@DealPrice", deal.GetDealPrice());
+            //    ////queryCommand.Parameters.AddWithValue("@CardNum", deal.GetCardNum());
+            //    //queryCommand.Parameters.AddWithValue("@DealDate", Convert.ToDateTime(deal.GetDealDate()));
+            //queryCommand.ExecuteNonQuery();
+            //}
+            //catch (SqlException pe)
+            //{
+            //    throw pe;
+            //}
+            //finally { dbc.CloseConnection(); }
         }
 
         

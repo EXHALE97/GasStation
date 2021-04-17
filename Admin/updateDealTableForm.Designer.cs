@@ -1,4 +1,6 @@
-﻿namespace Admin
+﻿using System;
+
+namespace Admin
 {
     partial class UpdateDealTableForm
     {
@@ -44,21 +46,22 @@
             this.HourLabel = new System.Windows.Forms.Label();
             this.MinuteTextBox = new System.Windows.Forms.TextBox();
             this.HourTextBox = new System.Windows.Forms.TextBox();
+            this.PriceWithDiscountLabel = new System.Windows.Forms.Label();
+            this.PriceWithDiscountTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // DealDatePicker
             // 
             this.DealDatePicker.CausesValidation = false;
             this.DealDatePicker.CustomFormat = "";
-            this.DealDatePicker.Enabled = false;
-            this.DealDatePicker.Location = new System.Drawing.Point(118, 127);
+            this.DealDatePicker.Location = new System.Drawing.Point(118, 156);
             this.DealDatePicker.Name = "DealDatePicker";
             this.DealDatePicker.Size = new System.Drawing.Size(135, 20);
             this.DealDatePicker.TabIndex = 41;
             // 
             // CancelActionButton
             // 
-            this.CancelActionButton.Location = new System.Drawing.Point(88, 221);
+            this.CancelActionButton.Location = new System.Drawing.Point(92, 257);
             this.CancelActionButton.Name = "CancelActionButton";
             this.CancelActionButton.Size = new System.Drawing.Size(75, 23);
             this.CancelActionButton.TabIndex = 40;
@@ -68,7 +71,7 @@
             // 
             // UpdateDealButton
             // 
-            this.UpdateDealButton.Location = new System.Drawing.Point(178, 221);
+            this.UpdateDealButton.Location = new System.Drawing.Point(178, 257);
             this.UpdateDealButton.Name = "UpdateDealButton";
             this.UpdateDealButton.Size = new System.Drawing.Size(75, 23);
             this.UpdateDealButton.TabIndex = 39;
@@ -79,7 +82,7 @@
             // CardNumberLabel
             // 
             this.CardNumberLabel.AutoSize = true;
-            this.CardNumberLabel.Location = new System.Drawing.Point(15, 107);
+            this.CardNumberLabel.Location = new System.Drawing.Point(15, 131);
             this.CardNumberLabel.Name = "CardNumberLabel";
             this.CardNumberLabel.Size = new System.Drawing.Size(78, 13);
             this.CardNumberLabel.TabIndex = 36;
@@ -88,7 +91,7 @@
             // DealDateLabel
             // 
             this.DealDateLabel.AutoSize = true;
-            this.DealDateLabel.Location = new System.Drawing.Point(16, 134);
+            this.DealDateLabel.Location = new System.Drawing.Point(15, 162);
             this.DealDateLabel.Name = "DealDateLabel";
             this.DealDateLabel.Size = new System.Drawing.Size(75, 13);
             this.DealDateLabel.TabIndex = 35;
@@ -97,7 +100,7 @@
             // DealPriceLabel
             // 
             this.DealPriceLabel.AutoSize = true;
-            this.DealPriceLabel.Location = new System.Drawing.Point(15, 81);
+            this.DealPriceLabel.Location = new System.Drawing.Point(15, 77);
             this.DealPriceLabel.Name = "DealPriceLabel";
             this.DealPriceLabel.Size = new System.Drawing.Size(75, 13);
             this.DealPriceLabel.TabIndex = 34;
@@ -106,7 +109,7 @@
             // SupplyTypeAmountLabel
             // 
             this.SupplyTypeAmountLabel.AutoSize = true;
-            this.SupplyTypeAmountLabel.Location = new System.Drawing.Point(15, 55);
+            this.SupplyTypeAmountLabel.Location = new System.Drawing.Point(15, 51);
             this.SupplyTypeAmountLabel.Name = "SupplyTypeAmountLabel";
             this.SupplyTypeAmountLabel.Size = new System.Drawing.Size(107, 13);
             this.SupplyTypeAmountLabel.TabIndex = 33;
@@ -115,7 +118,7 @@
             // SupplyTypeLabel
             // 
             this.SupplyTypeLabel.AutoSize = true;
-            this.SupplyTypeLabel.Location = new System.Drawing.Point(15, 29);
+            this.SupplyTypeLabel.Location = new System.Drawing.Point(15, 26);
             this.SupplyTypeLabel.Name = "SupplyTypeLabel";
             this.SupplyTypeLabel.Size = new System.Drawing.Size(41, 13);
             this.SupplyTypeLabel.TabIndex = 32;
@@ -145,12 +148,13 @@
             this.DealPriceTextBox.Size = new System.Drawing.Size(106, 20);
             this.DealPriceTextBox.TabIndex = 44;
             this.DealPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DealPriceTextBox_KeyPress);
+            this.DealPriceTextBox.TextChanged += new EventHandler(this.DealPriceTextBox_TextChanged);
             // 
             // CardNumberComboBox
             // 
             this.CardNumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CardNumberComboBox.FormattingEnabled = true;
-            this.CardNumberComboBox.Location = new System.Drawing.Point(118, 100);
+            this.CardNumberComboBox.Location = new System.Drawing.Point(119, 128);
             this.CardNumberComboBox.Name = "CardNumberComboBox";
             this.CardNumberComboBox.Size = new System.Drawing.Size(135, 21);
             this.CardNumberComboBox.TabIndex = 45;
@@ -158,7 +162,7 @@
             // MinuteLabel
             // 
             this.MinuteLabel.AutoSize = true;
-            this.MinuteLabel.Location = new System.Drawing.Point(162, 184);
+            this.MinuteLabel.Location = new System.Drawing.Point(162, 226);
             this.MinuteLabel.Name = "MinuteLabel";
             this.MinuteLabel.Size = new System.Drawing.Size(47, 13);
             this.MinuteLabel.TabIndex = 57;
@@ -167,7 +171,7 @@
             // HourLabel
             // 
             this.HourLabel.AutoSize = true;
-            this.HourLabel.Location = new System.Drawing.Point(162, 162);
+            this.HourLabel.Location = new System.Drawing.Point(162, 200);
             this.HourLabel.Name = "HourLabel";
             this.HourLabel.Size = new System.Drawing.Size(30, 13);
             this.HourLabel.TabIndex = 56;
@@ -175,7 +179,7 @@
             // 
             // MinuteTextBox
             // 
-            this.MinuteTextBox.Location = new System.Drawing.Point(230, 181);
+            this.MinuteTextBox.Location = new System.Drawing.Point(230, 223);
             this.MinuteTextBox.Name = "MinuteTextBox";
             this.MinuteTextBox.Size = new System.Drawing.Size(23, 20);
             this.MinuteTextBox.TabIndex = 55;
@@ -183,17 +187,35 @@
             // 
             // HourTextBox
             // 
-            this.HourTextBox.Location = new System.Drawing.Point(230, 155);
+            this.HourTextBox.Location = new System.Drawing.Point(230, 197);
             this.HourTextBox.Name = "HourTextBox";
             this.HourTextBox.Size = new System.Drawing.Size(23, 20);
             this.HourTextBox.TabIndex = 54;
             this.HourTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HourTextBox_KeyPress);
             // 
+            // PriceWithDiscountLabel
+            // 
+            this.PriceWithDiscountLabel.AutoSize = true;
+            this.PriceWithDiscountLabel.Location = new System.Drawing.Point(15, 103);
+            this.PriceWithDiscountLabel.Name = "PriceWithDiscountLabel";
+            this.PriceWithDiscountLabel.Size = new System.Drawing.Size(96, 13);
+            this.PriceWithDiscountLabel.TabIndex = 58;
+            this.PriceWithDiscountLabel.Text = "Цена со скидкой:";
+            // 
+            // PriceWithDiscountTextBox
+            // 
+            this.PriceWithDiscountTextBox.Location = new System.Drawing.Point(147, 100);
+            this.PriceWithDiscountTextBox.Name = "PriceWithDiscountTextBox";
+            this.PriceWithDiscountTextBox.Size = new System.Drawing.Size(106, 20);
+            this.PriceWithDiscountTextBox.TabIndex = 59;
+            // 
             // UpdateDealTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(266, 256);
+            this.ClientSize = new System.Drawing.Size(266, 292);
+            this.Controls.Add(this.PriceWithDiscountTextBox);
+            this.Controls.Add(this.PriceWithDiscountLabel);
             this.Controls.Add(this.MinuteLabel);
             this.Controls.Add(this.HourLabel);
             this.Controls.Add(this.MinuteTextBox);
@@ -238,5 +260,7 @@
         private System.Windows.Forms.Label HourLabel;
         private System.Windows.Forms.TextBox MinuteTextBox;
         private System.Windows.Forms.TextBox HourTextBox;
+        private System.Windows.Forms.Label PriceWithDiscountLabel;
+        private System.Windows.Forms.TextBox PriceWithDiscountTextBox;
     }
 }

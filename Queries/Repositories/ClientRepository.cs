@@ -45,6 +45,22 @@ namespace Queries.Repositories
             });
         }
 
+        public List<int> GetActivatedClientCards()
+        {
+            return ExecuteSqlCommand("EXEC GetActivatedClientCards", queryResult =>
+            {
+                var cards = new List<int>();
+                if (queryResult.HasRows)
+                {
+                    cards.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select int.Parse(dbDataRecord["id"].ToString()));
+                }
+
+                queryResult.Close();
+                return cards;
+            });
+        }
+
         public List<int> GetNonActivatedClientCards()
         {
             return ExecuteSqlCommand("EXEC GetNonActivatedClientCardId", queryResult =>
@@ -79,6 +95,21 @@ namespace Queries.Repositories
                 }
 
                 return fullName;
+            });
+        }
+
+        public int GetDiscountPercentForClient(int clientCardId)
+        {
+            return ExecuteSqlCommand($"EXEC GetDiscountPercentByClientCardId {clientCardId}", queryResult =>
+            {
+                var discount = 0;
+                if (!queryResult.HasRows) return discount;
+                foreach (DbDataRecord dbDataRecord in queryResult)
+                {
+                    discount = int.Parse(dbDataRecord[0].ToString());
+                }
+
+                return discount;
             });
         }
 

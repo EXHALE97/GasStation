@@ -14,7 +14,7 @@ namespace Queries.Interfaces
 
         List<Deal> GetDealsByStation(int stationId);
 
-        void UpdateDealTable(int id, Deal deal);
+        void UpdateDealTable(Deal deal);
 
         void AddToDealTable(Deal deal);
     }

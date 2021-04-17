@@ -35,31 +35,31 @@ namespace Queries.Support.Validators
             return checkFlag;
         }
 
-        public static bool CheckUpdate(int id, Deal deal, out List<string> errorList)
+        public static bool CheckUpdate(Deal deal, out List<string> errorList)
         {
             errorList = new List<string>();
-            bool checkFlag = true;
-            //if (deal.GetCarID() < 0)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Покупатель не обнаружен!");
-            //}
-            //if (deal.GetFuelType() == String.Empty)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Тип топлива не выбран!");
-            //}
-            //if (deal.GetFuelAmount() <= 0)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Количество топлива введено неверно!");
-            //}
-            //if (deal.GetDealPrice() <= 0)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Цена сделки задана неверно!");
-            //}
-
+            var checkFlag = true;
+            if (deal.ClientCardId <= 0)
+            {
+                checkFlag = false;
+                errorList.Add("Покупатель не обнаружен!");
+            }
+            if (deal.SupplyType == null)
+            {
+                checkFlag = false;
+                errorList.Add("Тип топлива не выбран!");
+            }
+            if (deal.SupplyTypeAmount <= 0)
+            {
+                checkFlag = false;
+                errorList.Add("Количество топлива введено неверно!");
+            }
+            if (deal.Price <= 0)
+            {
+                checkFlag = false;
+                errorList.Add("Цена сделки задана неверно!");
+            }
+            
             return checkFlag;
         }
     }
