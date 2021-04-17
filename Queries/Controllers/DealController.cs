@@ -27,7 +27,7 @@ namespace Queries.Controllers
         {
             return DoFormAction(() =>
             {
-                var dealList = Factory.GetDealRepository().GetDealsForClient(clientId);
+                var dealList = Factory.GetDealRepository().GetDealsByClient(clientId);
 
                 if (dealList.Count != 0)
                 {
@@ -45,89 +45,52 @@ namespace Queries.Controllers
 
         public void ShowTable()
         {
-            try
+            DoFormAction(() =>
             {
-                
-                dgvElements = Factory.GetDealRepository().ShowDealTable();
                 dealsTable.Rows.Clear();
-                foreach (Deal deal in dgvElements)
+                foreach (var deal in Factory.GetDealRepository().GetDeals())
                 {
-                    //string cardnum = factory.GetClientRepository().FindCardNumByCarID(deal.GetCarID()); 
-                    //dealsTable.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
-                    //    factory.GetEmployeeRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
-                    //    deal.GetDealPrice(), cardnum, deal.GetDealDate());
+                    dealsTable.Rows.Add(deal.Id, deal.Client, deal.Employee, deal.Station, deal.SupplyType,
+                        deal.SupplyTypeAmount, deal.Price, deal.CountDiscount(), deal.CountFullPrice(), deal.Date);
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            });
         }
 
-        public void ShowWorkerTable(int ID)
+        public void ShowWorkerTable(int id)
         {
-            try
+            DoFormAction(() =>
             {
-                dgvElements = Factory.GetDealRepository().ShowWorkerDealTable(ID);
                 dealsTable.Rows.Clear();
-                foreach (Deal deal in dgvElements)
+                foreach (var deal in Factory.GetDealRepository().GetDealsByEmployee(id))
                 {
-                    //dealsTable.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), factory.GetClientRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
+                    dealsTable.Rows.Add(deal.Id);
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            });
         }
 
-        public void ShowUserTable(string cardnum)
+        public void ShowUserTable(int id)
         {
-            try
+            DoFormAction(() =>
             {
-                dgvElements = Factory.GetDealRepository().ShowUserDealTable(Factory.GetClientRepository().FindCarIDByCardnum(cardnum));
                 dealsTable.Rows.Clear();
-                foreach (Deal deal in dgvElements)
+                foreach (var deal in Factory.GetDealRepository().GetDealsByClient(id))
                 {
-                    //dealsTable.Rows.Add(deal.GetFuelType(), deal.GetFuelAmount(), deal.GetDealPrice(), deal.GetDealDate());
+                    dealsTable.Rows.Add(deal.Id);
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            });
         }
 
-        public void FindDealsByStationID(int station_id)
+        public void ShowDealTableByStation(string stationName)
         {
-            try
+            DoFormAction(() =>
             {
-                //List<int> IDs = new List<int>();
-                //IDs = factory.GetEmployeeRepository().FindStaffIDByStationID(station_id);
-                //dealsTable.Rows.Clear();
-                //if (IDs.Count != 0)
-                //{
-                //    List<Deal> stationDealList = new List<Deal>(); 
-                //    foreach (int id in IDs)
-                //    {
-                //        stationDealList = factory.GetDealRepository().ShowWorkerDealTable(id);
-                //        foreach (Deal deal in stationDealList)
-                //        {
-                //            dealsTable.Rows.Add(deal.GetDealID(), factory.GetStationRepository().GetStationAddressById(factory.GetEmployeeRepository().FindStationIDByStaffID(deal.GetStaff_id())).Trim().Replace(" ", string.Empty),
-                //                factory.GetEmployeeRepository().FindEmployeeById(deal.GetStaff_id()), deal.GetFuelType(), deal.GetFuelAmount(),
-                //                deal.GetDealPrice(), factory.GetClientRepository().FindCardNumByCarID(deal.GetCarID()), deal.GetDealDate());
-                //        }
-                //    }
-                //}
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception) { MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                dealsTable.Rows.Clear();
+                foreach (var deal in Factory.GetDealRepository().GetDealsByStation(Factory.GetStationRepository().GetStationIdByName(stationName)))
+                {
+                    dealsTable.Rows.Add(deal.Id, deal.Client, deal.Employee, deal.Station, deal.SupplyType,
+                        deal.SupplyTypeAmount, deal.Price, deal.CountDiscount(), deal.CountFullPrice(), deal.Date); ;
+                }
+            });
         }
 
         public bool UpdateTable(int id, Deal deal)

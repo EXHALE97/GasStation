@@ -10,8 +10,6 @@ namespace Queries.Interfaces
 
         List<int> GetNonActivatedClientCards();
 
-        List<string> GetCardNumList();
-
         void AddToClientTable(Client client);
 
         string FindClientById(int id);

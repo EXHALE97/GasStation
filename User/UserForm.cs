@@ -27,7 +27,7 @@ namespace User
             fillStationTable = new StationController(dgvVievAZS, factory);
             fillStationTable.ShowTable(false);
             fillDealTable = new DealController(dgvUserDeals, factory);
-            fillDealTable.ShowUserTable(cardnum);
+            //fillDealTable.ShowUserTable(cardnum);
         }
 
         private void dataView1_Click(object sender, EventArgs e)
@@ -44,7 +44,7 @@ namespace User
 
         private void btnShowUserDeal_Click(object sender, EventArgs e)
         {
-            fillDealTable.ShowUserTable(cardnum);
+            //fillDealTable.ShowUserTable(cardnum);
         }
 
         private void lbSessionName1_Click(object sender, EventArgs e)

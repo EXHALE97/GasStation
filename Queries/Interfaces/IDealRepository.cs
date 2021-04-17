@@ -6,19 +6,16 @@ namespace Queries.Interfaces
 {
     public interface IDealRepository : IDisposable
     {
-        List<Deal> ShowDealTable();
+        List<Deal> GetDeals();
 
-        List<Deal> ShowUserDealTable(int id);
+        List<Deal> GetDealsByClient(int clientId);
 
-        List<Deal> ShowWorkerDealTable(int id);
+        List<Deal> GetDealsByEmployee(int employeeId);
 
-        List<Deal> GetDeals(Client car);
+        List<Deal> GetDealsByStation(int stationId);
 
         void UpdateDealTable(int id, Deal deal);
 
-        List<Deal> GetDealsForClient(int clientId);
-
         void AddToDealTable(Deal deal);
-
     }
 }

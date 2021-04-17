@@ -41,6 +41,24 @@ namespace Queries.Repositories
             });
         }
 
+        public int GetStationIdByName(string name)
+        {
+            return ExecuteSqlCommand($"EXEC GetStationIdByName N'{name}'", queryResult =>
+            {
+                var id = 0;
+                if (queryResult.HasRows)
+                {
+                    foreach (DbDataRecord dbDataRecord in queryResult)
+                    {
+                        id = int.Parse(dbDataRecord["id"].ToString());
+                    }
+                }
+
+                queryResult.Close();
+                return id;
+            });
+        }
+
         public List<Station> FindStations(string country, string city)
         {
             List<Station> stationList = new List<Station>();
@@ -68,47 +86,6 @@ namespace Queries.Repositories
             }
             finally { DataBaseConnection.CloseConnection(); }
             return stationList;
-        }
-
-        public int FindStationIdByLocation(string location)
-        {
-            int station_id = 0;
-            try
-            {
-
-                List<string> splittedLocation = new List<string>();
-                if (location != String.Empty)
-                {
-                    string[] split = location.Split(new Char[] { ',' });
-                    foreach (string s in split)
-                    {
-                        splittedLocation.Add(s);
-                    }
-                    splittedLocation[2] = StationValidator.CheckRightStreet(splittedLocation[2]);
-                }
-                DataBaseConnection.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country =" +
-                  "'" + splittedLocation[0] + "' AND city =" + "'" + splittedLocation[1] + "'" + "AND street =" + "'" + splittedLocation[2] + "'" + "");
-
-                //NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"GasStation\" WHERE country LIKE" +
-                //  "'%" + splittedLocation[0] + "%' AND city LIKE" + "'%" + splittedLocation[1] + "%'" + "AND street LIKE" + "'%" + splittedLocation[2] + "%'" + "", dbc.getConnection());
-
-                var Station_ID_TableSearcher = queryCommand.ExecuteReader();
-                if (Station_ID_TableSearcher.HasRows)
-                {
-                    foreach (DbDataRecord dbDataRecord in Station_ID_TableSearcher)
-                    {
-                        station_id = Convert.ToInt32(dbDataRecord["station_id"]);
-                    }
-                }
-                Station_ID_TableSearcher.Close();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { DataBaseConnection.CloseConnection(); }
-            return station_id;
         }
 
         public List<string> GetStationsAddress(string Orgname)

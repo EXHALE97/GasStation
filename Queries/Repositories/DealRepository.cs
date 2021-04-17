@@ -24,163 +24,104 @@ namespace Queries.Repositories
 
         }
 
-        //public List<Deal> ShowDealTable()
-        //{
-        //    List<Deal> dealList = new List<Deal>();
-        //    try
-        //    {
-        //        dbc.openConnection();
-        //        NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT * FROM \"AZS\".\"Deal\"", dbc.getConnection());
-        //        NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
-        //        if (AZSTableReader.HasRows)
-        //        {
-        //            foreach (DbDataRecord dbDataRecord in AZSTableReader)
-        //            {
-        //                Deal deal = new Deal();
-
-        //                deal.dealSet(Convert.ToInt32(dbDataRecord["deal_id"]), Convert.ToInt32(dbDataRecord["car_id"]), Convert.ToInt32(dbDataRecord["staff_id"]),
-        //                    dbDataRecord["fueltype"].ToString(), Convert.ToInt32(dbDataRecord["fuelamount"]), Convert.ToInt32(dbDataRecord["dealprice"]),
-        //                    dbDataRecord["cardnum"].ToString(), Convert.ToDateTime(dbDataRecord["dealdate"].ToString()));
-        //                dealList.Add(deal);
-        //            }
-        //        }
-        //        AZSTableReader.Close();
-        //    }
-        //    catch (PostgresException pe)
-        //    {
-        //        throw pe;
-        //    }
-        //    finally { dbc.closeConnection(); }
-
-        //    return dealList;
-        //}
-
-        public List<Deal> ShowDealTable()
+        public List<Deal> GetDeals()
         {
-            List<Deal> dealList = new List<Deal>();
-            try
+            return ExecuteSqlCommand("EXEC DealsSummary", queryResult =>
             {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Deal\"");
-                var AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
+                var deals = new List<Deal>();
+                if (queryResult.HasRows)
                 {
-                    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                    {
-                        //Deal deal = new Deal();
 
-                        //deal.dealSet(Convert.ToInt32(dbDataRecord["deal_id"]), Convert.ToInt32(dbDataRecord["car_id"]), Convert.ToInt32(dbDataRecord["staff_id"]),
-                        //    dbDataRecord["fueltype"].ToString(), Convert.ToInt32(dbDataRecord["fuelamount"]), Convert.ToInt32(dbDataRecord["dealprice"]), Convert.ToDateTime(dbDataRecord["dealdate"].ToString()));
-                        //dealList.Add(deal);
-                    }
+                    deals.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            dbDataRecord["client_data"].ToString(),
+                            dbDataRecord["employee_data"].ToString(),
+                            dbDataRecord["station_name"].ToString(),
+                            dbDataRecord["supply_type"].ToString(),
+                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            int.Parse(dbDataRecord["discount_percent"].ToString()),
+                            int.Parse(dbDataRecord["price"].ToString()),
+                            Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
-                AZSTableReader.Close();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
 
-            return dealList;
+                queryResult.Close();
+                return deals;
+            });
         }
 
-        public List<Deal> ShowUserDealTable(int id)
+        public List<Deal> GetDealsByClient(int clientId)
         {
-            List<Deal> dealList = new List<Deal>();
-            try
+            return ExecuteSqlCommand($"EXEC GetDealsByClient {clientId}", queryResult =>
             {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Deal\" WHERE car_id = @Car_id");
-                queryCommand.Parameters.AddWithValue("@Car_id", id);
-                var AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
+                var deals = new List<Deal>();
+                if (queryResult.HasRows)
                 {
-                    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                    {
-                        //Deal deal = new Deal();
 
-                        //deal.dealSet(Convert.ToInt32(dbDataRecord["deal_id"]), Convert.ToInt32(dbDataRecord["car_id"]), Convert.ToInt32(dbDataRecord["staff_id"]),
-                        //    dbDataRecord["fueltype"].ToString(), Convert.ToInt32(dbDataRecord["fuelamount"]), Convert.ToInt32(dbDataRecord["dealprice"]),
-                        //    Convert.ToDateTime(dbDataRecord["dealdate"].ToString()));
-                        //dealList.Add(deal);
-                    }
+                    deals.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            dbDataRecord["client_data"].ToString(),
+                            dbDataRecord["employee_data"].ToString(),
+                            dbDataRecord["station_name"].ToString(),
+                            dbDataRecord["supply_type"].ToString(),
+                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            int.Parse(dbDataRecord["discount_percent"].ToString()),
+                            int.Parse(dbDataRecord["price"].ToString()),
+                            Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
-                AZSTableReader.Close();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
 
-            return dealList;
+                queryResult.Close();
+                return deals;
+            });
         }
 
-        public List<Deal> ShowWorkerDealTable(int id)
+        public List<Deal> GetDealsByEmployee(int employeeId)
         {
-            List<Deal> dealList = new List<Deal>();
-            try
+            return ExecuteSqlCommand($"EXEC GetDealsByEmployee {employeeId}", queryResult =>
             {
-                dbc.OpenConnection();
-                var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Deal\" WHERE staff_id = @Staff_id");
-                queryCommand.Parameters.AddWithValue("@Staff_id", id);
-                var AZSTableReader = queryCommand.ExecuteReader();
-                if (AZSTableReader.HasRows)
+                var deals = new List<Deal>();
+                if (queryResult.HasRows)
                 {
-                    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                    {
-                        //Deal deal = new Deal();
 
-                        //deal.dealSet(Convert.ToInt32(dbDataRecord["deal_id"]), Convert.ToInt32(dbDataRecord["car_id"]), Convert.ToInt32(dbDataRecord["staff_id"]),
-                        //    dbDataRecord["fueltype"].ToString(), Convert.ToInt32(dbDataRecord["fuelamount"]), Convert.ToInt32(dbDataRecord["dealprice"]),
-                        //    Convert.ToDateTime(dbDataRecord["dealdate"]));
-                        //dealList.Add(deal);
-                    }
+                    deals.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            dbDataRecord["client_data"].ToString(),
+                            dbDataRecord["employee_data"].ToString(),
+                            dbDataRecord["station_name"].ToString(),
+                            dbDataRecord["supply_type"].ToString(),
+                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            int.Parse(dbDataRecord["discount_percent"].ToString()),
+                            int.Parse(dbDataRecord["price"].ToString()),
+                            Convert.ToDateTime(dbDataRecord["date"].ToString())));
                 }
-                AZSTableReader.Close();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
 
-            return dealList;
+                queryResult.Close();
+                return deals;
+            });
         }
 
-        public List<Deal> GetDeals(Client car)
+        public List<Deal> GetDealsByStation(int stationId)
         {
-            List<Deal> dgvElements = new List<Deal>();
-
-            try
+            return ExecuteSqlCommand($"EXEC GetDealsByStation {stationId}", queryResult =>
             {
-                //SqlDataReader AZSTableReader = null;
-                //dbc.OpenConnection();
-                //var queryCommand = new SqlCommand("SELECT fueltype, fuelamount, dealprice, dealdate FROM \"AZS\".\"Deal\" WHERE car_id = @Car_id");
-                ////NpgsqlCommand queryCommand = new NpgsqlCommand("SELECT fueltype, fuelamount, dealprice, dealdate FROM \"AZS\".\"Deal\" WHERE car_id = '" + car.GetCar_id() + "' ", dbc.getConnection());
-                //queryCommand.Parameters.AddWithValue("@Car_id", car.GetCarID());
-                //AZSTableReader = queryCommand.ExecuteReader();
-                ////NpgsqlDataReader AZSTableReader = queryCommand.ExecuteReader();
-                //if (AZSTableReader.HasRows)
-                //{
-                //    foreach (DbDataRecord dbDataRecord in AZSTableReader)
-                //    {
-                //        Deal foundDeal = new Deal();
-                //        foundDeal.dealSet(dbDataRecord["fueltype"].ToString(), Convert.ToInt32(dbDataRecord["fuelamount"].ToString()),
-                //            Convert.ToInt32(dbDataRecord["dealprice"]), Convert.ToDateTime(dbDataRecord["dealdate"].ToString()));
-                //        dgvElements.Add(foundDeal);
-                //    }
-                //}
-                //AZSTableReader.Close();
-            }
-            catch (SqlException pe)
-            {
-                throw pe;
-            }
-            finally { dbc.CloseConnection(); }
+                var deals = new List<Deal>();
+                if (queryResult.HasRows)
+                {
 
-            return dgvElements;
+                    deals.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select new Deal(int.Parse(dbDataRecord["id"].ToString()),
+                            dbDataRecord["client_data"].ToString(),
+                            dbDataRecord["employee_data"].ToString(),
+                            dbDataRecord["station_name"].ToString(),
+                            dbDataRecord["supply_type"].ToString(),
+                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
+                            int.Parse(dbDataRecord["discount_percent"].ToString()),
+                            int.Parse(dbDataRecord["price"].ToString()),
+                            Convert.ToDateTime(dbDataRecord["date"].ToString())));
+                }
+
+                queryResult.Close();
+                return deals;
+            });
         }
 
         public void UpdateDealTable(int id, Deal deal)
@@ -229,29 +170,6 @@ namespace Queries.Repositories
             finally { dbc.CloseConnection(); }
         }
 
-        public List<Deal> GetDealsForClient(int clientId)
-        {
-            return ExecuteSqlCommand($"EXEC DealsSummary {clientId}", queryResult =>
-            {
-                var deals = new List<Deal>();
-                if (queryResult.HasRows)
-                {
-
-                    deals.AddRange(from DbDataRecord dbDataRecord in queryResult
-                        select new Deal(int.Parse(dbDataRecord["id"].ToString()),
-                            dbDataRecord["client_data"].ToString(),
-                            dbDataRecord["employee_data"].ToString(),
-                            dbDataRecord["station_name"].ToString(),
-                            dbDataRecord["supply_type"].ToString(),
-                            int.Parse(dbDataRecord["supply_type_amount"].ToString()),
-                            int.Parse(dbDataRecord["discount_percent"].ToString()), 
-                            int.Parse(dbDataRecord["price"].ToString()),
-                            Convert.ToDateTime(dbDataRecord["date"].ToString())));
-                }
-
-                queryResult.Close();
-                return deals;
-            });
-        }
+        
     }
 }

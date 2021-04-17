@@ -49,6 +49,14 @@ namespace Admin
             this.FindDealsByClientButton = new System.Windows.Forms.Button();
             this.AddNewClientButton = new System.Windows.Forms.Button();
             this.ClientTable = new System.Windows.Forms.DataGridView();
+            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ActivationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CredId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabStaffTable = new System.Windows.Forms.TabPage();
             this.OnlyWorkingEmployeeCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -87,19 +95,21 @@ namespace Admin
             this.IsStationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabDealTable = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cbDealFilterByStation = new System.Windows.Forms.ComboBox();
+            this.FilterByStation = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.btnTableDealView = new System.Windows.Forms.Button();
-            this.btnDealUpdate = new System.Windows.Forms.Button();
-            this.dgvViewDeal = new System.Windows.Forms.DataGridView();
-            this.deal_id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stationDealName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fueltype = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuelamount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dealprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buyercard = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dealdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealTableRefreshButton = new System.Windows.Forms.Button();
+            this.DealUpdateButton = new System.Windows.Forms.Button();
+            this.DealTable = new System.Windows.Forms.DataGridView();
+            this.DealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmployeeFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationFullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyTypeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealFinalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PriceWithoutDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DealDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSupplyTable = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.cbSupplyFilterByStation = new System.Windows.Forms.ComboBox();
@@ -118,14 +128,6 @@ namespace Admin
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
             this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
-            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientFirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientLastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientMiddleName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DiscountPercent = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ActivationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CredId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -143,7 +145,7 @@ namespace Admin
             this.tabDealTable.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvViewDeal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DealTable)).BeginInit();
             this.tabSupplyTable.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
@@ -337,6 +339,55 @@ namespace Admin
             this.ClientTable.Name = "ClientTable";
             this.ClientTable.Size = new System.Drawing.Size(493, 459);
             this.ClientTable.TabIndex = 1;
+            // 
+            // ClientId
+            // 
+            this.ClientId.HeaderText = "ID";
+            this.ClientId.Name = "ClientId";
+            this.ClientId.ReadOnly = true;
+            this.ClientId.Width = 50;
+            // 
+            // ClientFirstName
+            // 
+            this.ClientFirstName.HeaderText = "Имя";
+            this.ClientFirstName.Name = "ClientFirstName";
+            this.ClientFirstName.ReadOnly = true;
+            // 
+            // ClientLastName
+            // 
+            this.ClientLastName.HeaderText = "Фамилия";
+            this.ClientLastName.Name = "ClientLastName";
+            this.ClientLastName.ReadOnly = true;
+            // 
+            // ClientMiddleName
+            // 
+            this.ClientMiddleName.HeaderText = "Отчество";
+            this.ClientMiddleName.Name = "ClientMiddleName";
+            this.ClientMiddleName.ReadOnly = true;
+            // 
+            // CardId
+            // 
+            this.CardId.HeaderText = "Карта клиента";
+            this.CardId.Name = "CardId";
+            this.CardId.ReadOnly = true;
+            // 
+            // DiscountPercent
+            // 
+            this.DiscountPercent.HeaderText = "Скидка";
+            this.DiscountPercent.Name = "DiscountPercent";
+            this.DiscountPercent.ReadOnly = true;
+            // 
+            // ActivationDate
+            // 
+            this.ActivationDate.HeaderText = "Дата активации";
+            this.ActivationDate.Name = "ActivationDate";
+            this.ActivationDate.ReadOnly = true;
+            // 
+            // CredId
+            // 
+            this.CredId.HeaderText = "Креды";
+            this.CredId.Name = "CredId";
+            this.CredId.ReadOnly = true;
             // 
             // tabStaffTable
             // 
@@ -670,7 +721,7 @@ namespace Admin
             // 
             this.tabDealTable.Controls.Add(this.groupBox5);
             this.tabDealTable.Controls.Add(this.groupBox4);
-            this.tabDealTable.Controls.Add(this.dgvViewDeal);
+            this.tabDealTable.Controls.Add(this.DealTable);
             this.tabDealTable.Location = new System.Drawing.Point(4, 22);
             this.tabDealTable.Name = "tabDealTable";
             this.tabDealTable.Padding = new System.Windows.Forms.Padding(3);
@@ -681,28 +732,28 @@ namespace Admin
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.cbDealFilterByStation);
+            this.groupBox5.Controls.Add(this.FilterByStation);
             this.groupBox5.Location = new System.Drawing.Point(607, 411);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(210, 48);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Фильтр по адресу станции";
+            this.groupBox5.Text = "Фильтр по станции";
             // 
-            // cbDealFilterByStation
+            // FilterByStation
             // 
-            this.cbDealFilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbDealFilterByStation.FormattingEnabled = true;
-            this.cbDealFilterByStation.Location = new System.Drawing.Point(8, 21);
-            this.cbDealFilterByStation.Name = "cbDealFilterByStation";
-            this.cbDealFilterByStation.Size = new System.Drawing.Size(199, 21);
-            this.cbDealFilterByStation.TabIndex = 0;
-            this.cbDealFilterByStation.SelectedIndexChanged += new System.EventHandler(this.cbFilterByStation_SelectedIndexChanged);
+            this.FilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.FilterByStation.FormattingEnabled = true;
+            this.FilterByStation.Location = new System.Drawing.Point(8, 21);
+            this.FilterByStation.Name = "FilterByStation";
+            this.FilterByStation.Size = new System.Drawing.Size(199, 21);
+            this.FilterByStation.TabIndex = 0;
+            this.FilterByStation.SelectedIndexChanged += new System.EventHandler(this.FilterByStation_SelectedIndexChanged);
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.btnTableDealView);
-            this.groupBox4.Controls.Add(this.btnDealUpdate);
+            this.groupBox4.Controls.Add(this.DealTableRefreshButton);
+            this.groupBox4.Controls.Add(this.DealUpdateButton);
             this.groupBox4.Location = new System.Drawing.Point(607, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(200, 153);
@@ -710,92 +761,109 @@ namespace Admin
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Функционал";
             // 
-            // btnTableDealView
+            // DealTableRefreshButton
             // 
-            this.btnTableDealView.Location = new System.Drawing.Point(6, 19);
-            this.btnTableDealView.Name = "btnTableDealView";
-            this.btnTableDealView.Size = new System.Drawing.Size(190, 60);
-            this.btnTableDealView.TabIndex = 3;
-            this.btnTableDealView.Text = "Обновить список сделок";
-            this.btnTableDealView.UseVisualStyleBackColor = true;
-            this.btnTableDealView.Click += new System.EventHandler(this.ViewDealTable);
+            this.DealTableRefreshButton.Location = new System.Drawing.Point(6, 19);
+            this.DealTableRefreshButton.Name = "DealTableRefreshButton";
+            this.DealTableRefreshButton.Size = new System.Drawing.Size(190, 60);
+            this.DealTableRefreshButton.TabIndex = 3;
+            this.DealTableRefreshButton.Text = "Обновить список сделок";
+            this.DealTableRefreshButton.UseVisualStyleBackColor = true;
+            this.DealTableRefreshButton.Click += new System.EventHandler(this.DealTableRefreshButton_Click);
             // 
-            // btnDealUpdate
+            // DealUpdateButton
             // 
-            this.btnDealUpdate.Location = new System.Drawing.Point(6, 85);
-            this.btnDealUpdate.Name = "btnDealUpdate";
-            this.btnDealUpdate.Size = new System.Drawing.Size(190, 60);
-            this.btnDealUpdate.TabIndex = 2;
-            this.btnDealUpdate.Text = "Править выбранную сделку";
-            this.btnDealUpdate.UseVisualStyleBackColor = true;
-            this.btnDealUpdate.Click += new System.EventHandler(this.btnDealUpdate_Click);
+            this.DealUpdateButton.Location = new System.Drawing.Point(6, 85);
+            this.DealUpdateButton.Name = "DealUpdateButton";
+            this.DealUpdateButton.Size = new System.Drawing.Size(190, 60);
+            this.DealUpdateButton.TabIndex = 2;
+            this.DealUpdateButton.Text = "Править выбранную сделку";
+            this.DealUpdateButton.UseVisualStyleBackColor = true;
+            this.DealUpdateButton.Click += new System.EventHandler(this.DealUpdateButton_Click);
             // 
-            // dgvViewDeal
+            // DealTable
             // 
-            this.dgvViewDeal.AllowUserToAddRows = false;
-            this.dgvViewDeal.AllowUserToDeleteRows = false;
-            this.dgvViewDeal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewDeal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.deal_id,
-            this.stationDealName,
-            this.sname,
-            this.fueltype,
-            this.fuelamount,
-            this.dealprice,
-            this.buyercard,
-            this.dealdate});
-            this.dgvViewDeal.Location = new System.Drawing.Point(6, 0);
-            this.dgvViewDeal.Name = "dgvViewDeal";
-            this.dgvViewDeal.Size = new System.Drawing.Size(595, 462);
-            this.dgvViewDeal.TabIndex = 1;
+            this.DealTable.AllowUserToAddRows = false;
+            this.DealTable.AllowUserToDeleteRows = false;
+            this.DealTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DealTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DealId,
+            this.ClientName,
+            this.EmployeeFullName,
+            this.StationFullName,
+            this.SupplyType,
+            this.SupplyTypeAmount,
+            this.DealFinalPrice,
+            this.DealDiscount,
+            this.PriceWithoutDiscount,
+            this.DealDate});
+            this.DealTable.Location = new System.Drawing.Point(-4, 0);
+            this.DealTable.Name = "DealTable";
+            this.DealTable.Size = new System.Drawing.Size(595, 462);
+            this.DealTable.TabIndex = 1;
             // 
-            // deal_id
+            // DealId
             // 
-            this.deal_id.HeaderText = "ID";
-            this.deal_id.Name = "deal_id";
-            this.deal_id.Width = 40;
+            this.DealId.HeaderText = "ID";
+            this.DealId.Name = "DealId";
+            this.DealId.ReadOnly = true;
+            this.DealId.Width = 40;
             // 
-            // stationDealName
+            // ClientName
             // 
-            this.stationDealName.HeaderText = "Адрес станции";
-            this.stationDealName.Name = "stationDealName";
+            this.ClientName.HeaderText = "Покупатель";
+            this.ClientName.Name = "ClientName";
+            this.ClientName.ReadOnly = true;
             // 
-            // sname
+            // EmployeeFullName
             // 
-            this.sname.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.sname.HeaderText = "ФИ сотрудника";
-            this.sname.Name = "sname";
-            this.sname.Width = 120;
+            this.EmployeeFullName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.EmployeeFullName.HeaderText = "Сотрудник";
+            this.EmployeeFullName.Name = "EmployeeFullName";
+            this.EmployeeFullName.ReadOnly = true;
             // 
-            // fueltype
+            // StationFullName
             // 
-            this.fueltype.HeaderText = "Тип топлива";
-            this.fueltype.Name = "fueltype";
-            this.fueltype.Width = 50;
+            this.StationFullName.HeaderText = "Станция";
+            this.StationFullName.Name = "StationFullName";
             // 
-            // fuelamount
+            // SupplyType
             // 
-            this.fuelamount.HeaderText = "Количество топлива";
-            this.fuelamount.Name = "fuelamount";
-            this.fuelamount.Width = 60;
+            this.SupplyType.HeaderText = "Товар";
+            this.SupplyType.Name = "SupplyType";
+            this.SupplyType.Width = 50;
             // 
-            // dealprice
+            // SupplyTypeAmount
             // 
-            this.dealprice.HeaderText = "Сумма сделки";
-            this.dealprice.Name = "dealprice";
-            this.dealprice.Width = 60;
+            this.SupplyTypeAmount.HeaderText = "Количество товара";
+            this.SupplyTypeAmount.Name = "SupplyTypeAmount";
+            this.SupplyTypeAmount.Width = 50;
             // 
-            // buyercard
+            // DealFinalPrice
             // 
-            this.buyercard.HeaderText = "Покупатель";
-            this.buyercard.Name = "buyercard";
-            this.buyercard.Width = 80;
+            this.DealFinalPrice.HeaderText = "Сумма сделки";
+            this.DealFinalPrice.Name = "DealFinalPrice";
+            this.DealFinalPrice.Width = 50;
             // 
-            // dealdate
+            // DealDiscount
             // 
-            this.dealdate.HeaderText = "Дата сделки";
-            this.dealdate.Name = "dealdate";
-            this.dealdate.Width = 150;
+            this.DealDiscount.HeaderText = "Скидка";
+            this.DealDiscount.Name = "DealDiscount";
+            this.DealDiscount.ReadOnly = true;
+            this.DealDiscount.Width = 50;
+            // 
+            // PriceWithoutDiscount
+            // 
+            this.PriceWithoutDiscount.HeaderText = "Цена без скидки";
+            this.PriceWithoutDiscount.Name = "PriceWithoutDiscount";
+            this.PriceWithoutDiscount.ReadOnly = true;
+            this.PriceWithoutDiscount.Width = 50;
+            // 
+            // DealDate
+            // 
+            this.DealDate.HeaderText = "Дата сделки";
+            this.DealDate.Name = "DealDate";
+            this.DealDate.Width = 150;
             // 
             // tabSupplyTable
             // 
@@ -950,55 +1018,6 @@ namespace Admin
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
             // 
-            // ClientId
-            // 
-            this.ClientId.HeaderText = "ID";
-            this.ClientId.Name = "ClientId";
-            this.ClientId.ReadOnly = true;
-            this.ClientId.Width = 50;
-            // 
-            // ClientFirstName
-            // 
-            this.ClientFirstName.HeaderText = "Имя";
-            this.ClientFirstName.Name = "ClientFirstName";
-            this.ClientFirstName.ReadOnly = true;
-            // 
-            // ClientLastName
-            // 
-            this.ClientLastName.HeaderText = "Фамилия";
-            this.ClientLastName.Name = "ClientLastName";
-            this.ClientLastName.ReadOnly = true;
-            // 
-            // ClientMiddleName
-            // 
-            this.ClientMiddleName.HeaderText = "Отчество";
-            this.ClientMiddleName.Name = "ClientMiddleName";
-            this.ClientMiddleName.ReadOnly = true;
-            // 
-            // CardId
-            // 
-            this.CardId.HeaderText = "Карта клиента";
-            this.CardId.Name = "CardId";
-            this.CardId.ReadOnly = true;
-            // 
-            // DiscountPercent
-            // 
-            this.DiscountPercent.HeaderText = "Скидка";
-            this.DiscountPercent.Name = "DiscountPercent";
-            this.DiscountPercent.ReadOnly = true;
-            // 
-            // ActivationDate
-            // 
-            this.ActivationDate.HeaderText = "Дата активации";
-            this.ActivationDate.Name = "ActivationDate";
-            this.ActivationDate.ReadOnly = true;
-            // 
-            // CredId
-            // 
-            this.CredId.HeaderText = "Креды";
-            this.CredId.Name = "CredId";
-            this.CredId.ReadOnly = true;
-            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1032,7 +1051,7 @@ namespace Admin
             this.tabDealTable.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvViewDeal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DealTable)).EndInit();
             this.tabSupplyTable.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
@@ -1060,8 +1079,8 @@ namespace Admin
         private System.Windows.Forms.DataGridView dgvViewAccounting;
         private System.Windows.Forms.TabPage tabAccountingTable;
         private System.Windows.Forms.TabPage tabDealTable;
-        private System.Windows.Forms.DataGridView dgvViewDeal;
-        private System.Windows.Forms.Button btnDealUpdate;
+        private System.Windows.Forms.DataGridView DealTable;
+        private System.Windows.Forms.Button DealUpdateButton;
         private System.Windows.Forms.TabPage tabStationTable;
         private System.Windows.Forms.DataGridView StationsTable;
         private System.Windows.Forms.Button AddNewStationButton;
@@ -1073,22 +1092,14 @@ namespace Admin
         private System.Windows.Forms.Button ActivateClientCardButton;
         private System.Windows.Forms.Button RefreshStationTableButton;
         private System.Windows.Forms.Button UpdateClientTableButton;
-        private System.Windows.Forms.Button btnTableDealView;
+        private System.Windows.Forms.Button DealTableRefreshButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lbSessionName;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox cbDealFilterByStation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dealdate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn buyercard;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dealprice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fuelamount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fueltype;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stationDealName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn deal_id;
+        private System.Windows.Forms.ComboBox FilterByStation;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnTableAccountingView;
@@ -1142,6 +1153,16 @@ namespace Admin
         private DataGridViewTextBoxColumn DiscountPercent;
         private DataGridViewTextBoxColumn ActivationDate;
         private DataGridViewTextBoxColumn CredId;
+        private DataGridViewTextBoxColumn DealId;
+        private DataGridViewTextBoxColumn ClientName;
+        private DataGridViewTextBoxColumn EmployeeFullName;
+        private DataGridViewTextBoxColumn StationFullName;
+        private DataGridViewTextBoxColumn SupplyType;
+        private DataGridViewTextBoxColumn SupplyTypeAmount;
+        private DataGridViewTextBoxColumn DealFinalPrice;
+        private DataGridViewTextBoxColumn DealDiscount;
+        private DataGridViewTextBoxColumn PriceWithoutDiscount;
+        private DataGridViewTextBoxColumn DealDate;
     }
 }
 

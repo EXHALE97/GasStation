@@ -156,7 +156,7 @@ namespace Worker
             cbFuelType.Items.Add("A92");
             cbFuelType.Items.Add("A95");
             cbFuelType.Items.Add("A95+");
-            ComboBoxDealFiller comboBoxDealFiller = new ComboBoxDealFiller(cbCardNum, factory);
+            ComboBoxDealFiller comboBoxDealFiller = new ComboBoxDealFiller(factory);
             comboBoxDealFiller.СbCardnumFill();
         }
     }
