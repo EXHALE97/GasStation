@@ -231,7 +231,7 @@ namespace Queries.Repositories
 
         public List<Deal> GetDealsForClient(int clientId)
         {
-            return ExecuteSqlCommand("EXEC DealsSummary", queryResult =>
+            return ExecuteSqlCommand($"EXEC DealsSummary {clientId}", queryResult =>
             {
                 var deals = new List<Deal>();
                 if (queryResult.HasRows)

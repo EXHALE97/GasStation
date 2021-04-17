@@ -3,44 +3,65 @@ using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Controllers;
 using Queries.Factory;
-using Queries.Interfaces;
+using Queries.Support.MessageBox;
 
 namespace Admin
 {
     public partial class AddNewClientForm : Form
     {
-        private DataGridView dgv;
-        private IRepositoryFactory factory;
+        private readonly Lazy<ClientController> clientController;
 
-        public AddNewClientForm(IRepositoryFactory factory, DataGridView dgv)
+        public AddNewClientForm(IRepositoryFactory factory, DataGridView clientTable)
         {
             InitializeComponent();
-            this.factory = factory;
-            this.dgv = dgv;
+            clientController = new Lazy<ClientController>(() => new ClientController(clientTable, factory));
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddClientButton_Click(object sender, EventArgs e)
         {
             try
             {
-                //string carMark, cardNum;
-                //carMark = tbCarMark.Text.ToString();
-                //cardNum = tbCardNum.Text.ToString();
-                //Client car = new Client();
-                //car.buyerSet(carMark, cardNum);
-                //ClientController carController = new ClientController(dgv, factory);
-                //if (carController.AddToTable(car))
-                //{
-                //    MessageBox.Show("Операция выполнена успешно!");
-                //    Close();
-                //}
+                if (clientController.Value.AddToTable(new Client(ClientNameTextBox.Text == string.Empty ? null : ClientNameTextBox.Text, 
+                    ClientLastNameTextBox.Text == string.Empty ? null : ClientLastNameTextBox.Text,
+                    ClientMiddleNameTextBox.Text == string.Empty ? null : ClientMiddleNameTextBox.Text,
+                    int.Parse(ClientCardComboBox.SelectedItem == null ? "0" : ClientCardComboBox.SelectedItem.ToString()))))
+                {
+                    SuccessMessageBox.ShowSuccessBox();
+                    Close();
+                }
             }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void AddNewClientForm_Load(object sender, EventArgs e)
+        {
+            clientController.Value.FillCardsComboBox(ClientCardComboBox);
+        }
+
+        private void ClientNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleLettersAndSpace(e);
+        }
+
+        private void ClientLastNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleLettersAndSpace(e);
+        }
+
+        private void ClientMiddleNameTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleLettersAndSpace(e);
+        }
+
+        private void CancelAddButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void HandleLettersAndSpace(KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && e.KeyChar != 32 && e.KeyChar != 8)
+                e.Handled = true;
         }
     }
 }

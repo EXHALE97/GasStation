@@ -24,5 +24,13 @@ namespace Queries.Entities
             ActivationDate = activationDate;
             CredId = credId;
         }
+
+        public Client(string firstName, string lastName, string middleName, int cardId)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            MiddleName = middleName;
+            CardId = cardId;
+        }
     }
 }

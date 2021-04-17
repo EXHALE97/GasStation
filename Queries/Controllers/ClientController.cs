@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Linq;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
+using Queries.Support.MessageBox;
 using Queries.Support.Validators;
 
 namespace Queries.Controllers
@@ -11,7 +10,6 @@ namespace Queries.Controllers
     public class ClientController : BaseController
     {
         private readonly DataGridView table;
-        private string error;
 
         public ClientController(DataGridView table, IRepositoryFactory factory)
         {
@@ -24,47 +22,41 @@ namespace Queries.Controllers
             DoFormAction(() =>
             {
                 table.Rows.Clear();
-
+                var x = Factory.GetClientRepository().GetClients();
                 foreach (var client in Factory.GetClientRepository().GetClients())
                 {
-                    table.Rows.Add(client.Id, client.FirstName, client.LastName, client.MiddleName ?? "-",
+                    table.Rows.Add(client.Id, client.FirstName ?? "-", client.LastName ?? "-", client.MiddleName ?? "-",
                         client.CardId, client.DiscountPercent, client.ActivationDate, client.CredId == 0 ? "-" : client.CredId.ToString());
                 }
             });
         }
 
-        public bool AddToTable(Client car)
+        public void FillCardsComboBox(ComboBox comboBox)
         {
-            bool checkFlag = false;
-            try
+            DoFormAction(() =>
             {
-                var errorList = new List<string>();
-                if (ClientValidator.CheckAddition(car, out errorList))
+                foreach (var id in Factory.GetClientRepository().GetNonActivatedClientCards())
                 {
-                    Factory.GetClientRepository().AddToCarTable(car);
+                    comboBox.Items.Add(id);
                 }
-                else
+            });
+        }
+
+        public bool AddToTable(Client client)
+        {
+            return DoFormAction(() =>
+            {
+                if (ClientValidator.CheckAddition(client, out var errorList))
                 {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Factory.GetClientRepository().AddToClientTable(client);
+                    return true;
                 }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
     }
 }

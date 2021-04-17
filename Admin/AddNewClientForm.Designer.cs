@@ -28,81 +28,126 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tbCarMark = new System.Windows.Forms.TextBox();
-            this.tbCardNum = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
+            this.ClientNameTextBox = new System.Windows.Forms.TextBox();
+            this.ClientLastNameTextBox = new System.Windows.Forms.TextBox();
+            this.ClientNameLabel = new System.Windows.Forms.Label();
+            this.ClientLastNameLabel = new System.Windows.Forms.Label();
+            this.AddClientButton = new System.Windows.Forms.Button();
+            this.CancelAddButton = new System.Windows.Forms.Button();
+            this.ClientMiddleNameTextBox = new System.Windows.Forms.TextBox();
+            this.ClientMiddleNameLabel = new System.Windows.Forms.Label();
+            this.ClientCardLabel = new System.Windows.Forms.Label();
+            this.ClientCardComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // tbCarMark
+            // ClientNameTextBox
             // 
-            this.tbCarMark.Location = new System.Drawing.Point(165, 31);
-            this.tbCarMark.Name = "tbCarMark";
-            this.tbCarMark.Size = new System.Drawing.Size(232, 20);
-            this.tbCarMark.TabIndex = 0;
+            this.ClientNameTextBox.Location = new System.Drawing.Point(78, 31);
+            this.ClientNameTextBox.Name = "ClientNameTextBox";
+            this.ClientNameTextBox.Size = new System.Drawing.Size(156, 20);
+            this.ClientNameTextBox.TabIndex = 0;
+            this.ClientNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ClientNameTextBox_KeyPress);
             // 
-            // tbCardNum
+            // ClientLastNameTextBox
             // 
-            this.tbCardNum.Location = new System.Drawing.Point(165, 69);
-            this.tbCardNum.Name = "tbCardNum";
-            this.tbCardNum.Size = new System.Drawing.Size(232, 20);
-            this.tbCardNum.TabIndex = 1;
+            this.ClientLastNameTextBox.Location = new System.Drawing.Point(78, 57);
+            this.ClientLastNameTextBox.Name = "ClientLastNameTextBox";
+            this.ClientLastNameTextBox.Size = new System.Drawing.Size(156, 20);
+            this.ClientLastNameTextBox.TabIndex = 1;
+            this.ClientLastNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ClientLastNameTextBox_KeyPress);
             // 
-            // label1
+            // ClientNameLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Марка автомобиля:";
+            this.ClientNameLabel.AutoSize = true;
+            this.ClientNameLabel.Location = new System.Drawing.Point(12, 34);
+            this.ClientNameLabel.Name = "ClientNameLabel";
+            this.ClientNameLabel.Size = new System.Drawing.Size(29, 13);
+            this.ClientNameLabel.TabIndex = 2;
+            this.ClientNameLabel.Text = "Имя";
             // 
-            // label2
+            // ClientLastNameLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 76);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(81, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Номер карты: ";
+            this.ClientLastNameLabel.AutoSize = true;
+            this.ClientLastNameLabel.Location = new System.Drawing.Point(12, 60);
+            this.ClientLastNameLabel.Name = "ClientLastNameLabel";
+            this.ClientLastNameLabel.Size = new System.Drawing.Size(56, 13);
+            this.ClientLastNameLabel.TabIndex = 3;
+            this.ClientLastNameLabel.Text = "Фамилия";
             // 
-            // btnAdd
+            // AddClientButton
             // 
-            this.btnAdd.Location = new System.Drawing.Point(322, 112);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 7;
-            this.btnAdd.Text = "Добавить";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.AddClientButton.Location = new System.Drawing.Point(159, 151);
+            this.AddClientButton.Name = "AddClientButton";
+            this.AddClientButton.Size = new System.Drawing.Size(75, 23);
+            this.AddClientButton.TabIndex = 7;
+            this.AddClientButton.Text = "Добавить";
+            this.AddClientButton.UseVisualStyleBackColor = true;
+            this.AddClientButton.Click += new System.EventHandler(this.AddClientButton_Click);
             // 
-            // btnCancel
+            // CancelAddButton
             // 
-            this.btnCancel.Location = new System.Drawing.Point(225, 112);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 8;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.CancelAddButton.Location = new System.Drawing.Point(78, 151);
+            this.CancelAddButton.Name = "CancelAddButton";
+            this.CancelAddButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelAddButton.TabIndex = 8;
+            this.CancelAddButton.Text = "Отмена";
+            this.CancelAddButton.UseVisualStyleBackColor = true;
+            this.CancelAddButton.Click += new System.EventHandler(this.CancelAddButton_Click);
             // 
-            // AddToCarTableForm
+            // ClientMiddleNameTextBox
+            // 
+            this.ClientMiddleNameTextBox.Location = new System.Drawing.Point(78, 83);
+            this.ClientMiddleNameTextBox.Name = "ClientMiddleNameTextBox";
+            this.ClientMiddleNameTextBox.Size = new System.Drawing.Size(156, 20);
+            this.ClientMiddleNameTextBox.TabIndex = 9;
+            this.ClientMiddleNameTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ClientMiddleNameTextBox_KeyPress);
+            // 
+            // ClientMiddleNameLabel
+            // 
+            this.ClientMiddleNameLabel.AutoSize = true;
+            this.ClientMiddleNameLabel.Location = new System.Drawing.Point(12, 86);
+            this.ClientMiddleNameLabel.Name = "ClientMiddleNameLabel";
+            this.ClientMiddleNameLabel.Size = new System.Drawing.Size(57, 13);
+            this.ClientMiddleNameLabel.TabIndex = 10;
+            this.ClientMiddleNameLabel.Text = "Отчество:";
+            // 
+            // ClientCardLabel
+            // 
+            this.ClientCardLabel.AutoSize = true;
+            this.ClientCardLabel.Location = new System.Drawing.Point(12, 112);
+            this.ClientCardLabel.Name = "ClientCardLabel";
+            this.ClientCardLabel.Size = new System.Drawing.Size(40, 13);
+            this.ClientCardLabel.TabIndex = 11;
+            this.ClientCardLabel.Text = "Карта:";
+            // 
+            // ClientCardComboBox
+            // 
+            this.ClientCardComboBox.FormattingEnabled = true;
+            this.ClientCardComboBox.Location = new System.Drawing.Point(78, 109);
+            this.ClientCardComboBox.Name = "ClientCardComboBox";
+            this.ClientCardComboBox.Size = new System.Drawing.Size(156, 21);
+            this.ClientCardComboBox.TabIndex = 13;
+            // 
+            // AddNewClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 150);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbCardNum);
-            this.Controls.Add(this.tbCarMark);
+            this.ClientSize = new System.Drawing.Size(250, 188);
+            this.Controls.Add(this.ClientCardComboBox);
+            this.Controls.Add(this.ClientCardLabel);
+            this.Controls.Add(this.ClientMiddleNameLabel);
+            this.Controls.Add(this.ClientMiddleNameTextBox);
+            this.Controls.Add(this.CancelAddButton);
+            this.Controls.Add(this.AddClientButton);
+            this.Controls.Add(this.ClientLastNameLabel);
+            this.Controls.Add(this.ClientNameLabel);
+            this.Controls.Add(this.ClientLastNameTextBox);
+            this.Controls.Add(this.ClientNameTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "AddToCarTableForm";
+            this.Name = "AddNewClientForm";
             this.Text = "Оформление покупателя";
+            this.Load += new System.EventHandler(this.AddNewClientForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -110,11 +155,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tbCarMark;
-        private System.Windows.Forms.TextBox tbCardNum;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox ClientNameTextBox;
+        private System.Windows.Forms.TextBox ClientLastNameTextBox;
+        private System.Windows.Forms.Label ClientNameLabel;
+        private System.Windows.Forms.Label ClientLastNameLabel;
+        private System.Windows.Forms.Button AddClientButton;
+        private System.Windows.Forms.Button CancelAddButton;
+        private System.Windows.Forms.TextBox ClientMiddleNameTextBox;
+        private System.Windows.Forms.Label ClientMiddleNameLabel;
+        private System.Windows.Forms.Label ClientCardLabel;
+        private System.Windows.Forms.ComboBox ClientCardComboBox;
     }
 }

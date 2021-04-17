@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
@@ -28,13 +27,12 @@ namespace Queries.Repositories
                 var clients = new List<Client>();
                 if (queryResult.HasRows)
                 {
-
                     clients.AddRange(from DbDataRecord dbDataRecord in queryResult
                         select new Client(int.Parse(dbDataRecord["id"].ToString()),
-                            dbDataRecord["first_name"].ToString(),
-                            dbDataRecord["last_name"].ToString(), 
-                            dbDataRecord["middle_name"].ToString(),
-                            int.Parse(dbDataRecord["cred_id"].ToString()),
+                            dbDataRecord["first_name"].ToString() == string.Empty ? null : dbDataRecord["first_name"].ToString(),
+                            dbDataRecord["last_name"].ToString() == string.Empty ? null : dbDataRecord["last_name"].ToString(), 
+                            dbDataRecord["middle_name"].ToString() == string.Empty ? null : dbDataRecord["middle_name"].ToString(),
+                            int.Parse(dbDataRecord["card_id"].ToString()),
                             int.Parse(dbDataRecord["discount_percent"].ToString()), 
                             Convert.ToDateTime(dbDataRecord["activation_date"].ToString()),
                             dbDataRecord["cred_id"].ToString() == string.Empty
@@ -45,6 +43,28 @@ namespace Queries.Repositories
                 queryResult.Close();
                 return clients;
             });
+        }
+
+        public List<int> GetNonActivatedClientCards()
+        {
+            return ExecuteSqlCommand("EXEC GetNonActivatedClientCardId", queryResult =>
+            {
+                var cards = new List<int>();
+                if (queryResult.HasRows)
+                {
+                    cards.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select int.Parse(dbDataRecord["id"].ToString()));
+                }
+
+                queryResult.Close();
+                return cards;
+            });
+        }
+
+        public void AddToClientTable(Client client)
+        {
+            ExecuteSqlNonQueryCommand(
+                $"EXEC InsertClient {client.CardId}, {(client.FirstName == null ? "NULL" : $"N'{client.FirstName}'")}, {(client.LastName == null ? "NULL" : $"N'{client.LastName}'")}, {(client.MiddleName == null ? "NULL" : $"N'{client.MiddleName}'")}, {(client.CredId == 0 ? "NULL" : $"{client.CredId}")}");
         }
 
         public int FindCarIDByCardnum(string cardnum)
@@ -129,25 +149,6 @@ namespace Queries.Repositories
             return comboBoxElements;
         }
 
-        public void AddToCarTable(Client car)
-        {
-            //try
-            //{
-            //    dbc.OpenConnection();
-
-            //    var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"Car\"(carmark, cardnum)" +
-            //                                      "VALUES(@carmark, @cardnum)");
-            //    queryCommand.Parameters.AddWithValue("@carmark", car.GetCarMark());
-            //    queryCommand.Parameters.AddWithValue("@cardnum", car.GetCardNum());
-
-            //    queryCommand.ExecuteNonQuery();
-            //}
-            //catch (SqlException pe)
-            //{
-            //    throw pe;
-            //}
-            //finally { dbc.CloseConnection(); }
-
-        }
+       
     }
 }

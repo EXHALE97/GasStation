@@ -8,9 +8,11 @@ namespace Queries.Interfaces
     {
         List<Client> GetClients();
 
+        List<int> GetNonActivatedClientCards();
+
         List<string> GetCardNumList();
 
-        void AddToCarTable(Client car);
+        void AddToClientTable(Client client);
 
         int FindCarIDByCardnum(string cardnum);
 
