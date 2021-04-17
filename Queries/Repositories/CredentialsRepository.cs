@@ -45,9 +45,9 @@ namespace Queries.Repositories
             });
         }
 
-        public bool IsThereCurrentCredentialsInTable(string login)
+        public int GetCredentialsIdCountByLogin(string login)
         {
-            return ExecuteSqlCommand($"EXEC GetCredentialsByLogin '{login}'", queryResult => queryResult.HasRows);
+            return ExecuteSqlNonQueryCommand($"EXEC GetCredentialsByLogin '{login}'");
         }
 
         public int GetCredentialsIdByLogin(string login)

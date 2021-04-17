@@ -14,9 +14,11 @@ namespace Queries.Interfaces
 
         void AddToClientTable(Client client);
 
-        int FindCarIDByCardnum(string cardnum);
+        string FindClientById(int id);
 
-        string FindCardNumByCarID(int id);
+        void SetClientCredentials(int clientId, Credentials credentials);
+
+        int FindCarIDByCardnum(string cardnum);
 
     }
 }

@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Entities;
 using Queries.Factory;
+using Queries.Support.MessageBox;
 
 namespace Admin
 {
@@ -24,11 +25,11 @@ namespace Admin
                     EmployeePositionTextBox.Text, EmployeeBirthDatePicker.Value, EmploymentDatePicker.Value, ContractEndDatePicker.Value,
                     double.Parse(EmployeeSalaryTextBox.Text), EmployeeAddressTextBox.Text, EmployeePhoneTextBox.Text, WorkingRadio.Checked)))
                 {
-                    MessageBox.Show("Операция выполнена успешно!");
+                    SuccessMessageBox.ShowSuccessBox();
                     Close();
                 }
             }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception) { ErrorMessageBox.ShowInvalidDataMessage(); }
         }
 
         private void EmployeeSurnameTextBox_KeyPress(object sender, KeyPressEventArgs e)

@@ -11,6 +11,11 @@ namespace Queries.Controllers
     {
         private readonly DataGridView table;
 
+        public ClientController(IRepositoryFactory factory)
+        {
+            Factory = factory;
+        }
+
         public ClientController(DataGridView table, IRepositoryFactory factory)
         {
             Factory = factory;
@@ -22,7 +27,6 @@ namespace Queries.Controllers
             DoFormAction(() =>
             {
                 table.Rows.Clear();
-                var x = Factory.GetClientRepository().GetClients();
                 foreach (var client in Factory.GetClientRepository().GetClients())
                 {
                     table.Rows.Add(client.Id, client.FirstName ?? "-", client.LastName ?? "-", client.MiddleName ?? "-",
@@ -49,6 +53,23 @@ namespace Queries.Controllers
                 if (ClientValidator.CheckAddition(client, out var errorList))
                 {
                     Factory.GetClientRepository().AddToClientTable(client);
+                    return true;
+                }
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
+        }
+
+        public bool SetClientCredentials(int client, Credentials credentials)
+        {
+            return DoFormAction(() =>
+            {
+                if (CredentialsValidator.CheckAddition(credentials, out var errorList))
+                {
+                    Factory.GetClientRepository().SetClientCredentials(client, credentials);
                     return true;
                 }
 

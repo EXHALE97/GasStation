@@ -11,7 +11,7 @@ namespace Queries.Interfaces
 
         string GetCredentialsLoginById(int id);
 
-        bool IsThereCurrentCredentialsInTable(string login);
+        int GetCredentialsIdCountByLogin(string login);
 
         int GetCredentialsIdByLogin(string login);
 

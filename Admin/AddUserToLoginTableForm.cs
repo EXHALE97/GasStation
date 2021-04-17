@@ -1,73 +1,70 @@
 ﻿using System;
 using System.Windows.Forms;
 using Queries.Controllers;
-using Queries.Interfaces;
 using Queries.Entities;
 using Queries.Factory;
+using Queries.Support.MessageBox;
 
 namespace Admin
 {
     public partial class AddUserToLoginTableForm : Form
     {
-        private DataGridViewRow row;
-        private IRepositoryFactory factory;
+        private readonly DataGridViewRow selectedRow;
+        private readonly IRepositoryFactory factory;
 
-        public AddUserToLoginTableForm(DataGridViewRow row, IRepositoryFactory factory)
+        public AddUserToLoginTableForm(DataGridViewRow selectedRow, IRepositoryFactory factory)
         {
             InitializeComponent();
-            this.row = row;
+            this.selectedRow = selectedRow;
             this.factory = factory;
         }
 
         private void AddToLoginTableForm_Load(object sender, EventArgs e)
         {
-            if (!factory.GetCredentialsRepository().IsThereCurrentCredentialsInTable(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty)))
+            if (selectedRow.Cells["CredId"].Value.ToString() == "-")
             {
                 try
                 {
-                    lbName.Text = row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty);
-                    tbPass.UseSystemPasswordChar = true;
+                    PasswordTextBox.UseSystemPasswordChar = true;
+                    ClientFullNameLabel.Text = factory.GetClientRepository().FindClientById(Convert.ToInt32(selectedRow.Cells["ClientId"].Value));
                 }
-                catch (Exception) { }
+                catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
             }
             else
             {
-                MessageBox.Show("Этому пользователю уже был выдан пароль!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ErrorMessageBox.ShowCustomErrorMessage("Этому пользователю уже был выдан пароль!");
                 Close();
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddCredentialsButton_Click(object sender, EventArgs e)
         {
-            string passWord = String.Empty;
             try
             {
-                passWord = tbPass.Text.ToString();
-                var nUser =
-                    new Credentials(row.Cells["cardnum"].Value.ToString().Trim().Replace(" ", string.Empty),
-                        passWord.Trim().Replace(" ", string.Empty), "user");
-                var lc = new CredentialsController(factory);
-                if (lc.AddToLoginTable(nUser))
+                if (new ClientController(factory).SetClientCredentials(Convert.ToInt32(selectedRow.Cells["ClientId"].Value),
+                    new Credentials(LoginTextBox.Text, PasswordTextBox.Text, "user")))
                 {
-                    MessageBox.Show("Операция выполнена успешно!");
+                    SuccessMessageBox.ShowSuccessBox();
                     Close();
                 }
             }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception) { ErrorMessageBox.ShowInvalidDataMessage(); }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void CancelActionButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void checkPass_CheckedChanged(object sender, EventArgs e)
+        private void LoginTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (checkPass.Checked)
-            {
-                tbPass.UseSystemPasswordChar = false;
-            }
-            else tbPass.UseSystemPasswordChar = true;
+            if (!char.IsLetter(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 46)
+                e.Handled = true;
+        }
+
+        private void CheckPassCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            PasswordTextBox.UseSystemPasswordChar = !CheckPassCheckBox.Checked;
         }
     }
 }

@@ -67,6 +67,27 @@ namespace Queries.Repositories
                 $"EXEC InsertClient {client.CardId}, {(client.FirstName == null ? "NULL" : $"N'{client.FirstName}'")}, {(client.LastName == null ? "NULL" : $"N'{client.LastName}'")}, {(client.MiddleName == null ? "NULL" : $"N'{client.MiddleName}'")}, {(client.CredId == 0 ? "NULL" : $"{client.CredId}")}");
         }
 
+        public string FindClientById(int id)
+        {
+            return ExecuteSqlCommand($"SELECT dbo.GetClientFullName({id})", queryResult =>
+            {
+                var fullName = string.Empty;
+                if (!queryResult.HasRows) return fullName;
+                foreach (DbDataRecord dbDataRecord in queryResult)
+                {
+                    fullName = dbDataRecord[0].ToString();
+                }
+
+                return fullName;
+            });
+        }
+
+        public void SetClientCredentials(int clientId, Credentials credentials)
+        {
+            ExecuteSqlNonQueryCommand(
+                $"EXEC InsertCredentialsAndConnectToClient '{clientId}', '{credentials.Login}', '{credentials.Password}', '{credentials.Role}'");
+        }
+
         public int FindCarIDByCardnum(string cardnum)
         {
             int car_id = 0;
@@ -120,35 +141,5 @@ namespace Queries.Repositories
 
             return cardnum;
         }
-
-
-        public List<string> GetCardNumList()
-        {
-            List<string> comboBoxElements = new List<string>();
-
-            //try
-            //{
-            //    dbc.OpenConnection();
-            //    var queryCommand = new SqlCommand("SELECT DISTINCT cardnum FROM \"AZS\".\"Car\"");
-            //    var AZSTableReader = queryCommand.ExecuteReader();
-            //    if (AZSTableReader.HasRows)
-            //    {
-            //        foreach (DbDataRecord dbDataRecord in AZSTableReader)
-            //        {
-            //            comboBoxElements.Add(dbDataRecord["cardnum"].ToString());
-            //        }
-            //    }
-            //    AZSTableReader.Close();
-            //}
-            //catch (SqlException pe)
-            //{
-            //    throw pe;
-            //}
-            //finally { dbc.CloseConnection(); }
-
-            return comboBoxElements;
-        }
-
-       
     }
 }

@@ -30,7 +30,7 @@ namespace Queries.Controllers
             {
                 if (CredentialsValidator.CheckAddition(dbUser, out errorList))
                 {
-                    var credId = factory.GetCredentialsRepository().AddNewCredentials(dbUser);
+                    factory.GetCredentialsRepository().AddNewCredentials(dbUser);
                     return true;
                 }
 

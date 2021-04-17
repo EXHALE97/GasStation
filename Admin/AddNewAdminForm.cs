@@ -27,7 +27,7 @@ namespace Admin
                 pass = tbPass.Text.ToString();
                 Credentials nAdmin = new Credentials(login, pass, "admin");
                 CredentialsController lc = new CredentialsController(factory);
-                if (!factory.GetCredentialsRepository().IsThereCurrentCredentialsInTable(login.ToString().Trim().Replace(" ", string.Empty)))
+                if (factory.GetCredentialsRepository().GetCredentialsIdCountByLogin(login.ToString().Trim().Replace(" ", string.Empty)) != 0)
                 {
                     if (lc.AddToLoginTable(nAdmin))
                     {
