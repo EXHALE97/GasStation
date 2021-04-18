@@ -38,9 +38,9 @@ namespace Queries.Factory
             return new DealRepository(dbc);
         }
 
-        public IAccountRepository GetAccountRepository()
+        public IWarehouseRepository GetWarehouseRepository()
         {
-            return new AccountRepository(dbc);
+            return new WarehouseRepository(dbc);
         }
 
         public ISupplyRepository GetSupplyRepository()
@@ -51,6 +51,16 @@ namespace Queries.Factory
         public ICredentialsRepository GetCredentialsRepository()
         {
             return new CredentialsRepository(dbc);
+        }
+
+        public ISupplyTypeRepository GetSupplyTypeRepository()
+        {
+            return new SupplyTypeRepository(dbc);
+        }
+
+        public IHistoryRepository GetHistoryRepository()
+        {
+            return new HistoryRepository(dbc);
         }
     }
 }

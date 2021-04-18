@@ -12,8 +12,6 @@ namespace Queries.Interfaces
 
         List<Supply> ShowSupplyTableByID(int ID);
 
-        List<Supply> GetSupplyBYStationID(int id);
-
-        List<SupplyType> GetSupplyTypes();
+        List<Supply> GetSuppliesByStation(int stationId);
     }
 }

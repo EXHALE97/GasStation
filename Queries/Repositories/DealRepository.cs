@@ -154,7 +154,5 @@ namespace Queries.Repositories
             //}
             //finally { dbc.CloseConnection(); }
         }
-
-        
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Linq;
 using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Entities;
@@ -10,14 +9,14 @@ using Queries.Support.MessageBox;
 
 namespace Admin
 {
-    public partial class UpdateDealTableForm : Form
+    public partial class UpdateDealForm : Form
     {
         private readonly int clientDiscountPercent;
         private readonly IRepositoryFactory factory;
         private readonly DataGridViewRow selectedRow;
         private readonly ComboBoxFiller comboBoxFiller;
 
-        public UpdateDealTableForm(DataGridViewRow selectedRow, IRepositoryFactory factory)
+        public UpdateDealForm(DataGridViewRow selectedRow, IRepositoryFactory factory)
         {
             InitializeComponent();
             comboBoxFiller = new ComboBoxFiller(factory);
@@ -70,8 +69,19 @@ namespace Admin
             catch (Exception) { ErrorMessageBox.ShowInvalidDataMessage(); }
         }
 
+        private void SupplyTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CountPrice();
+        }
+
+        private void SupplyTypeAmountTextBox_TextChanged(object sender, EventArgs e)
+        {
+            CountPrice();
+        }
+
         private void DealPriceTextBox_TextChanged(object sender, EventArgs e)
         {
+            if (DealPriceTextBox.Text == string.Empty) return;
             PriceWithDiscountTextBox.Text = (double.Parse(DealPriceTextBox.Text) * ((double)(100 - clientDiscountPercent) / 100)).ToString(CultureInfo.InvariantCulture);
         }
 
@@ -110,6 +120,16 @@ namespace Admin
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
+        }
+
+        private void CountPrice()
+        {
+            if (SupplyTypeAmountTextBox.Text == string.Empty) return;
+            if (SupplyTypeComboBox.SelectedIndex == -1) return;
+            DealPriceTextBox.Text =
+                (factory.GetSupplyTypeRepository()
+                     .GetSupplyTypePriceByName(SupplyTypeComboBox.SelectedItem.ToString()) *
+                 double.Parse(SupplyTypeAmountTextBox.Text)).ToString(CultureInfo.InvariantCulture);
         }
     }
 }

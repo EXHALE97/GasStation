@@ -6,7 +6,6 @@ using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
 using Queries.Interfaces;
-using Queries.Support.Validators;
 
 namespace Queries.Repositories
 {
@@ -174,12 +173,12 @@ namespace Queries.Repositories
 
         public void AddToStationTable(Station station)
         {
-            ExecuteSqlNonQueryCommand($"EXEC InsertStation N'{station.Name}', N'{station.City}', N'{station.Address}', {station.IsWorking.ToString()}");
+            ExecuteSqlNonQueryCommand($"EXEC InsertStation N'{station.Name}', N'{station.City}', N'{station.Address}', '{station.IsWorking.ToString()}'");
         }
 
         public void UpdateStation(Station station)
         {
-            ExecuteSqlNonQueryCommand($"EXEC UpdateStation {station.Id}, N'{station.Name}', N'{station.City}', N'{station.Address}', {station.IsWorking.ToString()}");
+            ExecuteSqlNonQueryCommand($"EXEC UpdateStation {station.Id}, N'{station.Name}', N'{station.City}', N'{station.Address}', '{station.IsWorking.ToString()}'");
         }
     }
 }

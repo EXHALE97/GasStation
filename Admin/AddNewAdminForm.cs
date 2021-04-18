@@ -4,57 +4,49 @@ using Queries.Controllers;
 using Queries.Entities;
 using Queries.Factory;
 using Queries.Interfaces;
+using Queries.Support.MessageBox;
 
 namespace Admin
 {
     public partial class AddNewAdminForm : Form
     {
-        private IRepositoryFactory factory;
+        private readonly IRepositoryFactory factory;
 
         public AddNewAdminForm(IRepositoryFactory factory)
         {
             InitializeComponent();
             this.factory = factory;
-            tbPass.UseSystemPasswordChar = true;
+            AdminPasswordTextBox.UseSystemPasswordChar = true;
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddAdminButton_Click(object sender, EventArgs e)
         {
-            string login = String.Empty, pass = String.Empty;
             try
             {
-                login = tbLogin.Text.ToString();
-                pass = tbPass.Text.ToString();
-                Credentials nAdmin = new Credentials(login, pass, "admin");
-                CredentialsController lc = new CredentialsController(factory);
-                if (factory.GetCredentialsRepository().GetCredentialsIdCountByLogin(login.ToString().Trim().Replace(" ", string.Empty)) != 0)
+                if (factory.GetCredentialsRepository().GetCredentialsIdCountByLogin(AdminLoginTextBox.Text) != 0)
                 {
-                    if (lc.AddToLoginTable(nAdmin))
+                    if (new CredentialsController(factory).AddToLoginTable(new Credentials(AdminLoginTextBox.Text, AdminPasswordTextBox.Text, "admin")))
                     {
-                        MessageBox.Show("Операция выполнена успешно!");
+                        SuccessMessageBox.ShowSuccessBox();
                         Close();
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Администратор с таким именем уже существует!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    ErrorMessageBox.ShowCustomErrorMessage("Администратор с таким именем уже существует!");
                 }
             }
-            catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception) { ErrorMessageBox.ShowInvalidDataMessage(); }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void CancelActionButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void checkPass_CheckedChanged(object sender, EventArgs e)
+        private void CheckPasswordCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkPass.Checked)
-            {
-                tbPass.UseSystemPasswordChar = false;
-            }
-            else tbPass.UseSystemPasswordChar = true;
+            AdminPasswordTextBox.UseSystemPasswordChar = !CheckPasswordCheckBox.Checked;
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Queries.Support.ComboBox
 {
     public class ComboBoxFiller
     {
-        private IRepositoryFactory factory;
+        private readonly IRepositoryFactory factory;
 
         public ComboBoxFiller(IRepositoryFactory factory)
         {
@@ -21,7 +21,7 @@ namespace Queries.Support.ComboBox
 
         public void FillSupplyTypes(System.Windows.Forms.ComboBox comboBox)
         {
-            foreach (var supplyType in factory.GetSupplyRepository().GetSupplyTypes())
+            foreach (var supplyType in factory.GetSupplyTypeRepository().GetSupplyTypes())
             {
                 comboBox.Items.Add(supplyType.Name);
             }

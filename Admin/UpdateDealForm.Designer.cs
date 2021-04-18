@@ -2,7 +2,7 @@
 
 namespace Admin
 {
-    partial class UpdateDealTableForm
+    partial class UpdateDealForm
     {
         /// <summary>
         /// Required designer variable.
@@ -130,6 +130,7 @@ namespace Admin
             this.SupplyTypeAmountTextBox.Name = "SupplyTypeAmountTextBox";
             this.SupplyTypeAmountTextBox.Size = new System.Drawing.Size(106, 20);
             this.SupplyTypeAmountTextBox.TabIndex = 28;
+            this.SupplyTypeAmountTextBox.TextChanged += new System.EventHandler(this.SupplyTypeAmountTextBox_TextChanged);
             this.SupplyTypeAmountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SupplyTypeAmountTextBox_KeyPress);
             // 
             // SupplyTypeComboBox
@@ -140,15 +141,18 @@ namespace Admin
             this.SupplyTypeComboBox.Name = "SupplyTypeComboBox";
             this.SupplyTypeComboBox.Size = new System.Drawing.Size(106, 21);
             this.SupplyTypeComboBox.TabIndex = 43;
+            this.SupplyTypeComboBox.SelectedIndexChanged +=
+                new EventHandler(this.SupplyTypeComboBox_SelectedIndexChanged);
             // 
             // DealPriceTextBox
             // 
+            this.DealPriceTextBox.Enabled = false;
             this.DealPriceTextBox.Location = new System.Drawing.Point(147, 74);
             this.DealPriceTextBox.Name = "DealPriceTextBox";
             this.DealPriceTextBox.Size = new System.Drawing.Size(106, 20);
             this.DealPriceTextBox.TabIndex = 44;
+            this.DealPriceTextBox.TextChanged += new System.EventHandler(this.DealPriceTextBox_TextChanged);
             this.DealPriceTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DealPriceTextBox_KeyPress);
-            this.DealPriceTextBox.TextChanged += new EventHandler(this.DealPriceTextBox_TextChanged);
             // 
             // CardNumberComboBox
             // 
@@ -204,12 +208,13 @@ namespace Admin
             // 
             // PriceWithDiscountTextBox
             // 
+            this.PriceWithDiscountTextBox.Enabled = false;
             this.PriceWithDiscountTextBox.Location = new System.Drawing.Point(147, 100);
             this.PriceWithDiscountTextBox.Name = "PriceWithDiscountTextBox";
             this.PriceWithDiscountTextBox.Size = new System.Drawing.Size(106, 20);
             this.PriceWithDiscountTextBox.TabIndex = 59;
             // 
-            // UpdateDealTableForm
+            // UpdateDealForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -234,7 +239,7 @@ namespace Admin
             this.Controls.Add(this.SupplyTypeAmountTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "UpdateDealTableForm";
+            this.Name = "UpdateDealForm";
             this.Text = "Обновление данных о сделке";
             this.Load += new System.EventHandler(this.UpdateDealTableForm_Load);
             this.ResumeLayout(false);

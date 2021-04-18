@@ -12,10 +12,14 @@ namespace Queries.Factory
 
         IDealRepository GetDealRepository();
 
-        IAccountRepository GetAccountRepository();
+        IWarehouseRepository GetWarehouseRepository();
 
         ISupplyRepository GetSupplyRepository();
 
         ICredentialsRepository GetCredentialsRepository();
+
+        ISupplyTypeRepository GetSupplyTypeRepository();
+
+        IHistoryRepository GetHistoryRepository();
     }
 }

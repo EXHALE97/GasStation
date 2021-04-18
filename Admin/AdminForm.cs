@@ -12,10 +12,11 @@ namespace Admin
         private readonly IRepositoryFactory factory;
         private readonly EmployeeController employeeController;
         private readonly ClientController clientController;
-        private readonly AccountController accountingController;
+        private readonly WarehouseController warehouseController;
         private readonly DealController dealController;
         private readonly StationController stationController;
         private readonly SupplyController supplyController;
+        private readonly SupplyTypeController supplyTypeController;
         private readonly ComboBoxFiller comboBoxFiller;
 
         public AdminForm(IRepositoryFactory factory)
@@ -25,9 +26,10 @@ namespace Admin
             stationController = new StationController(StationsTable, factory);
             employeeController = new EmployeeController(EmployeeTable, factory);
             clientController = new ClientController(ClientTable, factory);
-            accountingController = new AccountController(dgvViewAccounting, factory);
+            warehouseController = new WarehouseController(WarehouseTable, factory);
             dealController = new DealController(DealTable, factory);
-            supplyController = new SupplyController(dgvViewSupply, factory);
+            supplyController = new SupplyController(SuppliesTable, factory);
+            supplyTypeController = new SupplyTypeController(SupplyTypeTable, factory);
             comboBoxFiller = new ComboBoxFiller(factory);
         }
 
@@ -39,15 +41,12 @@ namespace Admin
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             clientController.ShowTable();
             dealController.ShowTable();
-            comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
             supplyController.ShowTable();
-            comboBoxFiller.FillStationNamesComboBox(SupplyFilterBytation);
-            //accountingController.ShowTable();
-
-
-
-            //accountingComboBox.FillStationNamesComboBox();
-            //supplyComboBox.FillStationNamesComboBox();
+            supplyTypeController.ShowTable();
+            warehouseController.ShowTable();
+            comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
+            comboBoxFiller.FillStationNamesComboBox(SupplyFilterByStation);
+            comboBoxFiller.FillStationNamesComboBox(WhFilterByStation);
         }
 
         private void RefreshEmployeeTable_Click(object sender, EventArgs e)
@@ -93,7 +92,7 @@ namespace Admin
 
         private void DealUpdateButton_Click(object sender, EventArgs e)
         {
-            new UpdateDealTableForm(DealTable.CurrentRow, factory).ShowDialog();
+            new UpdateDealForm(DealTable.CurrentRow, factory).ShowDialog();
             dealController.ShowTable();
         }
 
@@ -108,11 +107,13 @@ namespace Admin
             stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             clientController.ShowTable();
-            accountingController.ShowTable();
             dealController.ShowTable();
-            DealFilterByStation.Items.Clear();
+            supplyController.ShowTable();
+            supplyTypeController.ShowTable();
+            warehouseController.ShowTable();
             comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
-            WhFilterByStation.Items.Clear();
+            comboBoxFiller.FillStationNamesComboBox(SupplyFilterByStation);
+            comboBoxFiller.FillStationNamesComboBox(WhFilterByStation);
         }
 
         private void AddNewAdmin_Click(object sender, EventArgs e)
@@ -155,29 +156,29 @@ namespace Admin
             }
         }
 
-        private void cbAccountingFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
+        private void WhFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (WhFilterByStation.SelectedIndex != -1)
             {
-                accountingController.FilterBYStationID(factory.GetStationRepository().GetStationIdByName(WhFilterByStation.Text));
+                warehouseController.FilterTableByStationId(WhFilterByStation.SelectedItem.ToString());
                 WhFilterByStation.Items.Clear();
-                comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
+                comboBoxFiller.FillStationNamesComboBox(WhFilterByStation);
             }
         }
 
-        private void cbSupplyFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
+        private void SupplyFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SupplyFilterBytation.SelectedIndex != -1)
+            if (SupplyFilterByStation.SelectedIndex != -1)
             {
-                supplyController.FilterBYStationID(factory.GetStationRepository().GetStationIdByName(SupplyFilterBytation.Text));
-                SupplyFilterBytation.Items.Clear();
-                comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
+                supplyController.FilterByStationId(SupplyFilterByStation.SelectedItem.ToString());
+                SupplyFilterByStation.Items.Clear();
+                comboBoxFiller.FillStationNamesComboBox(SupplyFilterByStation);
             }
         }
 
-        private void ViewAccountingTable(object sender, EventArgs e)
+        private void RefreshWarehouseInfoButton_Click(object sender, EventArgs e)
         {
-            accountingController.ShowTable();
+            warehouseController.ShowTable();
         }
 
         private void RefreshSupplyTableButton_Click(object sender, EventArgs e)
@@ -187,7 +188,8 @@ namespace Admin
 
         private void UpdateStationInfoButton_Click(object sender, EventArgs e)
         {
-
+            new UpdateStationForm(StationsTable.CurrentRow, factory, StationsTable).ShowDialog();
+            stationController.ShowTable(OnlyWorkingStationsCheckBox.Checked);
         }
 
         private void OnlyWorkingStationsCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -198,6 +200,35 @@ namespace Admin
         private void OnlyWorkingEmployeeCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             employeeController.ShowTable(((CheckBox)sender).Checked);
+        }
+
+        private void RefreshSupplyTypeTableButton_Click(object sender, EventArgs e)
+        {
+            supplyTypeController.ShowTable();
+        }
+
+        private void UpdateSupplyTypeButton_Click(object sender, EventArgs e)
+        {
+            new UpdateSupplyTypeForm(SupplyTypeTable.CurrentRow, factory, SupplyTypeTable).ShowDialog();
+            supplyTypeController.ShowTable();
+        }
+
+        private void DeleteSupplyTypeButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (supplyTypeController.DeleteCurrentRowFromTable(int.Parse(SupplyTypeTable.CurrentRow.Cells["SupplyTypeId"].Value.ToString())))
+                {
+                    SuccessMessageBox.ShowSuccessBox();
+                }
+                supplyTypeController.ShowTable();
+            }
+            catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
+        }
+
+        private void HistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new HistoryForm(factory).ShowDialog();
         }
     }
 }
