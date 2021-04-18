@@ -16,9 +16,7 @@ namespace Admin
         private readonly DealController dealController;
         private readonly StationController stationController;
         private readonly SupplyController supplyController;
-        private readonly ComboBoxDealFiller comboBoxDealFiller;
-        private readonly ComboBoxAccountingFiller accountingComboBox;
-        private readonly ComboBoxSupplyFiller supplyComboBox;
+        private readonly ComboBoxFiller comboBoxFiller;
 
         public AdminForm(IRepositoryFactory factory)
         {
@@ -30,9 +28,7 @@ namespace Admin
             accountingController = new AccountController(dgvViewAccounting, factory);
             dealController = new DealController(DealTable, factory);
             supplyController = new SupplyController(dgvViewSupply, factory);
-            comboBoxDealFiller = new ComboBoxDealFiller(factory);
-            accountingComboBox = new ComboBoxAccountingFiller(cbAccountingFilterByStation, factory);
-            supplyComboBox = new ComboBoxSupplyFiller(cbSupplyFilterByStation, factory);
+            comboBoxFiller = new ComboBoxFiller(factory);
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -43,10 +39,12 @@ namespace Admin
             employeeController.ShowTable(OnlyWorkingEmployeeCheckBox.Checked);
             clientController.ShowTable();
             dealController.ShowTable();
-            comboBoxDealFiller.FillStationNamesComboBox(FilterByStation);
+            comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
+            supplyController.ShowTable();
+            comboBoxFiller.FillStationNamesComboBox(SupplyFilterBytation);
             //accountingController.ShowTable();
 
-            //supplyController.ShowTable();
+
 
             //accountingComboBox.FillStationNamesComboBox();
             //supplyComboBox.FillStationNamesComboBox();
@@ -112,12 +110,9 @@ namespace Admin
             clientController.ShowTable();
             accountingController.ShowTable();
             dealController.ShowTable();
-            FilterByStation.Items.Clear();
-            comboBoxDealFiller.FillStationNamesComboBox(FilterByStation);
-            cbAccountingFilterByStation.Items.Clear();
-            accountingComboBox.СbStationListFill();
-            cbSupplyFilterByStation.Items.Clear();
-            supplyComboBox.СbStationListFill();
+            DealFilterByStation.Items.Clear();
+            comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
+            WhFilterByStation.Items.Clear();
         }
 
         private void AddNewAdmin_Click(object sender, EventArgs e)
@@ -152,31 +147,31 @@ namespace Admin
 
         private void FilterByStation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (FilterByStation.SelectedIndex != -1)
+            if (DealFilterByStation.SelectedIndex != -1)
             {
-                dealController.ShowDealTableByStation(FilterByStation.SelectedItem.ToString());
-                FilterByStation.Items.Clear();
-                comboBoxDealFiller.FillStationNamesComboBox(FilterByStation);
+                dealController.ShowDealTableByStation(DealFilterByStation.SelectedItem.ToString());
+                DealFilterByStation.Items.Clear();
+                comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
             }
         }
 
         private void cbAccountingFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbAccountingFilterByStation.SelectedIndex != -1)
+            if (WhFilterByStation.SelectedIndex != -1)
             {
-                accountingController.FilterBYStationID(factory.GetStationRepository().GetStationIdByName(cbAccountingFilterByStation.Text));
-                cbAccountingFilterByStation.Items.Clear();
-                accountingComboBox.СbStationListFill();
+                accountingController.FilterBYStationID(factory.GetStationRepository().GetStationIdByName(WhFilterByStation.Text));
+                WhFilterByStation.Items.Clear();
+                comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
             }
         }
 
         private void cbSupplyFilterByStation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbSupplyFilterByStation.SelectedIndex != -1)
+            if (SupplyFilterBytation.SelectedIndex != -1)
             {
-                supplyController.FilterBYStationID(factory.GetStationRepository().GetStationIdByName(cbSupplyFilterByStation.Text));
-                cbSupplyFilterByStation.Items.Clear();
-                supplyComboBox.СbStationListFill();
+                supplyController.FilterBYStationID(factory.GetStationRepository().GetStationIdByName(SupplyFilterBytation.Text));
+                SupplyFilterBytation.Items.Clear();
+                comboBoxFiller.FillStationNamesComboBox(DealFilterByStation);
             }
         }
 
@@ -185,7 +180,7 @@ namespace Admin
             accountingController.ShowTable();
         }
 
-        private void ViewSuppliesTable(object sender, EventArgs e)
+        private void RefreshSupplyTableButton_Click(object sender, EventArgs e)
         {
             supplyController.ShowTable();
         }

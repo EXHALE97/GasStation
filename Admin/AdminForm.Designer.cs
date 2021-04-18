@@ -32,7 +32,7 @@ namespace Admin
         {
             this.tabAccountingTable = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.cbAccountingFilterByStation = new System.Windows.Forms.ComboBox();
+            this.WhFilterByStation = new System.Windows.Forms.ComboBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.btnTableAccountingView = new System.Windows.Forms.Button();
             this.dgvViewAccounting = new System.Windows.Forms.DataGridView();
@@ -95,29 +95,11 @@ namespace Admin
             this.IsStationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabDealTable = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.FilterByStation = new System.Windows.Forms.ComboBox();
+            this.DealFilterByStation = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.DealTableRefreshButton = new System.Windows.Forms.Button();
             this.DealUpdateButton = new System.Windows.Forms.Button();
             this.DealTable = new System.Windows.Forms.DataGridView();
-            this.tabSupplyTable = new System.Windows.Forms.TabPage();
-            this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.cbSupplyFilterByStation = new System.Windows.Forms.ComboBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.btnTableSupplyView = new System.Windows.Forms.Button();
-            this.dgvViewSupply = new System.Windows.Forms.DataGridView();
-            this.stationSupplyID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.stationSupply = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.staffSupply = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuelSupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fuelSupplyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SupplyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.msAdmin = new System.Windows.Forms.MenuStrip();
-            this.допФункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AddNewAdmin = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbSessionName = new System.Windows.Forms.Label();
             this.DealId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientCardId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,6 +111,26 @@ namespace Admin
             this.DealDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PriceWithoutDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DealDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabSupplyTable = new System.Windows.Forms.TabPage();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.SupplyFilterBytation = new System.Windows.Forms.ComboBox();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.RefreshSupplyTableButton = new System.Windows.Forms.Button();
+            this.dgvViewSupply = new System.Windows.Forms.DataGridView();
+            this.SupplyStationId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyStationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyEmployee = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductSupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fuelSupplyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SupplyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.msAdmin = new System.Windows.Forms.MenuStrip();
+            this.допФункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.AddNewAdmin = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
+            this.журналОперацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSessionName = new System.Windows.Forms.Label();
             this.tabAccountingTable.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -163,12 +165,12 @@ namespace Admin
             this.tabAccountingTable.Name = "tabAccountingTable";
             this.tabAccountingTable.Size = new System.Drawing.Size(820, 462);
             this.tabAccountingTable.TabIndex = 2;
-            this.tabAccountingTable.Text = "Таблица учёта";
+            this.tabAccountingTable.Text = "Склад";
             this.tabAccountingTable.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.cbAccountingFilterByStation);
+            this.groupBox7.Controls.Add(this.WhFilterByStation);
             this.groupBox7.Location = new System.Drawing.Point(604, 416);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(212, 43);
@@ -176,15 +178,15 @@ namespace Admin
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Фильтр по станции";
             // 
-            // cbAccountingFilterByStation
+            // WhFilterByStation
             // 
-            this.cbAccountingFilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbAccountingFilterByStation.FormattingEnabled = true;
-            this.cbAccountingFilterByStation.Location = new System.Drawing.Point(6, 16);
-            this.cbAccountingFilterByStation.Name = "cbAccountingFilterByStation";
-            this.cbAccountingFilterByStation.Size = new System.Drawing.Size(200, 21);
-            this.cbAccountingFilterByStation.TabIndex = 0;
-            this.cbAccountingFilterByStation.SelectedIndexChanged += new System.EventHandler(this.cbAccountingFilterByStation_SelectedIndexChanged);
+            this.WhFilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WhFilterByStation.FormattingEnabled = true;
+            this.WhFilterByStation.Location = new System.Drawing.Point(6, 16);
+            this.WhFilterByStation.Name = "WhFilterByStation";
+            this.WhFilterByStation.Size = new System.Drawing.Size(200, 21);
+            this.WhFilterByStation.TabIndex = 0;
+            this.WhFilterByStation.SelectedIndexChanged += new System.EventHandler(this.cbAccountingFilterByStation_SelectedIndexChanged);
             // 
             // groupBox6
             // 
@@ -588,8 +590,8 @@ namespace Admin
             this.tabAdmin.Controls.Add(this.tabStaffTable);
             this.tabAdmin.Controls.Add(this.tabCarTable);
             this.tabAdmin.Controls.Add(this.tabDealTable);
-            this.tabAdmin.Controls.Add(this.tabAccountingTable);
             this.tabAdmin.Controls.Add(this.tabSupplyTable);
+            this.tabAdmin.Controls.Add(this.tabAccountingTable);
             this.tabAdmin.Location = new System.Drawing.Point(12, 29);
             this.tabAdmin.Name = "tabAdmin";
             this.tabAdmin.SelectedIndex = 0;
@@ -733,7 +735,7 @@ namespace Admin
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.FilterByStation);
+            this.groupBox5.Controls.Add(this.DealFilterByStation);
             this.groupBox5.Location = new System.Drawing.Point(607, 411);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(210, 48);
@@ -741,15 +743,15 @@ namespace Admin
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Фильтр по станции";
             // 
-            // FilterByStation
+            // DealFilterByStation
             // 
-            this.FilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.FilterByStation.FormattingEnabled = true;
-            this.FilterByStation.Location = new System.Drawing.Point(8, 21);
-            this.FilterByStation.Name = "FilterByStation";
-            this.FilterByStation.Size = new System.Drawing.Size(199, 21);
-            this.FilterByStation.TabIndex = 0;
-            this.FilterByStation.SelectedIndexChanged += new System.EventHandler(this.FilterByStation_SelectedIndexChanged);
+            this.DealFilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DealFilterByStation.FormattingEnabled = true;
+            this.DealFilterByStation.Location = new System.Drawing.Point(8, 21);
+            this.DealFilterByStation.Name = "DealFilterByStation";
+            this.DealFilterByStation.Size = new System.Drawing.Size(199, 21);
+            this.DealFilterByStation.TabIndex = 0;
+            this.DealFilterByStation.SelectedIndexChanged += new System.EventHandler(this.FilterByStation_SelectedIndexChanged);
             // 
             // groupBox4
             // 
@@ -803,159 +805,6 @@ namespace Admin
             this.DealTable.Name = "DealTable";
             this.DealTable.Size = new System.Drawing.Size(595, 462);
             this.DealTable.TabIndex = 1;
-            // 
-            // tabSupplyTable
-            // 
-            this.tabSupplyTable.Controls.Add(this.groupBox9);
-            this.tabSupplyTable.Controls.Add(this.groupBox8);
-            this.tabSupplyTable.Controls.Add(this.dgvViewSupply);
-            this.tabSupplyTable.Location = new System.Drawing.Point(4, 22);
-            this.tabSupplyTable.Name = "tabSupplyTable";
-            this.tabSupplyTable.Size = new System.Drawing.Size(820, 462);
-            this.tabSupplyTable.TabIndex = 5;
-            this.tabSupplyTable.Text = "Список поставок";
-            this.tabSupplyTable.UseVisualStyleBackColor = true;
-            // 
-            // groupBox9
-            // 
-            this.groupBox9.Controls.Add(this.cbSupplyFilterByStation);
-            this.groupBox9.Location = new System.Drawing.Point(629, 417);
-            this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(188, 42);
-            this.groupBox9.TabIndex = 3;
-            this.groupBox9.TabStop = false;
-            this.groupBox9.Text = "Фильтр по станции";
-            // 
-            // cbSupplyFilterByStation
-            // 
-            this.cbSupplyFilterByStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbSupplyFilterByStation.FormattingEnabled = true;
-            this.cbSupplyFilterByStation.Location = new System.Drawing.Point(7, 15);
-            this.cbSupplyFilterByStation.Name = "cbSupplyFilterByStation";
-            this.cbSupplyFilterByStation.Size = new System.Drawing.Size(175, 21);
-            this.cbSupplyFilterByStation.TabIndex = 2;
-            this.cbSupplyFilterByStation.SelectedIndexChanged += new System.EventHandler(this.cbSupplyFilterByStation_SelectedIndexChanged);
-            // 
-            // groupBox8
-            // 
-            this.groupBox8.Controls.Add(this.btnTableSupplyView);
-            this.groupBox8.Location = new System.Drawing.Point(663, 3);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(154, 78);
-            this.groupBox8.TabIndex = 1;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Функционал";
-            // 
-            // btnTableSupplyView
-            // 
-            this.btnTableSupplyView.Location = new System.Drawing.Point(6, 19);
-            this.btnTableSupplyView.Name = "btnTableSupplyView";
-            this.btnTableSupplyView.Size = new System.Drawing.Size(140, 50);
-            this.btnTableSupplyView.TabIndex = 0;
-            this.btnTableSupplyView.Text = "Обновить список поставок";
-            this.btnTableSupplyView.UseVisualStyleBackColor = true;
-            this.btnTableSupplyView.Click += new System.EventHandler(this.ViewSuppliesTable);
-            // 
-            // dgvViewSupply
-            // 
-            this.dgvViewSupply.AllowUserToAddRows = false;
-            this.dgvViewSupply.AllowUserToDeleteRows = false;
-            this.dgvViewSupply.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvViewSupply.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.stationSupplyID,
-            this.stationSupply,
-            this.staffSupply,
-            this.fuelSupplyType,
-            this.fuelSupplyAmount,
-            this.SupplyDate});
-            this.dgvViewSupply.Location = new System.Drawing.Point(3, 3);
-            this.dgvViewSupply.Name = "dgvViewSupply";
-            this.dgvViewSupply.Size = new System.Drawing.Size(625, 456);
-            this.dgvViewSupply.TabIndex = 0;
-            // 
-            // stationSupplyID
-            // 
-            this.stationSupplyID.HeaderText = "ID станции";
-            this.stationSupplyID.Name = "stationSupplyID";
-            this.stationSupplyID.Width = 40;
-            // 
-            // stationSupply
-            // 
-            this.stationSupply.HeaderText = "Адрес станции";
-            this.stationSupply.Name = "stationSupply";
-            this.stationSupply.Width = 150;
-            // 
-            // staffSupply
-            // 
-            this.staffSupply.HeaderText = "ФИ сотрудника";
-            this.staffSupply.Name = "staffSupply";
-            this.staffSupply.Width = 150;
-            // 
-            // fuelSupplyType
-            // 
-            this.fuelSupplyType.HeaderText = "Тип топлива";
-            this.fuelSupplyType.Name = "fuelSupplyType";
-            this.fuelSupplyType.Width = 60;
-            // 
-            // fuelSupplyAmount
-            // 
-            this.fuelSupplyAmount.HeaderText = "Количество топлива";
-            this.fuelSupplyAmount.Name = "fuelSupplyAmount";
-            // 
-            // SupplyDate
-            // 
-            this.SupplyDate.HeaderText = "Дата поставки";
-            this.SupplyDate.Name = "SupplyDate";
-            this.SupplyDate.Width = 150;
-            // 
-            // msAdmin
-            // 
-            this.msAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.допФункцииToolStripMenuItem});
-            this.msAdmin.Location = new System.Drawing.Point(0, 0);
-            this.msAdmin.Name = "msAdmin";
-            this.msAdmin.Size = new System.Drawing.Size(851, 24);
-            this.msAdmin.TabIndex = 1;
-            this.msAdmin.Text = "Доп. функции";
-            // 
-            // допФункцииToolStripMenuItem
-            // 
-            this.допФункцииToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.AddNewAdmin,
-            this.RefreshTables,
-            this.dbQueryManager});
-            this.допФункцииToolStripMenuItem.Name = "допФункцииToolStripMenuItem";
-            this.допФункцииToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
-            this.допФункцииToolStripMenuItem.Text = "Доп. функции";
-            // 
-            // AddNewAdmin
-            // 
-            this.AddNewAdmin.Name = "AddNewAdmin";
-            this.AddNewAdmin.Size = new System.Drawing.Size(220, 22);
-            this.AddNewAdmin.Text = "Добавить администратора";
-            this.AddNewAdmin.Click += new System.EventHandler(this.AddNewAdmin_Click);
-            // 
-            // RefreshTables
-            // 
-            this.RefreshTables.Name = "RefreshTables";
-            this.RefreshTables.Size = new System.Drawing.Size(220, 22);
-            this.RefreshTables.Text = "Обновить таблицы";
-            this.RefreshTables.Click += new System.EventHandler(this.RefreshTables_Click);
-            // 
-            // dbQueryManager
-            // 
-            this.dbQueryManager.Name = "dbQueryManager";
-            this.dbQueryManager.Size = new System.Drawing.Size(220, 22);
-            this.dbQueryManager.Text = "Запрос к базе данных";
-            // 
-            // lbSessionName
-            // 
-            this.lbSessionName.AutoSize = true;
-            this.lbSessionName.Location = new System.Drawing.Point(748, 9);
-            this.lbSessionName.Name = "lbSessionName";
-            this.lbSessionName.Size = new System.Drawing.Size(78, 13);
-            this.lbSessionName.TabIndex = 3;
-            this.lbSessionName.Text = "Сессия: admin";
             // 
             // DealId
             // 
@@ -1026,6 +875,179 @@ namespace Admin
             this.DealDate.HeaderText = "Дата сделки";
             this.DealDate.Name = "DealDate";
             this.DealDate.Width = 150;
+            // 
+            // tabSupplyTable
+            // 
+            this.tabSupplyTable.Controls.Add(this.groupBox9);
+            this.tabSupplyTable.Controls.Add(this.groupBox8);
+            this.tabSupplyTable.Controls.Add(this.dgvViewSupply);
+            this.tabSupplyTable.Location = new System.Drawing.Point(4, 22);
+            this.tabSupplyTable.Name = "tabSupplyTable";
+            this.tabSupplyTable.Size = new System.Drawing.Size(820, 462);
+            this.tabSupplyTable.TabIndex = 5;
+            this.tabSupplyTable.Text = "Список поставок";
+            this.tabSupplyTable.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.SupplyFilterBytation);
+            this.groupBox9.Location = new System.Drawing.Point(629, 417);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(188, 42);
+            this.groupBox9.TabIndex = 3;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Фильтр по станции";
+            // 
+            // SupplyFilterBytation
+            // 
+            this.SupplyFilterBytation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SupplyFilterBytation.FormattingEnabled = true;
+            this.SupplyFilterBytation.Location = new System.Drawing.Point(7, 15);
+            this.SupplyFilterBytation.Name = "SupplyFilterBytation";
+            this.SupplyFilterBytation.Size = new System.Drawing.Size(175, 21);
+            this.SupplyFilterBytation.TabIndex = 2;
+            this.SupplyFilterBytation.SelectedIndexChanged += new System.EventHandler(this.cbSupplyFilterByStation_SelectedIndexChanged);
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.RefreshSupplyTableButton);
+            this.groupBox8.Location = new System.Drawing.Point(636, 3);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(181, 84);
+            this.groupBox8.TabIndex = 1;
+            this.groupBox8.TabStop = false;
+            this.groupBox8.Text = "Функционал";
+            // 
+            // RefreshSupplyTableButton
+            // 
+            this.RefreshSupplyTableButton.Location = new System.Drawing.Point(21, 19);
+            this.RefreshSupplyTableButton.Name = "RefreshSupplyTableButton";
+            this.RefreshSupplyTableButton.Size = new System.Drawing.Size(140, 50);
+            this.RefreshSupplyTableButton.TabIndex = 0;
+            this.RefreshSupplyTableButton.Text = "Обновить список поставок";
+            this.RefreshSupplyTableButton.UseVisualStyleBackColor = true;
+            this.RefreshSupplyTableButton.Click += new System.EventHandler(this.RefreshSupplyTableButton_Click);
+            // 
+            // dgvViewSupply
+            // 
+            this.dgvViewSupply.AllowUserToAddRows = false;
+            this.dgvViewSupply.AllowUserToDeleteRows = false;
+            this.dgvViewSupply.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvViewSupply.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SupplyStationId,
+            this.SupplyStationName,
+            this.SupplyEmployee,
+            this.ProductId,
+            this.ProductSupplyType,
+            this.fuelSupplyAmount,
+            this.SupplyDate});
+            this.dgvViewSupply.Location = new System.Drawing.Point(3, 3);
+            this.dgvViewSupply.Name = "dgvViewSupply";
+            this.dgvViewSupply.Size = new System.Drawing.Size(625, 456);
+            this.dgvViewSupply.TabIndex = 0;
+            // 
+            // SupplyStationId
+            // 
+            this.SupplyStationId.HeaderText = "ID станции";
+            this.SupplyStationId.Name = "SupplyStationId";
+            this.SupplyStationId.ReadOnly = true;
+            this.SupplyStationId.Width = 40;
+            // 
+            // SupplyStationName
+            // 
+            this.SupplyStationName.HeaderText = "Название станции";
+            this.SupplyStationName.Name = "SupplyStationName";
+            this.SupplyStationName.ReadOnly = true;
+            this.SupplyStationName.Width = 150;
+            // 
+            // SupplyEmployee
+            // 
+            this.SupplyEmployee.HeaderText = "Сотрудник";
+            this.SupplyEmployee.Name = "SupplyEmployee";
+            this.SupplyEmployee.ReadOnly = true;
+            this.SupplyEmployee.Width = 150;
+            // 
+            // ProductId
+            // 
+            this.ProductId.HeaderText = "ID товара";
+            this.ProductId.Name = "ProductId";
+            this.ProductId.ReadOnly = true;
+            this.ProductId.Width = 50;
+            // 
+            // ProductSupplyType
+            // 
+            this.ProductSupplyType.HeaderText = "Тип товара";
+            this.ProductSupplyType.Name = "ProductSupplyType";
+            this.ProductSupplyType.ReadOnly = true;
+            this.ProductSupplyType.Width = 60;
+            // 
+            // fuelSupplyAmount
+            // 
+            this.fuelSupplyAmount.HeaderText = "Количество товара";
+            this.fuelSupplyAmount.Name = "fuelSupplyAmount";
+            // 
+            // SupplyDate
+            // 
+            this.SupplyDate.HeaderText = "Дата поставки";
+            this.SupplyDate.Name = "SupplyDate";
+            this.SupplyDate.ReadOnly = true;
+            this.SupplyDate.Width = 150;
+            // 
+            // msAdmin
+            // 
+            this.msAdmin.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.допФункцииToolStripMenuItem});
+            this.msAdmin.Location = new System.Drawing.Point(0, 0);
+            this.msAdmin.Name = "msAdmin";
+            this.msAdmin.Size = new System.Drawing.Size(851, 24);
+            this.msAdmin.TabIndex = 1;
+            this.msAdmin.Text = "Доп. функции";
+            // 
+            // допФункцииToolStripMenuItem
+            // 
+            this.допФункцииToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.AddNewAdmin,
+            this.RefreshTables,
+            this.dbQueryManager,
+            this.журналОперацийToolStripMenuItem});
+            this.допФункцииToolStripMenuItem.Name = "допФункцииToolStripMenuItem";
+            this.допФункцииToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.допФункцииToolStripMenuItem.Text = "Доп. функции";
+            // 
+            // AddNewAdmin
+            // 
+            this.AddNewAdmin.Name = "AddNewAdmin";
+            this.AddNewAdmin.Size = new System.Drawing.Size(220, 22);
+            this.AddNewAdmin.Text = "Добавить администратора";
+            this.AddNewAdmin.Click += new System.EventHandler(this.AddNewAdmin_Click);
+            // 
+            // RefreshTables
+            // 
+            this.RefreshTables.Name = "RefreshTables";
+            this.RefreshTables.Size = new System.Drawing.Size(220, 22);
+            this.RefreshTables.Text = "Обновить таблицы";
+            this.RefreshTables.Click += new System.EventHandler(this.RefreshTables_Click);
+            // 
+            // dbQueryManager
+            // 
+            this.dbQueryManager.Name = "dbQueryManager";
+            this.dbQueryManager.Size = new System.Drawing.Size(220, 22);
+            this.dbQueryManager.Text = "Запрос к базе данных";
+            // 
+            // журналОперацийToolStripMenuItem
+            // 
+            this.журналОперацийToolStripMenuItem.Name = "журналОперацийToolStripMenuItem";
+            this.журналОперацийToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.журналОперацийToolStripMenuItem.Text = "Журнал операций";
+            // 
+            // lbSessionName
+            // 
+            this.lbSessionName.AutoSize = true;
+            this.lbSessionName.Location = new System.Drawing.Point(748, 9);
+            this.lbSessionName.Name = "lbSessionName";
+            this.lbSessionName.Size = new System.Drawing.Size(78, 13);
+            this.lbSessionName.TabIndex = 3;
+            this.lbSessionName.Text = "Сессия: admin";
             // 
             // AdminForm
             // 
@@ -1108,15 +1130,15 @@ namespace Admin
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label lbSessionName;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox FilterByStation;
+        private System.Windows.Forms.ComboBox DealFilterByStation;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button btnTableAccountingView;
-        private System.Windows.Forms.ComboBox cbAccountingFilterByStation;
+        private System.Windows.Forms.ComboBox WhFilterByStation;
         private System.Windows.Forms.TabPage tabSupplyTable;
         private System.Windows.Forms.DataGridView dgvViewSupply;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Button btnTableSupplyView;
+        private System.Windows.Forms.Button RefreshSupplyTableButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationAccountingAdres;
         private System.Windows.Forms.DataGridViewTextBoxColumn accountdate;
         private System.Windows.Forms.DataGridViewTextBoxColumn fuelaccountamount;
@@ -1124,13 +1146,7 @@ namespace Admin
         private System.Windows.Forms.DataGridViewTextBoxColumn accountrole;
         private System.Windows.Forms.DataGridViewTextBoxColumn stationaccountID;
         private System.Windows.Forms.GroupBox groupBox9;
-        private System.Windows.Forms.ComboBox cbSupplyFilterByStation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SupplyDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fuelSupplyAmount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fuelSupplyType;
-        private System.Windows.Forms.DataGridViewTextBoxColumn staffSupply;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stationSupply;
-        private System.Windows.Forms.DataGridViewTextBoxColumn stationSupplyID;
+        private System.Windows.Forms.ComboBox SupplyFilterBytation;
         private System.Windows.Forms.ToolStripMenuItem dbQueryManager;
         private Button CloseStationButton;
         private Button UpdateStationInfoButton;
@@ -1173,6 +1189,14 @@ namespace Admin
         private DataGridViewTextBoxColumn DealDiscount;
         private DataGridViewTextBoxColumn PriceWithoutDiscount;
         private DataGridViewTextBoxColumn DealDate;
+        private ToolStripMenuItem журналОперацийToolStripMenuItem;
+        private DataGridViewTextBoxColumn SupplyStationId;
+        private DataGridViewTextBoxColumn SupplyStationName;
+        private DataGridViewTextBoxColumn SupplyEmployee;
+        private DataGridViewTextBoxColumn ProductId;
+        private DataGridViewTextBoxColumn ProductSupplyType;
+        private DataGridViewTextBoxColumn fuelSupplyAmount;
+        private DataGridViewTextBoxColumn SupplyDate;
     }
 }
 

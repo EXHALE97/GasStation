@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Common;
-using System.Data.SqlClient;
 using System.Linq;
 using Queries.Connection;
 using Queries.Entities;
@@ -21,35 +20,27 @@ namespace Queries.Repositories
 
         }
 
-        public List<Supply> ShowSupplyTable()
+        public List<Supply> GetSupplies()
         {
-            List<Supply> supplyList = new List<Supply>();
-            //try
-            //{
-            //    dbc.OpenConnection();
-            //    var queryCommand = new SqlCommand("SELECT * FROM \"AZS\".\"Supply\"");
-            //    var AZSTableReader = queryCommand.ExecuteReader();
-            //    if (AZSTableReader.HasRows)
-            //    {
-            //        foreach (DbDataRecord dbDataRecord in AZSTableReader)
-            //        {
-            //            Supply supply = new Supply();
+            return ExecuteSqlCommand("EXEC SuppliesSummary", queryResult =>
+            {
+                var supplies = new List<Supply>();
+                if (queryResult.HasRows)
+                {
+                    supplies.AddRange(from DbDataRecord dbDataRecord in queryResult
+                        select new Supply(int.Parse(dbDataRecord["station_id"].ToString()),
+                            dbDataRecord["station_name"].ToString(),
+                            int.Parse(dbDataRecord["employee_id"].ToString()),
+                            dbDataRecord["employee_name"].ToString(),
+                            int.Parse(dbDataRecord["supply_type_id"].ToString()),
+                            dbDataRecord["supply_type_name"].ToString(),
+                            double.Parse(dbDataRecord["supply_amount"].ToString()),
+                            Convert.ToDateTime(dbDataRecord["date"].ToString())));
+                }
 
-            //            supply.supplySet(Convert.ToInt32(dbDataRecord["station_id"]), Convert.ToInt32(dbDataRecord["staff_id"]),
-            //                dbDataRecord["fuelsupplytype"].ToString(), Convert.ToInt32(dbDataRecord["fuelsupplyamount"]),
-            //                Convert.ToDateTime(dbDataRecord["supplydate"].ToString()));
-            //            supplyList.Add(supply);
-            //        }
-            //    }
-            //    AZSTableReader.Close();
-            //}
-            //catch (SqlException pe)
-            //{
-            //    throw pe;
-            //}
-            //finally { dbc.CloseConnection(); }
-
-            return supplyList;
+                queryResult.Close();
+                return supplies;
+            });
         }
 
         public void AddToSupplyTable(Supply sup)

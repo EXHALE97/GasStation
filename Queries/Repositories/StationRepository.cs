@@ -176,5 +176,10 @@ namespace Queries.Repositories
         {
             ExecuteSqlNonQueryCommand($"EXEC InsertStation N'{station.Name}', N'{station.City}', N'{station.Address}', {station.IsWorking.ToString()}");
         }
+
+        public void UpdateStation(Station station)
+        {
+            ExecuteSqlNonQueryCommand($"EXEC UpdateStation {station.Id}, N'{station.Name}', N'{station.City}', N'{station.Address}', {station.IsWorking.ToString()}");
+        }
     }
 }

@@ -153,7 +153,7 @@ namespace Worker
 
         private void updateDealTableForm_Load(object sender, EventArgs e)
         {
-            new ComboBoxDealFiller(factory).FillCardNumbers(cbCardNum);
+            new ComboBoxFiller(factory).FillCardNumbers(cbCardNum);
         }
     }
 }

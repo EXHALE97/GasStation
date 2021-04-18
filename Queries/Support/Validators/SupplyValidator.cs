@@ -1,38 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Queries.Entities;
 
 namespace Queries.Support.Validators
 {
-    public class SupplyValidator
+    public static class SupplyValidator
     {
-
-        public SupplyValidator()
-        {
-
-        }
-
-        public bool CheckAddition(Supply sup, out List<string> errorList)
+        public static bool CheckAddition(Supply supply, out List<string> errorList)
         {
             errorList = new List<string>();
-            bool checkFlag = true;
-            if (sup.GetStationID() < 0)
+            var checkFlag = !(supply.StationId <= 0);
+            if (supply.EmployeeId <= 0)
             {
                 checkFlag = false;
             }
-            if (sup.GetStaffID() < 0)
+            if (supply.SupplyTypeName == null)
             {
                 checkFlag = false;
+                errorList.Add("Тип товара не выбран!");
             }
-            if (sup.GetFuelSupplyType() == String.Empty)
+            if (supply.SupplyTypeAmount <= 0)
             {
                 checkFlag = false;
-                errorList.Add("Тип топлива не выбран!");
-            }
-            if (sup.GetFuelSupplyAmount() <= 0)
-            {
-                checkFlag = false;
-                errorList.Add("Количество топлива задано неправильно!");
+                errorList.Add("Количество товара задано неправильно!");
             }
 
             return checkFlag;

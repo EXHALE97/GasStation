@@ -20,5 +20,7 @@ namespace Queries.Interfaces
         string GetStationAddressById(int stationId);
 
         void AddToStationTable(Station station);
+
+        void UpdateStation(Station station);
     }
 }

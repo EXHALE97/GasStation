@@ -15,12 +15,12 @@ namespace Admin
         private readonly int clientDiscountPercent;
         private readonly IRepositoryFactory factory;
         private readonly DataGridViewRow selectedRow;
-        private readonly ComboBoxDealFiller comboBoxDealFiller;
+        private readonly ComboBoxFiller comboBoxFiller;
 
         public UpdateDealTableForm(DataGridViewRow selectedRow, IRepositoryFactory factory)
         {
             InitializeComponent();
-            comboBoxDealFiller = new ComboBoxDealFiller(factory);
+            comboBoxFiller = new ComboBoxFiller(factory);
             this.selectedRow = selectedRow;
             this.factory = factory;
             this.clientDiscountPercent = factory.GetClientRepository()
@@ -35,8 +35,8 @@ namespace Admin
                 DealDatePicker.Value = date;
                 SupplyTypeAmountTextBox.Text = selectedRow.Cells["SupplyTypeAmount"].Value.ToString();
                 DealPriceTextBox.Text = selectedRow.Cells["PriceWithoutDiscount"].Value.ToString();
-                comboBoxDealFiller.FillCardNumbers(CardNumberComboBox);
-                comboBoxDealFiller.FillSupplyTypes(SupplyTypeComboBox);
+                comboBoxFiller.FillCardNumbers(CardNumberComboBox);
+                comboBoxFiller.FillSupplyTypes(SupplyTypeComboBox);
                 SupplyTypeComboBox.SelectedItem = selectedRow.Cells["SupplyType"].Value.ToString();
                 CardNumberComboBox.SelectedItem = int.Parse(selectedRow.Cells["ClientCardId"].Value.ToString());
                 MinuteTextBox.Text = date.Minute.ToString();

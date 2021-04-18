@@ -2,14 +2,43 @@
 
 namespace Queries.Support.ComboBox
 {
-    public static class ComboBoxFiller
+    public class ComboBoxFiller
     {
-        private static IRepositoryFactory _factory;
+        private IRepositoryFactory factory;
 
-        public static void FillCredsComboBox(System.Windows.Forms.ComboBox comboBox)
+        public ComboBoxFiller(IRepositoryFactory factory)
+        {
+            this.factory = factory;
+        }
+        
+        public void FillCardNumbers(System.Windows.Forms.ComboBox comboBox)
+        {
+            foreach (var id in factory.GetClientRepository().GetActivatedClientCards())
+            {
+                comboBox.Items.Add(id);
+            }
+        }
+
+        public void FillSupplyTypes(System.Windows.Forms.ComboBox comboBox)
+        {
+            foreach (var supplyType in factory.GetSupplyRepository().GetSupplyTypes())
+            {
+                comboBox.Items.Add(supplyType.Name);
+            }
+        }
+
+        public void FillStationNamesComboBox(System.Windows.Forms.ComboBox comboBox)
+        {
+            foreach (var station in factory.GetStationRepository().GetStations(false))
+            {
+                comboBox.Items.Add(station.Name);
+            }
+        }
+
+        public void FillCredsComboBox(System.Windows.Forms.ComboBox comboBox)
         {
             comboBox.Items.Add("-");
-            foreach (var item in _factory.GetCredentialsRepository().GetUserLogins())
+            foreach (var item in factory.GetCredentialsRepository().GetUserLogins())
             {
                 comboBox.Items.Add(item);
             }

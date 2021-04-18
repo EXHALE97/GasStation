@@ -6,7 +6,7 @@ namespace Queries.Interfaces
 {
     public interface ISupplyRepository : IDisposable
     {
-        List<Supply> ShowSupplyTable();
+        List<Supply> GetSupplies();
 
         void AddToSupplyTable(Supply sup);
 

@@ -6,7 +6,7 @@ namespace Queries.Support.Validators
 {
     public static class StationValidator
     {
-        public static bool CheckAddition(Station station, out List<string> errorList)
+        public static bool CheckFields(Station station, out List<string> errorList)
         {
             var checkFlag = true;
             errorList = new List<string>();

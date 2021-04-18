@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 using Queries.Entities;
@@ -8,41 +7,27 @@ using Queries.Support.Validators;
 
 namespace Queries.Controllers
 {
-    public class SupplyController
+    public class SupplyController : BaseController
     {
-        private DataGridView dgv;
-        private List<Supply> dgvElements;
-        private IRepositoryFactory factory;
-        private SupplyValidator supplyValidator;
-        private List<string> errorList;
-        private string error;
+        private readonly DataGridView supplyTable;
 
-        public SupplyController(DataGridView dgv, IRepositoryFactory factory)
+        public SupplyController(DataGridView supplyTable, IRepositoryFactory factory)
         {
-            dgvElements = new List<Supply>();
-            this.dgv = dgv;
-            this.factory = factory;
-            supplyValidator = new SupplyValidator();
+            Factory = factory;
+            this.supplyTable = supplyTable;
         }
 
         public void ShowTable()
         {
-            try
+            DoFormAction(() =>
             {
-                dgvElements = factory.GetSupplyRepository().ShowSupplyTable();
-                dgv.Rows.Clear();
-                foreach (Supply supply in dgvElements)
+                supplyTable.Rows.Clear();
+                foreach (var supply in Factory.GetSupplyRepository().GetSupplies())
                 {
-                    int station_id = supply.GetStationID();
-                    dgv.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(station_id)), factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
-                        supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
+                    supplyTable.Rows.Add(supply.StationId, supply.StationName, supply.EmployeeName, supply.SupplyTypeId,
+                        supply.SupplyTypeName, supply.SupplyTypeAmount, supply.SupplyDate);
                 }
-            }
-            catch (SqlException e)
-            {
-                MessageBox.Show("Код ошибки: " + e.State, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception) { MessageBox.Show("Ошибка базы данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            });
         }
 
         public void ShowTable(int ID)
@@ -51,11 +36,11 @@ namespace Queries.Controllers
             {
                 //int id = factory.GetEmployeeRepository().FindStationIDByStaffID(ID);
                 //dgvElements = factory.GetSupplyRepository().ShowSupplyTableByID(id);
-                //dgv.Rows.Clear();
+                //supplyTable.Rows.Clear();
                 //foreach (Supply supply in dgvElements)
                 //{
                 //    int station_id = supply.GetStationID();
-                //    dgv.Rows.Add(factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(), supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
+                //    supplyTable.Rows.Add(factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(), supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 //}
             }
             catch (SqlException e)
@@ -70,19 +55,19 @@ namespace Queries.Controllers
             bool checkFlag = false;
             try
             {
-                if (checkFlag = supplyValidator.CheckAddition(sup, out errorList))
+                if (SupplyValidator.CheckAddition(sup, out var errorList))
                 {
-                    factory.GetSupplyRepository().AddToSupplyTable(sup);
+                    Factory.GetSupplyRepository().AddToSupplyTable(sup);
                 }
                 else
                 {
-                    int k = 0;
-                    foreach (string str in errorList)
-                    {
-                        k++;
-                        error += "Ошибка №" + k + ": " + str + " \n";
-                    }
-                    MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //int k = 0;
+                    //foreach (string str in errorList)
+                    //{
+                    //    k++;
+                    //    error += "Ошибка №" + k + ": " + str + " \n";
+                    //}
+                    //MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (SqlException e)
@@ -102,12 +87,12 @@ namespace Queries.Controllers
         {
             try
             {
-                dgvElements = factory.GetSupplyRepository().GetSupplyBYStationID(id);
-                dgv.Rows.Clear();
+                var dgvElements = Factory.GetSupplyRepository().GetSupplyBYStationID(id);
+                supplyTable.Rows.Clear();
                 foreach (Supply supply in dgvElements)
                 {
-                    dgv.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(supply.GetStationID())), factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
-                        supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
+                    //supplyTable.Rows.Add(supply.GetStationID(), RemoveSpaces(factory.GetStationRepository().GetStationAddressById(supply.GetStationID())), factory.GetEmployeeRepository().FindEmployeeById(supply.GetStaffID()), supply.GetFuelSupplyType(),
+                    //    supply.GetFuelSupplyAmount(), supply.GetSupplyDate());
                 }
             }
             catch (SqlException e)

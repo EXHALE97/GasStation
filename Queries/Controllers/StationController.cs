@@ -54,9 +54,26 @@ namespace Queries.Controllers
         {
             return DoFormAction(() =>
             {
-                if (StationValidator.CheckAddition(station, out var errorList))
+                if (StationValidator.CheckFields(station, out var errorList))
                 {
                     Factory.GetStationRepository().AddToStationTable(station);
+                    return true;
+                }
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
+        }
+
+        public bool UpdateStation(Station station)
+        {
+            return DoFormAction(() =>
+            {
+                if (StationValidator.CheckFields(station, out var errorList))
+                {
+                    Factory.GetStationRepository().UpdateStation(station);
                     return true;
                 }
 

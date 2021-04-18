@@ -47,10 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\BaseController.cs" />
-    <Compile Include="Support\ComboBox\ComboBoxDealFiller.cs" />
     <Compile Include="Support\ComboBox\ComboBoxFiller.cs" />
-    <Compile Include="Support\ComboBox\ComboBoxAccountingFiller.cs" />
-    <Compile Include="Support\ComboBox\ComboBoxSupplyFiller.cs" />
     <Compile Include="Connection\DataBaseConnection.cs" />
     <Compile Include="Entities\SupplyType.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
