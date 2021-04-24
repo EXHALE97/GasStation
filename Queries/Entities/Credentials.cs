@@ -7,14 +7,6 @@
         public string Password { get; }
         public string Role { get; set; }
 
-        public Credentials(int id, string login, string password, string role)
-        {
-            Id = id;
-            Login = login;
-            Password = password;
-            Role = role;
-        }
-
         public Credentials(string login, string password, string role)
         {
             Login = login;

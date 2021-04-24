@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Queries.Entities
+﻿namespace Queries.Entities
 {
     public class SupplyByStation
     {

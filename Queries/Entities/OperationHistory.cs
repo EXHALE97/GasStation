@@ -5,7 +5,6 @@ namespace Queries.Entities
     public class OperationHistory
     {
         public int Id { get; }
-        public int UserId { get; }
         public string Operation { get; }
         public DateTime Date { get; }
 
