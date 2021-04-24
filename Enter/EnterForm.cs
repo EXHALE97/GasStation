@@ -54,10 +54,11 @@ namespace Enter
 
         private void EnterRole(string role, string login)
         {
+            RepositoryFactory factory;
             switch (role)
             {
                 case "worker":
-                    var factory = new RepositoryFactory(
+                    factory = new RepositoryFactory(
                         new DataBaseConnection(ConfigurationManager.ConnectionStrings["Worker"].ToString()));
                     var workerForm = new WorkerForm(factory.GetCredentialsRepository().GetCredentialsIdByLogin(login), factory);
                     Hide();
@@ -76,7 +77,9 @@ namespace Enter
                     Show();
                     break;
                 case "user":
-                    var userForm = new UserForm(login,
+                    factory = new RepositoryFactory(
+                        new DataBaseConnection(ConfigurationManager.ConnectionStrings["User"].ToString()));
+                    var userForm = new UserForm(factory.GetCredentialsRepository().GetCredentialsIdByLogin(login),
                         new RepositoryFactory(
                             new DataBaseConnection(ConfigurationManager.ConnectionStrings["User"].ToString())));
                     Hide();

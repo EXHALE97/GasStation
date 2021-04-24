@@ -47,14 +47,14 @@
             this.RefreshSupplyTableButton = new System.Windows.Forms.Button();
             this.AddSupplyTable = new System.Windows.Forms.Button();
             this.SuppliesTable = new System.Windows.Forms.DataGridView();
-            this.msWorker = new System.Windows.Forms.MenuStrip();
-            this.smUser = new System.Windows.Forms.ToolStripMenuItem();
-            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbSessionName = new System.Windows.Forms.Label();
             this.SupplyStation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SuppliesSupplyType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SuppliesSupplyTypeAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SuppliesDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.msWorker = new System.Windows.Forms.MenuStrip();
+            this.smUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbSessionName = new System.Windows.Forms.Label();
             this.tabAdmin.SuspendLayout();
             this.tabDealTable.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -245,6 +245,32 @@
             this.SuppliesTable.Size = new System.Drawing.Size(483, 366);
             this.SuppliesTable.TabIndex = 0;
             // 
+            // SupplyStation
+            // 
+            this.SupplyStation.HeaderText = "Станция";
+            this.SupplyStation.Name = "SupplyStation";
+            this.SupplyStation.ReadOnly = true;
+            this.SupplyStation.Width = 120;
+            // 
+            // SuppliesSupplyType
+            // 
+            this.SuppliesSupplyType.HeaderText = "Тип товара";
+            this.SuppliesSupplyType.Name = "SuppliesSupplyType";
+            this.SuppliesSupplyType.ReadOnly = true;
+            // 
+            // SuppliesSupplyTypeAmount
+            // 
+            this.SuppliesSupplyTypeAmount.HeaderText = "Количество товара";
+            this.SuppliesSupplyTypeAmount.Name = "SuppliesSupplyTypeAmount";
+            this.SuppliesSupplyTypeAmount.ReadOnly = true;
+            // 
+            // SuppliesDate
+            // 
+            this.SuppliesDate.HeaderText = "Дата поставки";
+            this.SuppliesDate.Name = "SuppliesDate";
+            this.SuppliesDate.ReadOnly = true;
+            this.SuppliesDate.Width = 120;
+            // 
             // msWorker
             // 
             this.msWorker.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -273,37 +299,11 @@
             // lbSessionName
             // 
             this.lbSessionName.AutoSize = true;
-            this.lbSessionName.Location = new System.Drawing.Point(572, 9);
+            this.lbSessionName.Location = new System.Drawing.Point(460, 9);
             this.lbSessionName.Name = "lbSessionName";
             this.lbSessionName.Size = new System.Drawing.Size(16, 13);
             this.lbSessionName.TabIndex = 5;
             this.lbSessionName.Text = "---";
-            // 
-            // SupplyStation
-            // 
-            this.SupplyStation.HeaderText = "Станция";
-            this.SupplyStation.Name = "SupplyStation";
-            this.SupplyStation.ReadOnly = true;
-            this.SupplyStation.Width = 120;
-            // 
-            // SuppliesSupplyType
-            // 
-            this.SuppliesSupplyType.HeaderText = "Тип товара";
-            this.SuppliesSupplyType.Name = "SuppliesSupplyType";
-            this.SuppliesSupplyType.ReadOnly = true;
-            // 
-            // SuppliesSupplyTypeAmount
-            // 
-            this.SuppliesSupplyTypeAmount.HeaderText = "Количество товара";
-            this.SuppliesSupplyTypeAmount.Name = "SuppliesSupplyTypeAmount";
-            this.SuppliesSupplyTypeAmount.ReadOnly = true;
-            // 
-            // SuppliesDate
-            // 
-            this.SuppliesDate.HeaderText = "Дата поставки";
-            this.SuppliesDate.Name = "SuppliesDate";
-            this.SuppliesDate.ReadOnly = true;
-            this.SuppliesDate.Width = 120;
             // 
             // WorkerForm
             // 

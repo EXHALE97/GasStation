@@ -38,6 +38,7 @@ namespace Worker
                 MinutesTextBox.Visible = false;
                 HoursLabel.Visible = false;
                 MinutesLabel.Visible = false;
+                SupplyDatePicker.Enabled = false;
             }
             else
             {
@@ -45,6 +46,7 @@ namespace Worker
                 MinutesTextBox.Visible = true;
                 HoursLabel.Visible = true;
                 MinutesLabel.Visible = true;
+                SupplyDatePicker.Enabled = true;
             }
         }
 

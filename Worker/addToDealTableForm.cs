@@ -4,7 +4,6 @@ using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Controllers;
 using Queries.Factory;
-using Queries.Interfaces;
 using Queries.Support.ComboBox;
 using Queries.Support.MessageBox;
 
@@ -12,9 +11,8 @@ namespace Worker
 {
     public partial class AddToDealTableForm : Form
     {
-        private int employeeId;
+        private readonly int employeeId;
         private int clientDiscountPercent;
-        private DataGridView dealTable;
         private readonly IRepositoryFactory factory;
         private readonly ComboBoxFiller comboBoxFiller;
         private readonly Lazy<DealController> dealController;
@@ -23,7 +21,6 @@ namespace Worker
         {
             InitializeComponent();
             this.factory = factory;
-            this.dealTable = dealTable;
             this.employeeId = employeeId;
             comboBoxFiller = new ComboBoxFiller(factory);
             dealController = new Lazy<DealController>(() => new DealController(dealTable, factory));
@@ -44,6 +41,7 @@ namespace Worker
                 MinutesTextBox.Visible = false;
                 HoursLabel.Visible = false;
                 MinutesLabel.Visible = false;
+                DealDatePicker.Enabled = false;
             }
             else
             {
@@ -51,6 +49,7 @@ namespace Worker
                 MinutesTextBox.Visible = true;
                 HoursLabel.Visible = true;
                 MinutesLabel.Visible = true;
+                DealDatePicker.Enabled = true;
             }
         }
 
@@ -76,7 +75,7 @@ namespace Worker
                     }
                 }
 
-                if (new DealController(factory).AddToTable(new Deal(
+                if (dealController.Value.AddToTable(new Deal(
                     factory.GetClientRepository().GetClientIdByCardId(ClientCardComboBox.SelectedIndex != -1
                         ? int.Parse(ClientCardComboBox.SelectedItem.ToString())
                         : 0),
@@ -104,6 +103,8 @@ namespace Worker
             {
                 clientDiscountPercent = 0;
             }
+
+            CountPrice();
         }
 
         private void SupplyTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)

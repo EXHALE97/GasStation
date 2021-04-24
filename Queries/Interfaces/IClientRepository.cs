@@ -21,5 +21,7 @@ namespace Queries.Interfaces
         void SetClientCredentials(int clientId, Credentials credentials);
 
         int GetClientIdByCardId(int cardId);
+
+        int GetClientIdByCredId(int credId);
     }
 }

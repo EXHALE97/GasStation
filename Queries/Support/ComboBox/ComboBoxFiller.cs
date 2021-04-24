@@ -35,12 +35,11 @@ namespace Queries.Support.ComboBox
             }
         }
 
-        public void FillCredsComboBox(System.Windows.Forms.ComboBox comboBox)
+        public void FillStationCitiesComboBox(System.Windows.Forms.ComboBox comboBox)
         {
-            comboBox.Items.Add("-");
-            foreach (var item in factory.GetCredentialsRepository().GetUserLogins())
+            foreach (var city in factory.GetStationRepository().GetStationCities())
             {
-                comboBox.Items.Add(item);
+                comboBox.Items.Add(city);
             }
         }
     }

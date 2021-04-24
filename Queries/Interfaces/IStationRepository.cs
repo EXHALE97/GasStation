@@ -9,15 +9,11 @@ namespace Queries.Interfaces
     {
         int GetStationIdByName(string name);
 
-        List<Station> FindStations(string country, string city);
-
-        List<string> GetOrganizations();
+        List<Station> GetStationsByCity(string city);
 
         List<Station> GetStations(bool workingStationsOnly);
 
-        List<string> GetStationsAddress(string name);
-
-        string GetStationAddressById(int stationId);
+        List<string> GetStationCities();
 
         void AddToStationTable(Station station);
 

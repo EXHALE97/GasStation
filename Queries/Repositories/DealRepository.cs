@@ -129,13 +129,13 @@ namespace Queries.Repositories
         {
             //не конвертится время (всегда 12:00 пишет)
             ExecuteSqlNonQueryCommand(
-                $"EXEC UpdateDealShort {deal.Id}, {deal.ClientCardId}, N'{deal.SupplyType}', {deal.SupplyTypeAmount}, {deal.Price}, '{deal.Date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
+                $"EXEC UpdateDealShort {deal.Id}, {deal.ClientCardId}, N'{deal.SupplyType}', {deal.SupplyTypeAmount}, '{deal.Date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
         }
 
         public void AddToDealTable(Deal deal)
         {
             ExecuteSqlNonQueryCommand(
-                $"EXEC InsertDeal {deal.ClientCardId}, {deal.EmployeeId}, N'{deal.Station}', N'{deal.SupplyType}', {deal.SupplyTypeAmount}, {deal.Price}, '{deal.Date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
+                $"EXEC InsertDeal {deal.ClientCardId}, {deal.EmployeeId}, N'{deal.Station}', N'{deal.SupplyType}', {deal.SupplyTypeAmount}, '{deal.Date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
         }
     }
 }

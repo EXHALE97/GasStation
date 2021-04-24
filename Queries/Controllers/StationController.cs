@@ -25,23 +25,27 @@ namespace Queries.Controllers
 
                 foreach (var station in Factory.GetStationRepository().GetStations(workingOnly))
                 {
-                    if (stationsTable.Columns.Count == 4)
+                    switch (stationsTable.Columns.Count)
                     {
-                        stationsTable.Rows.Add(station.Name, station.City, station.Address, station.IsWorking.ToString());
-                    }
-                    else
-                    {
-                        stationsTable.Rows.Add(station.Id, station.Name, station.City, station.Address, station.IsWorking.ToString());
+                        case 3:
+                            stationsTable.Rows.Add(station.Name, station.City, station.Address);
+                            break;
+                        case 4:
+                            stationsTable.Rows.Add(station.Name, station.City, station.Address, station.IsWorking.ToString());
+                            break;
+                        default:
+                            stationsTable.Rows.Add(station.Id, station.Name, station.City, station.Address, station.IsWorking.ToString());
+                            break;
                     }
                 }
             });
         }
 
-        public void FindInTable(string country, string city)
+        public void ShowStationsByCity(string city)
         {
             DoFormAction(() =>
             {
-                var stations = Factory.GetStationRepository().FindStations(country, city);
+                var stations = Factory.GetStationRepository().GetStationsByCity(city);
                 stationsTable.Rows.Clear();
                 foreach (var station in stations)
                 {

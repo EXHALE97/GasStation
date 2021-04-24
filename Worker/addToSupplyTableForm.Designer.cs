@@ -55,7 +55,6 @@
             // 
             // SupplyDatePicker
             // 
-            this.SupplyDatePicker.Enabled = false;
             this.SupplyDatePicker.Location = new System.Drawing.Point(147, 95);
             this.SupplyDatePicker.Name = "SupplyDatePicker";
             this.SupplyDatePicker.Size = new System.Drawing.Size(146, 20);

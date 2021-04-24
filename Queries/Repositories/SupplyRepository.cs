@@ -92,7 +92,8 @@ namespace Queries.Repositories
         public void AddToSupplyTable(Supply supply)
         {
             ExecuteSqlNonQueryCommand(
-                $"EXEC InsertSupply {supply.StationId}, {supply.EmployeeId}, {supply.SupplyTypeId}, {supply.SupplyTypeAmount}, {supply.SupplyDate}");
+                $"EXEC InsertSupply {supply.StationId}, {supply.EmployeeId}, {supply.SupplyTypeId}, {supply.SupplyTypeAmount}," +
+                $"'{supply.SupplyDate.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
         }
     }
 }

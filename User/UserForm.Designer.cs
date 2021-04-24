@@ -1,4 +1,6 @@
-﻿namespace User
+﻿using System;
+
+namespace User
 {
     partial class UserForm
     {
@@ -30,24 +32,21 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabAZSTable = new System.Windows.Forms.TabPage();
-            this.lbSessionName1 = new System.Windows.Forms.Label();
+            this.SessionNameStations = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.tbCity = new System.Windows.Forms.TextBox();
-            this.tbCountry = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.lbCity = new System.Windows.Forms.Label();
-            this.lbCountry = new System.Windows.Forms.Label();
+            this.CityComboBox = new System.Windows.Forms.ComboBox();
+            this.CityLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataTableView = new System.Windows.Forms.Button();
+            this.RefreshStationTable = new System.Windows.Forms.Button();
             this.StationsTable = new System.Windows.Forms.DataGridView();
-            this.tabDealUserTable = new System.Windows.Forms.TabPage();
-            this.lbSessionName2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btnShowUserDeal = new System.Windows.Forms.Button();
-            this.DealTable = new System.Windows.Forms.DataGridView();
             this.StationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StationAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabDealUserTable = new System.Windows.Forms.TabPage();
+            this.SessionNameDeal = new System.Windows.Forms.Label();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.RefreshDealTable = new System.Windows.Forms.Button();
+            this.DealTable = new System.Windows.Forms.DataGridView();
             this.fueltype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelamount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dealprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,7 +73,7 @@
             // 
             // tabAZSTable
             // 
-            this.tabAZSTable.Controls.Add(this.lbSessionName1);
+            this.tabAZSTable.Controls.Add(this.SessionNameStations);
             this.tabAZSTable.Controls.Add(this.groupBox2);
             this.tabAZSTable.Controls.Add(this.groupBox1);
             this.tabAZSTable.Controls.Add(this.StationsTable);
@@ -86,75 +85,48 @@
             this.tabAZSTable.Text = "Список всех АЗС";
             this.tabAZSTable.UseVisualStyleBackColor = true;
             // 
-            // lbSessionName1
+            // SessionNameStations
             // 
-            this.lbSessionName1.AutoSize = true;
-            this.lbSessionName1.Location = new System.Drawing.Point(6, 6);
-            this.lbSessionName1.Name = "lbSessionName1";
-            this.lbSessionName1.Size = new System.Drawing.Size(16, 13);
-            this.lbSessionName1.TabIndex = 9;
-            this.lbSessionName1.Text = "---";
-            this.lbSessionName1.Click += new System.EventHandler(this.lbSessionName1_Click);
+            this.SessionNameStations.AutoSize = true;
+            this.SessionNameStations.Location = new System.Drawing.Point(6, 6);
+            this.SessionNameStations.Name = "SessionNameStations";
+            this.SessionNameStations.Size = new System.Drawing.Size(16, 13);
+            this.SessionNameStations.TabIndex = 9;
+            this.SessionNameStations.Text = "---";
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.tbCity);
-            this.groupBox2.Controls.Add(this.tbCountry);
-            this.groupBox2.Controls.Add(this.btnSearch);
-            this.groupBox2.Controls.Add(this.lbCity);
-            this.groupBox2.Controls.Add(this.lbCountry);
-            this.groupBox2.Location = new System.Drawing.Point(458, 254);
+            this.groupBox2.Controls.Add(this.CityComboBox);
+            this.groupBox2.Controls.Add(this.CityLabel);
+            this.groupBox2.Location = new System.Drawing.Point(458, 294);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(180, 103);
+            this.groupBox2.Size = new System.Drawing.Size(180, 63);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Фильтры";
             // 
-            // tbCity
+            // CityComboBox
             // 
-            this.tbCity.Location = new System.Drawing.Point(74, 45);
-            this.tbCity.Name = "tbCity";
-            this.tbCity.Size = new System.Drawing.Size(100, 20);
-            this.tbCity.TabIndex = 3;
+            this.CityComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.CityComboBox.FormattingEnabled = true;
+            this.CityComboBox.Location = new System.Drawing.Point(53, 19);
+            this.CityComboBox.Name = "CityComboBox";
+            this.CityComboBox.Size = new System.Drawing.Size(121, 21);
+            this.CityComboBox.TabIndex = 6;
+            this.CityComboBox.SelectedIndexChanged += new EventHandler(this.CityComboBox_SelectedIndexChanged);
             // 
-            // tbCountry
+            // CityLabel
             // 
-            this.tbCountry.Location = new System.Drawing.Point(74, 19);
-            this.tbCountry.Name = "tbCountry";
-            this.tbCountry.Size = new System.Drawing.Size(100, 20);
-            this.tbCountry.TabIndex = 2;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(99, 74);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 4;
-            this.btnSearch.Text = "Поиск";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // lbCity
-            // 
-            this.lbCity.AutoSize = true;
-            this.lbCity.Location = new System.Drawing.Point(28, 48);
-            this.lbCity.Name = "lbCity";
-            this.lbCity.Size = new System.Drawing.Size(40, 13);
-            this.lbCity.TabIndex = 6;
-            this.lbCity.Text = "Город:";
-            // 
-            // lbCountry
-            // 
-            this.lbCountry.AutoSize = true;
-            this.lbCountry.Location = new System.Drawing.Point(25, 22);
-            this.lbCountry.Name = "lbCountry";
-            this.lbCountry.Size = new System.Drawing.Size(46, 13);
-            this.lbCountry.TabIndex = 5;
-            this.lbCountry.Text = "Страна:";
+            this.CityLabel.AutoSize = true;
+            this.CityLabel.Location = new System.Drawing.Point(6, 22);
+            this.CityLabel.Name = "CityLabel";
+            this.CityLabel.Size = new System.Drawing.Size(40, 13);
+            this.CityLabel.TabIndex = 5;
+            this.CityLabel.Text = "Город:";
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataTableView);
+            this.groupBox1.Controls.Add(this.RefreshStationTable);
             this.groupBox1.Location = new System.Drawing.Point(458, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(180, 92);
@@ -162,15 +134,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Функционал";
             // 
-            // dataTableView
+            // RefreshStationTable
             // 
-            this.dataTableView.Location = new System.Drawing.Point(9, 19);
-            this.dataTableView.Name = "dataTableView";
-            this.dataTableView.Size = new System.Drawing.Size(165, 58);
-            this.dataTableView.TabIndex = 1;
-            this.dataTableView.Text = "Обновить таблицу станций";
-            this.dataTableView.UseVisualStyleBackColor = true;
-            this.dataTableView.Click += new System.EventHandler(this.dataView1_Click);
+            this.RefreshStationTable.Location = new System.Drawing.Point(9, 19);
+            this.RefreshStationTable.Name = "RefreshStationTable";
+            this.RefreshStationTable.Size = new System.Drawing.Size(165, 58);
+            this.RefreshStationTable.TabIndex = 1;
+            this.RefreshStationTable.Text = "Обновить таблицу станций";
+            this.RefreshStationTable.UseVisualStyleBackColor = true;
+            this.RefreshStationTable.Click += new System.EventHandler(this.RefreshStationTable_Click);
             // 
             // StationsTable
             // 
@@ -186,9 +158,27 @@
             this.StationsTable.Size = new System.Drawing.Size(446, 338);
             this.StationsTable.TabIndex = 0;
             // 
+            // StationName
+            // 
+            this.StationName.HeaderText = "Название";
+            this.StationName.Name = "StationName";
+            // 
+            // StationCity
+            // 
+            this.StationCity.HeaderText = "Город";
+            this.StationCity.Name = "StationCity";
+            this.StationCity.ReadOnly = true;
+            // 
+            // StationAddress
+            // 
+            this.StationAddress.HeaderText = "Адрес";
+            this.StationAddress.Name = "StationAddress";
+            this.StationAddress.ReadOnly = true;
+            this.StationAddress.Width = 200;
+            // 
             // tabDealUserTable
             // 
-            this.tabDealUserTable.Controls.Add(this.lbSessionName2);
+            this.tabDealUserTable.Controls.Add(this.SessionNameDeal);
             this.tabDealUserTable.Controls.Add(this.groupBox3);
             this.tabDealUserTable.Controls.Add(this.DealTable);
             this.tabDealUserTable.Location = new System.Drawing.Point(4, 22);
@@ -199,18 +189,18 @@
             this.tabDealUserTable.Text = "Журнал сделок";
             this.tabDealUserTable.UseVisualStyleBackColor = true;
             // 
-            // lbSessionName2
+            // SessionNameDeal
             // 
-            this.lbSessionName2.AutoSize = true;
-            this.lbSessionName2.Location = new System.Drawing.Point(6, 6);
-            this.lbSessionName2.Name = "lbSessionName2";
-            this.lbSessionName2.Size = new System.Drawing.Size(16, 13);
-            this.lbSessionName2.TabIndex = 10;
-            this.lbSessionName2.Text = "---";
+            this.SessionNameDeal.AutoSize = true;
+            this.SessionNameDeal.Location = new System.Drawing.Point(6, 6);
+            this.SessionNameDeal.Name = "SessionNameDeal";
+            this.SessionNameDeal.Size = new System.Drawing.Size(16, 13);
+            this.SessionNameDeal.TabIndex = 10;
+            this.SessionNameDeal.Text = "---";
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.btnShowUserDeal);
+            this.groupBox3.Controls.Add(this.RefreshDealTable);
             this.groupBox3.Location = new System.Drawing.Point(515, 6);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(124, 86);
@@ -218,15 +208,15 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Функционал";
             // 
-            // btnShowUserDeal
+            // RefreshDealTable
             // 
-            this.btnShowUserDeal.Location = new System.Drawing.Point(6, 26);
-            this.btnShowUserDeal.Name = "btnShowUserDeal";
-            this.btnShowUserDeal.Size = new System.Drawing.Size(112, 54);
-            this.btnShowUserDeal.TabIndex = 0;
-            this.btnShowUserDeal.Text = "Обновить таблицу своих сделок";
-            this.btnShowUserDeal.UseVisualStyleBackColor = true;
-            this.btnShowUserDeal.Click += new System.EventHandler(this.btnShowUserDeal_Click);
+            this.RefreshDealTable.Location = new System.Drawing.Point(6, 26);
+            this.RefreshDealTable.Name = "RefreshDealTable";
+            this.RefreshDealTable.Size = new System.Drawing.Size(112, 54);
+            this.RefreshDealTable.TabIndex = 0;
+            this.RefreshDealTable.Text = "Обновить таблицу своих сделок";
+            this.RefreshDealTable.UseVisualStyleBackColor = true;
+            this.RefreshDealTable.Click += new System.EventHandler(this.RefreshDealTable_Click);
             // 
             // DealTable
             // 
@@ -240,24 +230,6 @@
             this.DealTable.Name = "DealTable";
             this.DealTable.Size = new System.Drawing.Size(503, 335);
             this.DealTable.TabIndex = 0;
-            // 
-            // StationName
-            // 
-            this.StationName.HeaderText = "Название";
-            this.StationName.Name = "StationName";
-            // 
-            // StationCity
-            // 
-            this.StationCity.HeaderText = "Страна";
-            this.StationCity.Name = "StationCity";
-            this.StationCity.ReadOnly = true;
-            // 
-            // StationAddress
-            // 
-            this.StationAddress.HeaderText = "Адрес";
-            this.StationAddress.Name = "StationAddress";
-            this.StationAddress.ReadOnly = true;
-            this.StationAddress.Width = 200;
             // 
             // fueltype
             // 
@@ -319,19 +291,15 @@
         private System.Windows.Forms.TabPage tabAZSTable;
         private System.Windows.Forms.TabPage tabDealUserTable;
         private System.Windows.Forms.DataGridView StationsTable;
-        private System.Windows.Forms.Button dataTableView;
-        private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox tbCity;
-        private System.Windows.Forms.TextBox tbCountry;
-        private System.Windows.Forms.Label lbCity;
-        private System.Windows.Forms.Label lbCountry;
+        private System.Windows.Forms.Button RefreshStationTable;
+        private System.Windows.Forms.Label CityLabel;
         private System.Windows.Forms.DataGridView DealTable;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnShowUserDeal;
-        private System.Windows.Forms.Label lbSessionName1;
-        private System.Windows.Forms.Label lbSessionName2;
+        private System.Windows.Forms.Button RefreshDealTable;
+        private System.Windows.Forms.Label SessionNameStations;
+        private System.Windows.Forms.Label SessionNameDeal;
         private System.Windows.Forms.DataGridViewTextBoxColumn StationName;
         private System.Windows.Forms.DataGridViewTextBoxColumn StationCity;
         private System.Windows.Forms.DataGridViewTextBoxColumn StationAddress;
@@ -339,6 +307,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn fuelamount;
         private System.Windows.Forms.DataGridViewTextBoxColumn dealprice;
         private System.Windows.Forms.DataGridViewTextBoxColumn dealdate;
+        private System.Windows.Forms.ComboBox CityComboBox;
     }
 }
 

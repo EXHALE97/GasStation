@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Factory;
@@ -13,17 +10,14 @@ namespace Queries.Controllers
     public class DealController : BaseController
     {
         private readonly DataGridView dealsTable;
-        private List<Deal> dgvElements;
 
         public DealController(IRepositoryFactory factory)
         {
-            dgvElements = new List<Deal>();
             Factory = factory;
         }
 
         public DealController(DataGridView dealsTable, IRepositoryFactory factory)
         {
-            dgvElements = new List<Deal>();
             Factory = factory;
             this.dealsTable = dealsTable;
         }
@@ -68,7 +62,8 @@ namespace Queries.Controllers
                 dealsTable.Rows.Clear();
                 foreach (var deal in Factory.GetDealRepository().GetDealsByEmployee(id))
                 {
-                    dealsTable.Rows.Add(deal.Id);
+                    dealsTable.Rows.Add(deal.ClientCardId, deal.Client, deal.SupplyType,
+                        deal.SupplyTypeAmount, deal.Price, deal.CountDiscount(), deal.CountFullPrice(), deal.Date);
                 }
             });
         }
@@ -117,35 +112,19 @@ namespace Queries.Controllers
 
         public bool AddToTable(Deal deal)
         {
-            bool checkFlag = false;
-            try
+            return DoFormAction(() =>
             {
                 if (DealValidator.CheckAddition(deal, out var errorList))
                 {
                     Factory.GetDealRepository().AddToDealTable(deal);
+                    return true;
                 }
-                else
-                {
-                    //int k = 0;
-                    //foreach (string str in errorList)
-                    //{
-                    //    k++;
-                    //    error += "Ошибка №" + k + ": " + str + " \n";
-                    //}
-                    //MessageBox.Show(error, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (SqlException e)
-            {
-                checkFlag = false;
-                MessageBox.Show(e.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception)
-            {
-                checkFlag = false;
-                MessageBox.Show("Неизвестная ошибка!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return checkFlag;
+
+                ErrorMessageBox.ShowCustomErrorMessage(errorList.Aggregate(string.Empty,
+                    (current, error) => current + "Ошибка №" + errorList.IndexOf(error) + ": " + error + " \n"));
+
+                return false;
+            });
         }
     }
 }

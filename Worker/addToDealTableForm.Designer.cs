@@ -63,11 +63,10 @@ namespace Worker
             this.ClientCardComboBox.Name = "ClientCardComboBox";
             this.ClientCardComboBox.Size = new System.Drawing.Size(123, 21);
             this.ClientCardComboBox.TabIndex = 45;
-            this.ClientCardComboBox.SelectedIndexChanged += new EventHandler(this.ClientCardComboBox_SelectedIndexChanged);
+            this.ClientCardComboBox.SelectedIndexChanged += new System.EventHandler(this.ClientCardComboBox_SelectedIndexChanged);
             // 
             // DealDatePicker
             // 
-            this.DealDatePicker.Enabled = false;
             this.DealDatePicker.Location = new System.Drawing.Point(150, 177);
             this.DealDatePicker.MaxDate = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
             this.DealDatePicker.Name = "DealDatePicker";
@@ -146,8 +145,8 @@ namespace Worker
             this.SupplyTypeAmountTextBox.Name = "SupplyTypeAmountTextBox";
             this.SupplyTypeAmountTextBox.Size = new System.Drawing.Size(123, 20);
             this.SupplyTypeAmountTextBox.TabIndex = 26;
+            this.SupplyTypeAmountTextBox.TextChanged += new System.EventHandler(this.SupplyTypeAmountTextBox_TextChanged);
             this.SupplyTypeAmountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SupplyTypeAmountTextBox_KeyPress);
-            this.SupplyTypeAmountTextBox.TextChanged += new EventHandler(this.SupplyTypeAmountTextBox_TextChanged);
             // 
             // SupplyTypeComboBox
             // 
@@ -159,8 +158,7 @@ namespace Worker
             this.SupplyTypeComboBox.Name = "SupplyTypeComboBox";
             this.SupplyTypeComboBox.Size = new System.Drawing.Size(123, 21);
             this.SupplyTypeComboBox.TabIndex = 48;
-            this.SupplyTypeComboBox.SelectedIndexChanged +=
-                new EventHandler(this.SupplyTypeComboBox_SelectedIndexChanged);
+            this.SupplyTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.SupplyTypeComboBox_SelectedIndexChanged);
             // 
             // SupplyTypeLabel
             // 

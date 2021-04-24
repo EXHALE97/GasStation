@@ -134,31 +134,20 @@ namespace Queries.Repositories
             });
         }
 
-        public string FindCardNumByCarID(int id)
+        public int GetClientIdByCredId(int credId)
         {
-            string cardnum = String.Empty;
-            //try
-            //{
-            //    dbc.OpenConnection();
-            //    var queryCommand = new SqlCommand("SELECT cardnum FROM \"AZS\".\"Car\" WHERE car_id = @Car_id");
-            //    queryCommand.Parameters.AddWithValue("@Car_id", id);
-            //    var AZSTableReader = queryCommand.ExecuteReader();
-            //    if (AZSTableReader.HasRows)
-            //    {
-            //        foreach (DbDataRecord dbDataRecord in AZSTableReader)
-            //        {
-            //            cardnum = dbDataRecord["cardnum"].ToString();
-            //        }
-            //    }
-            //    AZSTableReader.Close();
-            //}
-            //catch (SqlException pe)
-            //{
-            //    throw pe;
-            //}
-            //finally { dbc.CloseConnection(); }
+            return ExecuteSqlCommand($"EXEC GetClientIdByCredId {credId}", queryResult =>
+            {
+                var id = 0;
+                if (!queryResult.HasRows) return id;
+                foreach (DbDataRecord dbDataRecord in queryResult)
+                {
+                    id = int.Parse(dbDataRecord["id"].ToString());
+                }
 
-            return cardnum;
+                return id;
+            });
         }
+
     }
 }
