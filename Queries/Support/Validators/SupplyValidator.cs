@@ -13,7 +13,7 @@ namespace Queries.Support.Validators
             {
                 checkFlag = false;
             }
-            if (supply.SupplyTypeName == null)
+            if (supply.SupplyTypeId <= 0)
             {
                 checkFlag = false;
                 errorList.Add("Тип товара не выбран!");

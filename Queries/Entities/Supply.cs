@@ -25,5 +25,14 @@ namespace Queries.Entities
             SupplyTypeAmount = supplyTypeAmount;
             SupplyDate = supplyDate;
         }
+
+        public Supply(int stationId, int employeeId, int supplyTypeId, double supplyTypeAmount, DateTime supplyDate)
+        {
+            StationId = stationId;
+            EmployeeId = employeeId;
+            SupplyTypeId = supplyTypeId;
+            SupplyTypeAmount = supplyTypeAmount;
+            SupplyDate = supplyDate;
+        }
     }
 }

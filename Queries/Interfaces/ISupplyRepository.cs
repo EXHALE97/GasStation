@@ -10,7 +10,7 @@ namespace Queries.Interfaces
 
         void AddToSupplyTable(Supply sup);
 
-        List<Supply> ShowSupplyTableByID(int ID);
+        List<Supply> GetSuppliesByEmployeeId(int employeeId);
 
         List<Supply> GetSuppliesByStation(int stationId);
     }

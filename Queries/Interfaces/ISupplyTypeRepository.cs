@@ -8,6 +8,8 @@ namespace Queries.Interfaces
     {
         List<SupplyType> GetSupplyTypes();
 
+        int GetSupplyTypeIdByName(string name);
+
         double GetSupplyTypePriceByName(string name);
 
         void AddSupplyType(SupplyType supplyType);

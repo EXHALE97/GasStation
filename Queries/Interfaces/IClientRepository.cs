@@ -14,13 +14,12 @@ namespace Queries.Interfaces
 
         void AddToClientTable(Client client);
 
-        string FindClientById(int id);
+        string GetClientFullNameById(int id);
 
         int GetDiscountPercentForClient(int clientCardId);
 
         void SetClientCredentials(int clientId, Credentials credentials);
 
-        int FindCarIDByCardnum(string cardnum);
-
+        int GetClientIdByCardId(int cardId);
     }
 }

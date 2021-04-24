@@ -16,6 +16,6 @@ namespace Queries.Interfaces
 
         void AddToEmployeeTable(Employee employee);
 
-        string FindEmployeeById(int id);
+        string GetEmployeeFullNameById(int id);
     }
 }

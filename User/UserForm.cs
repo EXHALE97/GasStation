@@ -7,44 +7,47 @@ namespace User
 {
     public partial class UserForm : Form //форма пользователя
     {
-        private IRepositoryFactory factory;
-        private StationController fillStationTable;
-        private DealController fillDealTable;
-        private string cardnum;
+        private readonly int clientId;
+        private readonly IRepositoryFactory factory;
+        private readonly StationController stationController;
+        private readonly DealController dealController;
+        
 
-        public UserForm(string cardnum, IRepositoryFactory factory)
+        public UserForm(int clientId, IRepositoryFactory factory)
         {
             InitializeComponent();
-            this.cardnum = cardnum;
-            this.factory = factory; 
+            this.clientId = clientId;
+            this.factory = factory;
+            stationController = new StationController(StationsTable, factory);
+            dealController = new DealController(DealTable, factory);
         }
 
         private void UserForm_Load(object sender, EventArgs e)
         {
+            var userFullName = factory.GetClientRepository().GetClientFullNameById(clientId);
             MessageBox.Show("Добро пожаловать!");
-            lbSessionName1.Text = "Вы зашли как:" + cardnum;
-            lbSessionName2.Text = "Вы зашли как:" + cardnum;
-            fillStationTable = new StationController(dgvVievAZS, factory);
-            fillStationTable.ShowTable(false);
-            fillDealTable = new DealController(dgvUserDeals, factory);
-            //fillDealTable.ShowUserTable(cardnum);
+            lbSessionName1.Text = "Вы зашли как:" + userFullName;
+            lbSessionName2.Text = "Вы зашли как:" + userFullName;
+            
+            stationController.ShowTable(false);
+            dealController.ShowUserTable(clientId);
         }
 
         private void dataView1_Click(object sender, EventArgs e)
         {
-            fillStationTable.ShowTable(false);
+            stationController.ShowTable(false);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string fCountry = tbCountry.Text;
             string fCity = tbCity.Text;
-            fillStationTable.FindInTable(fCountry, fCity);
+            stationController.FindInTable(fCountry, fCity);
         }
 
         private void btnShowUserDeal_Click(object sender, EventArgs e)
         {
-            //fillDealTable.ShowUserTable(cardnum);
+            //dealController.ShowUserTable(clientId);
         }
 
         private void lbSessionName1_Click(object sender, EventArgs e)

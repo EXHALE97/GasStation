@@ -5,7 +5,7 @@ namespace Queries.Interfaces
 {
     public interface ICredentialsRepository
     {
-        string LoginToTable(Credentials login);
+        string GetRoleByCredentials(Credentials login);
 
         int AddNewCredentials(Credentials dbUser);
 

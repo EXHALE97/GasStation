@@ -134,25 +134,8 @@ namespace Queries.Repositories
 
         public void AddToDealTable(Deal deal)
         {
-            //try
-            //{
-            //    dbc.OpenConnection();
-            //    var queryCommand = new SqlCommand("INSERT INTO \"AZS\".\"Deal\"(Car_ID , Staff_ID , FuelType , FuelAmount , DealPrice , DealDate)" +
-            //            "VALUES(@Car_id, @Staff_id, @FuelType, @FuelAmount, @DealPrice, @DealDate)");
-            //    //queryCommand.Parameters.AddWithValue("@Car_id", deal.GetCarID());
-            //    //queryCommand.Parameters.AddWithValue("@Staff_id", deal.GetStaff_id());
-            //    //queryCommand.Parameters.AddWithValue("@FuelType", deal.GetFuelType());
-            //    //queryCommand.Parameters.AddWithValue("@FuelAmount", deal.GetFuelAmount());
-            //    //queryCommand.Parameters.AddWithValue("@DealPrice", deal.GetDealPrice());
-            //    ////queryCommand.Parameters.AddWithValue("@CardNum", deal.GetCardNum());
-            //    //queryCommand.Parameters.AddWithValue("@DealDate", Convert.ToDateTime(deal.GetDealDate()));
-            //queryCommand.ExecuteNonQuery();
-            //}
-            //catch (SqlException pe)
-            //{
-            //    throw pe;
-            //}
-            //finally { dbc.CloseConnection(); }
+            ExecuteSqlNonQueryCommand(
+                $"EXEC InsertDeal {deal.ClientCardId}, {deal.EmployeeId}, N'{deal.Station}', N'{deal.SupplyType}', {deal.SupplyTypeAmount}, {deal.Price}, '{deal.Date.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.CurrentCulture)}'");
         }
     }
 }

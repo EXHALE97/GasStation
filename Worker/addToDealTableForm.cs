@@ -1,159 +1,167 @@
 ﻿using System;
+using System.Globalization;
 using System.Windows.Forms;
 using Queries.Entities;
 using Queries.Controllers;
 using Queries.Factory;
 using Queries.Interfaces;
 using Queries.Support.ComboBox;
+using Queries.Support.MessageBox;
 
 namespace Worker
 {
     public partial class AddToDealTableForm : Form
     {
-        private DataGridView dgv;
-        private IRepositoryFactory factory;
-        private int ID;
-        private string fueltype, cardnum;
+        private int employeeId;
+        private int clientDiscountPercent;
+        private DataGridView dealTable;
+        private readonly IRepositoryFactory factory;
+        private readonly ComboBoxFiller comboBoxFiller;
+        private readonly Lazy<DealController> dealController;
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        public AddToDealTableForm(int employeeId, IRepositoryFactory factory, DataGridView dealTable)
+        {
+            InitializeComponent();
+            this.factory = factory;
+            this.dealTable = dealTable;
+            this.employeeId = employeeId;
+            comboBoxFiller = new ComboBoxFiller(factory);
+            dealController = new Lazy<DealController>(() => new DealController(dealTable, factory));
+        }
+
+        private void UpdateDealTableForm_Load(object sender, EventArgs e)
+        {
+            comboBoxFiller.FillCardNumbers(ClientCardComboBox);
+            comboBoxFiller.FillStationNamesComboBox(StationComboBox);
+            comboBoxFiller.FillSupplyTypes(SupplyTypeComboBox);
+        }
+
+        private void NowCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (NowCheckBox.Checked)
+            {
+                HoursTextBox.Visible = false;
+                MinutesTextBox.Visible = false;
+                HoursLabel.Visible = false;
+                MinutesLabel.Visible = false;
+            }
+            else
+            {
+                HoursTextBox.Visible = true;
+                MinutesTextBox.Visible = true;
+                HoursLabel.Visible = true;
+                MinutesLabel.Visible = true;
+            }
+        }
+
+        private void AddDealButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DateTime dealDate;
+                if (NowCheckBox.Checked)
+                {
+                    dealDate = DateTime.Now;
+                }
+                else
+                {
+                    dealDate = DealDatePicker.Value.Date;
+                    if (HoursTextBox.Text != string.Empty)
+                    {
+                        dealDate = dealDate.AddHours(Convert.ToInt32(HoursTextBox.Text));
+                    }
+                    if (MinutesTextBox.Text != string.Empty)
+                    {
+                        dealDate = dealDate.AddMinutes(Convert.ToInt32(MinutesTextBox.Text));
+                    }
+                }
+
+                if (new DealController(factory).AddToTable(new Deal(
+                    factory.GetClientRepository().GetClientIdByCardId(ClientCardComboBox.SelectedIndex != -1
+                        ? int.Parse(ClientCardComboBox.SelectedItem.ToString())
+                        : 0),
+                    StationComboBox.SelectedIndex != -1 ? StationComboBox.SelectedItem.ToString() : null, 
+                    employeeId,
+                    SupplyTypeComboBox.SelectedIndex != -1 ? SupplyTypeComboBox.SelectedItem.ToString() : null,
+                    double.TryParse(SupplyTypeAmountTextBox.Text, out var amount) ? amount : 0,
+                    double.TryParse(DealPriceTextBox.Text, out var price) ? price : 0, dealDate)))
+                {
+                    SuccessMessageBox.ShowSuccessBox();
+                    Close();
+                }
+            }
+            catch (Exception) { ErrorMessageBox.ShowInvalidDataMessage(); }
+        }
+
+        private void ClientCardComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ClientCardComboBox.SelectedIndex != -1)
+            {
+                clientDiscountPercent = factory.GetClientRepository()
+                    .GetDiscountPercentForClient(int.Parse(ClientCardComboBox.SelectedItem.ToString()));
+            }
+            else
+            {
+                clientDiscountPercent = 0;
+            }
+        }
+
+        private void SupplyTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CountPrice();
+        }
+
+        private void SupplyTypeAmountTextBox_TextChanged(object sender, EventArgs e)
+        {
+            CountPrice();
+        }
+
+        private void SupplyTypeAmountTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleDigitsAndDot(e);
+        }
+
+        private void HoursTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleOnlyDigits(e);
+        }
+
+        private void MinutesTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            HandleOnlyDigits(e);
+        }
+
+        private void DealPriceTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (DealPriceTextBox.Text == string.Empty) return;
+            PriceWithDiscountTextBox.Text = (double.Parse(DealPriceTextBox.Text) * ((double)(100 - clientDiscountPercent) / 100)).ToString(CultureInfo.InvariantCulture);
+        }
+
+        private void CancelActionButton_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        DateTime dealdate;
-
-        public AddToDealTableForm(int ID, IRepositoryFactory factory, DataGridView dgv)
+        private void CountPrice()
         {
-            InitializeComponent();
-            this.factory = factory;
-            this.dgv = dgv;
-            this.ID = ID;
+            if (SupplyTypeAmountTextBox.Text == string.Empty) return;
+            if (SupplyTypeComboBox.SelectedIndex == -1) return;
+            DealPriceTextBox.Text =
+                (factory.GetSupplyTypeRepository()
+                     .GetSupplyTypePriceByName(SupplyTypeComboBox.SelectedItem.ToString()) *
+                 double.Parse(SupplyTypeAmountTextBox.Text)).ToString(CultureInfo.InvariantCulture);
         }
 
-        private void checkNow_CheckedChanged(object sender, EventArgs e)
+        private static void HandleDigitsAndDot(KeyPressEventArgs e)
         {
-            if (checkNow.Checked)
-            {
-                tbHours.Visible = false;
-                tbMinutes.Visible = false;
-                label1.Visible = false;
-                label2.Visible = false;
-            }
-            if (!checkNow.Checked)
-            {
-                tbHours.Visible = true;
-                tbMinutes.Visible = true;
-                label1.Visible = true;
-                label2.Visible = true;
-            }
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (cbFuelType.SelectedIndex != -1)
-                {
-                    fueltype = Convert.ToString(cbFuelType.Text);
-                }
-                else fueltype = String.Empty;
-                int fuelamount;
-                bool checkFuelAmount = Int32.TryParse(tbFuelamount.Text, out fuelamount);
-                if (!checkFuelAmount)
-                {
-                    fuelamount = -1;
-                }
-                if (cbCardNum.SelectedIndex != -1)
-                {
-                    cardnum = Convert.ToString(cbCardNum.Text);
-                    cardnum = cardnum.Trim().Replace(" ", string.Empty);
-                }
-                else cardnum = String.Empty;
-                int dealprice;
-                bool checkDealPrice = Int32.TryParse(tbDealPrice.Text, out dealprice);
-                if(!checkDealPrice)
-                {
-                    dealprice = -1;
-                }
-                dealdate = Convert.ToDateTime(dealDatePick.Text);
-
-                if (checkNow.Checked)
-                {
-                    dealdate = DateTime.Now;
-                }
-                if (!checkNow.Checked && (tbHours.Text != String.Empty || tbMinutes.Text != String.Empty))
-                {
-                    int hours, minutes;
-                    bool checkHours = Int32.TryParse(tbHours.Text, out hours);
-                    bool checkMinutes = Int32.TryParse(tbMinutes.Text, out minutes);
-                    if (checkHours != false && checkMinutes != false)
-                    {
-                        dealdate = dealdate.AddHours(hours);
-                        dealdate = dealdate.AddMinutes(minutes);
-                    }
-                    else
-                    {
-                        dealdate = DateTime.Now;
-                        MessageBox.Show("Неверный формат времени! Выставлено текущее время!");
-                    }
-                }
-
-                //Deal deal = new Deal();
-                //deal.dealSet(0, factory.GetClientRepository().FindCarIDByCardnum(cardnum), ID, fueltype, fuelamount, dealprice, dealdate);
-                //DealController dealController = new DealController(dgv, factory);
-                //if (dealController.AddToTable(deal))
-                //{
-                //    MessageBox.Show("Операция выполнена успешно!");
-                //    Close();
-                //}
-            }
-            catch (Exception pe) { MessageBox.Show(pe.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-
-            //catch (Exception) { MessageBox.Show("Данные введены некорректно!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-        }
-
-        private void tbFuelamount_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 46 && e.KeyChar != 8)
                 e.Handled = true;
         }
 
-        private void tbDealPrice_KeyPress(object sender, KeyPressEventArgs e)
+        private static void HandleOnlyDigits(KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
-        }
-
-        private void tbHours_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
-                e.Handled = true;
-        }
-
-        private void tbMinutes_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8)
-                e.Handled = true;
-        }
-
-        private void dealDatePick_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbDealPrice_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void updateDealTableForm_Load(object sender, EventArgs e)
-        {
-            new ComboBoxFiller(factory).FillCardNumbers(cbCardNum);
         }
     }
 }

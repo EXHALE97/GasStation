@@ -26,8 +26,7 @@ namespace Enter
             Credentials logUser;
             try
             {
-                logUser = new Credentials(LoginTextBox.Text.Trim().Replace(" ", string.Empty),
-                    PasswordTextBox.Text.Trim().Replace(" ", string.Empty));
+                logUser = new Credentials(LoginTextBox.Text, PasswordTextBox.Text);
             }
             catch (Exception)
             {
@@ -58,9 +57,9 @@ namespace Enter
             switch (role)
             {
                 case "worker":
-                    var workerForm = new WorkerForm(Convert.ToInt32(login),
-                        new RepositoryFactory(
-                            new DataBaseConnection(ConfigurationManager.ConnectionStrings["Worker"].ToString())));
+                    var factory = new RepositoryFactory(
+                        new DataBaseConnection(ConfigurationManager.ConnectionStrings["Worker"].ToString()));
+                    var workerForm = new WorkerForm(factory.GetCredentialsRepository().GetCredentialsIdByLogin(login), factory);
                     Hide();
                     workerForm.ShowDialog();
                     LoginTextBox.Clear();

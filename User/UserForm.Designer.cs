@@ -39,16 +39,15 @@
             this.lbCountry = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dataTableView = new System.Windows.Forms.Button();
-            this.dgvVievAZS = new System.Windows.Forms.DataGridView();
-            this.orgname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.country = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.city = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.street = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationsTable = new System.Windows.Forms.DataGridView();
             this.tabDealUserTable = new System.Windows.Forms.TabPage();
             this.lbSessionName2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnShowUserDeal = new System.Windows.Forms.Button();
-            this.dgvUserDeals = new System.Windows.Forms.DataGridView();
+            this.DealTable = new System.Windows.Forms.DataGridView();
+            this.StationName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationCity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StationAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fueltype = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fuelamount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dealprice = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,10 +56,10 @@
             this.tabAZSTable.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVievAZS)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StationsTable)).BeginInit();
             this.tabDealUserTable.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUserDeals)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DealTable)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -78,7 +77,7 @@
             this.tabAZSTable.Controls.Add(this.lbSessionName1);
             this.tabAZSTable.Controls.Add(this.groupBox2);
             this.tabAZSTable.Controls.Add(this.groupBox1);
-            this.tabAZSTable.Controls.Add(this.dgvVievAZS);
+            this.tabAZSTable.Controls.Add(this.StationsTable);
             this.tabAZSTable.Location = new System.Drawing.Point(4, 22);
             this.tabAZSTable.Name = "tabAZSTable";
             this.tabAZSTable.Padding = new System.Windows.Forms.Padding(3);
@@ -173,46 +172,25 @@
             this.dataTableView.UseVisualStyleBackColor = true;
             this.dataTableView.Click += new System.EventHandler(this.dataView1_Click);
             // 
-            // dgvVievAZS
+            // StationsTable
             // 
-            this.dgvVievAZS.AllowUserToAddRows = false;
-            this.dgvVievAZS.AllowUserToDeleteRows = false;
-            this.dgvVievAZS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvVievAZS.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.orgname,
-            this.country,
-            this.city,
-            this.street});
-            this.dgvVievAZS.Location = new System.Drawing.Point(3, 22);
-            this.dgvVievAZS.Name = "dgvVievAZS";
-            this.dgvVievAZS.Size = new System.Drawing.Size(446, 338);
-            this.dgvVievAZS.TabIndex = 0;
-            // 
-            // orgname
-            // 
-            this.orgname.HeaderText = "Организация";
-            this.orgname.Name = "orgname";
-            // 
-            // country
-            // 
-            this.country.HeaderText = "Страна";
-            this.country.Name = "country";
-            // 
-            // city
-            // 
-            this.city.HeaderText = "Город";
-            this.city.Name = "city";
-            // 
-            // street
-            // 
-            this.street.HeaderText = "Улица";
-            this.street.Name = "street";
+            this.StationsTable.AllowUserToAddRows = false;
+            this.StationsTable.AllowUserToDeleteRows = false;
+            this.StationsTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.StationsTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.StationName,
+            this.StationCity,
+            this.StationAddress});
+            this.StationsTable.Location = new System.Drawing.Point(3, 22);
+            this.StationsTable.Name = "StationsTable";
+            this.StationsTable.Size = new System.Drawing.Size(446, 338);
+            this.StationsTable.TabIndex = 0;
             // 
             // tabDealUserTable
             // 
             this.tabDealUserTable.Controls.Add(this.lbSessionName2);
             this.tabDealUserTable.Controls.Add(this.groupBox3);
-            this.tabDealUserTable.Controls.Add(this.dgvUserDeals);
+            this.tabDealUserTable.Controls.Add(this.DealTable);
             this.tabDealUserTable.Location = new System.Drawing.Point(4, 22);
             this.tabDealUserTable.Name = "tabDealUserTable";
             this.tabDealUserTable.Padding = new System.Windows.Forms.Padding(3);
@@ -250,41 +228,63 @@
             this.btnShowUserDeal.UseVisualStyleBackColor = true;
             this.btnShowUserDeal.Click += new System.EventHandler(this.btnShowUserDeal_Click);
             // 
-            // dgvUserDeals
+            // DealTable
             // 
-            this.dgvUserDeals.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUserDeals.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.DealTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DealTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fueltype,
             this.fuelamount,
             this.dealprice,
             this.dealdate});
-            this.dgvUserDeals.Location = new System.Drawing.Point(6, 22);
-            this.dgvUserDeals.Name = "dgvUserDeals";
-            this.dgvUserDeals.Size = new System.Drawing.Size(503, 335);
-            this.dgvUserDeals.TabIndex = 0;
+            this.DealTable.Location = new System.Drawing.Point(6, 22);
+            this.DealTable.Name = "DealTable";
+            this.DealTable.Size = new System.Drawing.Size(503, 335);
+            this.DealTable.TabIndex = 0;
+            // 
+            // StationName
+            // 
+            this.StationName.HeaderText = "Название";
+            this.StationName.Name = "StationName";
+            // 
+            // StationCity
+            // 
+            this.StationCity.HeaderText = "Страна";
+            this.StationCity.Name = "StationCity";
+            this.StationCity.ReadOnly = true;
+            // 
+            // StationAddress
+            // 
+            this.StationAddress.HeaderText = "Адрес";
+            this.StationAddress.Name = "StationAddress";
+            this.StationAddress.ReadOnly = true;
+            this.StationAddress.Width = 200;
             // 
             // fueltype
             // 
-            this.fueltype.HeaderText = "Тип топлива";
+            this.fueltype.HeaderText = "Тип товара";
             this.fueltype.Name = "fueltype";
+            this.fueltype.ReadOnly = true;
             this.fueltype.Width = 150;
             // 
             // fuelamount
             // 
-            this.fuelamount.HeaderText = "Количество топлива";
+            this.fuelamount.HeaderText = "Количество товара";
             this.fuelamount.Name = "fuelamount";
+            this.fuelamount.ReadOnly = true;
             this.fuelamount.Width = 80;
             // 
             // dealprice
             // 
             this.dealprice.HeaderText = "Сумма сделки";
             this.dealprice.Name = "dealprice";
+            this.dealprice.ReadOnly = true;
             this.dealprice.Width = 80;
             // 
             // dealdate
             // 
             this.dealdate.HeaderText = "Дата сделки";
             this.dealdate.Name = "dealdate";
+            this.dealdate.ReadOnly = true;
             this.dealdate.Width = 150;
             // 
             // UserForm
@@ -304,11 +304,11 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvVievAZS)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StationsTable)).EndInit();
             this.tabDealUserTable.ResumeLayout(false);
             this.tabDealUserTable.PerformLayout();
             this.groupBox3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUserDeals)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DealTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -318,28 +318,27 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabAZSTable;
         private System.Windows.Forms.TabPage tabDealUserTable;
-        private System.Windows.Forms.DataGridView dgvVievAZS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn orgname;
-        private System.Windows.Forms.DataGridViewTextBoxColumn country;
-        private System.Windows.Forms.DataGridViewTextBoxColumn city;
-        private System.Windows.Forms.DataGridViewTextBoxColumn street;
+        private System.Windows.Forms.DataGridView StationsTable;
         private System.Windows.Forms.Button dataTableView;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox tbCity;
         private System.Windows.Forms.TextBox tbCountry;
         private System.Windows.Forms.Label lbCity;
         private System.Windows.Forms.Label lbCountry;
-        private System.Windows.Forms.DataGridView dgvUserDeals;
+        private System.Windows.Forms.DataGridView DealTable;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnShowUserDeal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dealdate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dealprice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fuelamount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fueltype;
         private System.Windows.Forms.Label lbSessionName1;
         private System.Windows.Forms.Label lbSessionName2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StationName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StationCity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StationAddress;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fueltype;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fuelamount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dealprice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dealdate;
     }
 }
 

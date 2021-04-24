@@ -1,4 +1,6 @@
-﻿namespace Worker
+﻿using System;
+
+namespace Worker
 {
     partial class AddToDealTableForm
     {
@@ -28,209 +30,260 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbCardNum = new System.Windows.Forms.ComboBox();
-            this.dealDatePick = new System.Windows.Forms.DateTimePicker();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbDealPrice = new System.Windows.Forms.TextBox();
-            this.tbFuelamount = new System.Windows.Forms.TextBox();
-            this.cbFuelType = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbHours = new System.Windows.Forms.TextBox();
-            this.tbMinutes = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.checkNow = new System.Windows.Forms.CheckBox();
+            this.ClientCardComboBox = new System.Windows.Forms.ComboBox();
+            this.DealDatePicker = new System.Windows.Forms.DateTimePicker();
+            this.CancelActionButton = new System.Windows.Forms.Button();
+            this.AddDealButton = new System.Windows.Forms.Button();
+            this.DealDateLabel = new System.Windows.Forms.Label();
+            this.ClientCardLabel = new System.Windows.Forms.Label();
+            this.DealPriceLabel = new System.Windows.Forms.Label();
+            this.SupplyTypeAmountLabel = new System.Windows.Forms.Label();
+            this.DealPriceTextBox = new System.Windows.Forms.TextBox();
+            this.SupplyTypeAmountTextBox = new System.Windows.Forms.TextBox();
+            this.SupplyTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.SupplyTypeLabel = new System.Windows.Forms.Label();
+            this.HoursTextBox = new System.Windows.Forms.TextBox();
+            this.MinutesTextBox = new System.Windows.Forms.TextBox();
+            this.HoursLabel = new System.Windows.Forms.Label();
+            this.MinutesLabel = new System.Windows.Forms.Label();
+            this.NowCheckBox = new System.Windows.Forms.CheckBox();
+            this.StationLabel = new System.Windows.Forms.Label();
+            this.StationComboBox = new System.Windows.Forms.ComboBox();
+            this.PriceWithDiscountTextBox = new System.Windows.Forms.TextBox();
+            this.DealPriceWithDiscountLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // cbCardNum
+            // ClientCardComboBox
             // 
-            this.cbCardNum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCardNum.FormattingEnabled = true;
-            this.cbCardNum.Location = new System.Drawing.Point(150, 91);
-            this.cbCardNum.Name = "cbCardNum";
-            this.cbCardNum.Size = new System.Drawing.Size(123, 21);
-            this.cbCardNum.TabIndex = 45;
+            this.ClientCardComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.ClientCardComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.ClientCardComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ClientCardComboBox.FormattingEnabled = true;
+            this.ClientCardComboBox.Location = new System.Drawing.Point(150, 150);
+            this.ClientCardComboBox.Name = "ClientCardComboBox";
+            this.ClientCardComboBox.Size = new System.Drawing.Size(123, 21);
+            this.ClientCardComboBox.TabIndex = 45;
+            this.ClientCardComboBox.SelectedIndexChanged += new EventHandler(this.ClientCardComboBox_SelectedIndexChanged);
             // 
-            // dealDatePick
+            // DealDatePicker
             // 
-            this.dealDatePick.Enabled = false;
-            this.dealDatePick.Location = new System.Drawing.Point(150, 118);
-            this.dealDatePick.MaxDate = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
-            this.dealDatePick.Name = "dealDatePick";
-            this.dealDatePick.Size = new System.Drawing.Size(123, 20);
-            this.dealDatePick.TabIndex = 44;
-            this.dealDatePick.Value = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
-            this.dealDatePick.ValueChanged += new System.EventHandler(this.dealDatePick_ValueChanged);
+            this.DealDatePicker.Enabled = false;
+            this.DealDatePicker.Location = new System.Drawing.Point(150, 177);
+            this.DealDatePicker.MaxDate = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
+            this.DealDatePicker.Name = "DealDatePicker";
+            this.DealDatePicker.Size = new System.Drawing.Size(123, 20);
+            this.DealDatePicker.TabIndex = 44;
+            this.DealDatePicker.Value = new System.DateTime(2021, 4, 1, 0, 0, 0, 0);
             // 
-            // btnCancel
+            // CancelActionButton
             // 
-            this.btnCancel.Location = new System.Drawing.Point(111, 205);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
-            this.btnCancel.TabIndex = 39;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            this.CancelActionButton.Location = new System.Drawing.Point(111, 276);
+            this.CancelActionButton.Name = "CancelActionButton";
+            this.CancelActionButton.Size = new System.Drawing.Size(75, 23);
+            this.CancelActionButton.TabIndex = 39;
+            this.CancelActionButton.Text = "Отмена";
+            this.CancelActionButton.UseVisualStyleBackColor = true;
+            this.CancelActionButton.Click += new System.EventHandler(this.CancelActionButton_Click);
             // 
-            // btnAdd
+            // AddDealButton
             // 
-            this.btnAdd.Location = new System.Drawing.Point(198, 205);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 23);
-            this.btnAdd.TabIndex = 38;
-            this.btnAdd.Text = "Добавить";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            this.AddDealButton.Location = new System.Drawing.Point(198, 276);
+            this.AddDealButton.Name = "AddDealButton";
+            this.AddDealButton.Size = new System.Drawing.Size(75, 23);
+            this.AddDealButton.TabIndex = 38;
+            this.AddDealButton.Text = "Добавить";
+            this.AddDealButton.UseVisualStyleBackColor = true;
+            this.AddDealButton.Click += new System.EventHandler(this.AddDealButton_Click);
             // 
-            // label6
+            // DealDateLabel
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 125);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(75, 13);
-            this.label6.TabIndex = 34;
-            this.label6.Text = "Дата сделки:";
+            this.DealDateLabel.AutoSize = true;
+            this.DealDateLabel.Location = new System.Drawing.Point(12, 183);
+            this.DealDateLabel.Name = "DealDateLabel";
+            this.DealDateLabel.Size = new System.Drawing.Size(75, 13);
+            this.DealDateLabel.TabIndex = 34;
+            this.DealDateLabel.Text = "Дата сделки:";
             // 
-            // label5
+            // ClientCardLabel
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 99);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 13);
-            this.label5.TabIndex = 33;
-            this.label5.Text = "Номер карты:";
+            this.ClientCardLabel.AutoSize = true;
+            this.ClientCardLabel.Location = new System.Drawing.Point(12, 153);
+            this.ClientCardLabel.Name = "ClientCardLabel";
+            this.ClientCardLabel.Size = new System.Drawing.Size(78, 13);
+            this.ClientCardLabel.TabIndex = 33;
+            this.ClientCardLabel.Text = "Номер карты:";
             // 
-            // label4
+            // DealPriceLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 72);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(104, 13);
-            this.label4.TabIndex = 32;
-            this.label4.Text = "Цена сделки (руб.):";
+            this.DealPriceLabel.AutoSize = true;
+            this.DealPriceLabel.Location = new System.Drawing.Point(12, 100);
+            this.DealPriceLabel.Name = "DealPriceLabel";
+            this.DealPriceLabel.Size = new System.Drawing.Size(36, 13);
+            this.DealPriceLabel.TabIndex = 32;
+            this.DealPriceLabel.Text = "Цена:";
             // 
-            // label3
+            // SupplyTypeAmountLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 46);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(128, 13);
-            this.label3.TabIndex = 31;
-            this.label3.Text = "Количество топлива (л):";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.SupplyTypeAmountLabel.AutoSize = true;
+            this.SupplyTypeAmountLabel.Location = new System.Drawing.Point(12, 74);
+            this.SupplyTypeAmountLabel.Name = "SupplyTypeAmountLabel";
+            this.SupplyTypeAmountLabel.Size = new System.Drawing.Size(107, 13);
+            this.SupplyTypeAmountLabel.TabIndex = 31;
+            this.SupplyTypeAmountLabel.Text = "Количество товара:";
             // 
-            // tbDealPrice
+            // DealPriceTextBox
             // 
-            this.tbDealPrice.Location = new System.Drawing.Point(150, 65);
-            this.tbDealPrice.Name = "tbDealPrice";
-            this.tbDealPrice.Size = new System.Drawing.Size(123, 20);
-            this.tbDealPrice.TabIndex = 27;
-            this.tbDealPrice.TextChanged += new System.EventHandler(this.tbDealPrice_TextChanged);
-            this.tbDealPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbDealPrice_KeyPress);
+            this.DealPriceTextBox.Location = new System.Drawing.Point(150, 97);
+            this.DealPriceTextBox.Name = "DealPriceTextBox";
+            this.DealPriceTextBox.ReadOnly = true;
+            this.DealPriceTextBox.Size = new System.Drawing.Size(123, 20);
+            this.DealPriceTextBox.TabIndex = 27;
+            this.DealPriceTextBox.TextChanged += new System.EventHandler(this.DealPriceTextBox_TextChanged);
             // 
-            // tbFuelamount
+            // SupplyTypeAmountTextBox
             // 
-            this.tbFuelamount.Location = new System.Drawing.Point(150, 39);
-            this.tbFuelamount.Name = "tbFuelamount";
-            this.tbFuelamount.Size = new System.Drawing.Size(123, 20);
-            this.tbFuelamount.TabIndex = 26;
-            this.tbFuelamount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbFuelamount_KeyPress);
+            this.SupplyTypeAmountTextBox.Location = new System.Drawing.Point(150, 71);
+            this.SupplyTypeAmountTextBox.Name = "SupplyTypeAmountTextBox";
+            this.SupplyTypeAmountTextBox.Size = new System.Drawing.Size(123, 20);
+            this.SupplyTypeAmountTextBox.TabIndex = 26;
+            this.SupplyTypeAmountTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.SupplyTypeAmountTextBox_KeyPress);
+            this.SupplyTypeAmountTextBox.TextChanged += new EventHandler(this.SupplyTypeAmountTextBox_TextChanged);
             // 
-            // cbFuelType
+            // SupplyTypeComboBox
             // 
-            this.cbFuelType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbFuelType.FormattingEnabled = true;
-            this.cbFuelType.Location = new System.Drawing.Point(150, 12);
-            this.cbFuelType.Name = "cbFuelType";
-            this.cbFuelType.Size = new System.Drawing.Size(123, 21);
-            this.cbFuelType.TabIndex = 48;
+            this.SupplyTypeComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.SupplyTypeComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.SupplyTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.SupplyTypeComboBox.FormattingEnabled = true;
+            this.SupplyTypeComboBox.Location = new System.Drawing.Point(150, 44);
+            this.SupplyTypeComboBox.Name = "SupplyTypeComboBox";
+            this.SupplyTypeComboBox.Size = new System.Drawing.Size(123, 21);
+            this.SupplyTypeComboBox.TabIndex = 48;
+            this.SupplyTypeComboBox.SelectedIndexChanged +=
+                new EventHandler(this.SupplyTypeComboBox_SelectedIndexChanged);
             // 
-            // label11
+            // SupplyTypeLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(18, 20);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(73, 13);
-            this.label11.TabIndex = 49;
-            this.label11.Text = "Тип топлива:";
+            this.SupplyTypeLabel.AutoSize = true;
+            this.SupplyTypeLabel.Location = new System.Drawing.Point(12, 47);
+            this.SupplyTypeLabel.Name = "SupplyTypeLabel";
+            this.SupplyTypeLabel.Size = new System.Drawing.Size(67, 13);
+            this.SupplyTypeLabel.TabIndex = 49;
+            this.SupplyTypeLabel.Text = "Тип товара:";
             // 
-            // tbHours
+            // HoursTextBox
             // 
-            this.tbHours.Location = new System.Drawing.Point(250, 144);
-            this.tbHours.Name = "tbHours";
-            this.tbHours.Size = new System.Drawing.Size(23, 20);
-            this.tbHours.TabIndex = 50;
-            this.tbHours.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbHours_KeyPress);
+            this.HoursTextBox.Location = new System.Drawing.Point(250, 212);
+            this.HoursTextBox.Name = "HoursTextBox";
+            this.HoursTextBox.Size = new System.Drawing.Size(23, 20);
+            this.HoursTextBox.TabIndex = 50;
+            this.HoursTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.HoursTextBox_KeyPress);
             // 
-            // tbMinutes
+            // MinutesTextBox
             // 
-            this.tbMinutes.Location = new System.Drawing.Point(250, 170);
-            this.tbMinutes.Name = "tbMinutes";
-            this.tbMinutes.Size = new System.Drawing.Size(23, 20);
-            this.tbMinutes.TabIndex = 51;
-            this.tbMinutes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbMinutes_KeyPress);
+            this.MinutesTextBox.Location = new System.Drawing.Point(250, 240);
+            this.MinutesTextBox.Name = "MinutesTextBox";
+            this.MinutesTextBox.Size = new System.Drawing.Size(23, 20);
+            this.MinutesTextBox.TabIndex = 51;
+            this.MinutesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.MinutesTextBox_KeyPress);
             // 
-            // label1
+            // HoursLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(182, 151);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 13);
-            this.label1.TabIndex = 52;
-            this.label1.Text = "Час:";
+            this.HoursLabel.AutoSize = true;
+            this.HoursLabel.Location = new System.Drawing.Point(182, 215);
+            this.HoursLabel.Name = "HoursLabel";
+            this.HoursLabel.Size = new System.Drawing.Size(30, 13);
+            this.HoursLabel.TabIndex = 52;
+            this.HoursLabel.Text = "Час:";
             // 
-            // label2
+            // MinutesLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(182, 173);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 13);
-            this.label2.TabIndex = 53;
-            this.label2.Text = "Минута:";
+            this.MinutesLabel.AutoSize = true;
+            this.MinutesLabel.Location = new System.Drawing.Point(182, 243);
+            this.MinutesLabel.Name = "MinutesLabel";
+            this.MinutesLabel.Size = new System.Drawing.Size(47, 13);
+            this.MinutesLabel.TabIndex = 53;
+            this.MinutesLabel.Text = "Минута:";
             // 
-            // checkNow
+            // NowCheckBox
             // 
-            this.checkNow.AutoSize = true;
-            this.checkNow.Location = new System.Drawing.Point(24, 151);
-            this.checkNow.Name = "checkNow";
-            this.checkNow.Size = new System.Drawing.Size(62, 17);
-            this.checkNow.TabIndex = 54;
-            this.checkNow.Text = "Сейчас";
-            this.checkNow.UseVisualStyleBackColor = true;
-            this.checkNow.CheckedChanged += new System.EventHandler(this.checkNow_CheckedChanged);
+            this.NowCheckBox.AutoSize = true;
+            this.NowCheckBox.Location = new System.Drawing.Point(15, 239);
+            this.NowCheckBox.Name = "NowCheckBox";
+            this.NowCheckBox.Size = new System.Drawing.Size(62, 17);
+            this.NowCheckBox.TabIndex = 54;
+            this.NowCheckBox.Text = "Сейчас";
+            this.NowCheckBox.UseVisualStyleBackColor = true;
+            this.NowCheckBox.CheckedChanged += new System.EventHandler(this.NowCheckBox_CheckedChanged);
+            // 
+            // StationLabel
+            // 
+            this.StationLabel.AutoSize = true;
+            this.StationLabel.Location = new System.Drawing.Point(12, 20);
+            this.StationLabel.Name = "StationLabel";
+            this.StationLabel.Size = new System.Drawing.Size(52, 13);
+            this.StationLabel.TabIndex = 55;
+            this.StationLabel.Text = "Станция:";
+            // 
+            // StationComboBox
+            // 
+            this.StationComboBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.StationComboBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.StationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.StationComboBox.FormattingEnabled = true;
+            this.StationComboBox.Location = new System.Drawing.Point(150, 17);
+            this.StationComboBox.Name = "StationComboBox";
+            this.StationComboBox.Size = new System.Drawing.Size(123, 21);
+            this.StationComboBox.TabIndex = 56;
+            // 
+            // PriceWithDiscountTextBox
+            // 
+            this.PriceWithDiscountTextBox.Location = new System.Drawing.Point(150, 123);
+            this.PriceWithDiscountTextBox.Name = "PriceWithDiscountTextBox";
+            this.PriceWithDiscountTextBox.ReadOnly = true;
+            this.PriceWithDiscountTextBox.Size = new System.Drawing.Size(123, 20);
+            this.PriceWithDiscountTextBox.TabIndex = 57;
+            // 
+            // DealPriceWithDiscountLabel
+            // 
+            this.DealPriceWithDiscountLabel.AutoSize = true;
+            this.DealPriceWithDiscountLabel.Location = new System.Drawing.Point(12, 126);
+            this.DealPriceWithDiscountLabel.Name = "DealPriceWithDiscountLabel";
+            this.DealPriceWithDiscountLabel.Size = new System.Drawing.Size(96, 13);
+            this.DealPriceWithDiscountLabel.TabIndex = 58;
+            this.DealPriceWithDiscountLabel.Text = "Цена со скидкой:";
             // 
             // AddToDealTableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(291, 238);
-            this.Controls.Add(this.checkNow);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tbMinutes);
-            this.Controls.Add(this.tbHours);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.cbFuelType);
-            this.Controls.Add(this.cbCardNum);
-            this.Controls.Add(this.dealDatePick);
-            this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.tbDealPrice);
-            this.Controls.Add(this.tbFuelamount);
+            this.ClientSize = new System.Drawing.Size(291, 312);
+            this.Controls.Add(this.DealPriceWithDiscountLabel);
+            this.Controls.Add(this.PriceWithDiscountTextBox);
+            this.Controls.Add(this.StationComboBox);
+            this.Controls.Add(this.StationLabel);
+            this.Controls.Add(this.NowCheckBox);
+            this.Controls.Add(this.MinutesLabel);
+            this.Controls.Add(this.HoursLabel);
+            this.Controls.Add(this.MinutesTextBox);
+            this.Controls.Add(this.HoursTextBox);
+            this.Controls.Add(this.SupplyTypeLabel);
+            this.Controls.Add(this.SupplyTypeComboBox);
+            this.Controls.Add(this.ClientCardComboBox);
+            this.Controls.Add(this.DealDatePicker);
+            this.Controls.Add(this.CancelActionButton);
+            this.Controls.Add(this.AddDealButton);
+            this.Controls.Add(this.DealDateLabel);
+            this.Controls.Add(this.ClientCardLabel);
+            this.Controls.Add(this.DealPriceLabel);
+            this.Controls.Add(this.SupplyTypeAmountLabel);
+            this.Controls.Add(this.DealPriceTextBox);
+            this.Controls.Add(this.SupplyTypeAmountTextBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "AddToDealTableForm";
             this.Text = "Добавление сделки";
-            this.Load += new System.EventHandler(this.updateDealTableForm_Load);
+            this.Load += new System.EventHandler(this.UpdateDealTableForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -238,22 +291,26 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cbCardNum;
-        private System.Windows.Forms.DateTimePicker dealDatePick;
-        private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbDealPrice;
-        private System.Windows.Forms.TextBox tbFuelamount;
-        private System.Windows.Forms.ComboBox cbFuelType;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tbHours;
-        private System.Windows.Forms.TextBox tbMinutes;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkNow;
+        private System.Windows.Forms.ComboBox ClientCardComboBox;
+        private System.Windows.Forms.DateTimePicker DealDatePicker;
+        private System.Windows.Forms.Button CancelActionButton;
+        private System.Windows.Forms.Button AddDealButton;
+        private System.Windows.Forms.Label DealDateLabel;
+        private System.Windows.Forms.Label ClientCardLabel;
+        private System.Windows.Forms.Label DealPriceLabel;
+        private System.Windows.Forms.Label SupplyTypeAmountLabel;
+        private System.Windows.Forms.TextBox DealPriceTextBox;
+        private System.Windows.Forms.TextBox SupplyTypeAmountTextBox;
+        private System.Windows.Forms.ComboBox SupplyTypeComboBox;
+        private System.Windows.Forms.Label SupplyTypeLabel;
+        private System.Windows.Forms.TextBox HoursTextBox;
+        private System.Windows.Forms.TextBox MinutesTextBox;
+        private System.Windows.Forms.Label MinutesLabel;
+        private System.Windows.Forms.Label HoursLabel;
+        private System.Windows.Forms.CheckBox NowCheckBox;
+        private System.Windows.Forms.Label StationLabel;
+        private System.Windows.Forms.ComboBox StationComboBox;
+        private System.Windows.Forms.TextBox PriceWithDiscountTextBox;
+        private System.Windows.Forms.Label DealPriceWithDiscountLabel;
     }
 }

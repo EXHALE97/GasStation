@@ -83,7 +83,7 @@ namespace Queries.Repositories
                 $"EXEC InsertClient {client.CardId}, {(client.FirstName == null ? "NULL" : $"N'{client.FirstName}'")}, {(client.LastName == null ? "NULL" : $"N'{client.LastName}'")}, {(client.MiddleName == null ? "NULL" : $"N'{client.MiddleName}'")}, {(client.CredId == 0 ? "NULL" : $"{client.CredId}")}");
         }
 
-        public string FindClientById(int id)
+        public string GetClientFullNameById(int id)
         {
             return ExecuteSqlCommand($"SELECT dbo.GetClientFullName({id})", queryResult =>
             {
@@ -100,13 +100,13 @@ namespace Queries.Repositories
 
         public int GetDiscountPercentForClient(int clientCardId)
         {
-            return ExecuteSqlCommand($"EXEC GetDiscountPercentByClientCardId {clientCardId}", queryResult =>
+            return ExecuteSqlCommand($"EXEC GetClientByClientCardId {clientCardId}", queryResult =>
             {
                 var discount = 0;
                 if (!queryResult.HasRows) return discount;
                 foreach (DbDataRecord dbDataRecord in queryResult)
                 {
-                    discount = int.Parse(dbDataRecord[0].ToString());
+                    discount = int.Parse(dbDataRecord["discount_percent"].ToString());
                 }
 
                 return discount;
@@ -119,31 +119,19 @@ namespace Queries.Repositories
                 $"EXEC InsertCredentialsAndConnectToClient '{clientId}', '{credentials.Login}', '{credentials.Password}', '{credentials.Role}'");
         }
 
-        public int FindCarIDByCardnum(string cardnum)
+        public int GetClientIdByCardId(int clientCardId)
         {
-            int car_id = 0;
-            //try
-            //{
-            //    dbc.OpenConnection();
-            //    var queryCommand = new SqlCommand("SELECT car_id FROM \"AZS\".\"Car\" WHERE cardnum = @Cardnum");
-            //    queryCommand.Parameters.AddWithValue("@CardNum", cardnum);
-            //    var AZSTableReader = queryCommand.ExecuteReader();
-            //    if (AZSTableReader.HasRows)
-            //    {
-            //        foreach (DbDataRecord dbDataRecord in AZSTableReader)
-            //        {
-            //            car_id = Convert.ToInt32(dbDataRecord["car_id"]);
-            //        }
-            //    }
-            //    AZSTableReader.Close();
-            //}
-            //catch (SqlException pe)
-            //{
-            //    throw pe;
-            //}
-            //finally { dbc.CloseConnection(); }
+            return ExecuteSqlCommand($"EXEC GetClientByClientCardId {clientCardId}", queryResult =>
+            {
+                var id = 0;
+                if (!queryResult.HasRows) return id;
+                foreach (DbDataRecord dbDataRecord in queryResult)
+                {
+                    id = int.Parse(dbDataRecord["id"].ToString());
+                }
 
-            return car_id;
+                return id;
+            });
         }
 
         public string FindCardNumByCarID(int id)

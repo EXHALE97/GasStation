@@ -26,7 +26,7 @@ namespace Admin
                 try
                 {
                     PasswordTextBox.UseSystemPasswordChar = true;
-                    ClientFullNameLabel.Text = factory.GetClientRepository().FindClientById(Convert.ToInt32(selectedRow.Cells["ClientId"].Value));
+                    ClientFullNameLabel.Text = factory.GetClientRepository().GetClientFullNameById(Convert.ToInt32(selectedRow.Cells["ClientId"].Value));
                 }
                 catch (Exception) { ErrorMessageBox.ShowUnknownErrorMessage(); }
             }

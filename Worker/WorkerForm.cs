@@ -1,65 +1,64 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Factory;
-using Queries.Interfaces;
 
 namespace Worker
 {
     public partial class WorkerForm : Form
     {
-        int ID;
-        IRepositoryFactory factory;
-        DealController fillDealTable;
-        SupplyController fillSupplyTable;
+        private readonly int employeeId;
+        private readonly IRepositoryFactory factory;
+        private readonly DealController dealController;
+        private readonly SupplyController supplyController;
 
-        public WorkerForm(int ID, IRepositoryFactory factory)
+        public WorkerForm(int credId, IRepositoryFactory factory)
         {
             InitializeComponent();
-            this.ID = ID;
             this.factory = factory;
+            dealController = new DealController(DealsTable, factory);
+            supplyController = new SupplyController(SuppliesTable, factory);
+            employeeId = factory.GetEmployeeRepository().GetEmployees(false).First(employee => employee.CredId == credId).Id;
         }
 
         private void WorkerForm_Load(object sender, EventArgs e)
         {
-            MessageBox.Show("Добро пожаловать, " + factory.GetEmployeeRepository().FindEmployeeById(ID) + "!" + "\n" + "Желаем вам приятного рабочего дня!" + "\n");
-            lbSessionName.Text = "Сессия: " + factory.GetEmployeeRepository().FindEmployeeById(ID) + "[" + ID + "]";
-            fillDealTable = new DealController(dgvVievDeal, factory);
-            fillDealTable.ShowWorkerTable(ID);
-            fillSupplyTable = new SupplyController(dgvViewSupply, factory);
-            fillSupplyTable.ShowTable(ID);
+            var fullName = factory.GetEmployeeRepository().GetEmployeeFullNameById(employeeId);
+            MessageBox.Show("Добро пожаловать, " + fullName + "!\n" + "Желаем вам приятного рабочего дня!\n");
+            lbSessionName.Text = "Сессия: " + fullName + '[' + employeeId + ']';
+            dealController.ShowWorkerTable(employeeId);
+            supplyController.ShowEmployeeTable(employeeId);
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void AddDealButton_Click(object sender, EventArgs e)
         {
-            AddToDealTableForm addForm = new AddToDealTableForm(ID, factory, dgvVievDeal);
-            addForm.ShowDialog();
-            fillDealTable.ShowWorkerTable(ID);
-            fillSupplyTable.ShowTable(ID);
+            new AddToDealTableForm(employeeId, factory, DealsTable).ShowDialog();
+            dealController.ShowWorkerTable(employeeId);
+            supplyController.ShowEmployeeTable(employeeId);
         }
 
-        private void btnAddSupply_Click(object sender, EventArgs e)
+        private void AddSupplyTable_Click(object sender, EventArgs e)
         {
-            AddToSupplyTableForm addForm = new AddToSupplyTableForm(ID, factory, dgvViewSupply);
-            addForm.ShowDialog();
-            fillDealTable.ShowWorkerTable(ID);
-            fillSupplyTable.ShowTable(ID);
+            new AddToSupplyTableForm(employeeId, factory, SuppliesTable).ShowDialog();
+            dealController.ShowWorkerTable(employeeId);
+            supplyController.ShowEmployeeTable(employeeId);
         }
 
-        private void RefreshTables_Click_1(object sender, EventArgs e)
+        private void RefreshTables_Click(object sender, EventArgs e)
         {
-            fillDealTable.ShowWorkerTable(ID);
-            fillSupplyTable.ShowTable(ID);
+            dealController.ShowWorkerTable(employeeId);
+            supplyController.ShowEmployeeTable(employeeId);
         }
 
-        private void btnSupplyUpdate_Click(object sender, EventArgs e)
+        private void RefreshSupplyTableButton_Click(object sender, EventArgs e)
         {
-            fillSupplyTable.ShowTable(ID);
+            supplyController.ShowEmployeeTable(employeeId);
         }
 
-        private void btnTableView_Click(object sender, EventArgs e)
+        private void RefreshDealTableButton_Click(object sender, EventArgs e)
         {
-
+            dealController.ShowWorkerTable(employeeId);
         }
     }
 }

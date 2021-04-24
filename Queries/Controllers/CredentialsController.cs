@@ -12,7 +12,6 @@ namespace Queries.Controllers
     {
         private readonly IRepositoryFactory factory;
         private List<string> errorList;
-        private string error;
 
         public CredentialsController(IRepositoryFactory factory)
         {
@@ -21,7 +20,7 @@ namespace Queries.Controllers
 
         public string TryLogin(Credentials credentials)
         {
-            return factory.GetCredentialsRepository().LoginToTable(credentials);
+            return factory.GetCredentialsRepository().GetRoleByCredentials(credentials);
         }
 
         public bool AddToLoginTable(Credentials dbUser)

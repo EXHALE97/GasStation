@@ -37,6 +37,21 @@ namespace Queries.Repositories
             });
         }
 
+        public int GetSupplyTypeIdByName(string name)
+        {
+            return ExecuteSqlCommand($"EXEC GetSupplyTypeIdByName N'{name}'", queryResult =>
+            {
+                var supplyTypeId = 0;
+                if (!queryResult.HasRows) return supplyTypeId;
+                foreach (DbDataRecord dbDataRecord in queryResult)
+                {
+                    supplyTypeId = int.Parse(dbDataRecord["id"].ToString());
+                }
+
+                return supplyTypeId;
+            });
+        }
+
         public double GetSupplyTypePriceByName(string name)
         {
             return ExecuteSqlCommand($"EXEC GetSupplyTypePriceByName N'{name}'", queryResult =>

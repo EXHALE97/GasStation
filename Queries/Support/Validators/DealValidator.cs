@@ -10,27 +10,32 @@ namespace Queries.Support.Validators
         public static bool CheckAddition(Deal deal, out List<string> errorList)
         {
             errorList = new List<string>();
-            bool checkFlag = true;
-            //if (deal.GetFuelType() == String.Empty)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Тип топлива не выбран!");
-            //}
-            //if (deal.GetFuelAmount() <= 0)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Количество топлива введено неверно!");
-            //}
-            //if (deal.GetDealPrice() <= 0)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Цена сделки задана неверно!");
-            //}
-            //if (deal.GetDealDate().DayOfYear != DateTime.Now.DayOfYear && deal.GetDealDate().Year != DateTime.Now.Year)
-            //{
-            //    checkFlag = false;
-            //    errorList.Add("Дата задана неверно!");
-            //}
+            var checkFlag = true;
+            if (deal.Station == null)
+            {
+                checkFlag = false;
+                errorList.Add("Тип товара не выбран!");
+            }
+            if (deal.SupplyType == null)
+            {
+                checkFlag = false;
+                errorList.Add("Тип товара не выбран!");
+            }
+            if (deal.SupplyTypeAmount <= 0)
+            {
+                checkFlag = false;
+                errorList.Add("Количество товара введено неверно!");
+            }
+            if (deal.Price <= 0)
+            {
+                checkFlag = false;
+                errorList.Add("Цена сделки задана неверно!");
+            }
+            if (deal.Date.DayOfYear != DateTime.Now.DayOfYear && deal.Date.Year != DateTime.Now.Year)
+            {
+                checkFlag = false;
+                errorList.Add("Дата задана неверно!");
+            }
 
             return checkFlag;
         }
@@ -47,12 +52,12 @@ namespace Queries.Support.Validators
             if (deal.SupplyType == null)
             {
                 checkFlag = false;
-                errorList.Add("Тип топлива не выбран!");
+                errorList.Add("Тип товара не выбран!");
             }
             if (deal.SupplyTypeAmount <= 0)
             {
                 checkFlag = false;
-                errorList.Add("Количество топлива введено неверно!");
+                errorList.Add("Количество товара введено неверно!");
             }
             if (deal.Price <= 0)
             {

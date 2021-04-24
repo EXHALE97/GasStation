@@ -14,7 +14,7 @@ namespace Queries.Repositories
             DataBaseConnection = dbc;
         }
 
-        public string LoginToTable(Credentials login)
+        public string GetRoleByCredentials(Credentials login)
         {
             return ExecuteSqlCommand($"EXEC GetCredentialsRole '{login.Login}', '{login.Password}'", queryResult =>
             {

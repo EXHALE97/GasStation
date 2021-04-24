@@ -116,7 +116,7 @@ namespace Queries.Repositories
             ExecuteSqlNonQueryCommand($"EXEC DeleteEmployee '{id}'");
         }
 
-        public string FindEmployeeById(int id)
+        public string GetEmployeeFullNameById(int id)
         {
             return ExecuteSqlCommand($"SELECT dbo.GetEmployeeFullName({id})", queryResult =>
             {

@@ -22,7 +22,7 @@ namespace Admin
             comboBoxFiller = new ComboBoxFiller(factory);
             this.selectedRow = selectedRow;
             this.factory = factory;
-            this.clientDiscountPercent = factory.GetClientRepository()
+            clientDiscountPercent = factory.GetClientRepository()
                 .GetDiscountPercentForClient(int.Parse(selectedRow.Cells["ClientCardId"].Value.ToString()));
         }
         
@@ -110,13 +110,13 @@ namespace Admin
             Close();
         }
 
-        private void HandleDigitsAndDot(KeyPressEventArgs e)
+        private static void HandleDigitsAndDot(KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 46 && e.KeyChar != 8)
                 e.Handled = true;
         }
 
-        private void HandleDigits(KeyPressEventArgs e)
+        private static void HandleDigits(KeyPressEventArgs e)
         {
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
