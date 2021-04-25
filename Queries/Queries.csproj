@@ -31,12 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Mono.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Security.3.2.3.0\lib\net45\Mono.Security.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,14 +54,18 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\SupplyTypeController.cs" />
     <Compile Include="Entities\OperationHistory.cs" />
+    <Compile Include="Interfaces\IDatabaseRepository.cs" />
     <Compile Include="Interfaces\IHistoryRepository.cs" />
     <Compile Include="Interfaces\ISupplyTypeRepository.cs" />
+    <Compile Include="Repositories\DatabaseRepository.cs" />
     <Compile Include="Repositories\HistoryRepository.cs" />
     <Compile Include="Repositories\SupplyTypeRepository.cs" />
+    <Compile Include="Support\Backup\BackupTool.cs" />
     <Compile Include="Support\ComboBox\ComboBoxFiller.cs" />
     <Compile Include="Connection\DataBaseConnection.cs" />
     <Compile Include="Entities\SupplyType.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Support\Export\DataExport.cs" />
     <Compile Include="Support\MessageBox\ErrorMessageBox.cs" />
     <Compile Include="Support\MessageBox\SuccessMessageBox.cs" />
     <Compile Include="Support\Validators\ClientValidator.cs" />
@@ -77,8 +86,6 @@
     <Compile Include="Interfaces\IStationRepository.cs" />
     <Compile Include="Interfaces\ISupplyRepository.cs" />
     <Compile Include="Factory\RepositoryFactory.cs" />
-    <Compile Include="Support\Security\SecurityConst.cs" />
-    <Compile Include="Support\Security\SecurityCrypt.cs" />
     <Compile Include="Repositories\CredentialsRepository.cs" />
     <Compile Include="Repositories\SupplyRepository.cs" />
     <Compile Include="Controllers\WarehouseController.cs" />
@@ -102,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Triggers.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

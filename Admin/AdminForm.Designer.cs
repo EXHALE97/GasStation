@@ -31,6 +31,9 @@ namespace Admin
         private void InitializeComponent()
         {
             this.WarehouseTableTab = new System.Windows.Forms.TabPage();
+            this.ExportWarehouseGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExportWarehouseButton = new System.Windows.Forms.Button();
+            this.PrintWarehouseButton = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.WhFilterByStation = new System.Windows.Forms.ComboBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -42,6 +45,9 @@ namespace Admin
             this.WarehouseSupplyTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WarehouseSupplyCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientTableTab = new System.Windows.Forms.TabPage();
+            this.ExportClientsGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExportClientsButton = new System.Windows.Forms.Button();
+            this.PrintClientsButton = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.UpdateClientTableButton = new System.Windows.Forms.Button();
             this.ActivateClientCardButton = new System.Windows.Forms.Button();
@@ -57,6 +63,9 @@ namespace Admin
             this.ActivationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CredId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmployeeTableTab = new System.Windows.Forms.TabPage();
+            this.ExportEmployeesGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExportEmployeesButton = new System.Windows.Forms.Button();
+            this.PrintEmployeesButton = new System.Windows.Forms.Button();
             this.OnlyWorkingEmployeeCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.AddNewEmployee = new System.Windows.Forms.Button();
@@ -80,6 +89,9 @@ namespace Admin
             this.EmployeeIsWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabAdmin = new System.Windows.Forms.TabControl();
             this.StationTableTab = new System.Windows.Forms.TabPage();
+            this.ExportStationsGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExportStationsTable = new System.Windows.Forms.Button();
+            this.PrintDocStationsButton = new System.Windows.Forms.Button();
             this.OnlyWorkingStationsCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.CloseStationButton = new System.Windows.Forms.Button();
@@ -93,6 +105,9 @@ namespace Admin
             this.StationAddress = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsStationWorking = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DealTableTab = new System.Windows.Forms.TabPage();
+            this.ExportDealsGroup = new System.Windows.Forms.GroupBox();
+            this.ExportDealsButton = new System.Windows.Forms.Button();
+            this.PrintDealsButton = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.DealFilterByStation = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -111,6 +126,9 @@ namespace Admin
             this.PriceWithoutDiscount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DealDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplyTableTab = new System.Windows.Forms.TabPage();
+            this.ExportSuppliesGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExportSuppliesButton = new System.Windows.Forms.Button();
+            this.PrintSuppliesButton = new System.Windows.Forms.Button();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.SupplyFilterByStation = new System.Windows.Forms.ComboBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
@@ -124,6 +142,9 @@ namespace Admin
             this.fuelSupplyAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductTableTab = new System.Windows.Forms.TabPage();
+            this.ExportProductsGroupBox = new System.Windows.Forms.GroupBox();
+            this.ExportProductsButton = new System.Windows.Forms.Button();
+            this.PrintProductsButton = new System.Windows.Forms.Button();
             this.ProductTableFunc = new System.Windows.Forms.GroupBox();
             this.DeleteSupplyTypeButton = new System.Windows.Forms.Button();
             this.UpdateSupplyTypeButton = new System.Windows.Forms.Button();
@@ -137,32 +158,48 @@ namespace Admin
             this.допФункцииToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AddNewAdmin = new System.Windows.Forms.ToolStripMenuItem();
             this.RefreshTables = new System.Windows.Forms.ToolStripMenuItem();
-            this.dbQueryManager = new System.Windows.Forms.ToolStripMenuItem();
             this.HistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.BackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RestoreBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lbSessionName = new System.Windows.Forms.Label();
+            this.PrintStationTable = new System.Drawing.Printing.PrintDocument();
+            this.PrintEmployeesTable = new System.Drawing.Printing.PrintDocument();
+            this.PrintClientsTable = new System.Drawing.Printing.PrintDocument();
+            this.PrintDealsTable = new System.Drawing.Printing.PrintDocument();
+            this.PrintSuppliesTable = new System.Drawing.Printing.PrintDocument();
+            this.PrintWarehouseTable = new System.Drawing.Printing.PrintDocument();
+            this.PrintProductsTable = new System.Drawing.Printing.PrintDocument();
             this.WarehouseTableTab.SuspendLayout();
+            this.ExportWarehouseGroupBox.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WarehouseTable)).BeginInit();
             this.ClientTableTab.SuspendLayout();
+            this.ExportClientsGroupBox.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientTable)).BeginInit();
             this.EmployeeTableTab.SuspendLayout();
+            this.ExportEmployeesGroupBox.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeTable)).BeginInit();
             this.tabAdmin.SuspendLayout();
             this.StationTableTab.SuspendLayout();
+            this.ExportStationsGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.StationsTable)).BeginInit();
             this.DealTableTab.SuspendLayout();
+            this.ExportDealsGroup.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DealTable)).BeginInit();
             this.SupplyTableTab.SuspendLayout();
+            this.ExportSuppliesGroupBox.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SuppliesTable)).BeginInit();
             this.ProductTableTab.SuspendLayout();
+            this.ExportProductsGroupBox.SuspendLayout();
             this.ProductTableFunc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SupplyTypeTable)).BeginInit();
             this.msAdmin.SuspendLayout();
@@ -170,6 +207,7 @@ namespace Admin
             // 
             // WarehouseTableTab
             // 
+            this.WarehouseTableTab.Controls.Add(this.ExportWarehouseGroupBox);
             this.WarehouseTableTab.Controls.Add(this.groupBox7);
             this.WarehouseTableTab.Controls.Add(this.groupBox6);
             this.WarehouseTableTab.Controls.Add(this.WarehouseTable);
@@ -179,6 +217,37 @@ namespace Admin
             this.WarehouseTableTab.TabIndex = 2;
             this.WarehouseTableTab.Text = "Склад";
             this.WarehouseTableTab.UseVisualStyleBackColor = true;
+            // 
+            // ExportWarehouseGroupBox
+            // 
+            this.ExportWarehouseGroupBox.Controls.Add(this.ExportWarehouseButton);
+            this.ExportWarehouseGroupBox.Controls.Add(this.PrintWarehouseButton);
+            this.ExportWarehouseGroupBox.Location = new System.Drawing.Point(604, 125);
+            this.ExportWarehouseGroupBox.Name = "ExportWarehouseGroupBox";
+            this.ExportWarehouseGroupBox.Size = new System.Drawing.Size(206, 59);
+            this.ExportWarehouseGroupBox.TabIndex = 8;
+            this.ExportWarehouseGroupBox.TabStop = false;
+            this.ExportWarehouseGroupBox.Text = "Экспорт";
+            // 
+            // ExportWarehouseButton
+            // 
+            this.ExportWarehouseButton.Location = new System.Drawing.Point(116, 19);
+            this.ExportWarehouseButton.Name = "ExportWarehouseButton";
+            this.ExportWarehouseButton.Size = new System.Drawing.Size(75, 34);
+            this.ExportWarehouseButton.TabIndex = 1;
+            this.ExportWarehouseButton.Text = "CSV";
+            this.ExportWarehouseButton.UseVisualStyleBackColor = true;
+            this.ExportWarehouseButton.Click += new System.EventHandler(this.ExportWarehouseButton_Click);
+            // 
+            // PrintWarehouseButton
+            // 
+            this.PrintWarehouseButton.Location = new System.Drawing.Point(17, 19);
+            this.PrintWarehouseButton.Name = "PrintWarehouseButton";
+            this.PrintWarehouseButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintWarehouseButton.TabIndex = 0;
+            this.PrintWarehouseButton.Text = "Вывод на печать";
+            this.PrintWarehouseButton.UseVisualStyleBackColor = true;
+            this.PrintWarehouseButton.Click += new System.EventHandler(this.PrintWarehouseButton_Click);
             // 
             // groupBox7
             // 
@@ -272,6 +341,7 @@ namespace Admin
             // 
             // ClientTableTab
             // 
+            this.ClientTableTab.Controls.Add(this.ExportClientsGroupBox);
             this.ClientTableTab.Controls.Add(this.groupBox3);
             this.ClientTableTab.Controls.Add(this.ClientTable);
             this.ClientTableTab.Location = new System.Drawing.Point(4, 22);
@@ -281,6 +351,37 @@ namespace Admin
             this.ClientTableTab.TabIndex = 1;
             this.ClientTableTab.Text = "Список покупателей";
             this.ClientTableTab.UseVisualStyleBackColor = true;
+            // 
+            // ExportClientsGroupBox
+            // 
+            this.ExportClientsGroupBox.Controls.Add(this.ExportClientsButton);
+            this.ExportClientsGroupBox.Controls.Add(this.PrintClientsButton);
+            this.ExportClientsGroupBox.Location = new System.Drawing.Point(505, 383);
+            this.ExportClientsGroupBox.Name = "ExportClientsGroupBox";
+            this.ExportClientsGroupBox.Size = new System.Drawing.Size(305, 66);
+            this.ExportClientsGroupBox.TabIndex = 8;
+            this.ExportClientsGroupBox.TabStop = false;
+            this.ExportClientsGroupBox.Text = "Экспорт";
+            // 
+            // ExportClientsButton
+            // 
+            this.ExportClientsButton.Location = new System.Drawing.Point(177, 19);
+            this.ExportClientsButton.Name = "ExportClientsButton";
+            this.ExportClientsButton.Size = new System.Drawing.Size(75, 34);
+            this.ExportClientsButton.TabIndex = 1;
+            this.ExportClientsButton.Text = "CSV";
+            this.ExportClientsButton.UseVisualStyleBackColor = true;
+            this.ExportClientsButton.Click += new System.EventHandler(this.ExportClientsButton_Click);
+            // 
+            // PrintClientsButton
+            // 
+            this.PrintClientsButton.Location = new System.Drawing.Point(62, 19);
+            this.PrintClientsButton.Name = "PrintClientsButton";
+            this.PrintClientsButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintClientsButton.TabIndex = 0;
+            this.PrintClientsButton.Text = "Вывод на печать";
+            this.PrintClientsButton.UseVisualStyleBackColor = true;
+            this.PrintClientsButton.Click += new System.EventHandler(this.PrintClientsButton_Click);
             // 
             // groupBox3
             // 
@@ -405,6 +506,7 @@ namespace Admin
             // 
             // EmployeeTableTab
             // 
+            this.EmployeeTableTab.Controls.Add(this.ExportEmployeesGroupBox);
             this.EmployeeTableTab.Controls.Add(this.OnlyWorkingEmployeeCheckBox);
             this.EmployeeTableTab.Controls.Add(this.groupBox2);
             this.EmployeeTableTab.Controls.Add(this.EmployeeTable);
@@ -416,10 +518,41 @@ namespace Admin
             this.EmployeeTableTab.Text = "Список сотрудников";
             this.EmployeeTableTab.UseVisualStyleBackColor = true;
             // 
+            // ExportEmployeesGroupBox
+            // 
+            this.ExportEmployeesGroupBox.Controls.Add(this.ExportEmployeesButton);
+            this.ExportEmployeesGroupBox.Controls.Add(this.PrintEmployeesButton);
+            this.ExportEmployeesGroupBox.Location = new System.Drawing.Point(536, 397);
+            this.ExportEmployeesGroupBox.Name = "ExportEmployeesGroupBox";
+            this.ExportEmployeesGroupBox.Size = new System.Drawing.Size(274, 59);
+            this.ExportEmployeesGroupBox.TabIndex = 7;
+            this.ExportEmployeesGroupBox.TabStop = false;
+            this.ExportEmployeesGroupBox.Text = "Экспорт";
+            // 
+            // ExportEmployeesButton
+            // 
+            this.ExportEmployeesButton.Location = new System.Drawing.Point(153, 19);
+            this.ExportEmployeesButton.Name = "ExportEmployeesButton";
+            this.ExportEmployeesButton.Size = new System.Drawing.Size(75, 34);
+            this.ExportEmployeesButton.TabIndex = 1;
+            this.ExportEmployeesButton.Text = "CSV";
+            this.ExportEmployeesButton.UseVisualStyleBackColor = true;
+            this.ExportEmployeesButton.Click += new System.EventHandler(this.ExportEmployeesButton_Click);
+            // 
+            // PrintEmployeesButton
+            // 
+            this.PrintEmployeesButton.Location = new System.Drawing.Point(38, 19);
+            this.PrintEmployeesButton.Name = "PrintEmployeesButton";
+            this.PrintEmployeesButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintEmployeesButton.TabIndex = 0;
+            this.PrintEmployeesButton.Text = "Вывод на печать";
+            this.PrintEmployeesButton.UseVisualStyleBackColor = true;
+            this.PrintEmployeesButton.Click += new System.EventHandler(this.PrintEmployeesButton_Click);
+            // 
             // OnlyWorkingEmployeeCheckBox
             // 
             this.OnlyWorkingEmployeeCheckBox.AutoSize = true;
-            this.OnlyWorkingEmployeeCheckBox.Location = new System.Drawing.Point(584, 423);
+            this.OnlyWorkingEmployeeCheckBox.Location = new System.Drawing.Point(583, 374);
             this.OnlyWorkingEmployeeCheckBox.Name = "OnlyWorkingEmployeeCheckBox";
             this.OnlyWorkingEmployeeCheckBox.Size = new System.Drawing.Size(191, 17);
             this.OnlyWorkingEmployeeCheckBox.TabIndex = 6;
@@ -612,6 +745,7 @@ namespace Admin
             // 
             // StationTableTab
             // 
+            this.StationTableTab.Controls.Add(this.ExportStationsGroupBox);
             this.StationTableTab.Controls.Add(this.OnlyWorkingStationsCheckBox);
             this.StationTableTab.Controls.Add(this.groupBox1);
             this.StationTableTab.Controls.Add(this.StationsTable);
@@ -623,10 +757,41 @@ namespace Admin
             this.StationTableTab.Text = "Список станций";
             this.StationTableTab.UseVisualStyleBackColor = true;
             // 
+            // ExportStationsGroupBox
+            // 
+            this.ExportStationsGroupBox.Controls.Add(this.ExportStationsTable);
+            this.ExportStationsGroupBox.Controls.Add(this.PrintDocStationsButton);
+            this.ExportStationsGroupBox.Location = new System.Drawing.Point(554, 397);
+            this.ExportStationsGroupBox.Name = "ExportStationsGroupBox";
+            this.ExportStationsGroupBox.Size = new System.Drawing.Size(256, 59);
+            this.ExportStationsGroupBox.TabIndex = 4;
+            this.ExportStationsGroupBox.TabStop = false;
+            this.ExportStationsGroupBox.Text = "Экспорт";
+            // 
+            // ExportStationsTable
+            // 
+            this.ExportStationsTable.Location = new System.Drawing.Point(153, 19);
+            this.ExportStationsTable.Name = "ExportStationsTable";
+            this.ExportStationsTable.Size = new System.Drawing.Size(75, 34);
+            this.ExportStationsTable.TabIndex = 1;
+            this.ExportStationsTable.Text = "CSV";
+            this.ExportStationsTable.UseVisualStyleBackColor = true;
+            this.ExportStationsTable.Click += new System.EventHandler(this.ExportStationsTable_Click);
+            // 
+            // PrintDocStationsButton
+            // 
+            this.PrintDocStationsButton.Location = new System.Drawing.Point(38, 19);
+            this.PrintDocStationsButton.Name = "PrintDocStationsButton";
+            this.PrintDocStationsButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintDocStationsButton.TabIndex = 0;
+            this.PrintDocStationsButton.Text = "Вывод на печать";
+            this.PrintDocStationsButton.UseVisualStyleBackColor = true;
+            this.PrintDocStationsButton.Click += new System.EventHandler(this.PrintDocStationsButton_Click);
+            // 
             // OnlyWorkingStationsCheckBox
             // 
             this.OnlyWorkingStationsCheckBox.AutoSize = true;
-            this.OnlyWorkingStationsCheckBox.Location = new System.Drawing.Point(592, 430);
+            this.OnlyWorkingStationsCheckBox.Location = new System.Drawing.Point(592, 318);
             this.OnlyWorkingStationsCheckBox.Name = "OnlyWorkingStationsCheckBox";
             this.OnlyWorkingStationsCheckBox.Size = new System.Drawing.Size(174, 17);
             this.OnlyWorkingStationsCheckBox.TabIndex = 3;
@@ -734,6 +899,7 @@ namespace Admin
             // 
             // DealTableTab
             // 
+            this.DealTableTab.Controls.Add(this.ExportDealsGroup);
             this.DealTableTab.Controls.Add(this.groupBox5);
             this.DealTableTab.Controls.Add(this.groupBox4);
             this.DealTableTab.Controls.Add(this.DealTable);
@@ -744,6 +910,37 @@ namespace Admin
             this.DealTableTab.TabIndex = 3;
             this.DealTableTab.Text = "Список сделок";
             this.DealTableTab.UseVisualStyleBackColor = true;
+            // 
+            // ExportDealsGroup
+            // 
+            this.ExportDealsGroup.Controls.Add(this.ExportDealsButton);
+            this.ExportDealsGroup.Controls.Add(this.PrintDealsButton);
+            this.ExportDealsGroup.Location = new System.Drawing.Point(607, 175);
+            this.ExportDealsGroup.Name = "ExportDealsGroup";
+            this.ExportDealsGroup.Size = new System.Drawing.Size(196, 59);
+            this.ExportDealsGroup.TabIndex = 8;
+            this.ExportDealsGroup.TabStop = false;
+            this.ExportDealsGroup.Text = "Экспорт";
+            // 
+            // ExportDealsButton
+            // 
+            this.ExportDealsButton.Location = new System.Drawing.Point(115, 19);
+            this.ExportDealsButton.Name = "ExportDealsButton";
+            this.ExportDealsButton.Size = new System.Drawing.Size(75, 34);
+            this.ExportDealsButton.TabIndex = 1;
+            this.ExportDealsButton.Text = "CSV";
+            this.ExportDealsButton.UseVisualStyleBackColor = true;
+            this.ExportDealsButton.Click += new System.EventHandler(this.ExportDealsButton_Click);
+            // 
+            // PrintDealsButton
+            // 
+            this.PrintDealsButton.Location = new System.Drawing.Point(8, 19);
+            this.PrintDealsButton.Name = "PrintDealsButton";
+            this.PrintDealsButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintDealsButton.TabIndex = 0;
+            this.PrintDealsButton.Text = "Вывод на печать";
+            this.PrintDealsButton.UseVisualStyleBackColor = true;
+            this.PrintDealsButton.Click += new System.EventHandler(this.PrintDealsButton_Click);
             // 
             // groupBox5
             // 
@@ -890,6 +1087,7 @@ namespace Admin
             // 
             // SupplyTableTab
             // 
+            this.SupplyTableTab.Controls.Add(this.ExportSuppliesGroupBox);
             this.SupplyTableTab.Controls.Add(this.groupBox9);
             this.SupplyTableTab.Controls.Add(this.groupBox8);
             this.SupplyTableTab.Controls.Add(this.SuppliesTable);
@@ -899,6 +1097,37 @@ namespace Admin
             this.SupplyTableTab.TabIndex = 5;
             this.SupplyTableTab.Text = "Список поставок";
             this.SupplyTableTab.UseVisualStyleBackColor = true;
+            // 
+            // ExportSuppliesGroupBox
+            // 
+            this.ExportSuppliesGroupBox.Controls.Add(this.ExportSuppliesButton);
+            this.ExportSuppliesGroupBox.Controls.Add(this.PrintSuppliesButton);
+            this.ExportSuppliesGroupBox.Location = new System.Drawing.Point(636, 113);
+            this.ExportSuppliesGroupBox.Name = "ExportSuppliesGroupBox";
+            this.ExportSuppliesGroupBox.Size = new System.Drawing.Size(175, 66);
+            this.ExportSuppliesGroupBox.TabIndex = 8;
+            this.ExportSuppliesGroupBox.TabStop = false;
+            this.ExportSuppliesGroupBox.Text = "Экспорт";
+            // 
+            // ExportSuppliesButton
+            // 
+            this.ExportSuppliesButton.Location = new System.Drawing.Point(94, 19);
+            this.ExportSuppliesButton.Name = "ExportSuppliesButton";
+            this.ExportSuppliesButton.Size = new System.Drawing.Size(75, 34);
+            this.ExportSuppliesButton.TabIndex = 1;
+            this.ExportSuppliesButton.Text = "CSV";
+            this.ExportSuppliesButton.UseVisualStyleBackColor = true;
+            this.ExportSuppliesButton.Click += new System.EventHandler(this.ExportSuppliesButton_Click);
+            // 
+            // PrintSuppliesButton
+            // 
+            this.PrintSuppliesButton.Location = new System.Drawing.Point(6, 19);
+            this.PrintSuppliesButton.Name = "PrintSuppliesButton";
+            this.PrintSuppliesButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintSuppliesButton.TabIndex = 0;
+            this.PrintSuppliesButton.Text = "Вывод на печать";
+            this.PrintSuppliesButton.UseVisualStyleBackColor = true;
+            this.PrintSuppliesButton.Click += new System.EventHandler(this.PrintSuppliesButton_Click);
             // 
             // groupBox9
             // 
@@ -1007,6 +1236,7 @@ namespace Admin
             // 
             // ProductTableTab
             // 
+            this.ProductTableTab.Controls.Add(this.ExportProductsGroupBox);
             this.ProductTableTab.Controls.Add(this.ProductTableFunc);
             this.ProductTableTab.Controls.Add(this.SupplyTypeTable);
             this.ProductTableTab.Location = new System.Drawing.Point(4, 22);
@@ -1016,6 +1246,37 @@ namespace Admin
             this.ProductTableTab.TabIndex = 6;
             this.ProductTableTab.Text = "Товары";
             this.ProductTableTab.UseVisualStyleBackColor = true;
+            // 
+            // ExportProductsGroupBox
+            // 
+            this.ExportProductsGroupBox.Controls.Add(this.ExportProductsButton);
+            this.ExportProductsGroupBox.Controls.Add(this.PrintProductsButton);
+            this.ExportProductsGroupBox.Location = new System.Drawing.Point(546, 397);
+            this.ExportProductsGroupBox.Name = "ExportProductsGroupBox";
+            this.ExportProductsGroupBox.Size = new System.Drawing.Size(268, 59);
+            this.ExportProductsGroupBox.TabIndex = 8;
+            this.ExportProductsGroupBox.TabStop = false;
+            this.ExportProductsGroupBox.Text = "Экспорт";
+            // 
+            // ExportProductsButton
+            // 
+            this.ExportProductsButton.Location = new System.Drawing.Point(153, 19);
+            this.ExportProductsButton.Name = "ExportProductsButton";
+            this.ExportProductsButton.Size = new System.Drawing.Size(75, 34);
+            this.ExportProductsButton.TabIndex = 1;
+            this.ExportProductsButton.Text = "CSV";
+            this.ExportProductsButton.UseVisualStyleBackColor = true;
+            this.ExportProductsButton.Click += new System.EventHandler(this.ExportProductsButton_Click);
+            // 
+            // PrintProductsButton
+            // 
+            this.PrintProductsButton.Location = new System.Drawing.Point(38, 19);
+            this.PrintProductsButton.Name = "PrintProductsButton";
+            this.PrintProductsButton.Size = new System.Drawing.Size(75, 34);
+            this.PrintProductsButton.TabIndex = 0;
+            this.PrintProductsButton.Text = "Вывод на печать";
+            this.PrintProductsButton.UseVisualStyleBackColor = true;
+            this.PrintProductsButton.Click += new System.EventHandler(this.PrintProductsButton_Click);
             // 
             // ProductTableFunc
             // 
@@ -1114,8 +1375,8 @@ namespace Admin
             this.допФункцииToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.AddNewAdmin,
             this.RefreshTables,
-            this.dbQueryManager,
-            this.HistoryToolStripMenuItem});
+            this.HistoryToolStripMenuItem,
+            this.BackupToolStripMenuItem});
             this.допФункцииToolStripMenuItem.Name = "допФункцииToolStripMenuItem";
             this.допФункцииToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
             this.допФункцииToolStripMenuItem.Text = "Доп. функции";
@@ -1134,18 +1395,35 @@ namespace Admin
             this.RefreshTables.Text = "Обновить таблицы";
             this.RefreshTables.Click += new System.EventHandler(this.RefreshTables_Click);
             // 
-            // dbQueryManager
-            // 
-            this.dbQueryManager.Name = "dbQueryManager";
-            this.dbQueryManager.Size = new System.Drawing.Size(220, 22);
-            this.dbQueryManager.Text = "Запрос к базе данных";
-            // 
             // HistoryToolStripMenuItem
             // 
             this.HistoryToolStripMenuItem.Name = "HistoryToolStripMenuItem";
             this.HistoryToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.HistoryToolStripMenuItem.Text = "Журнал операций";
             this.HistoryToolStripMenuItem.Click += new System.EventHandler(this.HistoryToolStripMenuItem_Click);
+            // 
+            // BackupToolStripMenuItem
+            // 
+            this.BackupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CreateBackupToolStripMenuItem,
+            this.RestoreBackupToolStripMenuItem});
+            this.BackupToolStripMenuItem.Name = "BackupToolStripMenuItem";
+            this.BackupToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.BackupToolStripMenuItem.Text = "Бэкап";
+            // 
+            // CreateBackupToolStripMenuItem
+            // 
+            this.CreateBackupToolStripMenuItem.Name = "CreateBackupToolStripMenuItem";
+            this.CreateBackupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.CreateBackupToolStripMenuItem.Text = "Создать";
+            this.CreateBackupToolStripMenuItem.Click += new System.EventHandler(this.CreateBackupToolStripMenuItem_Click);
+            // 
+            // RestoreBackupToolStripMenuItem
+            // 
+            this.RestoreBackupToolStripMenuItem.Name = "RestoreBackupToolStripMenuItem";
+            this.RestoreBackupToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.RestoreBackupToolStripMenuItem.Text = "Восстановить";
+            this.RestoreBackupToolStripMenuItem.Click += new System.EventHandler(this.RestoreBackupToolStripMenuItem_Click);
             // 
             // lbSessionName
             // 
@@ -1155,6 +1433,34 @@ namespace Admin
             this.lbSessionName.Size = new System.Drawing.Size(78, 13);
             this.lbSessionName.TabIndex = 3;
             this.lbSessionName.Text = "Сессия: admin";
+            // 
+            // PrintStationTable
+            // 
+            this.PrintStationTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintStationTable_PrintPage);
+            // 
+            // PrintEmployeesTable
+            // 
+            this.PrintEmployeesTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintEmployeesTable_PrintPage);
+            // 
+            // PrintClientsTable
+            // 
+            this.PrintClientsTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintClientsTable_PrintPage);
+            // 
+            // PrintDealsTable
+            // 
+            this.PrintDealsTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintDealsTable_PrintPage);
+            // 
+            // PrintSuppliesTable
+            // 
+            this.PrintSuppliesTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintSuppliesTable_PrintPage);
+            // 
+            // PrintWarehouseTable
+            // 
+            this.PrintWarehouseTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintWarehouseTable_PrintPage);
+            // 
+            // PrintProductsTable
+            // 
+            this.PrintProductsTable.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PrintProductsTable_PrintPage);
             // 
             // AdminForm
             // 
@@ -1171,30 +1477,37 @@ namespace Admin
             this.Text = "Раздел администратора";
             this.Load += new System.EventHandler(this.AdminForm_Load);
             this.WarehouseTableTab.ResumeLayout(false);
+            this.ExportWarehouseGroupBox.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.WarehouseTable)).EndInit();
             this.ClientTableTab.ResumeLayout(false);
+            this.ExportClientsGroupBox.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientTable)).EndInit();
             this.EmployeeTableTab.ResumeLayout(false);
             this.EmployeeTableTab.PerformLayout();
+            this.ExportEmployeesGroupBox.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.EmployeeTable)).EndInit();
             this.tabAdmin.ResumeLayout(false);
             this.StationTableTab.ResumeLayout(false);
             this.StationTableTab.PerformLayout();
+            this.ExportStationsGroupBox.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.StationsTable)).EndInit();
             this.DealTableTab.ResumeLayout(false);
+            this.ExportDealsGroup.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.DealTable)).EndInit();
             this.SupplyTableTab.ResumeLayout(false);
+            this.ExportSuppliesGroupBox.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SuppliesTable)).EndInit();
             this.ProductTableTab.ResumeLayout(false);
+            this.ExportProductsGroupBox.ResumeLayout(false);
             this.ProductTableFunc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.SupplyTypeTable)).EndInit();
             this.msAdmin.ResumeLayout(false);
@@ -1251,7 +1564,6 @@ namespace Admin
         private System.Windows.Forms.Button RefreshSupplyTableButton;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.ComboBox SupplyFilterByStation;
-        private System.Windows.Forms.ToolStripMenuItem dbQueryManager;
         private Button CloseStationButton;
         private Button UpdateStationInfoButton;
         private CheckBox OnlyWorkingStationsCheckBox;
@@ -1316,6 +1628,37 @@ namespace Admin
         private DataGridViewTextBoxColumn WarehouseSupplyTypeId;
         private DataGridViewTextBoxColumn WarehouseSupplyTypeName;
         private DataGridViewTextBoxColumn WarehouseSupplyCount;
+        private GroupBox ExportStationsGroupBox;
+        private Button ExportStationsTable;
+        private Button PrintDocStationsButton;
+        private System.Drawing.Printing.PrintDocument PrintStationTable;
+        private GroupBox ExportEmployeesGroupBox;
+        private Button ExportEmployeesButton;
+        private Button PrintEmployeesButton;
+        private GroupBox ExportWarehouseGroupBox;
+        private Button ExportWarehouseButton;
+        private Button PrintWarehouseButton;
+        private GroupBox ExportClientsGroupBox;
+        private Button ExportClientsButton;
+        private Button PrintClientsButton;
+        private GroupBox ExportDealsGroup;
+        private Button ExportDealsButton;
+        private Button PrintDealsButton;
+        private GroupBox ExportSuppliesGroupBox;
+        private Button ExportSuppliesButton;
+        private Button PrintSuppliesButton;
+        private GroupBox ExportProductsGroupBox;
+        private Button ExportProductsButton;
+        private Button PrintProductsButton;
+        private System.Drawing.Printing.PrintDocument PrintEmployeesTable;
+        private System.Drawing.Printing.PrintDocument PrintClientsTable;
+        private System.Drawing.Printing.PrintDocument PrintDealsTable;
+        private System.Drawing.Printing.PrintDocument PrintSuppliesTable;
+        private System.Drawing.Printing.PrintDocument PrintWarehouseTable;
+        private System.Drawing.Printing.PrintDocument PrintProductsTable;
+        private ToolStripMenuItem BackupToolStripMenuItem;
+        private ToolStripMenuItem CreateBackupToolStripMenuItem;
+        private ToolStripMenuItem RestoreBackupToolStripMenuItem;
     }
 }
 

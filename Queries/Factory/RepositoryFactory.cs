@@ -62,5 +62,10 @@ namespace Queries.Factory
         {
             return new HistoryRepository(dbc);
         }
+
+        public IDatabaseRepository GetDatabaseRepository()
+        {
+            return new DatabaseRepository(dbc);
+        }
     }
 }

@@ -2,7 +2,9 @@
 using System.Windows.Forms;
 using Queries.Controllers;
 using Queries.Factory;
+using Queries.Support.Backup;
 using Queries.Support.ComboBox;
+using Queries.Support.Export;
 using Queries.Support.MessageBox;
 
 namespace Admin
@@ -18,6 +20,7 @@ namespace Admin
         private readonly SupplyController supplyController;
         private readonly SupplyTypeController supplyTypeController;
         private readonly ComboBoxFiller comboBoxFiller;
+        private readonly Lazy<BackupTool> backupTool;
 
         public AdminForm(IRepositoryFactory factory)
         {
@@ -31,6 +34,7 @@ namespace Admin
             supplyController = new SupplyController(SuppliesTable, factory);
             supplyTypeController = new SupplyTypeController(SupplyTypeTable, factory);
             comboBoxFiller = new ComboBoxFiller(factory);
+            backupTool = new Lazy<BackupTool>(() => new BackupTool(factory));
         }
 
         private void AdminForm_Load(object sender, EventArgs e)
@@ -229,6 +233,121 @@ namespace Admin
         private void HistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new HistoryForm(factory).ShowDialog();
+        }
+
+        private void PrintDocStationsButton_Click(object sender, EventArgs e)
+        {
+            PrintStationTable.Print();
+        }
+
+        private void PrintStationTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(StationsTable, e);
+        }
+
+        private void ExportStationsTable_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(StationsTable);
+        }
+
+        private void PrintEmployeesButton_Click(object sender, EventArgs e)
+        {
+            PrintEmployeesTable.Print();
+        }
+
+        private void ExportEmployeesButton_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(EmployeeTable);
+        }
+
+        private void PrintClientsButton_Click(object sender, EventArgs e)
+        {
+            PrintClientsTable.Print();
+        }
+
+        private void ExportClientsButton_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(ClientTable);
+        }
+
+        private void PrintDealsButton_Click(object sender, EventArgs e)
+        {
+            PrintDealsTable.Print();
+        }
+
+        private void ExportDealsButton_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(StationsTable);
+        }
+
+        private void PrintSuppliesButton_Click(object sender, EventArgs e)
+        {
+            PrintSuppliesTable.Print();
+        }
+
+        private void ExportSuppliesButton_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(SuppliesTable);
+        }
+
+        private void PrintWarehouseButton_Click(object sender, EventArgs e)
+        {
+            PrintWarehouseTable.Print();
+        }
+
+        private void ExportWarehouseButton_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(WarehouseTable);
+        }
+
+        private void PrintProductsButton_Click(object sender, EventArgs e)
+        {
+            PrintProductsTable.Print();
+        }
+
+        private void ExportProductsButton_Click(object sender, EventArgs e)
+        {
+            DataExport.ExportInCsv(SupplyTypeTable);
+        }
+
+        private void PrintClientsTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(ClientTable, e);
+        }
+
+        private void PrintEmployeesTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(EmployeeTable, e);
+        }
+
+        private void PrintDealsTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(DealTable, e);
+        }
+
+        private void PrintSuppliesTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(SuppliesTable, e);
+        }
+
+        private void PrintWarehouseTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(WarehouseTable, e);
+        }
+
+        private void PrintProductsTable_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            DataExport.PrintTable(SupplyTypeTable, e);
+        }
+
+        private void CreateBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backupTool.Value.CreateBackup();
+        }
+
+        private void RestoreBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            backupTool.Value.RestoreBackup();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Data.SqlClient;
 using Queries.Entities;
 using User;
 using Admin;
@@ -46,7 +47,7 @@ namespace Enter
                     EnterRole(logUser.Role, logUser.Login);
                 }
             }
-            catch (Exception)
+            catch (SqlException)
             {
                 MessageBox.Show("Ошибка входа!");
             }

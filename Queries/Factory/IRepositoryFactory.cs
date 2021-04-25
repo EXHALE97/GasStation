@@ -21,5 +21,7 @@ namespace Queries.Factory
         ISupplyTypeRepository GetSupplyTypeRepository();
 
         IHistoryRepository GetHistoryRepository();
+
+        IDatabaseRepository GetDatabaseRepository();
     }
 }
