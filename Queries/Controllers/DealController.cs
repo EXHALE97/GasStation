@@ -75,7 +75,7 @@ namespace Queries.Controllers
                 dealsTable.Rows.Clear();
                 foreach (var deal in Factory.GetDealRepository().GetDealsByClient(id))
                 {
-                    dealsTable.Rows.Add(deal.Id);
+                    dealsTable.Rows.Add(deal.SupplyType, deal.SupplyTypeAmount, deal.CountFullPrice(), deal.Date);
                 }
             });
         }

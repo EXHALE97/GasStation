@@ -113,7 +113,7 @@ namespace User
             this.CityComboBox.Name = "CityComboBox";
             this.CityComboBox.Size = new System.Drawing.Size(121, 21);
             this.CityComboBox.TabIndex = 6;
-            this.CityComboBox.SelectedIndexChanged += new EventHandler(this.CityComboBox_SelectedIndexChanged);
+            this.CityComboBox.SelectedIndexChanged += new System.EventHandler(this.CityComboBox_SelectedIndexChanged);
             // 
             // CityLabel
             // 
@@ -220,6 +220,8 @@ namespace User
             // 
             // DealTable
             // 
+            this.DealTable.AllowUserToAddRows = false;
+            this.DealTable.AllowUserToDeleteRows = false;
             this.DealTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DealTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fueltype,

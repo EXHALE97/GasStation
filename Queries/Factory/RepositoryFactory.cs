@@ -10,11 +10,6 @@ namespace Queries.Factory
 
         public RepositoryFactory(DataBaseConnection dbc)
         {
-            //if (dbc == null)
-            //{
-            //    throw new ArgumentNullException("Connection out!");
-            //}
-
             this.dbc = dbc;
         }
 
